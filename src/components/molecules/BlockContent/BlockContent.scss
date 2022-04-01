@@ -1,4 +1,5 @@
 .block-content{
+    position: relative;
     .field-input{
         margin-top: 0.5rem;
     }
@@ -27,6 +28,17 @@
     &-optional, &-detail, &-bullet{
         font-size: 1rem;
     }
+    &-tag{
+        background-color: #989DA6;
+        color: white;
+        border-radius: 0.5rem;
+        width: auto;
+        padding: 0.2rem;
+        &::placeholder{
+            color: white;
+            text-align: center;
+        }
+    }
     &-contact{
         display: flex;
         .block-content-detail{
@@ -36,8 +48,23 @@
             margin-left: 0.5rem;
         }
     }
+    &-alert{
+        position: absolute;
+        left: -1.7rem;
+        height: 1.3rem;
+        width: 1.3rem;
+        border-radius: 50%;
+        background-color: #D15454;
+        cursor: pointer;
+        img{
+            height: 100%;
+        }
+        &:hover{
+            transform: scale(135%);
+        }
+    }
     &-bottom{
-        margin-top: 1.5rem;
+        margin: 1.5rem 0;
         display: flex;
         align-items: center;
         .btn{

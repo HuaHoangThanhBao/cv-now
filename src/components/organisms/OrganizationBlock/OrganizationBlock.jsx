@@ -5,8 +5,9 @@ import BlockHeader from '../../molecules/BlockHeader/BlockHeader';
 import DateInput from '../../molecules/DateInput/DateInput';
 import './../../../styles/block.scss';
 
-const OrganizationBlock = ({handleOutsideClick}) => {
+const OrganizationBlock = ({handleOutsideClick, onInputFieldChange, createNewContent}) => {
     const [isVisible, setIsVisible] = useState(false);
+    const [contentList, setContentList] = useState([0]);
     const ref = useRef();
     const handleVisible = (status) => {
         setIsVisible(status)
@@ -18,20 +19,31 @@ const OrganizationBlock = ({handleOutsideClick}) => {
            <div className="block-space">
                 <hr />
            </div>
-           <BlockContent isVisible={isVisible}>
-                <InputField
-                    externalClass="block-content-title"
-                    type="text"
-                    placeHolder="Organization Name"
-                />
-                <DateInput isVisible={isVisible}/>
-                <InputField
-                    externalClass="block-content-detail dashed"
-                    type="text"
-                    placeHolder="Role (optional)"
-                    visible={isVisible}
-                />
-           </BlockContent>
+           {contentList && contentList.map((item, index) => (
+               <BlockContent 
+                isVisible={isVisible} 
+                key={item} 
+                onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                >
+                    <InputField
+                        externalClass="block-content-title"
+                        type="text"
+                        visible={true}
+                        placeHolder="Organization Name"
+                    />
+                    <DateInput 
+                        isVisible={isVisible}
+                        onInputFieldChange={onInputFieldChange}
+                    />
+                    <InputField
+                        externalClass="block-content-detail dashed"
+                        type="text"
+                        placeHolder="Role (optional)"
+                        visible={isVisible}
+                        onChange={onInputFieldChange}
+                    />
+                </BlockContent>
+           ))}
         </div>
     )
 }

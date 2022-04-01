@@ -1,14 +1,15 @@
-import React from 'react';
-import InputField from '../../atoms/InputField/InputField';
+import React, {createRef} from 'react';
+import ContentEditable from 'react-contenteditable';
 import './BlockHeader.scss';
 
 const BlockHeader = ({title}) => {
+    const contentEditable = React.createRef();
     return(
         <div className="block-header">
-           <InputField 
-                externalClass="block-header-title"
-                type="text"
-                placeHolder={title}
+            <ContentEditable 
+                className={"field-input block-header-title"}
+                innerRef={contentEditable} 
+                html={title}
             />
         </div>
     )

@@ -1,35 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './InputField.scss';
 
-const InputField = ({externalClass, visible, icon, type, placeHolder, value, onChange}) => {
-    return(
-        (visible !== false && (
-            (icon ? 
-                <div className='field field-bullet'>
+const InputField = (props) => {
+    const {externalClass, visible, allCheck, icon, type, placeHolder, onChange} = props;
+    const [value, setValue] = useState('')
+    const [isHide, setIsHide] = useState(true);
+    const renderField = () => {
+        if(visible){
+            return (
+                <div className={'field' + (icon ? " field-bullet": "")}>
                     {icon && (
                         <img src={icon} alt="" className='field-icon'/>
                     )}
                     <input 
                         className={"field-input" + (externalClass ? " " + externalClass: "")}
                         type={type} 
+                        value={value}
                         placeholder={placeHolder}
-                        onChange={onChange}
+                        onChange={(e) => onChange(e, setValue, setIsHide)}
                     />
                 </div>
-            :
-            <div className='field'>
-                {icon && (
-                    <img src={icon} alt="" className='field-icon'/>
-                )}
-                <input 
-                    className={"field-input" + (externalClass ? " " + externalClass: "")}
-                    type={type} 
-                    placeholder={placeHolder}
-                    onChange={onChange}
-                />
-            </div>
             )
-        ))
+        }
+        else{
+            if(allCheck !== undefined){
+                if(!allCheck)
+                    return ''
+            }
+            if(!isHide){
+                return <div className={'field' + (icon ? " field-bullet": "")}>
+                    {icon && (
+                        <img src={icon} alt="" className='field-icon'/>
+                    )}
+                    <input 
+                        className={"field-input" + (externalClass ? " " + externalClass: "")}
+                        type={type} 
+                        value={value}
+                        placeholder={placeHolder}
+                        onChange={(e) => onChange(e, setValue, setIsHide)}
+                    />
+                </div>
+            }
+            return ''
+        }
+    }
+    return(
+        renderField()
+        // (visible !== false ? (
+        //     <div className={'field' + (icon ? " field-bullet": "")}>
+        //         {icon && (
+        //             <img src={icon} alt="" className='field-icon'/>
+        //         )}
+        //         <input 
+        //             className={"field-input" + (externalClass ? " " + externalClass: "")}
+        //             type={type} 
+        //             value={value}
+        //             placeholder={placeHolder}
+        //             onChange={(e) => onChange(e, setValue, setIsHide)}
+        //         />
+        //     </div>
+        // )
+        // :
+        // (!isHide && (
+        //     <div className={'field' + (icon ? " field-bullet": "")}>
+        //         {icon && (
+        //             <img src={icon} alt="" className='field-icon'/>
+        //         )}
+        //         <input 
+        //             className={"field-input" + (externalClass ? " " + externalClass: "")}
+        //             type={type} 
+        //             value={value}
+        //             placeholder={placeHolder}
+        //             onChange={(e) => onChange(e, setValue, setIsHide)}
+        //         />
+        //     </div>
+        // )))
     )
 }
 
