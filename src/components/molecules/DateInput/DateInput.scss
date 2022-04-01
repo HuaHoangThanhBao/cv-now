@@ -1,0 +1,20 @@
+.date{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    &-group{
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    &-month{
+        width: 2.2rem;
+        font-size: 1rem;
+        text-align: center;
+    }
+    &-year{
+        width: 2.5rem;
+        font-size: 1rem;
+        text-align: center;
+    }
+}

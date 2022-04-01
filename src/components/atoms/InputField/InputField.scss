@@ -1,0 +1,22 @@
+.field{
+    &-input{
+        display: block;
+        border: none;
+        outline: none;
+        width: 100%;
+        &:focus{
+            border-bottom: 1px solid #238983;
+        }
+    }
+    &-icon{
+        margin-top: 0.4rem;
+        margin-right: 0.4rem;
+        height: 0.5rem;
+        width: 0.5rem;
+        float: left;
+    }
+    &-bullet{
+        display: flex;
+        align-items: center;
+    }
+}

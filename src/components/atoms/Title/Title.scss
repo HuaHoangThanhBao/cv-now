@@ -1,0 +1,17 @@
+.title{
+    display: inline-block;
+    input {
+        font-size: 2rem;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        outline: none;
+        max-width: 15rem;
+        &::placeholder{
+            color: #fff;
+        }
+        &:focus{
+            border-bottom: 2px solid #238983;
+        }
+    }
+}

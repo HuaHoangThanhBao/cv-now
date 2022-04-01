@@ -1,0 +1,91 @@
+:root{
+    --columns: 3;
+    --spacing: 30px;
+}
+
+body {
+    font-family: $primary-font;
+    font-size: 16px;
+    line-height: 1;
+    color: $light-grey;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+section[id] {
+    scroll-margin-top: 20px;
+}
+
+input,
+button,
+textarea,
+select {
+    font-family: $primary-font;
+    font-size: 16px;
+    outline: none;
+    border: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+}
+
+.second-font {
+    font-family: $primary-font;
+}
+
+.btn {
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    //padding: 15px 50px;
+    //border-radius: 40px;
+    background-color: inherit;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 22px 60px;
+    &--black{
+        background-color: $black;
+        color: $white;
+    }
+    &--yellow{
+        background-color: $yellow;
+        color: $white;
+    }
+    &--search{
+        color: $white;
+    }
+}
+
+.sybmol{
+    &-pad-left{
+        padding-left: 5px;
+    }
+}
+
+a {
+    cursor: pointer;
+    user-select: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    word-break: break-word;
+}
+
+a {
+    color: inherit;
+}
+
+p {
+    line-height: lineH(36, 18);
+    word-break: break-word;
+}

@@ -1,0 +1,14 @@
+.block-header{
+    &-title{
+        font-size: 1.7rem;
+        font-weight: bold;
+        &::placeholder{
+            color: black;
+        }
+    }
+    .field{
+        &:focus{
+            border-color:#00c8aa;
+        }
+    }
+}
