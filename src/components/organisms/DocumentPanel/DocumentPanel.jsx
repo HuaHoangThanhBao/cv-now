@@ -139,7 +139,7 @@ const DocumentPanel = () => {
     }
 
     const moveBlockDown = (pageIndex, childIndex, childBlockRef, parentBlockRef) => {
-        if(childIndex + 1 < pages.length - 1){
+        if(childIndex !== pages[pageIndex].child.length - 1){
             pages[pageIndex].child.move(childIndex, childIndex + 1)
             setPages([...pages])
         }
