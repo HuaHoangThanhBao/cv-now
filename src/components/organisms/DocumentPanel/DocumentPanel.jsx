@@ -13,9 +13,10 @@ const DocumentPanel = () => {
             parent: {},
             child: [
                 {id: 1},
-                {id: 5},
+                {id: 2},
                 {id: 3},
                 {id: 4},
+                {id: 5},
                 {id: 2},
             ]
         },
@@ -27,6 +28,7 @@ const DocumentPanel = () => {
                 {id: 2},
                 {id: 5},
                 {id: 4},
+                {id: 2},
             ]
         }
     ])
@@ -85,7 +87,7 @@ const DocumentPanel = () => {
         for(let i = 0; i < panelsRef.current.length; i++){
             const height = panelsRef.current[i].offsetHeight
             // console.log(height)
-            if(height > 1800){
+            if(height > 1300){
                 console.log('start moving last block at page ' + i + ' to new page')
                 moveContentToNextBlock(i)
             }
@@ -121,7 +123,7 @@ const DocumentPanel = () => {
                 const previousPageHeight = parentBlockRef.current[pageIndex - 1].offsetHeight
                 const currentBlockHeight = childBlockRef.current.offsetHeight
   
-                if(previousPageHeight + currentBlockHeight < 1300){
+                if(previousPageHeight + currentBlockHeight <= 1024){
                     const removedBlock = pages[pageIndex].child.shift()
                     pages[pageIndex - 1].child.push(removedBlock)
                     if(pages[pageIndex].child.length == 0){
@@ -142,11 +144,11 @@ const DocumentPanel = () => {
             setPages([...pages])
         }
         else{
-            if(pageIndex < pages.length){
+            if(pageIndex < pages.length - 1){
                 const nextPageHeight = parentBlockRef.current[pageIndex + 1].offsetHeight
                 const currentBlockHeight = childBlockRef.current.offsetHeight
 
-                if(nextPageHeight + currentBlockHeight < 1300){
+                if(nextPageHeight + currentBlockHeight <= 1024){
                     if(pages[pageIndex].child.length > 1){
                         const removedBlock = pages[pageIndex].child.pop()
                         pages[pageIndex + 1].child.unshift(removedBlock)

@@ -31,20 +31,18 @@ const EducationBlock = ({pageIndex, childIndex, childId, handleOutsideClick, che
     }
 
     useEffect(() => {
-        return () => {
+        return() => {
             if(isVisible) {
-                console.log(isVisible)
                 console.log('yess')
                 setBlockContentOnClick(false)
                 setBlockOnClick(false)
-                setIsVisible(false)
                 checkToMoveContent(pageIndex)
             }
         }
     }, [isVisible])
 
     return(
-        <div className="block block-education" ref={ref}>
+        <div className="block block-education">
            <BlockHeader 
                 title="EDUCATION"
                 onClick={() => onSetBlock(true)}
@@ -52,59 +50,61 @@ const EducationBlock = ({pageIndex, childIndex, childId, handleOutsideClick, che
            <div className="block-space">
                 <hr />
            </div>
-           {contentList && contentList.map((item, index) => (
-               <BlockContent 
-                isVisible={isVisible} 
-                key={item} 
-                onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
-                onClick={() => onSetBlockContent(true)}
-                >
-                    <InputField
-                        externalClass="block-content-title"
-                        type="text"
-                        placeHolder="Study Program"
-                        visible={true}
-                        onChange={onInputFieldChange}
-                    />
-                    <InputField
-                        externalClass="block-content-desc"
-                        type="text"
-                        placeHolder="Institution/ Place of education"
-                        visible={true}
-                        onChange={onInputFieldChange}
-                    />
-                    <DateInput 
-                        isVisible={true}
-                        onInputFieldChange={onInputFieldChange}
-                    />
-                    <InputField
-                        externalClass="block-content-optional dashed"
-                        type="text"
-                        placeHolder="City, Country or GPA (optional)"
-                        visible={true}
-                        onChange={onInputFieldChange}
-                    />
-                    <InputField
-                        externalClass="block-content-detail"
-                        type="text"
-                        placeHolder="Coures"
-                        visible={true}
-                        onChange={onInputFieldChange}
-                    />
-                    <InputField
-                        externalClass="block-content-bullet dashed"
-                        type="text"
-                        placeHolder="Course/Thesis/Project"
-                        visible={true}
-                        onChange={onInputFieldChange}
-                    />
-                    <BlockContentBar 
-                        isVisible={blockContentOnClick} 
-                        onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
-                        onRemoveContent={() => removeContent(index, contentList, setContentList)}
-                    />
-                </BlockContent>
-           ))}
+           <div ref={ref}>
+                {contentList && contentList.map((item, index) => (
+                    <BlockContent 
+                     isVisible={isVisible} 
+                     key={item} 
+                     onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                     onClick={() => onSetBlockContent(true)}
+                     >
+                         <InputField
+                             externalClass="block-content-title"
+                             type="text"
+                             placeHolder="Study Program"
+                             visible={true}
+                             onChange={onInputFieldChange}
+                         />
+                         <InputField
+                             externalClass="block-content-desc"
+                             type="text"
+                             placeHolder="Institution/ Place of education"
+                             visible={isVisible}
+                             onChange={onInputFieldChange}
+                         />
+                         <DateInput 
+                             isVisible={isVisible}
+                             onInputFieldChange={onInputFieldChange}
+                         />
+                         <InputField
+                             externalClass="block-content-optional dashed"
+                             type="text"
+                             placeHolder="City, Country or GPA (optional)"
+                             visible={isVisible}
+                             onChange={onInputFieldChange}
+                         />
+                         <InputField
+                             externalClass="block-content-detail"
+                             type="text"
+                             placeHolder="Coures"
+                             visible={isVisible}
+                             onChange={onInputFieldChange}
+                         />
+                         <InputField
+                             externalClass="block-content-bullet dashed"
+                             type="text"
+                             placeHolder="Course/Thesis/Project"
+                             visible={isVisible}
+                             onChange={onInputFieldChange}
+                         />
+                         <BlockContentBar 
+                             isVisible={blockContentOnClick} 
+                             onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                             onRemoveContent={() => removeContent(index, contentList, setContentList)}
+                         />
+                     </BlockContent>
+                ))}
+           </div>
            <BlockBar 
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}

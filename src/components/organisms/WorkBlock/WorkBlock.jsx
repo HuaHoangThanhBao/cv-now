@@ -32,20 +32,18 @@ const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToM
     }
 
     useEffect(() => {
-        return () => {
+        return() => {
             if(isVisible) {
-                console.log(isVisible)
                 console.log('yess')
                 setBlockContentOnClick(false)
                 setBlockOnClick(false)
-                setIsVisible(false)
                 checkToMoveContent(pageIndex)
             }
         }
     }, [isVisible])
 
     return(
-        <div className="block block-education" ref={ref}>
+        <div className="block block-education">
            <BlockHeader 
                 title="WORK EXPERIENCE"
                 onClick={() => onSetBlock(true)}
@@ -53,92 +51,94 @@ const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToM
            <div className="block-space">
                 <hr />
            </div>
-           {contentList && contentList.map((item, index) => (
-                <BlockContent 
-                isVisible={isVisible} 
-                key={item} 
-                onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
-                onClick={() => onSetBlockContent(true)}
-                >
-                     <InputField
-                         externalClass="block-content-title"
-                         type="text"
-                         visible={true}
-                         placeHolder="Title/Position"
-                         onChange={onInputFieldChange}
-                     />
-                     <InputField
-                         externalClass="block-content-desc"
-                         type="text"
-                         visible={true}
-                         placeHolder="Workplace/Company"
-                         onChange={onInputFieldChange}
-                     />
-                     <DateInput 
-                        isVisible={true}
-                        onInputFieldChange={onInputFieldChange}
-                    />
-                     <InputField
-                         externalClass="block-content-optional dashed"
-                         type="text"
-                         placeHolder="City, Country (optional)"
-                         visible={true}
-                         onChange={onInputFieldChange}
-                     />
-                     <InputField
-                         externalClass="block-content-optional dashed"
-                         type="text"
-                         placeHolder="Company Description (optional, fill when the company is not well known)"
-                         visible={true}
-                         onChange={onInputFieldChange}
-                     />
-                     <InputField
-                         externalClass="block-content-detail"
-                         type="text"
-                         placeHolder="Achievements/Tasks"
-                         visible={true}
-                         onChange={onInputFieldChange}
-                     />
-                     <InputField
-                         externalClass="block-content-bullet dashed"
-                         type="text"
-                         icon={BulletIcon}
-                         placeHolder="Accomplishment/Responsibility/Task"
-                         visible={true}
-                         onChange={onInputFieldChange}
-                     />
-                     <div className='block-content-contact'>
-                         <InputField
-                             externalClass="block-content-detail"
-                             type="text"
-                             placeHolder="Contact:"
-                             visible={true}
-                             onChange={onInputFieldChange}
+           <div ref={ref}>
+                {contentList && contentList.map((item, index) => (
+                     <BlockContent 
+                     isVisible={isVisible} 
+                     key={item} 
+                     onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                     onClick={() => onSetBlockContent(true)}
+                     >
+                          <InputField
+                              externalClass="block-content-title"
+                              type="text"
+                              visible={true}
+                              placeHolder="Title/Position"
+                              onChange={onInputFieldChange}
+                          />
+                          <InputField
+                              externalClass="block-content-desc"
+                              type="text"
+                              visible={isVisible}
+                              placeHolder="Workplace/Company"
+                              onChange={onInputFieldChange}
+                          />
+                          <DateInput 
+                             isVisible={isVisible}
+                             onInputFieldChange={onInputFieldChange}
                          />
-                         <div className='block-content-contact-group'>
-                             <InputField
-                                 externalClass="block-content-bullet dashed"
-                                 type="text"
-                                 placeHolder="Contact Person"
-                                 visible={true}
-                                 onChange={onInputFieldChange}
-                             />
-                             <InputField
-                                 externalClass="block-content-bullet dashed"
-                                 type="text"
-                                 placeHolder="Contact Info"
-                                 visible={true}
-                                 onChange={onInputFieldChange}
-                             />
-                         </div>
-                     </div>
-                    <BlockContentBar 
-                        isVisible={blockContentOnClick} 
-                        onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
-                        onRemoveContent={() => removeContent(index, contentList, setContentList)}
-                    />
-                </BlockContent>
-           ))}
+                          <InputField
+                              externalClass="block-content-optional dashed"
+                              type="text"
+                              placeHolder="City, Country (optional)"
+                              visible={isVisible}
+                              onChange={onInputFieldChange}
+                          />
+                          <InputField
+                              externalClass="block-content-optional dashed"
+                              type="text"
+                              placeHolder="Company Description (optional, fill when the company is not well known)"
+                              visible={isVisible}
+                              onChange={onInputFieldChange}
+                          />
+                          <InputField
+                              externalClass="block-content-detail"
+                              type="text"
+                              placeHolder="Achievements/Tasks"
+                              visible={isVisible}
+                              onChange={onInputFieldChange}
+                          />
+                          <InputField
+                              externalClass="block-content-bullet dashed"
+                              type="text"
+                              icon={BulletIcon}
+                              placeHolder="Accomplishment/Responsibility/Task"
+                              visible={isVisible}
+                              onChange={onInputFieldChange}
+                          />
+                          <div className='block-content-contact'>
+                              <InputField
+                                  externalClass="block-content-detail"
+                                  type="text"
+                                  placeHolder="Contact:"
+                                  visible={isVisible}
+                                  onChange={onInputFieldChange}
+                              />
+                              <div className='block-content-contact-group'>
+                                  <InputField
+                                      externalClass="block-content-bullet dashed"
+                                      type="text"
+                                      placeHolder="Contact Person"
+                                      visible={isVisible}
+                                      onChange={onInputFieldChange}
+                                  />
+                                  <InputField
+                                      externalClass="block-content-bullet dashed"
+                                      type="text"
+                                      placeHolder="Contact Info"
+                                      visible={isVisible}
+                                      onChange={onInputFieldChange}
+                                  />
+                              </div>
+                          </div>
+                         <BlockContentBar 
+                             isVisible={blockContentOnClick} 
+                             onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                             onRemoveContent={() => removeContent(index, contentList, setContentList)}
+                         />
+                     </BlockContent>
+                ))}
+           </div>
            <BlockBar 
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}

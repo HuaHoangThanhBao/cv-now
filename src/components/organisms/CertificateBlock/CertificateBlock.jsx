@@ -31,20 +31,18 @@ const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, c
     }
 
     useEffect(() => {
-      return () => {
+      return() => {
           if(isVisible) {
-              console.log(isVisible)
               console.log('yess')
               setBlockContentOnClick(false)
               setBlockOnClick(false)
-              setIsVisible(false)
               checkToMoveContent(pageIndex)
           }
       }
     }, [isVisible])
 
     return(
-        <div className="block block-education" ref={ref}>
+        <div className="block block-education">
            <BlockHeader 
               title="CERTIFICATES"
               onClick={() => onSetBlock(true)}
@@ -52,37 +50,39 @@ const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, c
            <div className="block-space">
                 <hr />
            </div>
-           {contentList && contentList.map((item, index) => (
-              <BlockContent 
-               isVisible={isVisible} 
-               key={item} 
-               onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
-               onClick={() => onSetBlockContent(true)}
-              >
-                <InputField
-                  externalClass="block-content-title"
-                  type="text"
-                  visible={true}
-                  placeHolder="Certificate Name"
-                  onChange={onInputFieldChange}
-                />
-                <DateInput 
-                  visible={true}
-                />
-                <InputField
-                    externalClass="block-content-detail dashed"
-                    type="text"
-                    placeHolder="Description (optional)"
-                    visible={true}
-                    onChange={onInputFieldChange}
-                />
-                <BlockContentBar 
-                        isVisible={blockContentOnClick} 
+           <div ref={ref}>
+                {contentList && contentList.map((item, index) => (
+                   <BlockContent 
+                    isVisible={isVisible} 
+                    key={item} 
                     onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
-                    onRemoveContent={() => removeContent(index, contentList, setContentList)}
-                />
-              </BlockContent>
-           ))}
+                    onClick={() => onSetBlockContent(true)}
+                   >
+                     <InputField
+                       externalClass="block-content-title"
+                       type="text"
+                       visible={true}
+                       placeHolder="Certificate Name"
+                       onChange={onInputFieldChange}
+                     />
+                     <DateInput 
+                       visible={isVisible}
+                     />
+                     <InputField
+                         externalClass="block-content-detail dashed"
+                         type="text"
+                         placeHolder="Description (optional)"
+                         visible={isVisible}
+                         onChange={onInputFieldChange}
+                     />
+                     <BlockContentBar 
+                             isVisible={blockContentOnClick} 
+                         onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                         onRemoveContent={() => removeContent(index, contentList, setContentList)}
+                     />
+                   </BlockContent>
+                ))}
+           </div>
            <BlockBar 
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}

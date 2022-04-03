@@ -31,20 +31,18 @@ const OrganizationBlock = ({pageIndex, childIndex, childId, handleOutsideClick, 
     }
 
     useEffect(() => {
-        return () => {
+        return() => {
             if(isVisible) {
-                console.log(isVisible)
                 console.log('yess')
                 setBlockContentOnClick(false)
                 setBlockOnClick(false)
-                setIsVisible(false)
                 checkToMoveContent(pageIndex)
             }
         }
     }, [isVisible])
     
     return(
-        <div className="block block-education" ref={ref}>
+        <div className="block block-education">
            <BlockHeader 
                 title="ORGANIZATIONS"
                 onClick={() => onSetBlock(true)}
@@ -52,37 +50,39 @@ const OrganizationBlock = ({pageIndex, childIndex, childId, handleOutsideClick, 
            <div className="block-space">
                 <hr />
            </div>
-           {contentList && contentList.map((item, index) => (
-               <BlockContent 
-                isVisible={isVisible} 
-                key={item} 
-                onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
-                onClick={() => onSetBlockContent(true)}
-                >
-                    <InputField
-                        externalClass="block-content-title"
-                        type="text"
-                        visible={true}
-                        placeHolder="Organization Name"
-                    />
-                    <DateInput 
-                        visible={true}
-                        onInputFieldChange={onInputFieldChange}
-                    />
-                    <InputField
-                        externalClass="block-content-detail dashed"
-                        type="text"
-                        placeHolder="Role (optional)"
-                        visible={true}
-                        onChange={onInputFieldChange}
-                    />
-                    <BlockContentBar 
-                        isVisible={blockContentOnClick} 
-                        onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
-                        onRemoveContent={() => removeContent(index, contentList, setContentList)}
-                    />
-                </BlockContent>
-           ))}
+           <div ref={ref}>
+                {contentList && contentList.map((item, index) => (
+                    <BlockContent 
+                     isVisible={isVisible} 
+                     key={item} 
+                     onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                     onClick={() => onSetBlockContent(true)}
+                     >
+                         <InputField
+                             externalClass="block-content-title"
+                             type="text"
+                             visible={true}
+                             placeHolder="Organization Name"
+                         />
+                         <DateInput 
+                             visible={isVisible}
+                             onInputFieldChange={onInputFieldChange}
+                         />
+                         <InputField
+                             externalClass="block-content-detail dashed"
+                             type="text"
+                             placeHolder="Role (optional)"
+                             visible={isVisible}
+                             onChange={onInputFieldChange}
+                         />
+                         <BlockContentBar 
+                             isVisible={blockContentOnClick} 
+                             onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                             onRemoveContent={() => removeContent(index, contentList, setContentList)}
+                         />
+                     </BlockContent>
+                ))}
+           </div>
            <BlockBar 
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
