@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, createRef } from 'react';
+import ContentEditable from 'react-contenteditable';
 import './InputField.scss';
 
 const InputField = (props) => {
+    const contentEditable = createRef();
     const {externalClass, visible, allCheck, icon, type, placeHolder, onChange} = props;
-    const [value, setValue] = useState('')
+    const [html, setHTML] = useState(placeHolder);
+    // const [value, setValue] = useState('')
     const [isHide, setIsHide] = useState(true);
     const renderField = () => {
         if(visible){
@@ -12,12 +15,11 @@ const InputField = (props) => {
                     {icon && (
                         <img src={icon} alt="" className='field-icon'/>
                     )}
-                    <input 
+                    <ContentEditable 
                         className={"field-input" + (externalClass ? " " + externalClass: "")}
-                        type={type} 
-                        value={value}
-                        placeholder={placeHolder}
-                        onChange={(e) => onChange(e, setValue, setIsHide)}
+                        innerRef={contentEditable} 
+                        html={html}
+                        onChange={(e) => onChange(e, setHTML, setIsHide)}
                     />
                 </div>
             )
@@ -32,12 +34,11 @@ const InputField = (props) => {
                     {icon && (
                         <img src={icon} alt="" className='field-icon'/>
                     )}
-                    <input 
+                    <ContentEditable 
                         className={"field-input" + (externalClass ? " " + externalClass: "")}
-                        type={type} 
-                        value={value}
-                        placeholder={placeHolder}
-                        onChange={(e) => onChange(e, setValue, setIsHide)}
+                        innerRef={contentEditable} 
+                        html={html}
+                        onChange={(e) => onChange(e, setHTML, setIsHide)}
                     />
                 </div>
             }

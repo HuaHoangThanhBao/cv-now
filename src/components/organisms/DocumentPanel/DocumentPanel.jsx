@@ -1,22 +1,37 @@
-import React, {useEffect} from 'react';
-import AchievementBlock from '../Achievement/Achievement';
+import React, {useEffect, useRef, useState} from 'react';
 import CertificateBlock from '../CertificateBlock/CertificateBlock';
-import ConferenceBlock from '../Conference/Conference';
 import EducationBlock from '../EducationBlock/EducationBlock';
-import HonorAwardBlock from '../HonorAward/HonorAward';
-import LanguageBlock from '../LanguageBlock/LanguageBlock';
 import OrganizationBlock from '../OrganizationBlock/OrganizationBlock';
+import Panel from '../Panel/Panel';
 import PersonalProjectBlock from '../PersonalProjectBlock/PersonalProjectBlock';
-import PublicationBlock from '../Publication/Publication';
-import ReferenceBlock from '../ReferenceBlock/ReferenceBlock';
-import TagBlock from '../TagBlock/TagBlock';
-import TeachingBlock from '../TeachingBlock/TeachingBlock';
-import TechnicalSkillBlock from '../TechnicalSkill/TechnicalSkill';
-import VolunteerkBlock from '../Volunteer/Volunteer';
 import WorkBlock from '../WorkBlock/WorkBlock';
 import './DocumentPanel.scss';
 
 const DocumentPanel = () => {
+    const [pages, setPages] = useState([
+        {
+            parent: {},
+            child: [
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4},
+                {id: 5},
+            ]
+        },
+        {
+            parent: {},
+            child: [
+                {id: 2},
+                {id: 3},
+                {id: 1},
+                {id: 5},
+                {id: 4},
+            ]
+        }
+    ])
+    const panelsRef = useRef([]);
+
     function useOnClickOutside(ref, handler) {
         useEffect(() => {
             const listener = (event) => {
@@ -36,6 +51,7 @@ const DocumentPanel = () => {
             };
         }, [ref]);
     }
+
     const onInputFieldChange = (event, setValue, setIsHide) => {
         const val = event.target.value;
         if(val !== ''){
@@ -47,28 +63,160 @@ const DocumentPanel = () => {
             setValue('');
         }
     }
+
     const createNewContent = (atIndex, contentList, setContentList) => {
         console.log('Going to create component at index: '+ atIndex)
         contentList.splice(atIndex + 1, 0, contentList.length)
         setContentList([...contentList])
     }
+
+    const removeContent = (atIndex, contentList, setContentList) => {
+        console.log('Removed component at index: '+ atIndex)
+        contentList.splice(atIndex, 1)
+        setContentList([...contentList])
+    }
+
+    const removeBlock = (pageIndex, childIndex) => {
+        pages[pageIndex].child.splice(childIndex, 1)
+        setPages([...pages])
+    }
+
+    const checkToMoveContent = () => {
+        for(let i = 0; i < panelsRef.current.length; i++){
+            const height = panelsRef.current[i].offsetHeight
+            // console.log(height)
+            if(height > 1020){
+                console.log('stat moving last block at page ' + i + ' to new page')
+                moveContentToNextBlock(i)
+            }
+            else{
+                // console.log('stat moving first block at page ' + i + ' to previous page')
+                // moveContentToPreviousBlock(i)
+            }
+        }
+    }
+
+    function moveContentToNextBlock(index){
+        if(index >= pages.length - 1){
+            pages.push({
+                parent: {},
+                child: []
+            })
+        }
+
+        let lastCurrentContent = pages[index].child.pop();
+        // console.log(lastCurrentContent)
+        // console.log('page index:', index)
+        // console.log('next page index:', index + 1)
+
+        pages[index + 1].child.unshift(lastCurrentContent)
+        // console.log('number of pages:', pages)
+
+        setPages([...pages])
+    }
+
+    function moveContentToPreviousBlock(index){
+        if(index === 0) return;
+        
+        let lastCurrentContent = pages[index].child.shift();
+
+        console.log(lastCurrentContent)
+        // console.log(lastCurrentContent)
+        // console.log('page index:', index)
+        // console.log('next page index:', index + 1)
+
+        pages[index - 1].child.push(lastCurrentContent)
+        // console.log('number of pages:', pages)
+
+        console.log(index)
+        console.log(pages)
+
+        setPages([...pages])
+    }
+
+    useEffect(() => {
+        panelsRef.current = panelsRef.current.slice(0, pages.length);
+    }, [pages]);
+
+    function renderChildContent(pageIndex, childId, childIndex){
+        switch(childId){
+            case 1:
+                return <EducationBlock 
+                        key={childIndex} 
+                        pageIndex={pageIndex}
+                        childId={childId}
+                        childIndex={childIndex}
+                        handleOutsideClick={useOnClickOutside}
+                        onInputFieldChange={onInputFieldChange} 
+                        createNewContent={createNewContent}
+                        checkToMoveContent={checkToMoveContent}
+                        removeContent={removeContent}
+                        removeBlock={removeBlock}/>
+            case 2:
+                return <WorkBlock 
+                        key={childIndex} 
+                        pageIndex={pageIndex}
+                        childId={childId}
+                        childIndex={childIndex}
+                        handleOutsideClick={useOnClickOutside}
+                        onInputFieldChange={onInputFieldChange} 
+                        createNewContent={createNewContent}
+                        checkToMoveContent={checkToMoveContent}
+                        removeContent={removeContent}
+                        removeBlock={removeBlock}/>
+            case 3:
+                return <OrganizationBlock 
+                        key={childIndex} 
+                        pageIndex={pageIndex}
+                        childId={childId}
+                        childIndex={childIndex}
+                        handleOutsideClick={useOnClickOutside}
+                        onInputFieldChange={onInputFieldChange} 
+                        createNewContent={createNewContent}
+                        checkToMoveContent={checkToMoveContent}
+                        removeContent={removeContent}
+                        removeBlock={removeBlock}/>
+            case 4:
+                return <CertificateBlock 
+                        key={childIndex} 
+                        pageIndex={pageIndex}
+                        childId={childId}
+                        childIndex={childIndex}
+                        handleOutsideClick={useOnClickOutside}
+                        onInputFieldChange={onInputFieldChange} 
+                        createNewContent={createNewContent}
+                        checkToMoveContent={checkToMoveContent}
+                        removeContent={removeContent}
+                        removeBlock={removeBlock}/>
+            case 5:
+                return <PersonalProjectBlock 
+                        key={childIndex} 
+                        pageIndex={pageIndex}
+                        childId={childId}
+                        childIndex={childIndex}
+                        handleOutsideClick={useOnClickOutside}
+                        onInputFieldChange={onInputFieldChange} 
+                        createNewContent={createNewContent}
+                        checkToMoveContent={checkToMoveContent}
+                        removeContent={removeContent}
+                        removeBlock={removeBlock}/>
+        }
+    }
+
     return(
         <div className="document">
-            <EducationBlock handleOutsideClick={useOnClickOutside} onInputFieldChange={onInputFieldChange} createNewContent={createNewContent}/>
-            <WorkBlock handleOutsideClick={useOnClickOutside} onInputFieldChange={onInputFieldChange} createNewContent={createNewContent}/>
-            <OrganizationBlock handleOutsideClick={useOnClickOutside} onInputFieldChange={onInputFieldChange} createNewContent={createNewContent}/>
-            <CertificateBlock handleOutsideClick={useOnClickOutside} onInputFieldChange={onInputFieldChange} createNewContent={createNewContent}/>
-            <PersonalProjectBlock handleOutsideClick={useOnClickOutside} onInputFieldChange={onInputFieldChange} createNewContent={createNewContent}/>
-            <ConferenceBlock handleOutsideClick={useOnClickOutside}/>
-            <PublicationBlock handleOutsideClick={useOnClickOutside}/>
-            <HonorAwardBlock handleOutsideClick={useOnClickOutside}/>
-            <AchievementBlock handleOutsideClick={useOnClickOutside}/>
-            <VolunteerkBlock handleOutsideClick={useOnClickOutside}/>
-            <TeachingBlock handleOutsideClick={useOnClickOutside}/>
-            <ReferenceBlock handleOutsideClick={useOnClickOutside}/>
-            <LanguageBlock handleOutsideClick={useOnClickOutside}/>
-            <TechnicalSkillBlock handleOutsideClick={useOnClickOutside}/>
-            <TagBlock handleOutsideClick={useOnClickOutside}/>
+            {pages && pages.map((page, pageIndex) => (
+                <div key={pageIndex} 
+                     ref={el => panelsRef.current[pageIndex] = el}>
+                    <Panel pageIndex={pageIndex}>
+                        {page.child && (
+                            page.child.map((child, childIndex) => {
+                                return(renderChildContent(pageIndex, child.id, childIndex)
+                            )})
+                        )}
+                    </Panel>
+                </div>
+            ))}
         </div>
     )
 }

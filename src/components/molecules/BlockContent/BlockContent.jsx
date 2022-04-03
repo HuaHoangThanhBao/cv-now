@@ -4,9 +4,9 @@ import AddIcon from './../../../dist/add.svg';
 import AlertIcon from './../../../dist/exclamation.svg';
 import './BlockContent.scss';
 
-const BlockContent = ({isVisible, onCreateNewContent, children}) => {
+const BlockContent = ({isVisible, onCreateNewContent, onClick, children}) => {
     return(
-        <div className={"block-content" + (isVisible ? " active": "")}>
+        <div className={"block-content" + (isVisible ? " active": "")} onClick={onClick}>
             <span className='block-content-alert'>
                 <img src={AlertIcon} alt="" />
             </span>
