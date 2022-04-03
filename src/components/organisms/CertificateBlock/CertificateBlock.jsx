@@ -7,16 +7,14 @@ import BlockHeader from '../../molecules/BlockHeader/BlockHeader';
 import DateInput from '../../molecules/DateInput/DateInput';
 import './../../../styles/block.scss';
 
-const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock, parentRef, moveBlockUp}) => {
+const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock, parentRef, moveBlockUp, moveBlockDown}) => {
     const [isVisible, setIsVisible] = useState(false);
     const [contentList, setContentList] = useState([0]);
     const [blockContentOnClick, setBlockContentOnClick] = useState(false);
     const [blockOnClick, setBlockOnClick] = useState(false);
-    const [count, setCount] = useState(0);
     const ref = useRef();
 
     const handleVisible = (status) => {
-        setCount(count => count + 1)
         setIsVisible(status)
     }
 
@@ -33,12 +31,15 @@ const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, c
     }
 
     useEffect(() => {
-      if(!isVisible && count > 1) {
-        console.log('yess')
-        setBlockContentOnClick(false)
-        setBlockOnClick(false)
-        setCount(0)
-        checkToMoveContent(pageIndex)
+      return () => {
+          if(isVisible) {
+              console.log(isVisible)
+              console.log('yess')
+              setBlockContentOnClick(false)
+              setBlockOnClick(false)
+              setIsVisible(false)
+              checkToMoveContent(pageIndex)
+          }
       }
     }, [isVisible])
 
@@ -86,6 +87,7 @@ const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, c
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
                 moveBlockUp={() => moveBlockUp(pageIndex, childIndex, ref, parentRef)}
+                moveBlockDown={() => moveBlockDown(pageIndex, childIndex, ref, parentRef)}
            />
         </div>
     )

@@ -12,11 +12,11 @@ const DocumentPanel = () => {
         {
             parent: {},
             child: [
-                {id: 2},
                 {id: 1},
+                {id: 5},
                 {id: 3},
                 {id: 4},
-                {id: 5},
+                {id: 2},
             ]
         },
         {
@@ -86,7 +86,7 @@ const DocumentPanel = () => {
             const height = panelsRef.current[i].offsetHeight
             // console.log(height)
             if(height > 1800){
-                console.log('stat moving last block at page ' + i + ' to new page')
+                console.log('start moving last block at page ' + i + ' to new page')
                 moveContentToNextBlock(i)
             }
         }
@@ -101,13 +101,7 @@ const DocumentPanel = () => {
         }
 
         let lastCurrentContent = pages[index].child.pop();
-        // console.log(lastCurrentContent)
-        // console.log('page index:', index)
-        // console.log('next page index:', index + 1)
-
         pages[index + 1].child.unshift(lastCurrentContent)
-        // console.log('number of pages:', pages)
-
         setPages([...pages])
     }
 
@@ -121,23 +115,50 @@ const DocumentPanel = () => {
         {
             pages[pageIndex].child.move(childIndex, childIndex - 1)
             setPages([...pages])
-            console.log(parentBlockRef.current[pageIndex].offsetHeight)
         }
         else{
             if(pageIndex > 0){
-              const previousPageHeight = parentBlockRef.current[pageIndex - 1].offsetHeight
-              const currentBlockHeight = childBlockRef.current.offsetHeight
+                const previousPageHeight = parentBlockRef.current[pageIndex - 1].offsetHeight
+                const currentBlockHeight = childBlockRef.current.offsetHeight
+  
+                if(previousPageHeight + currentBlockHeight < 1300){
+                    const removedBlock = pages[pageIndex].child.shift()
+                    pages[pageIndex - 1].child.push(removedBlock)
+                    if(pages[pageIndex].child.length == 0){
+                        pages.pop()
+                    }
+                    setPages([...pages])
+                }
+                else{
+                    console.log('cannot move block to previous page')
+                }
+            }
+        }
+    }
 
-              console.log('previous page height:', previousPageHeight)
+    const moveBlockDown = (pageIndex, childIndex, childBlockRef, parentBlockRef) => {
+        if(childIndex + 1 < pages.length){
+            pages[pageIndex].child.move(childIndex, childIndex + 1)
+            setPages([...pages])
+        }
+        else{
+            if(pageIndex < pages.length){
+                const nextPageHeight = parentBlockRef.current[pageIndex + 1].offsetHeight
+                const currentBlockHeight = childBlockRef.current.offsetHeight
 
-              if(previousPageHeight + currentBlockHeight < 1300){
-                  const removedBlock = pages[pageIndex].child.shift()
-                  pages[pageIndex - 1].child.push(removedBlock)
-                  setPages([...pages])
-              }
-              else{
-                  console.log('cannot move block to previous page')
-              }
+                if(nextPageHeight + currentBlockHeight < 1300){
+                    if(pages[pageIndex].child.length > 1){
+                        const removedBlock = pages[pageIndex].child.pop()
+                        pages[pageIndex + 1].child.unshift(removedBlock)
+                        setPages([...pages])
+                    }
+                    else{
+                        console.log('cannot move block to next page because there is at least one block in page')
+                    }
+                }
+                else{
+                    console.log('cannot move block to next page')
+                }
             }
         }
     }
@@ -160,7 +181,8 @@ const DocumentPanel = () => {
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
                         parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}/>
+                        moveBlockUp={moveBlockUp}
+                        moveBlockDown={moveBlockDown}/>
             case 2:
                 return <WorkBlock 
                         key={childIndex} 
@@ -174,7 +196,8 @@ const DocumentPanel = () => {
                         removeContent={removeContent}
                         removeBlock={removeBlock}
                         parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}/>
+                        moveBlockUp={moveBlockUp}
+                        moveBlockDown={moveBlockDown}/>
             case 3:
                 return <OrganizationBlock 
                         key={childIndex} 
@@ -188,7 +211,8 @@ const DocumentPanel = () => {
                         removeContent={removeContent}
                         removeBlock={removeBlock}
                         parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}/>
+                        moveBlockUp={moveBlockUp}
+                        moveBlockDown={moveBlockDown}/>
             case 4:
                 return <CertificateBlock 
                         key={childIndex} 
@@ -202,7 +226,8 @@ const DocumentPanel = () => {
                         removeContent={removeContent}
                         removeBlock={removeBlock}
                         parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}/>
+                        moveBlockUp={moveBlockUp}
+                        moveBlockDown={moveBlockDown}/>
             case 5:
                 return <PersonalProjectBlock 
                         key={childIndex} 
@@ -216,7 +241,8 @@ const DocumentPanel = () => {
                         removeContent={removeContent}
                         removeBlock={removeBlock}
                         parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}/>
+                        moveBlockUp={moveBlockUp}
+                        moveBlockDown={moveBlockDown}/>
         }
     }
 
