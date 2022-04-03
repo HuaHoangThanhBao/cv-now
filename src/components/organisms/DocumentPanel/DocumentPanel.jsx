@@ -12,8 +12,8 @@ const DocumentPanel = () => {
         {
             parent: {},
             child: [
-                {id: 1},
                 {id: 2},
+                {id: 1},
                 {id: 3},
                 {id: 4},
                 {id: 5},
@@ -22,9 +22,9 @@ const DocumentPanel = () => {
         {
             parent: {},
             child: [
-                {id: 2},
-                {id: 3},
                 {id: 1},
+                {id: 3},
+                {id: 2},
                 {id: 5},
                 {id: 4},
             ]
@@ -85,13 +85,9 @@ const DocumentPanel = () => {
         for(let i = 0; i < panelsRef.current.length; i++){
             const height = panelsRef.current[i].offsetHeight
             // console.log(height)
-            if(height > 1020){
+            if(height > 1800){
                 console.log('stat moving last block at page ' + i + ' to new page')
                 moveContentToNextBlock(i)
-            }
-            else{
-                // console.log('stat moving first block at page ' + i + ' to previous page')
-                // moveContentToPreviousBlock(i)
             }
         }
     }
@@ -115,23 +111,35 @@ const DocumentPanel = () => {
         setPages([...pages])
     }
 
-    function moveContentToPreviousBlock(index){
-        if(index === 0) return;
-        
-        let lastCurrentContent = pages[index].child.shift();
+    Array.prototype.move = function(from,to){
+        this.splice(to,0,this.splice(from,1)[0]);
+        return this;
+    };
 
-        console.log(lastCurrentContent)
-        // console.log(lastCurrentContent)
-        // console.log('page index:', index)
-        // console.log('next page index:', index + 1)
+    const moveBlockUp = (pageIndex, childIndex, childBlockRef, parentBlockRef) => {
+        if(childIndex - 1 >= 0)
+        {
+            pages[pageIndex].child.move(childIndex, childIndex - 1)
+            setPages([...pages])
+            console.log(parentBlockRef.current[pageIndex].offsetHeight)
+        }
+        else{
+            if(pageIndex > 0){
+              const previousPageHeight = parentBlockRef.current[pageIndex - 1].offsetHeight
+              const currentBlockHeight = childBlockRef.current.offsetHeight
 
-        pages[index - 1].child.push(lastCurrentContent)
-        // console.log('number of pages:', pages)
+              console.log('previous page height:', previousPageHeight)
 
-        console.log(index)
-        console.log(pages)
-
-        setPages([...pages])
+              if(previousPageHeight + currentBlockHeight < 1300){
+                  const removedBlock = pages[pageIndex].child.shift()
+                  pages[pageIndex - 1].child.push(removedBlock)
+                  setPages([...pages])
+              }
+              else{
+                  console.log('cannot move block to previous page')
+              }
+            }
+        }
     }
 
     useEffect(() => {
@@ -151,7 +159,8 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}/>
+                        parentRef={panelsRef}
+                        moveBlockUp={moveBlockUp}/>
             case 2:
                 return <WorkBlock 
                         key={childIndex} 
@@ -163,7 +172,9 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}/>
+                        removeBlock={removeBlock}
+                        parentRef={panelsRef}
+                        moveBlockUp={moveBlockUp}/>
             case 3:
                 return <OrganizationBlock 
                         key={childIndex} 
@@ -175,7 +186,9 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}/>
+                        removeBlock={removeBlock}
+                        parentRef={panelsRef}
+                        moveBlockUp={moveBlockUp}/>
             case 4:
                 return <CertificateBlock 
                         key={childIndex} 
@@ -187,7 +200,9 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}/>
+                        removeBlock={removeBlock}
+                        parentRef={panelsRef}
+                        moveBlockUp={moveBlockUp}/>
             case 5:
                 return <PersonalProjectBlock 
                         key={childIndex} 
@@ -199,7 +214,9 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}/>
+                        removeBlock={removeBlock}
+                        parentRef={panelsRef}
+                        moveBlockUp={moveBlockUp}/>
         }
     }
 

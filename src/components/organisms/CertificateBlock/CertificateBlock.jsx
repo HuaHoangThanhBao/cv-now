@@ -7,7 +7,7 @@ import BlockHeader from '../../molecules/BlockHeader/BlockHeader';
 import DateInput from '../../molecules/DateInput/DateInput';
 import './../../../styles/block.scss';
 
-const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock}) => {
+const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock, parentRef, moveBlockUp}) => {
     const [isVisible, setIsVisible] = useState(false);
     const [contentList, setContentList] = useState([0]);
     const [blockContentOnClick, setBlockContentOnClick] = useState(false);
@@ -41,6 +41,7 @@ const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, c
         checkToMoveContent(pageIndex)
       }
     }, [isVisible])
+
     return(
         <div className="block block-education" ref={ref}>
            <BlockHeader 
@@ -64,12 +65,14 @@ const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, c
                   placeHolder="Certificate Name"
                   onChange={onInputFieldChange}
                 />
-                <DateInput isVisible={isVisible}/>
+                <DateInput 
+                  visible={true}
+                />
                 <InputField
                     externalClass="block-content-detail dashed"
                     type="text"
                     placeHolder="Description (optional)"
-                    visible={isVisible}
+                    visible={true}
                     onChange={onInputFieldChange}
                 />
                 <BlockContentBar 
@@ -82,6 +85,7 @@ const CertificateBlock = ({pageIndex, childIndex, childId, handleOutsideClick, c
            <BlockBar 
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
+                moveBlockUp={() => moveBlockUp(pageIndex, childIndex, ref, parentRef)}
            />
         </div>
     )

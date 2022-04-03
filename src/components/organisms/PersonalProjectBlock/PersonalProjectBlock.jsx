@@ -7,7 +7,7 @@ import BlockHeader from '../../molecules/BlockHeader/BlockHeader';
 import DateInput from '../../molecules/DateInput/DateInput';
 import './../../../styles/block.scss';
 
-const PersonalProjectBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock}) => {
+const PersonalProjectBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock, parentRef, moveBlockUp}) => {
     const [isVisible, setIsVisible] = useState(false);
     const [contentList, setContentList] = useState([0]);
     const [blockContentOnClick, setBlockContentOnClick] = useState(false);
@@ -41,6 +41,7 @@ const PersonalProjectBlock = ({pageIndex, childIndex, childId, handleOutsideClic
             checkToMoveContent(pageIndex)
         }
     }, [isVisible])
+
     return(
         <div className="block block-education" ref={ref}>
            <BlockHeader 
@@ -64,12 +65,15 @@ const PersonalProjectBlock = ({pageIndex, childIndex, childId, handleOutsideClic
                         placeHolder="Project Name"
                         onChange={onInputFieldChange}
                     />
-                    <DateInput isVisible={isVisible}/>
+                    <DateInput 
+                       isVisible={true}
+                       onInputFieldChange={onInputFieldChange}
+                   />
                     <InputField
                         externalClass="block-content-detail dashed"
                         type="text"
                         placeHolder="Description of Achievements"
-                        visible={isVisible}
+                        visible={true}
                         onChange={onInputFieldChange}
                     />
                     <BlockContentBar 
@@ -82,6 +86,7 @@ const PersonalProjectBlock = ({pageIndex, childIndex, childId, handleOutsideClic
            <BlockBar 
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
+                moveBlockUp={() => moveBlockUp(pageIndex, childIndex, ref, parentRef)}
            />
         </div>
     )

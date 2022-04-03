@@ -8,7 +8,7 @@ import DateInput from '../../molecules/DateInput/DateInput';
 import BulletIcon from './../../../dist/bullet.svg';
 import './../../../styles/block.scss';
 
-const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock}) => {
+const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock, parentRef, moveBlockUp}) => {
     const [isVisible, setIsVisible] = useState(false);
     const [contentList, setContentList] = useState([0]);
     const [blockContentOnClick, setBlockContentOnClick] = useState(false);
@@ -42,6 +42,7 @@ const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToM
             checkToMoveContent(pageIndex)
         }
     }, [isVisible])
+
     return(
         <div className="block block-education" ref={ref}>
            <BlockHeader 
@@ -73,28 +74,28 @@ const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToM
                          onChange={onInputFieldChange}
                      />
                      <DateInput 
-                        isVisible={isVisible}
+                        isVisible={true}
                         onInputFieldChange={onInputFieldChange}
                     />
                      <InputField
                          externalClass="block-content-optional dashed"
                          type="text"
                          placeHolder="City, Country (optional)"
-                         visible={isVisible}
+                         visible={true}
                          onChange={onInputFieldChange}
                      />
                      <InputField
                          externalClass="block-content-optional dashed"
                          type="text"
                          placeHolder="Company Description (optional, fill when the company is not well known)"
-                         visible={isVisible}
+                         visible={true}
                          onChange={onInputFieldChange}
                      />
                      <InputField
                          externalClass="block-content-detail"
                          type="text"
                          placeHolder="Achievements/Tasks"
-                         visible={isVisible}
+                         visible={true}
                          onChange={onInputFieldChange}
                      />
                      <InputField
@@ -102,7 +103,7 @@ const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToM
                          type="text"
                          icon={BulletIcon}
                          placeHolder="Accomplishment/Responsibility/Task"
-                         visible={isVisible}
+                         visible={true}
                          onChange={onInputFieldChange}
                      />
                      <div className='block-content-contact'>
@@ -110,7 +111,7 @@ const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToM
                              externalClass="block-content-detail"
                              type="text"
                              placeHolder="Contact:"
-                             visible={isVisible}
+                             visible={true}
                              onChange={onInputFieldChange}
                          />
                          <div className='block-content-contact-group'>
@@ -118,14 +119,14 @@ const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToM
                                  externalClass="block-content-bullet dashed"
                                  type="text"
                                  placeHolder="Contact Person"
-                                 visible={isVisible}
+                                 visible={true}
                                  onChange={onInputFieldChange}
                              />
                              <InputField
                                  externalClass="block-content-bullet dashed"
                                  type="text"
                                  placeHolder="Contact Info"
-                                 visible={isVisible}
+                                 visible={true}
                                  onChange={onInputFieldChange}
                              />
                          </div>
@@ -140,6 +141,7 @@ const WorkBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToM
            <BlockBar 
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
+                moveBlockUp={() => moveBlockUp(pageIndex, childIndex, ref, parentRef)}
            />
         </div>
     )

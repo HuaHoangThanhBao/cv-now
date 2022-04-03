@@ -7,7 +7,7 @@ import BlockHeader from '../../molecules/BlockHeader/BlockHeader';
 import DateInput from '../../molecules/DateInput/DateInput';
 import './../../../styles/block.scss';
 
-const EducationBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock}) => {
+const EducationBlock = ({pageIndex, childIndex, childId, handleOutsideClick, checkToMoveContent, onInputFieldChange, createNewContent, removeContent, removeBlock, parentRef, moveBlockUp}) => {
     const [isVisible, setIsVisible] = useState(false);
     const [contentList, setContentList] = useState([0]);
     const [count, setCount] = useState(0);
@@ -73,28 +73,28 @@ const EducationBlock = ({pageIndex, childIndex, childId, handleOutsideClick, che
                         onChange={onInputFieldChange}
                     />
                     <DateInput 
-                        isVisible={isVisible}
+                        isVisible={true}
                         onInputFieldChange={onInputFieldChange}
                     />
                     <InputField
                         externalClass="block-content-optional dashed"
                         type="text"
                         placeHolder="City, Country or GPA (optional)"
-                        visible={isVisible}
+                        visible={true}
                         onChange={onInputFieldChange}
                     />
                     <InputField
                         externalClass="block-content-detail"
                         type="text"
                         placeHolder="Coures"
-                        visible={isVisible}
+                        visible={true}
                         onChange={onInputFieldChange}
                     />
                     <InputField
                         externalClass="block-content-bullet dashed"
                         type="text"
                         placeHolder="Course/Thesis/Project"
-                        visible={isVisible}
+                        visible={true}
                         onChange={onInputFieldChange}
                     />
                     <BlockContentBar 
@@ -107,6 +107,7 @@ const EducationBlock = ({pageIndex, childIndex, childId, handleOutsideClick, che
            <BlockBar 
                 isVisible={blockOnClick}
                 onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
+                moveBlockUp={() => moveBlockUp(pageIndex, childIndex, ref, parentRef)}
            />
         </div>
     )
