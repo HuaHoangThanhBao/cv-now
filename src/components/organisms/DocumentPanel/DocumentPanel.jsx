@@ -17,7 +17,7 @@ const DocumentPanel = () => {
                 {id: 3},
                 {id: 4},
                 {id: 5},
-                {id: 2},
+                // {id: 2},
             ]
         },
         {
@@ -28,7 +28,7 @@ const DocumentPanel = () => {
                 {id: 2},
                 {id: 5},
                 {id: 4},
-                {id: 2},
+                // {id: 2},
             ]
         }
     ])
@@ -139,6 +139,7 @@ const DocumentPanel = () => {
     }
 
     const moveBlockDown = (pageIndex, childIndex, childBlockRef, parentBlockRef) => {
+        console.log('move down..........')
         if(childIndex !== pages[pageIndex].child.length - 1){
             pages[pageIndex].child.move(childIndex, childIndex + 1)
             setPages([...pages])
