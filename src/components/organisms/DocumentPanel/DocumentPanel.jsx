@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import BlockWrapper from '../BlockWrapper/BlockWrapper';
 import CertificateBlock from '../CertificateBlock/CertificateBlock';
 import EducationBlock from '../EducationBlock/EducationBlock';
 import OrganizationBlock from '../OrganizationBlock/OrganizationBlock';
@@ -12,23 +13,137 @@ const DocumentPanel = () => {
         {
             parent: {},
             child: [
-                {id: 1},
-                {id: 2},
-                {id: 3},
-                {id: 4},
-                {id: 5},
-                // {id: 2},
+                {id: 1,
+                title:"EDUCATION",
+                blockType: 1,
+                data: {
+                    title: "Study Program",
+                    desc: "Institution/ Place of education",
+                    optional_dashed: "City, Country or GPA (optional)",
+                    content_detail: "Coures",
+                    content_bullet: "Course/Thesis/Project"
+                }
+                },
+                {id: 2,
+                title:"WORK EXPERIENCE",
+                blockType: 2,
+                data:{
+                    title: "Title/Position",
+                    desc: "Workplace/Company",
+                    optional_dashed: "City, Country (optional)",
+                    optional_dashed2: "Company Description (optional, fill when the company is not well known)",
+                    content_detail: "Achievements/Tasks",
+                    content_bullet: "Accomplishment/Responsibility/Task",
+                    contact: "Contact:",
+                    contact_person: "Contact Person",
+                    contact_info: "Contact Info",
+                }},
+                {id: 3,
+                title:"ORGANIZATION",
+                blockType: 3,
+                data: {
+                    title: "Organization Name",
+                    content_detail: "Role (optional)",
+                }},
+                {id: 4,
+                    title:"CERTIFICATES",
+                    blockType: 3,
+                    data: {
+                        title: "Certificate Name",
+                        content_detail: "Description (optional)",
+                    }
+                },
+                {id: 5,
+                    title:"PERSONAL PROJECTS",
+                    blockType: 3,
+                    data: {
+                        title: "Project Name",
+                        content_detail: "Description of Achievements",
+                    }
+                },
+                {id: 2,
+                    title:"WORK EXPERIENCE",
+                    blockType: 2,
+                    data:{
+                        title: "Title/Position",
+                        desc: "Workplace/Company",
+                        optional_dashed: "City, Country (optional)",
+                        optional_dashed2: "Company Description (optional, fill when the company is not well known)",
+                        content_detail: "Achievements/Tasks",
+                        content_bullet: "Accomplishment/Responsibility/Task",
+                        contact: "Contact:",
+                        contact_person: "Contact Person",
+                        contact_info: "Contact Info",
+                    }
+                },
             ]
         },
         {
             parent: {},
             child: [
-                {id: 1},
-                {id: 3},
-                {id: 2},
-                {id: 5},
-                {id: 4},
-                // {id: 2},
+                {id: 1,
+                title:"EDUCATION",
+                blockType: 1,
+                data: {
+                    title: "Study Program",
+                    desc: "Institution/ Place of education",
+                    optional_dashed: "City, Country or GPA (optional)",
+                    content_detail: "Coures",
+                    content_bullet: "Course/Thesis/Project"
+                }
+                },
+                {id: 2,
+                title:"WORK EXPERIENCE",
+                blockType: 2,
+                data:{
+                    title: "Title/Position",
+                    desc: "Workplace/Company",
+                    optional_dashed: "City, Country (optional)",
+                    optional_dashed2: "Company Description (optional, fill when the company is not well known)",
+                    content_detail: "Achievements/Tasks",
+                    content_bullet: "Accomplishment/Responsibility/Task",
+                    contact: "Contact:",
+                    contact_person: "Contact Person",
+                    contact_info: "Contact Info",
+                }},
+                {id: 3,
+                title:"ORGANIZATION",
+                blockType: 3,
+                data: {
+                    title: "Organization Name",
+                    content_detail: "Role (optional)",
+                }},
+                {id: 4,
+                    title:"CERTIFICATES",
+                    blockType: 3,
+                    data: {
+                        title: "Certificate Name",
+                        content_detail: "Description (optional)",
+                    }
+                },
+                {id: 5,
+                    title:"PERSONAL PROJECTS",
+                    blockType: 3,
+                    data: {
+                        title: "Project Name",
+                        content_detail: "Description of Achievements",
+                    }
+                },
+                {id: 2,
+                    title:"WORK EXPERIENCE",
+                    blockType: 2,
+                    data:{
+                        title: "Title/Position",
+                        desc: "Workplace/Company",
+                        optional_dashed: "City, Country (optional)",
+                        optional_dashed2: "Company Description (optional, fill when the company is not well known)",
+                        content_detail: "Achievements/Tasks",
+                        content_bullet: "Accomplishment/Responsibility/Task",
+                        contact: "Contact:",
+                        contact_person: "Contact Person",
+                        contact_info: "Contact Info",
+                    }
+                },
             ]
         }
     ])
@@ -139,7 +254,6 @@ const DocumentPanel = () => {
     }
 
     const moveBlockDown = (pageIndex, childIndex, childBlockRef, parentBlockRef) => {
-        console.log('move down..........')
         if(childIndex !== pages[pageIndex].child.length - 1){
             pages[pageIndex].child.move(childIndex, childIndex + 1)
             setPages([...pages])
@@ -171,9 +285,13 @@ const DocumentPanel = () => {
     }, [pages]);
 
     function renderChildContent(pageIndex, childId, childIndex){
+        const child =  pages[pageIndex].child.find(c => c.id == childId)
         switch(childId){
             case 1:
-                return <EducationBlock 
+                return <BlockWrapper
+                        title={child.title} 
+                        blockType={child.blockType}
+                        data={child.data}
                         key={childIndex} 
                         pageIndex={pageIndex}
                         childId={childId}
@@ -187,7 +305,10 @@ const DocumentPanel = () => {
                         moveBlockUp={moveBlockUp}
                         moveBlockDown={moveBlockDown}/>
             case 2:
-                return <WorkBlock 
+                return <BlockWrapper
+                        title={child.title}
+                        blockType={child.blockType}
+                        data={child.data}
                         key={childIndex} 
                         pageIndex={pageIndex}
                         childId={childId}
@@ -197,12 +318,17 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}
                         parentRef={panelsRef}
                         moveBlockUp={moveBlockUp}
                         moveBlockDown={moveBlockDown}/>
             case 3:
-                return <OrganizationBlock 
+                return <BlockWrapper
+                        title="ORGANIZATION" 
+                        blockType={3}
+                        data={{
+                            title: "Organization Name",
+                            content_detail: "Role (optional)",
+                        }}
                         key={childIndex} 
                         pageIndex={pageIndex}
                         childId={childId}
@@ -212,12 +338,17 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}
                         parentRef={panelsRef}
                         moveBlockUp={moveBlockUp}
                         moveBlockDown={moveBlockDown}/>
             case 4:
-                return <CertificateBlock 
+                return <BlockWrapper
+                        title="CERTIFICATES" 
+                        blockType={3}
+                        data={{
+                            title: "Certificate Name",
+                            content_detail: "Description (optional)",
+                        }}
                         key={childIndex} 
                         pageIndex={pageIndex}
                         childId={childId}
@@ -227,12 +358,17 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}
                         parentRef={panelsRef}
                         moveBlockUp={moveBlockUp}
                         moveBlockDown={moveBlockDown}/>
             case 5:
-                return <PersonalProjectBlock 
+                return <BlockWrapper
+                        title="PERSONAL PROJECTS" 
+                        blockType={3}
+                        data={{
+                            title: "Project Name",
+                            content_detail: "Description of Achievements",
+                        }}
                         key={childIndex} 
                         pageIndex={pageIndex}
                         childId={childId}
@@ -242,7 +378,6 @@ const DocumentPanel = () => {
                         createNewContent={createNewContent}
                         checkToMoveContent={checkToMoveContent}
                         removeContent={removeContent}
-                        removeBlock={removeBlock}
                         parentRef={panelsRef}
                         moveBlockUp={moveBlockUp}
                         moveBlockDown={moveBlockDown}/>

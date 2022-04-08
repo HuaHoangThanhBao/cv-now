@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import ContentEditable from 'react-contenteditable';
 import './InputField.scss';
 
@@ -8,6 +8,11 @@ const InputField = (props) => {
     const [html, setHTML] = useState(placeHolder);
     // const [value, setValue] = useState('')
     const [isHide, setIsHide] = useState(true);
+
+    useEffect(() => {
+        setHTML(placeHolder)
+    }, [placeHolder])
+
     const renderField = () => {
         if(visible){
             return (

@@ -5,7 +5,7 @@ import './BlockHeader.scss';
 const BlockHeader = ({title, handleOutsideClick, handleBlockHeader, onClick}) => {
     const ref = useRef();
     const contentEditable = createRef();
-    const [html, setHTML] = useState(title);
+    const [html, setHTML] = useState('');
     const [visible, setVisible] = useState(false)
 
     const handleChange = (evt) => {
@@ -25,6 +25,10 @@ const BlockHeader = ({title, handleOutsideClick, handleBlockHeader, onClick}) =>
             }
         }
     }, [visible])
+
+    useEffect(() => {
+        setHTML(title)
+    }, [title])
 
     return(
         <div className="block-header" ref={ref} onClick={onClick}>
