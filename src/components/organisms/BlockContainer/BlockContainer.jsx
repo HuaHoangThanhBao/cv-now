@@ -82,7 +82,7 @@ const BlockContainer = (props) => {
                         isVisible={isVisible} 
                         key={item[0].title + index} 
                         onCreateNewContent={() => createNewContent(pageIndex, childId, childIndex, index)}
-                        onRemoveContent={() => removeContent(index)}
+                        onRemoveContent={() => removeContent(pageIndex, childId, childIndex, index)}
                         onClick={() => handleBlockContentStatus(true)}
                     >
                         {getBlockContent(blockType, index)}

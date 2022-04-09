@@ -57,7 +57,7 @@ const DocumentPanel = () => {
     const removeContent = (pageIndex, childId, childIndex, atIndex) => {
         console.log('Removed component at index: '+ atIndex)
 
-        if(childIndex > 0){
+        if(pages[pageIndex].child[childIndex].data.length > 1){
             pages[pageIndex].child[childIndex].data.splice(atIndex, 1)
             setPages(pages)
         }
