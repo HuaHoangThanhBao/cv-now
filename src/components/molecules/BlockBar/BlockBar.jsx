@@ -4,26 +4,9 @@ import MoveUpIcon from './../../../dist/move-up.svg';
 import MoveDownIcon from './../../../dist/move-down.svg';
 import './BlockBar.scss';
 
-const BlockBar = ({childIndex, pageIndex, isVisible, handleBlockBar, handleOutsideClick, onRemoveBlock, moveBlockUp, moveBlockDown}) => {
-    const ref = useRef();
-    const [visible, setVisible] = useState(true)
-    
-    const handleBlockBarClick = (status) => {
-        setVisible(status)
-    }
-
-    handleOutsideClick(ref, handleBlockBarClick)
-
-    useEffect(() => {
-        return () => {
-            if(visible){
-                handleBlockBar(true)
-            }
-        }
-    }, [visible])
-
+const BlockBar = ({childIndex, pageIndex, isVisible, onRemoveBlock, moveBlockUp, moveBlockDown}) => {
     return(
-        <div className='block-bar' ref={ref}>
+        <div className='block-bar'>
             {(isVisible && (
                 <div className='block-bar-container'>
                     {

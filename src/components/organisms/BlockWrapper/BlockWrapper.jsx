@@ -26,10 +26,8 @@ const BlockWrapper = (props) => {
     } = props;
 
     const [isVisible, setIsVisible] = useState(false);
-    const [blockHeaderVisible, setBlockHeaderVisible] = useState(false)
-    const [blockBarVisible, setBlockBarVisible] = useState(false)
     const [myBlockVisible, setMyBlockVisible] = useState(false)
-    const [blockContentOnClick, setBlockContentOnClick] = useState(false);
+    const [blockHeaderStatus, setBlockHeaderStatus] = useState(false)
 
     const getBlockContent = (_blockType, index) => {
         switch(_blockType){
@@ -390,19 +388,10 @@ const BlockWrapper = (props) => {
         return() => {
             if(isVisible) {
                 console.log('yess')
-                setBlockContentOnClick(false)
                 checkToMoveContent(pageIndex)
             }
         }
     }, [isVisible])
-
-    useEffect(() => {
-        return () => {
-            if(myBlockVisible && (!blockHeaderVisible && !blockBarVisible)){
-                setMyBlockVisible(false)
-            }
-        }
-    }, [blockHeaderVisible, blockBarVisible, myBlockVisible])
 
     return (
         <BlockContainer 
@@ -421,16 +410,14 @@ const BlockWrapper = (props) => {
             title={title}
             setIsVisible={setIsVisible}
             isVisible={isVisible}
-            setBlockHeaderVisible={setBlockHeaderVisible}
-            setBlockBarVisible={setBlockBarVisible}
             setMyBlockVisible={setMyBlockVisible}
             myBlockVisible={myBlockVisible}
-            setBlockContentOnClick={setBlockContentOnClick}
-            blockContentOnClick={blockContentOnClick}
             getBlockContent={getBlockContent}
             blockType={blockType}
             data={data}
             updateFieldData={updateFieldData}
+            blockHeaderStatus={blockHeaderStatus}
+            setBlockHeaderStatus={setBlockHeaderStatus}
         />
     )
 }

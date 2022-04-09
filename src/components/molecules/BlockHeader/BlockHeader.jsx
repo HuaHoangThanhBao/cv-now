@@ -3,29 +3,16 @@ import ContentEditable from 'react-contenteditable';
 import { InputFieldType } from '../../../constants/InputFieldType';
 import './BlockHeader.scss';
 
-const BlockHeader = ({title, pageIndex, childIndex, handleOutsideClick, handleBlockHeader, onClick, updateFieldData}) => {
+const BlockHeader = ({title, pageIndex, childIndex, handleBlockHeader, handleOutsideClick, updateFieldData, children}) => {
     const ref = useRef();
     const contentEditable = createRef();
     const [html, setHTML] = useState('');
-    const [visible, setVisible] = useState(false)
 
     const handleChange = (evt) => {
         setHTML(evt.target.value);
     };
 
-    const handleBlockHeaderClick = (status) => {
-        setVisible(status)
-    }
-
-    handleOutsideClick(ref, handleBlockHeaderClick)
-
-    useEffect(() => {
-        return () => {
-            if(visible){
-                handleBlockHeader(true)
-            }
-        }
-    }, [visible])
+    handleOutsideClick(ref, handleBlockHeader)
 
     useEffect(() => {
         setHTML(title)
@@ -36,7 +23,8 @@ const BlockHeader = ({title, pageIndex, childIndex, handleOutsideClick, handleBl
     }, [html])
 
     return(
-        <div className="block-header" ref={ref} onClick={onClick}>
+        <div className="block-header" ref={ref}>
+            {children}
             <ContentEditable 
                 className={"field-input block-header-title"}
                 innerRef={contentEditable} 

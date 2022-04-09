@@ -3,6 +3,11 @@ import BlockBar from '../../molecules/BlockBar/BlockBar';
 import BlockContent from '../../molecules/BlockContent/BlockContent';
 import BlockContentBar from '../../molecules/BlockContentBar/BlockContentBar';
 import BlockHeader from '../../molecules/BlockHeader/BlockHeader';
+import AddIcon from './../../../dist/add.svg';
+import TrashIcon from './../../../dist/trash.svg';
+import AlertIcon from './../../../dist/exclamation.svg';
+import MoveUpIcon from './../../../dist/move-up.svg';
+import MoveDownIcon from './../../../dist/move-down.svg';
 
 const BlockContainer = (props) => {
     const {
@@ -20,18 +25,14 @@ const BlockContainer = (props) => {
         setIsVisible,
         title,
         data,
-        setBlockHeaderVisible,
-        setBlockBarVisible,
         setMyBlockVisible,
         myBlockVisible,
-        setBlockContentOnClick,
-        blockContentOnClick,
         getBlockContent,
         blockType,
-        updateFieldData
+        updateFieldData,
+        blockHeaderStatus,
+        setBlockHeaderStatus
     } = props;
-
-    const [contentList, setContentList] = useState([0]);
 
     const myRef = useRef();
     const contentRef = useRef();
@@ -44,25 +45,34 @@ const BlockContainer = (props) => {
     handleOutsideClick(myRef, setMyBlockVisible);
 
     const handleBlockContentStatus = (status) => {
-        setBlockContentOnClick(status)
         setMyBlockVisible(!status)
-    }
-
-    const handleBlockStatus = (status) => {
-        setBlockContentOnClick(!status)
     }
 
     return(
         <div className="block block-education" ref={myRef}>
            <BlockHeader 
                 title={title}
-                onClick={() => handleBlockStatus(true)}
+                handleBlockHeader={setBlockHeaderStatus}
                 handleOutsideClick={handleOutsideClick}
-                handleBlockHeader={setBlockHeaderVisible}
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
                 childIndex={childIndex}
-            />
+            >
+                <BlockBar 
+                    childIndex={childIndex}
+                    pageIndex={pageIndex}
+                    isVisible={blockHeaderStatus}
+                    onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
+                    moveBlockUp={() => {
+                        setBlockHeaderStatus(false)
+                        moveBlockUp(pageIndex, childIndex, contentRef, parentRef)
+                    }}
+                    moveBlockDown={() => {
+                        setBlockHeaderStatus(false)
+                        moveBlockDown(pageIndex, childIndex, contentRef, parentRef)
+                    }}
+                />
+            </BlockHeader>
            <div className="block-space">
                 <hr />
            </div>
@@ -70,35 +80,15 @@ const BlockContainer = (props) => {
                 {data && data.map((item, index) => (
                     <BlockContent 
                         isVisible={isVisible} 
-                        key={contentList[index]} 
-                        onCreateNewContent={() => createNewContent(pageIndex, childIndex, index, contentList, setContentList)}
+                        key={item[0].title + index} 
+                        onCreateNewContent={() => createNewContent(pageIndex, childId, childIndex, index)}
+                        onRemoveContent={() => removeContent(index)}
                         onClick={() => handleBlockContentStatus(true)}
                     >
                         {getBlockContent(blockType, index)}
-                        <BlockContentBar 
-                            isVisible={blockContentOnClick} 
-                            onCreateNewContent={() => createNewContent(pageIndex, childIndex, index, contentList, setContentList)}
-                            onRemoveContent={() => removeContent(index, contentList, setContentList)}
-                        />
                     </BlockContent>
                 ))}
            </div>
-           <BlockBar 
-                childIndex={childIndex}
-                pageIndex={pageIndex}
-                isVisible={myBlockVisible}
-                handleOutsideClick={handleOutsideClick}
-                handleBlockBar={setBlockBarVisible}
-                onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
-                moveBlockUp={() => {
-                    setMyBlockVisible(false)
-                    moveBlockUp(pageIndex, childIndex, contentRef, parentRef)
-                }}
-                moveBlockDown={() => {
-                    setMyBlockVisible(false)
-                    moveBlockDown(pageIndex, childIndex, contentRef, parentRef)
-                }}
-           />
         </div>
     )
 }

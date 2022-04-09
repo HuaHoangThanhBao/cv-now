@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { InputFieldType } from '../../../constants/InputFieldType';
 import { MetaData, rootData } from '../../../constants/MetaData';
+import { getContent } from '../../../service/contentService';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
 import CertificateBlock from '../CertificateBlock/CertificateBlock';
 import EducationBlock from '../EducationBlock/EducationBlock';
@@ -44,21 +45,25 @@ const DocumentPanel = () => {
         }
     }
 
-    const createNewContent = (pageIndex, childIndex, atIndex, contentList, setContentList) => {
+    const createNewContent = (pageIndex, childId, childIndex, atIndex) => {
         console.log('Going to create component at index: '+ atIndex)
 
-        const currentChild = pages[pageIndex].child[childIndex].data;
-        currentChild.splice(atIndex + 1, 0, rootData[pageIndex].child[childIndex].data[atIndex])
-        setPages(pages)
+        const currentChild = pages[pageIndex].child[childIndex].data
+        currentChild.splice(atIndex + 1, 0, getContent(childId))
 
-        contentList.splice(atIndex + 1, 0, contentList.length)
-        setContentList([...contentList])
+        setPages(pages)
     }
 
-    const removeContent = (atIndex, contentList, setContentList) => {
+    const removeContent = (pageIndex, childId, childIndex, atIndex) => {
         console.log('Removed component at index: '+ atIndex)
-        contentList.splice(atIndex, 1)
-        setContentList([...contentList])
+
+        if(childIndex > 0){
+            pages[pageIndex].child[childIndex].data.splice(atIndex, 1)
+            setPages(pages)
+        }
+        else{
+            console.log('cannot remove this child content')
+        }
     }
 
     const removeBlock = (pageIndex, childIndex) => {
@@ -185,6 +190,7 @@ const DocumentPanel = () => {
                     createNewContent={createNewContent}
                     checkToMoveContent={checkToMoveContent}
                     removeContent={removeContent}
+                    removeBlock={removeBlock}
                     parentRef={panelsRef}
                     moveBlockUp={moveBlockUp}
                     moveBlockDown={moveBlockDown}

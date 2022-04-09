@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Button = ({icon, text, onClick}) => {
+const Button = ({icon, externalClassName, text, onClick}) => {
     return(
-        <div className="btn" onClick={onClick}>
+        <div className={"btn" +  (externalClassName ? ` ${externalClassName}`: '')} onClick={onClick}>
             {icon && (
                 <img className="btn-icon" src={icon} alt="" />
             )}
