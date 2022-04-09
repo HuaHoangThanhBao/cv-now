@@ -1,4 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
+import { InputFieldType } from '../../../constants/InputFieldType';
+import { MetaData, rootData } from '../../../constants/MetaData';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
 import CertificateBlock from '../CertificateBlock/CertificateBlock';
 import EducationBlock from '../EducationBlock/EducationBlock';
@@ -9,144 +11,7 @@ import WorkBlock from '../WorkBlock/WorkBlock';
 import './DocumentPanel.scss';
 
 const DocumentPanel = () => {
-    const [pages, setPages] = useState([
-        {
-            parent: {},
-            child: [
-                {id: 1,
-                title:"EDUCATION",
-                blockType: 1,
-                data: {
-                    title: "Study Program",
-                    desc: "Institution/ Place of education",
-                    optional_dashed: "City, Country or GPA (optional)",
-                    content_detail: "Coures",
-                    content_bullet: "Course/Thesis/Project"
-                }
-                },
-                {id: 2,
-                title:"WORK EXPERIENCE",
-                blockType: 2,
-                data:{
-                    title: "Title/Position",
-                    desc: "Workplace/Company",
-                    optional_dashed: "City, Country (optional)",
-                    optional_dashed2: "Company Description (optional, fill when the company is not well known)",
-                    content_detail: "Achievements/Tasks",
-                    content_bullet: "Accomplishment/Responsibility/Task",
-                    contact: "Contact:",
-                    contact_person: "Contact Person",
-                    contact_info: "Contact Info",
-                }},
-                {id: 3,
-                title:"ORGANIZATION",
-                blockType: 3,
-                data: {
-                    title: "Organization Name",
-                    content_detail: "Role (optional)",
-                }},
-                {id: 4,
-                    title:"CERTIFICATES",
-                    blockType: 3,
-                    data: {
-                        title: "Certificate Name",
-                        content_detail: "Description (optional)",
-                    }
-                },
-                {id: 5,
-                    title:"PERSONAL PROJECTS",
-                    blockType: 3,
-                    data: {
-                        title: "Project Name",
-                        content_detail: "Description of Achievements",
-                    }
-                },
-                {id: 2,
-                    title:"WORK EXPERIENCE",
-                    blockType: 2,
-                    data:{
-                        title: "Title/Position",
-                        desc: "Workplace/Company",
-                        optional_dashed: "City, Country (optional)",
-                        optional_dashed2: "Company Description (optional, fill when the company is not well known)",
-                        content_detail: "Achievements/Tasks",
-                        content_bullet: "Accomplishment/Responsibility/Task",
-                        contact: "Contact:",
-                        contact_person: "Contact Person",
-                        contact_info: "Contact Info",
-                    }
-                },
-            ]
-        },
-        {
-            parent: {},
-            child: [
-                {id: 1,
-                title:"EDUCATION",
-                blockType: 1,
-                data: {
-                    title: "Study Program",
-                    desc: "Institution/ Place of education",
-                    optional_dashed: "City, Country or GPA (optional)",
-                    content_detail: "Coures",
-                    content_bullet: "Course/Thesis/Project"
-                }
-                },
-                {id: 2,
-                title:"WORK EXPERIENCE",
-                blockType: 2,
-                data:{
-                    title: "Title/Position",
-                    desc: "Workplace/Company",
-                    optional_dashed: "City, Country (optional)",
-                    optional_dashed2: "Company Description (optional, fill when the company is not well known)",
-                    content_detail: "Achievements/Tasks",
-                    content_bullet: "Accomplishment/Responsibility/Task",
-                    contact: "Contact:",
-                    contact_person: "Contact Person",
-                    contact_info: "Contact Info",
-                }},
-                {id: 3,
-                title:"ORGANIZATION",
-                blockType: 3,
-                data: {
-                    title: "Organization Name",
-                    content_detail: "Role (optional)",
-                }},
-                {id: 4,
-                    title:"CERTIFICATES",
-                    blockType: 3,
-                    data: {
-                        title: "Certificate Name",
-                        content_detail: "Description (optional)",
-                    }
-                },
-                {id: 5,
-                    title:"PERSONAL PROJECTS",
-                    blockType: 3,
-                    data: {
-                        title: "Project Name",
-                        content_detail: "Description of Achievements",
-                    }
-                },
-                {id: 2,
-                    title:"WORK EXPERIENCE",
-                    blockType: 2,
-                    data:{
-                        title: "Title/Position",
-                        desc: "Workplace/Company",
-                        optional_dashed: "City, Country (optional)",
-                        optional_dashed2: "Company Description (optional, fill when the company is not well known)",
-                        content_detail: "Achievements/Tasks",
-                        content_bullet: "Accomplishment/Responsibility/Task",
-                        contact: "Contact:",
-                        contact_person: "Contact Person",
-                        contact_info: "Contact Info",
-                    }
-                },
-            ]
-        }
-    ])
+    const [pages, setPages] = useState(MetaData)
     const panelsRef = useRef([]);
 
     function useOnClickOutside(ref, handler) {
@@ -169,20 +34,23 @@ const DocumentPanel = () => {
         }, [ref]);
     }
 
-    const onInputFieldChange = (event, setValue, setIsHide) => {
+    const onInputFieldChange = (event, setValue) => {
         const val = event.target.value;
         if(val !== ''){
-            setIsHide(false);
             setValue(event.target.value);
         }
         else{
-            setIsHide(true);
             setValue('');
         }
     }
 
-    const createNewContent = (atIndex, contentList, setContentList) => {
+    const createNewContent = (pageIndex, childIndex, atIndex, contentList, setContentList) => {
         console.log('Going to create component at index: '+ atIndex)
+
+        const currentChild = pages[pageIndex].child[childIndex].data;
+        currentChild.splice(atIndex + 1, 0, rootData[pageIndex].child[childIndex].data[atIndex])
+        setPages(pages)
+
         contentList.splice(atIndex + 1, 0, contentList.length)
         setContentList([...contentList])
     }
@@ -280,108 +148,48 @@ const DocumentPanel = () => {
         }
     }
 
+    const updateFieldData = (pageIndex, childIndex, currentIndex = -1, type, rootContent, contentToUpdate) => {
+        if(type === InputFieldType.header){
+            pages[pageIndex].child[childIndex][type] = contentToUpdate
+        }
+        else{
+            if(contentToUpdate !== rootContent){
+                pages[pageIndex].child[childIndex].data[currentIndex].forEach(row => {
+                    const firstProperty = Object.keys(row)[0]
+                    if(firstProperty === type){
+                        row.status = true
+                        row[firstProperty] = contentToUpdate
+                        setPages(pages)
+                    }
+                })
+            }
+        }
+    }
+
     useEffect(() => {
         panelsRef.current = panelsRef.current.slice(0, pages.length);
     }, [pages]);
 
     function renderChildContent(pageIndex, childId, childIndex){
         const child =  pages[pageIndex].child.find(c => c.id == childId)
-        switch(childId){
-            case 1:
-                return <BlockWrapper
-                        title={child.title} 
-                        blockType={child.blockType}
-                        data={child.data}
-                        key={childIndex} 
-                        pageIndex={pageIndex}
-                        childId={childId}
-                        childIndex={childIndex}
-                        handleOutsideClick={useOnClickOutside}
-                        onInputFieldChange={onInputFieldChange} 
-                        createNewContent={createNewContent}
-                        checkToMoveContent={checkToMoveContent}
-                        removeContent={removeContent}
-                        parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}
-                        moveBlockDown={moveBlockDown}/>
-            case 2:
-                return <BlockWrapper
-                        title={child.title}
-                        blockType={child.blockType}
-                        data={child.data}
-                        key={childIndex} 
-                        pageIndex={pageIndex}
-                        childId={childId}
-                        childIndex={childIndex}
-                        handleOutsideClick={useOnClickOutside}
-                        onInputFieldChange={onInputFieldChange} 
-                        createNewContent={createNewContent}
-                        checkToMoveContent={checkToMoveContent}
-                        removeContent={removeContent}
-                        parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}
-                        moveBlockDown={moveBlockDown}/>
-            case 3:
-                return <BlockWrapper
-                        title="ORGANIZATION" 
-                        blockType={3}
-                        data={{
-                            title: "Organization Name",
-                            content_detail: "Role (optional)",
-                        }}
-                        key={childIndex} 
-                        pageIndex={pageIndex}
-                        childId={childId}
-                        childIndex={childIndex}
-                        handleOutsideClick={useOnClickOutside}
-                        onInputFieldChange={onInputFieldChange} 
-                        createNewContent={createNewContent}
-                        checkToMoveContent={checkToMoveContent}
-                        removeContent={removeContent}
-                        parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}
-                        moveBlockDown={moveBlockDown}/>
-            case 4:
-                return <BlockWrapper
-                        title="CERTIFICATES" 
-                        blockType={3}
-                        data={{
-                            title: "Certificate Name",
-                            content_detail: "Description (optional)",
-                        }}
-                        key={childIndex} 
-                        pageIndex={pageIndex}
-                        childId={childId}
-                        childIndex={childIndex}
-                        handleOutsideClick={useOnClickOutside}
-                        onInputFieldChange={onInputFieldChange} 
-                        createNewContent={createNewContent}
-                        checkToMoveContent={checkToMoveContent}
-                        removeContent={removeContent}
-                        parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}
-                        moveBlockDown={moveBlockDown}/>
-            case 5:
-                return <BlockWrapper
-                        title="PERSONAL PROJECTS" 
-                        blockType={3}
-                        data={{
-                            title: "Project Name",
-                            content_detail: "Description of Achievements",
-                        }}
-                        key={childIndex} 
-                        pageIndex={pageIndex}
-                        childId={childId}
-                        childIndex={childIndex}
-                        handleOutsideClick={useOnClickOutside}
-                        onInputFieldChange={onInputFieldChange} 
-                        createNewContent={createNewContent}
-                        checkToMoveContent={checkToMoveContent}
-                        removeContent={removeContent}
-                        parentRef={panelsRef}
-                        moveBlockUp={moveBlockUp}
-                        moveBlockDown={moveBlockDown}/>
-        }
+        return <BlockWrapper
+                    title={child.header} 
+                    blockType={child.blockType}
+                    data={child.data}
+                    key={childIndex} 
+                    pageIndex={pageIndex}
+                    childId={childId}
+                    childIndex={childIndex}
+                    handleOutsideClick={useOnClickOutside}
+                    onInputFieldChange={onInputFieldChange} 
+                    createNewContent={createNewContent}
+                    checkToMoveContent={checkToMoveContent}
+                    removeContent={removeContent}
+                    parentRef={panelsRef}
+                    moveBlockUp={moveBlockUp}
+                    moveBlockDown={moveBlockDown}
+                    updateFieldData={updateFieldData}
+                />
     }
 
     return(

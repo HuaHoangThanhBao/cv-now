@@ -4,14 +4,16 @@ import './InputField.scss';
 
 const InputField = (props) => {
     const contentEditable = createRef();
-    const {externalClass, visible, allCheck, icon, type, placeHolder, onChange} = props;
+    const {externalClass, pageIndex, childIndex, currentIndex, visible, isVisible, inputBlockType, icon, type, placeHolder, onChange, updateFieldData} = props;
     const [html, setHTML] = useState(placeHolder);
-    // const [value, setValue] = useState('')
-    const [isHide, setIsHide] = useState(true);
 
     useEffect(() => {
         setHTML(placeHolder)
     }, [placeHolder])
+
+    useEffect(() => {
+        updateFieldData(pageIndex, childIndex, currentIndex, inputBlockType, placeHolder, html)
+    }, [html])
 
     const renderField = () => {
         if(visible){
@@ -24,63 +26,32 @@ const InputField = (props) => {
                         className={"field-input" + (externalClass ? " " + externalClass: "")}
                         innerRef={contentEditable} 
                         html={html}
-                        onChange={(e) => onChange(e, setHTML, setIsHide)}
+                        onChange={(e) => onChange(e, setHTML)}
                     />
                 </div>
             )
         }
         else{
-            if(allCheck !== undefined){
-                if(!allCheck)
-                    return ''
+            if(isVisible){
+                return (
+                    <div className={'field' + (icon ? " field-bullet": "")}>
+                        {icon && (
+                            <img src={icon} alt="" className='field-icon'/>
+                        )}
+                        <ContentEditable 
+                            className={"field-input" + (externalClass ? " " + externalClass: "")}
+                            innerRef={contentEditable} 
+                            html={html}
+                            onChange={(e) => onChange(e, setHTML)}
+                        />
+                    </div>
+                )
             }
-            if(!isHide){
-                return <div className={'field' + (icon ? " field-bullet": "")}>
-                    {icon && (
-                        <img src={icon} alt="" className='field-icon'/>
-                    )}
-                    <ContentEditable 
-                        className={"field-input" + (externalClass ? " " + externalClass: "")}
-                        innerRef={contentEditable} 
-                        html={html}
-                        onChange={(e) => onChange(e, setHTML, setIsHide)}
-                    />
-                </div>
-            }
-            return ''
+            else return ''
         }
     }
     return(
         renderField()
-        // (visible !== false ? (
-        //     <div className={'field' + (icon ? " field-bullet": "")}>
-        //         {icon && (
-        //             <img src={icon} alt="" className='field-icon'/>
-        //         )}
-        //         <input 
-        //             className={"field-input" + (externalClass ? " " + externalClass: "")}
-        //             type={type} 
-        //             value={value}
-        //             placeholder={placeHolder}
-        //             onChange={(e) => onChange(e, setValue, setIsHide)}
-        //         />
-        //     </div>
-        // )
-        // :
-        // (!isHide && (
-        //     <div className={'field' + (icon ? " field-bullet": "")}>
-        //         {icon && (
-        //             <img src={icon} alt="" className='field-icon'/>
-        //         )}
-        //         <input 
-        //             className={"field-input" + (externalClass ? " " + externalClass: "")}
-        //             type={type} 
-        //             value={value}
-        //             placeholder={placeHolder}
-        //             onChange={(e) => onChange(e, setValue, setIsHide)}
-        //         />
-        //     </div>
-        // )))
     )
 }
 

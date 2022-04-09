@@ -10,7 +10,6 @@ const BlockContainer = (props) => {
         childIndex, 
         childId, 
         handleOutsideClick, 
-        checkToMoveContent, 
         createNewContent, 
         removeContent, 
         removeBlock, 
@@ -27,6 +26,9 @@ const BlockContainer = (props) => {
         myBlockVisible,
         setBlockContentOnClick,
         blockContentOnClick,
+        getBlockContent,
+        blockType,
+        updateFieldData
     } = props;
 
     const [contentList, setContentList] = useState([0]);
@@ -49,7 +51,7 @@ const BlockContainer = (props) => {
     const handleBlockStatus = (status) => {
         setBlockContentOnClick(!status)
     }
-    
+
     return(
         <div className="block block-education" ref={myRef}>
            <BlockHeader 
@@ -57,22 +59,25 @@ const BlockContainer = (props) => {
                 onClick={() => handleBlockStatus(true)}
                 handleOutsideClick={handleOutsideClick}
                 handleBlockHeader={setBlockHeaderVisible}
+                updateFieldData={updateFieldData}
+                pageIndex={pageIndex}
+                childIndex={childIndex}
             />
            <div className="block-space">
                 <hr />
            </div>
            <div ref={contentRef}>
-                {contentList && contentList.map((item, index) => (
+                {data && data.map((item, index) => (
                     <BlockContent 
                         isVisible={isVisible} 
-                        key={item} 
-                        onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                        key={contentList[index]} 
+                        onCreateNewContent={() => createNewContent(pageIndex, childIndex, index, contentList, setContentList)}
                         onClick={() => handleBlockContentStatus(true)}
                     >
-                        {props.children}
+                        {getBlockContent(blockType, index)}
                         <BlockContentBar 
                             isVisible={blockContentOnClick} 
-                            onCreateNewContent={() => createNewContent(index, contentList, setContentList)}
+                            onCreateNewContent={() => createNewContent(pageIndex, childIndex, index, contentList, setContentList)}
                             onRemoveContent={() => removeContent(index, contentList, setContentList)}
                         />
                     </BlockContent>
