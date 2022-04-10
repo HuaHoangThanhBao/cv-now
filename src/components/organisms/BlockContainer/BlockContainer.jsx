@@ -34,7 +34,6 @@ const BlockContainer = (props) => {
         setBlockHeaderStatus,
         moveContentDown,
         moveContentUp,
-        updateFieldHeight,
     } = props;
 
     const myRef = useRef();
@@ -60,7 +59,6 @@ const BlockContainer = (props) => {
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
                 childIndex={childIndex}
-                updateFieldHeight={updateFieldHeight}
             >
                 <BlockBar 
                     childIndex={childIndex}

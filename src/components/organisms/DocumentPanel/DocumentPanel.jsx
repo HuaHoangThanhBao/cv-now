@@ -91,8 +91,7 @@ const DocumentPanel = () => {
         setPages([...pages])
     }
 
-    const checkToMoveContent = (pageIndex, childId, childIndex) => {
-        console.log("start calculating......")
+    const checkToMoveContent = () => {
         for(let i = 0; i < panelsRef.current.length; i++){
             const height = panelsRef.current[i].offsetHeight
             // console.log(height)
@@ -174,22 +173,6 @@ const DocumentPanel = () => {
         }
     }
 
-    const updateFieldHeight = (pageIndex, childIndex, currentIndex = -1, type, height) => {
-        if(type === InputFieldType.header){
-            pages[pageIndex].child[childIndex].height = height
-        }
-        else{
-            pages[pageIndex].child[childIndex].data[currentIndex].forEach(row => {
-                const firstProperty = Object.keys(row)[0]
-                if(firstProperty === type){
-                    row.height = height
-                    setPages(pages)
-                }
-            }) 
-        }
-        console.log('updated height for input field:', pages)
-    }
-
     const updateFieldData = (pageIndex, childIndex, currentIndex = -1, type, rootContent, contentToUpdate) => {
         if(type === InputFieldType.header){
             pages[pageIndex].child[childIndex][type] = contentToUpdate
@@ -232,7 +215,6 @@ const DocumentPanel = () => {
                     moveBlockUp={moveBlockUp}
                     moveBlockDown={moveBlockDown}
                     updateFieldData={updateFieldData}
-                    updateFieldHeight={updateFieldHeight}
                     moveContentDown={moveContentDown}
                     moveContentUp={moveContentUp}
                 />
