@@ -1,36 +1,30 @@
 import React, {createRef, useEffect, useRef, useState} from 'react';
-import ContentEditable from 'react-contenteditable';
 import { InputFieldType } from '../../../constants/InputFieldType';
+import InputField from '../../atoms/InputField/InputField';
 import './BlockHeader.scss';
 
-const BlockHeader = ({title, pageIndex, childIndex, handleBlockHeader, handleOutsideClick, updateFieldData, children}) => {
+const BlockHeader = (props) => {
+    const {title, pageIndex, childIndex, handleBlockHeader, handleOutsideClick, updateFieldData, updateFieldHeight} = props
     const ref = useRef();
-    const contentEditable = createRef();
-    const [html, setHTML] = useState('');
-
-    const handleChange = (evt) => {
-        setHTML(evt.target.value);
-    };
 
     handleOutsideClick(ref, handleBlockHeader)
 
-    useEffect(() => {
-        setHTML(title)
-    }, [title])
-
-    useEffect(() => {
-        updateFieldData(pageIndex, childIndex, -1, InputFieldType.header, title, html)
-    }, [html])
-
     return(
         <div className="block-header" ref={ref}>
-            {children}
-            <ContentEditable 
-                className={"field-input block-header-title"}
-                innerRef={contentEditable} 
-                html={html}
-                onChange={handleChange}
-            />
+            {props.children}
+            <InputField
+                    externalClass="field-input block-header-title"
+                    type="text"
+                    inputBlockType={InputFieldType.header}
+                    placeHolder={title}
+                    isVisible={true}
+                    visible={true}
+                    updateFieldData={updateFieldData}
+                    pageIndex={pageIndex}
+                    childIndex={childIndex}
+                    currentIndex={childIndex}
+                    updateFieldHeight={updateFieldHeight}
+                />
         </div>
     )
 }
