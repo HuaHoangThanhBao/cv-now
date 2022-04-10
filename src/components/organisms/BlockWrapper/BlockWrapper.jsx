@@ -80,7 +80,6 @@ const BlockWrapper = (props) => {
                      placeHolder={getTitle(index, InputFieldType.title)}
                      visible={true}
                      isVisible={getStatus(index,InputFieldType.title)}
-                     onChange={onInputFieldChange}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      childIndex={childIndex}
@@ -93,7 +92,6 @@ const BlockWrapper = (props) => {
                      placeHolder={getTitle(index, InputFieldType.desc)}
                      visible={isVisible}
                      isVisible={getStatus(index,InputFieldType.desc)}
-                     onChange={onInputFieldChange}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      childIndex={childIndex}
@@ -115,7 +113,6 @@ const BlockWrapper = (props) => {
                      placeHolder={getTitle(index, InputFieldType.optional_dashed)}
                      visible={isVisible}
                      isVisible={getStatus(index,InputFieldType.optional_dashed)}
-                     onChange={onInputFieldChange}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      childIndex={childIndex}
@@ -128,7 +125,6 @@ const BlockWrapper = (props) => {
                      placeHolder={getTitle(index, InputFieldType.content_detail)}
                      visible={isVisible}
                      isVisible={getStatus(index,InputFieldType.content_detail)}
-                     onChange={onInputFieldChange}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      childIndex={childIndex}
@@ -141,7 +137,6 @@ const BlockWrapper = (props) => {
                      placeHolder={getTitle(index, InputFieldType.content_bullet)}
                      visible={isVisible}
                      isVisible={getStatus(index,InputFieldType.content_bullet)}
-                     onChange={onInputFieldChange}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      childIndex={childIndex}
@@ -161,7 +156,6 @@ const BlockWrapper = (props) => {
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
                     isVisible={getStatus(index,InputFieldType.title)}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -174,7 +168,6 @@ const BlockWrapper = (props) => {
                     inputBlockType={InputFieldType.desc}
                     placeHolder={getTitle(index, InputFieldType.desc)}
                     isVisible={getStatus(index,InputFieldType.desc)}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -196,7 +189,6 @@ const BlockWrapper = (props) => {
                     placeHolder={getTitle(index, InputFieldType.optional_dashed)}
                     isVisible={getStatus(index,InputFieldType.optional_dashed)}
                     visible={isVisible}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -209,7 +201,6 @@ const BlockWrapper = (props) => {
                     placeHolder={getTitle(index, InputFieldType.optional_dashed2)}
                     isVisible={getStatus(index,InputFieldType.optional_dashed2)}
                     visible={isVisible}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -222,7 +213,6 @@ const BlockWrapper = (props) => {
                     placeHolder={getTitle(index, InputFieldType.content_detail)}
                     isVisible={getStatus(index,InputFieldType.content_detail)}
                     visible={isVisible}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -236,7 +226,6 @@ const BlockWrapper = (props) => {
                     placeHolder={getTitle(index, InputFieldType.content_bullet)}
                     isVisible={getStatus(index,InputFieldType.content_bullet)}
                     visible={isVisible}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -250,7 +239,6 @@ const BlockWrapper = (props) => {
                         placeHolder={getTitle(index, InputFieldType.contact)}
                         isVisible={getStatus(index,InputFieldType.contact)}
                         visible={isVisible}
-                        onChange={onInputFieldChange}
                         updateFieldData={updateFieldData}
                         pageIndex={pageIndex}
                         childIndex={childIndex}
@@ -264,7 +252,6 @@ const BlockWrapper = (props) => {
                             placeHolder={getTitle(index, InputFieldType.contact_person)}
                             isVisible={getStatus(index,InputFieldType.contact_person)}
                             visible={isVisible}
-                            onChange={onInputFieldChange}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
                             childIndex={childIndex}
@@ -277,7 +264,6 @@ const BlockWrapper = (props) => {
                             placeHolder={getTitle(index, InputFieldType.contact_info)}
                             isVisible={getStatus(index,InputFieldType.contact_info)}
                             visible={isVisible}
-                            onChange={onInputFieldChange}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
                             childIndex={childIndex}
@@ -299,7 +285,6 @@ const BlockWrapper = (props) => {
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
                     isVisible={getStatus(index,InputFieldType.title)}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -321,7 +306,6 @@ const BlockWrapper = (props) => {
                     placeHolder={getTitle(index, InputFieldType.content_detail_dashed)}
                     isVisible={getStatus(index,InputFieldType.content_detail_dashed)}
                     visible={isVisible}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -341,7 +325,6 @@ const BlockWrapper = (props) => {
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
                     isVisible={getStatus(index,InputFieldType.title)}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -363,7 +346,6 @@ const BlockWrapper = (props) => {
                     placeHolder={getTitle(index, InputFieldType.content_detail_dashed)}
                     isVisible={getStatus(index,InputFieldType.content_detail_dashed)}
                     visible={isVisible}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -376,7 +358,6 @@ const BlockWrapper = (props) => {
                     placeHolder={getTitle(index, InputFieldType.content_detail)}
                     isVisible={getStatus(index,InputFieldType.content_detail)}
                     visible={isVisible}
-                    onChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     childIndex={childIndex}
@@ -389,7 +370,7 @@ const BlockWrapper = (props) => {
     useEffect(() => {
         return() => {
             if(isVisible) {
-                console.log('yess')
+                // console.log('yess')
                 checkToMoveContent(pageIndex)
             }
         }

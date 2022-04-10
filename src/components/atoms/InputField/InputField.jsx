@@ -4,8 +4,12 @@ import './InputField.scss';
 
 const InputField = (props) => {
     const contentEditable = createRef();
-    const {externalClass, pageIndex, childIndex, currentIndex, visible, isVisible, inputBlockType, icon, type, placeHolder, onChange, updateFieldData} = props;
+    const {externalClass, pageIndex, childIndex, currentIndex, visible, isVisible, inputBlockType, icon, type, placeHolder, updateFieldData} = props;
     const [html, setHTML] = useState(placeHolder);
+
+    const handleChange = (evt) => {
+        setHTML(evt.target.value);
+    };
 
     useEffect(() => {
         setHTML(placeHolder)
@@ -26,7 +30,7 @@ const InputField = (props) => {
                         className={"field-input" + (externalClass ? " " + externalClass: "")}
                         innerRef={contentEditable} 
                         html={html}
-                        onChange={(e) => onChange(e, setHTML)}
+                        onChange={handleChange}
                     />
                 </div>
             )
@@ -42,7 +46,7 @@ const InputField = (props) => {
                             className={"field-input" + (externalClass ? " " + externalClass: "")}
                             innerRef={contentEditable} 
                             html={html}
-                            onChange={(e) => onChange(e, setHTML)}
+                            onChange={handleChange}
                         />
                     </div>
                 )
