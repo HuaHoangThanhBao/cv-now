@@ -66,6 +66,26 @@ const DocumentPanel = () => {
         }
     }
 
+    const moveContentDown = (pageIndex, childId, childIndex, atIndex) => {
+        if(atIndex !== pages[pageIndex].child[childIndex].data.length - 1){
+            pages[pageIndex].child[childIndex].data.move(atIndex, atIndex + 1)
+            setPages([...pages])
+        }
+        else{
+            console.log('cannot move child content down')
+        }
+    }
+
+    const moveContentUp = (pageIndex, childId, childIndex, atIndex) => {
+        if(atIndex > 0){
+            pages[pageIndex].child[childIndex].data.move(atIndex, atIndex - 1)
+            setPages([...pages])
+        }
+        else{
+            console.log('cannot move child content up')
+        }
+    }
+
     const removeBlock = (pageIndex, childIndex) => {
         pages[pageIndex].child.splice(childIndex, 1)
         setPages([...pages])
@@ -195,6 +215,8 @@ const DocumentPanel = () => {
                     moveBlockUp={moveBlockUp}
                     moveBlockDown={moveBlockDown}
                     updateFieldData={updateFieldData}
+                    moveContentDown={moveContentDown}
+                    moveContentUp={moveContentUp}
                 />
     }
 

@@ -22,7 +22,9 @@ const BlockWrapper = (props) => {
         title,
         blockType,
         data,
-        updateFieldData
+        updateFieldData,
+        moveContentDown,
+        moveContentUp
     } = props;
 
     const [isVisible, setIsVisible] = useState(false);
@@ -418,6 +420,8 @@ const BlockWrapper = (props) => {
             updateFieldData={updateFieldData}
             blockHeaderStatus={blockHeaderStatus}
             setBlockHeaderStatus={setBlockHeaderStatus}
+            moveContentDown={moveContentDown}
+            moveContentUp={moveContentUp}
         />
     )
 }

@@ -31,7 +31,9 @@ const BlockContainer = (props) => {
         blockType,
         updateFieldData,
         blockHeaderStatus,
-        setBlockHeaderStatus
+        setBlockHeaderStatus,
+        moveContentDown,
+        moveContentUp,
     } = props;
 
     const myRef = useRef();
@@ -81,11 +83,20 @@ const BlockContainer = (props) => {
                     <BlockContent 
                         isVisible={isVisible} 
                         key={item[0].title + index} 
-                        onCreateNewContent={() => createNewContent(pageIndex, childId, childIndex, index)}
-                        onRemoveContent={() => removeContent(pageIndex, childId, childIndex, index)}
                         onClick={() => handleBlockContentStatus(true)}
+                        onCreateNewContent={() => createNewContent(pageIndex, childId, childIndex, index)}
                     >
                         {getBlockContent(blockType, index)}
+                        
+                        <BlockContentBar 
+                            isVisible={isVisible}
+                            dataLength={data.length}
+                            currentIndex={index}
+                            onCreateNewContent={() => createNewContent(pageIndex, childId, childIndex, index)}
+                            onRemoveContent={() => removeContent(pageIndex, childId, childIndex, index)}
+                            onMoveContentDown={() => moveContentDown(pageIndex, childId, childIndex, index)}
+                            onMoveContentUp={() => moveContentUp(pageIndex, childId, childIndex, index)}
+                        />
                     </BlockContent>
                 ))}
            </div>
