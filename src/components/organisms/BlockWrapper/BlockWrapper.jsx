@@ -24,7 +24,9 @@ const BlockWrapper = (props) => {
         data,
         updateFieldData,
         moveContentDown,
-        moveContentUp
+        moveContentUp,
+        updateFieldHeight,
+        getHeader,
     } = props;
 
     const [isVisible, setIsVisible] = useState(false);
@@ -84,6 +86,7 @@ const BlockWrapper = (props) => {
                      pageIndex={pageIndex}
                      childIndex={childIndex}
                      currentIndex={index}
+                     updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
                      externalClass="block-content-desc"
@@ -96,6 +99,7 @@ const BlockWrapper = (props) => {
                      pageIndex={pageIndex}
                      childIndex={childIndex}
                      currentIndex={index}
+                     updateFieldHeight={updateFieldHeight}
                  />
                  <DateInput 
                      isVisible={isVisible}
@@ -105,6 +109,7 @@ const BlockWrapper = (props) => {
                      childIndex={childIndex}
                      currentIndex={index}
                      getTitle={getTitle}
+                     updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
                      externalClass="block-content-optional dashed"
@@ -117,6 +122,7 @@ const BlockWrapper = (props) => {
                      pageIndex={pageIndex}
                      childIndex={childIndex}
                      currentIndex={index}
+                     updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
                      externalClass="block-content-detail"
@@ -129,6 +135,7 @@ const BlockWrapper = (props) => {
                      pageIndex={pageIndex}
                      childIndex={childIndex}
                      currentIndex={index}
+                     updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
                      externalClass="block-content-bullet dashed"
@@ -141,6 +148,7 @@ const BlockWrapper = (props) => {
                      pageIndex={pageIndex}
                      childIndex={childIndex}
                      currentIndex={index}
+                     updateFieldHeight={updateFieldHeight}
                  />
             </div>
         )
@@ -160,6 +168,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
                     externalClass="block-content-desc"
@@ -172,6 +181,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
                     isVisible={isVisible}
@@ -181,6 +191,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
                     externalClass="block-content-optional dashed"
@@ -193,6 +204,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
                     externalClass="block-content-optional dashed"
@@ -205,6 +217,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
                     externalClass="block-content-detail"
@@ -217,6 +230,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
                     externalClass="block-content-bullet dashed"
@@ -230,6 +244,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <div className='block-content-contact'>
                     <InputField
@@ -243,6 +258,7 @@ const BlockWrapper = (props) => {
                         pageIndex={pageIndex}
                         childIndex={childIndex}
                         currentIndex={index}
+                        updateFieldHeight={updateFieldHeight}
                     />
                     <div className='block-content-contact-group'>
                         <InputField
@@ -256,6 +272,7 @@ const BlockWrapper = (props) => {
                             pageIndex={pageIndex}
                             childIndex={childIndex}
                             currentIndex={index}
+                            updateFieldHeight={updateFieldHeight}
                         />
                         <InputField
                             externalClass="block-content-bullet dashed"
@@ -268,6 +285,7 @@ const BlockWrapper = (props) => {
                             pageIndex={pageIndex}
                             childIndex={childIndex}
                             currentIndex={index}
+                            updateFieldHeight={updateFieldHeight}
                         />
                     </div>
                 </div>
@@ -289,6 +307,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
                     isVisible={isVisible}
@@ -298,6 +317,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
                     externalClass="block-content-detail dashed"
@@ -310,6 +330,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
             </div>
         )
@@ -329,6 +350,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
                     isVisible={isVisible}
@@ -338,6 +360,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
                     externalClass="block-content-detail dashed"
@@ -350,6 +373,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
                     externalClass="block-content-detail"
@@ -362,6 +386,7 @@ const BlockWrapper = (props) => {
                     pageIndex={pageIndex}
                     childIndex={childIndex}
                     currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
                 />
             </div>
         )
@@ -369,12 +394,12 @@ const BlockWrapper = (props) => {
 
     useEffect(() => {
         return() => {
-            if(isVisible) {
+            if(isVisible || blockHeaderStatus) {
                 // console.log('yess')
-                checkToMoveContent(pageIndex)
+                checkToMoveContent(pageIndex, childIndex, setBlockHeaderStatus)
             }
         }
-    }, [isVisible])
+    }, [isVisible, blockHeaderStatus])
 
     return (
         <BlockContainer 
@@ -403,6 +428,8 @@ const BlockWrapper = (props) => {
             setBlockHeaderStatus={setBlockHeaderStatus}
             moveContentDown={moveContentDown}
             moveContentUp={moveContentUp}
+            updateFieldHeight={updateFieldHeight}
+            getHeader={getHeader}
         />
     )
 }

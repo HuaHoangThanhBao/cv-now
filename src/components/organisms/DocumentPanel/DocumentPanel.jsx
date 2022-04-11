@@ -86,32 +86,126 @@ const DocumentPanel = () => {
         }
     }
 
-    const removeBlock = (pageIndex, childIndex) => {
+    const removeBlock = (pageIndex, childIndex, setBlockHeaderStatus) => {
         pages[pageIndex].child.splice(childIndex, 1)
-        setPages([...pages])
+        checkToMoveContent(pageIndex, childIndex, setBlockHeaderStatus)
     }
 
-    const checkToMoveContent = () => {
+    const sumOfChildData = (childData) => {
+        let sum = 0;
+        childData.forEach(row => {
+            row.forEach(c => {
+                sum += c.height
+            })
+        })
+        return sum
+    }
+
+    const checkToMoveContent = (pageIndex, childIndex, setBlockHeaderStatus) => {
+        console.log("start calculating......")
+        console.log('pages:', pages)
+
+        const maxHeight = 1000
         for(let i = 0; i < panelsRef.current.length; i++){
-            const height = panelsRef.current[i].offsetHeight
-            // console.log(height)
-            if(height > 1300){
-                console.log('start moving last block at page ' + i + ' to new page')
-                moveContentToNextBlock(i)
+            if(pages[i])
+            {
+                let sumPanelHeight = 0
+                pages[i].child.forEach((item, index) => {
+                    let headerHeight = item.height
+
+                    let itemsHeight = 0
+                    item.data.forEach(row => {
+                        row.forEach(c => {
+                            itemsHeight += c.height
+                        })
+                    })
+
+                    sumPanelHeight += headerHeight + itemsHeight
+                })
+
+                console.log('-------------------------------')
+                console.log('sum panel height at index: ' + i + ' is: ' + sumPanelHeight)
+
+                if(sumPanelHeight > maxHeight){
+                    console.log('++++++Move content to next page+++++++')
+                    let currentRowData = pages[i].child
+                    let currentRowDataLength = currentRowData.length
+                    // console.log(currentRowData)
+
+                    let maximunIndex = 0
+
+                    let sumOfEachRow = 0
+                    for(let j = 0; j < currentRowDataLength; j++){
+                        const headerHeight = currentRowData[j].height
+                        const childHeights = sumOfChildData(currentRowData[j].data)
+                        sumOfEachRow += headerHeight + childHeights
+                        console.log('header height: ' + headerHeight + ", at index: " + j + ", has child height: " + childHeights)
+
+                        if(sumOfEachRow > maxHeight){
+                            maximunIndex = j
+                            if(maximunIndex == 0) maximunIndex = j + 1
+                            console.log('Max index at:', maximunIndex)
+                            break;
+                        }
+                    }
+
+                    if(i >= pages.length - 1)
+                    {
+                        pages.push({parent: {}, child: []})
+                    }
+
+                    for(let j = maximunIndex; j < currentRowDataLength; j++){
+                        const lastItemRowData = currentRowData.pop()
+                        pages[i + 1].child.unshift(lastItemRowData)
+                    }
+                }
+                else{
+                    console.log('++++++Move content to previous page+++++++')
+                    if(i < pages.length - 1){
+                        let currentRowData = pages[i].child
+                        let currentRowDataLength = currentRowData.length
+                        
+                        let nextRowData = pages[i + 1].child
+                        const nextRowDataLength = nextRowData.length
+                        
+                        let sumOfCurrenthRow = 0
+                        for(let j = 0; j < currentRowDataLength; j++){
+                            const headerHeight = currentRowData[j].height
+                            const childHeights = sumOfChildData(currentRowData[j].data)
+                            sumOfCurrenthRow += headerHeight + childHeights
+                        }
+
+                        console.log('??????total height of current page:', sumOfCurrenthRow)
+
+                        for(let j = 0; j < nextRowDataLength; j++){
+                            if(!nextRowData[j]) break;
+
+                            const headerHeight = nextRowData[j].height
+                            const childHeights = sumOfChildData(nextRowData[j].data)
+                            
+                            sumOfCurrenthRow += headerHeight + childHeights
+
+                            if(sumOfCurrenthRow < maxHeight){
+                                const firstItemNextRowData = nextRowData.shift()
+                                pages[i].child.push(firstItemNextRowData)
+                            }
+                            else break
+                        }
+                    }
+                }
             }
         }
-    }
-
-    function moveContentToNextBlock(index){
-        if(index >= pages.length - 1){
-            pages.push({
-                parent: {},
-                child: []
-            })
+        
+        //clearn up empty pages
+        let pagesLength = pages.length - 1
+        for(let i = pagesLength; i >= 0; i--){
+            if(pages[i].child.length === 0){
+                pages.pop()
+            }
         }
 
-        let lastCurrentContent = pages[index].child.pop();
-        pages[index + 1].child.unshift(lastCurrentContent)
+        console.log('pages result:', pages)
+        setBlockHeaderStatus(false)
         setPages([...pages])
     }
 
@@ -173,20 +267,41 @@ const DocumentPanel = () => {
         }
     }
 
-    const updateFieldData = (pageIndex, childIndex, currentIndex = -1, type, rootContent, contentToUpdate) => {
+    const updateFieldHeight = (pageIndex, childIndex, currentIndex = -1, type, height) => {
         if(type === InputFieldType.header){
-            pages[pageIndex].child[childIndex][type] = contentToUpdate
+            pages[pageIndex].child[childIndex].height = height
+            setPages([...pages])
         }
         else{
-            if(contentToUpdate !== rootContent){
+            if(pages[pageIndex].child[childIndex]){
                 pages[pageIndex].child[childIndex].data[currentIndex].forEach(row => {
                     const firstProperty = Object.keys(row)[0]
                     if(firstProperty === type){
-                        row.status = true
-                        row[firstProperty] = contentToUpdate
-                        setPages(pages)
+                        row.height = height
+                        setPages([...pages])
                     }
                 })
+            }
+        }
+    }
+
+    const updateFieldData = (pageIndex, childIndex, currentIndex = -1, type, rootContent, contentToUpdate) => {
+        if(type === InputFieldType.header){
+            pages[pageIndex].child[childIndex][type] = contentToUpdate
+            setPages([...pages])
+        }
+        else{
+            if(contentToUpdate !== rootContent){
+                if(pages[pageIndex].child[childIndex]){
+                    pages[pageIndex].child[childIndex].data[currentIndex].forEach(row => {
+                        const firstProperty = Object.keys(row)[0]
+                        if(firstProperty === type){
+                            row.status = true
+                            row[firstProperty] = contentToUpdate
+                            setPages([...pages])
+                        }
+                    })
+                }
             }
         }
     }
@@ -215,6 +330,7 @@ const DocumentPanel = () => {
                     moveBlockUp={moveBlockUp}
                     moveBlockDown={moveBlockDown}
                     updateFieldData={updateFieldData}
+                    updateFieldHeight={updateFieldHeight}
                     moveContentDown={moveContentDown}
                     moveContentUp={moveContentUp}
                 />

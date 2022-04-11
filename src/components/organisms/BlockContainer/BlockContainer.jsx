@@ -34,6 +34,7 @@ const BlockContainer = (props) => {
         setBlockHeaderStatus,
         moveContentDown,
         moveContentUp,
+        updateFieldHeight,
     } = props;
 
     const myRef = useRef();
@@ -59,12 +60,15 @@ const BlockContainer = (props) => {
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
                 childIndex={childIndex}
+                updateFieldHeight={updateFieldHeight}
             >
                 <BlockBar 
                     childIndex={childIndex}
                     pageIndex={pageIndex}
                     isVisible={blockHeaderStatus}
-                    onRemoveBlock={() => removeBlock(pageIndex, childIndex)}
+                    onRemoveBlock={() => {
+                        removeBlock(pageIndex, childIndex, setBlockHeaderStatus)
+                    }}
                     moveBlockUp={() => {
                         setBlockHeaderStatus(false)
                         moveBlockUp(pageIndex, childIndex, contentRef, parentRef)
