@@ -242,8 +242,10 @@ const DocumentPanel = () => {
 
     const moveBlockDown = (pageIndex, childIndex, childBlockRef, parentBlockRef) => {
         if(childIndex !== pages[pageIndex].child.length - 1){
-            pages[pageIndex].child.move(childIndex, childIndex + 1)
-            setPages([...pages])
+            if(pages[pageIndex].child[childIndex]){
+                pages[pageIndex].child.move(childIndex, childIndex + 1)
+                setPages([...pages])
+            }
         }
         else{
             if(pageIndex < pages.length - 1){
@@ -269,8 +271,10 @@ const DocumentPanel = () => {
 
     const updateFieldHeight = (pageIndex, childIndex, currentIndex = -1, type, height) => {
         if(type === InputFieldType.header){
-            pages[pageIndex].child[childIndex].height = height
-            setPages([...pages])
+            if(pages[pageIndex].child[childIndex]){
+                pages[pageIndex].child[childIndex].height = height
+                setPages([...pages])
+            }
         }
         else{
             if(pages[pageIndex].child[childIndex]){

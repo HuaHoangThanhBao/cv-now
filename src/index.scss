@@ -27,7 +27,9 @@ code {
 }
 
 .block{
-  margin-bottom: 5rem;
+  &:not(:first-child){
+    margin-top: 80px;
+  }
   &-space{
     padding-top: 0.5rem;
   }
