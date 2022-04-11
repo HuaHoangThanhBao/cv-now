@@ -200,7 +200,6 @@ const DocumentPanel = () => {
                                     sumOfCurrenthRow += headerHeight + childHeights
         
                                     if(sumOfCurrenthRow < maxHeight){
-                                        console.log(nextRowData[j])
                                         const firstItemNextRowData = nextRowData[j]
                                         pages[k].child.push(firstItemNextRowData)
                                         deletedIndexs.push(j)
@@ -210,7 +209,6 @@ const DocumentPanel = () => {
         
                                 //process to delete
                                 for(let j = 0; j < deletedIndexs.length; j++){
-                                    console.log(deletedIndexs[j])
                                     nextRowData.shift()
                                 }
                             }
