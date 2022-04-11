@@ -154,9 +154,17 @@ const DocumentPanel = () => {
                         pages.push({parent: {}, child: []})
                     }
 
-                    for(let j = maximunIndex; j < currentRowDataLength; j++){
-                        const lastItemRowData = currentRowData.pop()
+                    //store index to delete of the next page
+                    let deletedIndexs = []
+                    for(let j = currentRowDataLength - 1; j >= maximunIndex; j--){
+                        const lastItemRowData = currentRowData[j]
                         pages[i + 1].child.unshift(lastItemRowData)
+                        deletedIndexs.push(j)
+                    }
+                    
+                    //process to delete
+                    for(let j = 0; j < deletedIndexs.length; j++){
+                        currentRowData.pop()
                     }
                 }
                 else{
@@ -177,8 +185,10 @@ const DocumentPanel = () => {
 
                         console.log('??????total height of current page:', sumOfCurrenthRow)
 
+                        //store index to delete of the next page
+                        let deletedIndexs = []
                         for(let j = 0; j < nextRowDataLength; j++){
-                            if(!nextRowData[j]) break;
+                            // if(!nextRowData[j]) break;
 
                             const headerHeight = nextRowData[j].height
                             const childHeights = sumOfChildData(nextRowData[j].data)
@@ -186,10 +196,16 @@ const DocumentPanel = () => {
                             sumOfCurrenthRow += headerHeight + childHeights
 
                             if(sumOfCurrenthRow < maxHeight){
-                                const firstItemNextRowData = nextRowData.shift()
+                                const firstItemNextRowData = nextRowData[j]
                                 pages[i].child.push(firstItemNextRowData)
+                                deletedIndexs.push(j)
                             }
                             else break
+                        }
+
+                        //process to delete
+                        for(let j = 0; j < deletedIndexs.length; j++){
+                            nextRowData.shift()
                         }
                     }
                 }
