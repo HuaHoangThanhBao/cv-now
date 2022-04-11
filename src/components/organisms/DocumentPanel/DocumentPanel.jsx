@@ -170,42 +170,50 @@ const DocumentPanel = () => {
                 else{
                     console.log('++++++Move content to previous page+++++++')
                     if(i < pages.length - 1){
-                        let currentRowData = pages[i].child
-                        let currentRowDataLength = currentRowData.length
-                        
-                        let nextRowData = pages[i + 1].child
-                        const nextRowDataLength = nextRowData.length
-                        
-                        let sumOfCurrenthRow = 0
-                        for(let j = 0; j < currentRowDataLength; j++){
-                            const headerHeight = currentRowData[j].height
-                            const childHeights = sumOfChildData(currentRowData[j].data)
-                            sumOfCurrenthRow += headerHeight + childHeights
-                        }
-
-                        console.log('??????total height of current page:', sumOfCurrenthRow)
-
-                        //store index to delete of the next page
-                        let deletedIndexs = []
-                        for(let j = 0; j < nextRowDataLength; j++){
-                            // if(!nextRowData[j]) break;
-
-                            const headerHeight = nextRowData[j].height
-                            const childHeights = sumOfChildData(nextRowData[j].data)
-                            
-                            sumOfCurrenthRow += headerHeight + childHeights
-
-                            if(sumOfCurrenthRow < maxHeight){
-                                const firstItemNextRowData = nextRowData[j]
-                                pages[i].child.push(firstItemNextRowData)
-                                deletedIndexs.push(j)
+                        const pagesLength = pages.length
+                        for(let k = 0; k < pagesLength - 1; k++){
+                            if(pages[k]){
+                                let currentRowData = pages[k].child
+                                let currentRowDataLength = currentRowData.length
+                                
+                                let nextRowData = pages[k + 1].child
+                                const nextRowDataLength = nextRowData.length
+                                
+                                let sumOfCurrenthRow = 0
+                                for(let j = 0; j < currentRowDataLength; j++){
+                                    const headerHeight = currentRowData[j].height
+                                    const childHeights = sumOfChildData(currentRowData[j].data)
+                                    sumOfCurrenthRow += headerHeight + childHeights
+                                }
+        
+                                console.log('<<<<<<total height of current page:', sumOfCurrenthRow)
+                                console.log(i)
+        
+                                //store index to delete of the next page
+                                let deletedIndexs = []
+                                for(let j = 0; j < nextRowDataLength; j++){
+                                    // if(!nextRowData[j]) break;
+        
+                                    const headerHeight = nextRowData[j].height
+                                    const childHeights = sumOfChildData(nextRowData[j].data)
+                                    
+                                    sumOfCurrenthRow += headerHeight + childHeights
+        
+                                    if(sumOfCurrenthRow < maxHeight){
+                                        console.log(nextRowData[j])
+                                        const firstItemNextRowData = nextRowData[j]
+                                        pages[k].child.push(firstItemNextRowData)
+                                        deletedIndexs.push(j)
+                                    }
+                                    else break
+                                }
+        
+                                //process to delete
+                                for(let j = 0; j < deletedIndexs.length; j++){
+                                    console.log(deletedIndexs[j])
+                                    nextRowData.shift()
+                                }
                             }
-                            else break
-                        }
-
-                        //process to delete
-                        for(let j = 0; j < deletedIndexs.length; j++){
-                            nextRowData.shift()
                         }
                     }
                 }
