@@ -88,7 +88,7 @@ const DocumentPanel = () => {
 
     const removeBlock = (pageIndex, childIndex, setBlockHeaderStatus) => {
         pages[pageIndex].child.splice(childIndex, 1)
-        checkToMoveContent(pageIndex, childIndex, setBlockHeaderStatus)
+        checkToMoveContent(pageIndex, childIndex, setBlockHeaderStatus, true)
     }
 
     const sumOfChildData = (childData) => {
@@ -101,7 +101,7 @@ const DocumentPanel = () => {
         return sum
     }
 
-    const checkToMoveContent = (pageIndex, childIndex, setBlockHeaderStatus) => {
+    const checkToMoveContent = (pageIndex, childIndex, setBlockHeaderStatus, isDeleted) => {
         console.log("start calculating......")
         console.log('pages:', pages)
 
@@ -221,7 +221,11 @@ const DocumentPanel = () => {
         }
 
         console.log('pages result:', pages)
-        setBlockHeaderStatus(false)
+        
+        if(isDeleted){
+            setBlockHeaderStatus(false)
+        }
+
         setPages([...pages])
     }
 
