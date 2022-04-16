@@ -8,6 +8,7 @@ import BulletIcon from './../../../dist/bullet.svg';
 const BlockWrapper = (props) => {
     const {
         pageIndex, 
+        columnIndex,
         childIndex, 
         childId, 
         handleOutsideClick, 
@@ -84,6 +85,7 @@ const BlockWrapper = (props) => {
                      isVisible={getStatus(index,InputFieldType.title)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
+                     columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
                      updateFieldHeight={updateFieldHeight}
@@ -97,6 +99,7 @@ const BlockWrapper = (props) => {
                      isVisible={getStatus(index,InputFieldType.desc)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
+                     columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
                      updateFieldHeight={updateFieldHeight}
@@ -106,6 +109,7 @@ const BlockWrapper = (props) => {
                      onInputFieldChange={onInputFieldChange}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
+                     columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
                      getTitle={getTitle}
@@ -120,6 +124,7 @@ const BlockWrapper = (props) => {
                      isVisible={getStatus(index,InputFieldType.optional_dashed)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
+                     columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
                      updateFieldHeight={updateFieldHeight}
@@ -133,6 +138,7 @@ const BlockWrapper = (props) => {
                      isVisible={getStatus(index,InputFieldType.content_detail)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
+                     columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
                      updateFieldHeight={updateFieldHeight}
@@ -146,6 +152,7 @@ const BlockWrapper = (props) => {
                      isVisible={getStatus(index,InputFieldType.content_bullet)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
+                     columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
                      updateFieldHeight={updateFieldHeight}
@@ -166,6 +173,7 @@ const BlockWrapper = (props) => {
                     isVisible={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -179,6 +187,7 @@ const BlockWrapper = (props) => {
                     isVisible={getStatus(index,InputFieldType.desc)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -188,6 +197,7 @@ const BlockWrapper = (props) => {
                     onInputFieldChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
@@ -202,6 +212,7 @@ const BlockWrapper = (props) => {
                     visible={isVisible}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -215,6 +226,7 @@ const BlockWrapper = (props) => {
                     visible={isVisible}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -228,6 +240,7 @@ const BlockWrapper = (props) => {
                     visible={isVisible}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -242,6 +255,7 @@ const BlockWrapper = (props) => {
                     visible={isVisible}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -256,6 +270,7 @@ const BlockWrapper = (props) => {
                         visible={isVisible}
                         updateFieldData={updateFieldData}
                         pageIndex={pageIndex}
+                        columnIndex={columnIndex}
                         childIndex={childIndex}
                         currentIndex={index}
                         updateFieldHeight={updateFieldHeight}
@@ -270,6 +285,7 @@ const BlockWrapper = (props) => {
                             visible={isVisible}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
+                            columnIndex={columnIndex}
                             childIndex={childIndex}
                             currentIndex={index}
                             updateFieldHeight={updateFieldHeight}
@@ -283,6 +299,7 @@ const BlockWrapper = (props) => {
                             visible={isVisible}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
+                            columnIndex={columnIndex}
                             childIndex={childIndex}
                             currentIndex={index}
                             updateFieldHeight={updateFieldHeight}
@@ -305,6 +322,7 @@ const BlockWrapper = (props) => {
                     isVisible={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -314,6 +332,7 @@ const BlockWrapper = (props) => {
                     onInputFieldChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
@@ -328,6 +347,7 @@ const BlockWrapper = (props) => {
                     visible={isVisible}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -348,6 +368,7 @@ const BlockWrapper = (props) => {
                     isVisible={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -357,6 +378,7 @@ const BlockWrapper = (props) => {
                     onInputFieldChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
@@ -371,6 +393,7 @@ const BlockWrapper = (props) => {
                     visible={isVisible}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -384,6 +407,7 @@ const BlockWrapper = (props) => {
                     visible={isVisible}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
@@ -396,7 +420,7 @@ const BlockWrapper = (props) => {
         return() => {
             if(isVisible || blockHeaderStatus) {
                 // console.log('yess')
-                checkToMoveContent(pageIndex, childIndex, setBlockHeaderStatus)
+                checkToMoveContent(pageIndex, columnIndex, childIndex, setBlockHeaderStatus)
             }
         }
     }, [isVisible, blockHeaderStatus])
@@ -404,6 +428,7 @@ const BlockWrapper = (props) => {
     return (
         <BlockContainer 
             pageIndex={pageIndex}
+            columnIndex={columnIndex}
             childIndex={childIndex}
             childId={childId}
             handleOutsideClick={handleOutsideClick}

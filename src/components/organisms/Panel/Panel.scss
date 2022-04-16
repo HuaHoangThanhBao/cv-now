@@ -1,7 +1,26 @@
 .panel{
-    margin-bottom: 5rem;
-    min-height: 1000px;
-    background-color: #fff;
-    padding: 3rem;
-    width: 100%;
+    &-wrapper{
+        margin-bottom: 5rem;
+        min-height: 1000px;
+        background-color: #fff;
+        padding: 3rem;
+        width: 100%;
+        display: flex;
+        .column{
+            &:nth-child(1){
+              width: calc(50% - 1rem);
+              margin-right: 2rem;
+            }
+            &:nth-child(2){
+              width: calc(50% - 1rem);
+              margin-left: 2rem;
+            }
+        }
+    }
+    &.left{
+        .block-bar{
+            left: -4.3rem;
+            right: auto !important;
+        }
+    }
 }
