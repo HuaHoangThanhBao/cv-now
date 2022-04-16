@@ -12,6 +12,7 @@ import MoveDownIcon from './../../../dist/move-down.svg';
 const BlockContainer = (props) => {
     const {
         pageIndex, 
+        columnIndex, 
         childIndex, 
         childId, 
         handleOutsideClick, 
@@ -59,6 +60,7 @@ const BlockContainer = (props) => {
                 handleOutsideClick={handleOutsideClick}
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
+                columnIndex={columnIndex}
                 childIndex={childIndex}
                 updateFieldHeight={updateFieldHeight}
             >
@@ -67,15 +69,16 @@ const BlockContainer = (props) => {
                     pageIndex={pageIndex}
                     isVisible={blockHeaderStatus}
                     onRemoveBlock={() => {
-                        removeBlock(pageIndex, childIndex, setBlockHeaderStatus)
+                        setBlockHeaderStatus(false)
+                        removeBlock(pageIndex, columnIndex, childIndex, setBlockHeaderStatus)
                     }}
                     moveBlockUp={() => {
                         setBlockHeaderStatus(false)
-                        moveBlockUp(pageIndex, childIndex, contentRef, parentRef)
+                        moveBlockUp(pageIndex, columnIndex, childIndex, contentRef, parentRef)
                     }}
                     moveBlockDown={() => {
                         setBlockHeaderStatus(false)
-                        moveBlockDown(pageIndex, childIndex, contentRef, parentRef)
+                        moveBlockDown(pageIndex, columnIndex, childIndex, contentRef, parentRef)
                     }}
                 />
             </BlockHeader>
@@ -88,7 +91,7 @@ const BlockContainer = (props) => {
                         isVisible={isVisible} 
                         key={item[0].title + index} 
                         onClick={() => handleBlockContentStatus(true)}
-                        onCreateNewContent={() => createNewContent(pageIndex, childId, childIndex, index)}
+                        onCreateNewContent={() => createNewContent(pageIndex, columnIndex, childId, childIndex, index)}
                     >
                         {getBlockContent(blockType, index)}
                         
@@ -96,10 +99,10 @@ const BlockContainer = (props) => {
                             isVisible={isVisible}
                             dataLength={data.length}
                             currentIndex={index}
-                            onCreateNewContent={() => createNewContent(pageIndex, childId, childIndex, index)}
-                            onRemoveContent={() => removeContent(pageIndex, childId, childIndex, index)}
-                            onMoveContentDown={() => moveContentDown(pageIndex, childId, childIndex, index)}
-                            onMoveContentUp={() => moveContentUp(pageIndex, childId, childIndex, index)}
+                            onCreateNewContent={() => createNewContent(pageIndex, columnIndex, childId, childIndex, index)}
+                            onRemoveContent={() => removeContent(pageIndex, columnIndex, childId, childIndex, index)}
+                            onMoveContentDown={() => moveContentDown(pageIndex, columnIndex, childId, childIndex, index)}
+                            onMoveContentUp={() => moveContentUp(pageIndex, columnIndex, childId, childIndex, index)}
                         />
                     </BlockContent>
                 ))}

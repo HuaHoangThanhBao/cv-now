@@ -5,7 +5,7 @@ import './InputField.scss';
 const InputField = (props) => {
     const inputRef = useRef();
     const contentEditable = createRef();
-    const {externalClass, pageIndex, childIndex, currentIndex, visible, isVisible, inputBlockType, icon, type, placeHolder, updateFieldData, updateFieldHeight} = props;
+    const {externalClass, pageIndex, columnIndex, childIndex, currentIndex, visible, isVisible, inputBlockType, icon, type, placeHolder, updateFieldData, updateFieldHeight} = props;
     const [html, setHTML] = useState(placeHolder);
     
     useEffect(() => {
@@ -14,14 +14,14 @@ const InputField = (props) => {
 
     const handleChange = (evt) => {
         const value = evt.target.value
-        updateFieldData(pageIndex, childIndex, currentIndex, inputBlockType, placeHolder, value)
+        updateFieldData(pageIndex, columnIndex, childIndex, currentIndex, inputBlockType, placeHolder, value)
         setHTML(value);
     };
     
     useEffect(() => {
         if(inputRef && inputRef.current){
             const height = inputRef.current.offsetHeight
-            updateFieldHeight(pageIndex, childIndex, currentIndex, inputBlockType, height)
+            updateFieldHeight(pageIndex, columnIndex, childIndex, currentIndex, inputBlockType, height)
         }
     }, [html])
 

@@ -4,7 +4,7 @@ import InputField from '../../atoms/InputField/InputField';
 import './BlockHeader.scss';
 
 const BlockHeader = (props) => {
-    const {title, pageIndex, childIndex, handleBlockHeader, handleOutsideClick, updateFieldData, updateFieldHeight} = props
+    const {title, pageIndex, columnIndex, childIndex, handleBlockHeader, handleOutsideClick, updateFieldData, updateFieldHeight} = props
     const ref = useRef();
 
     handleOutsideClick(ref, handleBlockHeader)
@@ -21,6 +21,7 @@ const BlockHeader = (props) => {
                     visible={true}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={childIndex}
                     updateFieldHeight={updateFieldHeight}

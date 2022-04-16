@@ -45,20 +45,20 @@ const DocumentPanel = () => {
         }
     }
 
-    const createNewContent = (pageIndex, childId, childIndex, atIndex) => {
+    const createNewContent = (pageIndex, columnIndex, childId, childIndex, atIndex) => {
         console.log('Going to create component at index: '+ atIndex)
 
-        const currentChild = pages[pageIndex].child[childIndex].data
+        const currentChild = pages[pageIndex].columns[columnIndex].child[childIndex].data
         currentChild.splice(atIndex + 1, 0, getContent(childId))
 
         setPages(pages)
     }
 
-    const removeContent = (pageIndex, childId, childIndex, atIndex) => {
+    const removeContent = (pageIndex, columnIndex, childId, childIndex, atIndex) => {
         console.log('Removed component at index: '+ atIndex)
 
-        if(pages[pageIndex].child[childIndex].data.length > 1){
-            pages[pageIndex].child[childIndex].data.splice(atIndex, 1)
+        if(pages[pageIndex].columns[columnIndex].child[childIndex].data.length > 1){
+            pages[pageIndex].columns[columnIndex].child[childIndex].data.splice(atIndex, 1)
             setPages(pages)
         }
         else{
@@ -66,9 +66,9 @@ const DocumentPanel = () => {
         }
     }
 
-    const moveContentDown = (pageIndex, childId, childIndex, atIndex) => {
-        if(atIndex !== pages[pageIndex].child[childIndex].data.length - 1){
-            pages[pageIndex].child[childIndex].data.move(atIndex, atIndex + 1)
+    const moveContentDown = (pageIndex, columnIndex, childId, childIndex, atIndex) => {
+        if(atIndex !== pages[pageIndex].columns[columnIndex].child[childIndex].data.length - 1){
+            pages[pageIndex].columns[columnIndex].child[childIndex].data.move(atIndex, atIndex + 1)
             setPages([...pages])
         }
         else{
@@ -76,9 +76,9 @@ const DocumentPanel = () => {
         }
     }
 
-    const moveContentUp = (pageIndex, childId, childIndex, atIndex) => {
+    const moveContentUp = (pageIndex, columnIndex, childId, childIndex, atIndex) => {
         if(atIndex > 0){
-            pages[pageIndex].child[childIndex].data.move(atIndex, atIndex - 1)
+            pages[pageIndex].columns[columnIndex].child[childIndex].data.move(atIndex, atIndex - 1)
             setPages([...pages])
         }
         else{
@@ -86,8 +86,8 @@ const DocumentPanel = () => {
         }
     }
 
-    const removeBlock = (pageIndex, childIndex, setBlockHeaderStatus) => {
-        pages[pageIndex].child.splice(childIndex, 1)
+    const removeBlock = (pageIndex, columnIndex, childIndex, setBlockHeaderStatus) => {
+        pages[pageIndex].columns[columnIndex].child.splice(childIndex, 1)
         checkToMoveContent(pageIndex, childIndex, setBlockHeaderStatus, true)
     }
 
@@ -101,7 +101,7 @@ const DocumentPanel = () => {
         return sum
     }
 
-    const checkToMoveContent = (pageIndex, childIndex, setBlockHeaderStatus, isDeleted) => {
+    const checkToMoveContent = (pageIndex, columnIndex, childIndex, setBlockHeaderStatus, isDeleted) => {
         console.log("start calculating......")
         console.log('pages:', pages)
 
@@ -110,7 +110,7 @@ const DocumentPanel = () => {
             if(pages[i])
             {
                 let sumPanelHeight = 0
-                pages[i].child.forEach((item, index) => {
+                pages[i].columns[columnIndex].child.forEach((item, index) => {
                     let headerHeight = item.height
 
                     let itemsHeight = 0
@@ -128,7 +128,7 @@ const DocumentPanel = () => {
 
                 if(sumPanelHeight > maxHeight){
                     console.log('++++++Move content to next page+++++++')
-                    let currentRowData = pages[i].child
+                    let currentRowData = pages[i].columns[columnIndex].child
                     let currentRowDataLength = currentRowData.length
                     // console.log(currentRowData)
 
@@ -151,14 +151,25 @@ const DocumentPanel = () => {
 
                     if(i >= pages.length - 1)
                     {
-                        pages.push({parent: {}, child: []})
+                        pages.push(
+                            {
+                                columns: [
+                                    {
+                                        child: []
+                                    },
+                                    {
+                                        child: []
+                                    }
+                                ]
+                            }
+                        )
                     }
 
                     //store index to delete of the next page
                     let deletedIndexs = []
                     for(let j = currentRowDataLength - 1; j >= maximunIndex; j--){
                         const lastItemRowData = currentRowData[j]
-                        pages[i + 1].child.unshift(lastItemRowData)
+                        pages[i + 1].columns[columnIndex].child.unshift(lastItemRowData)
                         deletedIndexs.push(j)
                     }
                     
@@ -173,10 +184,10 @@ const DocumentPanel = () => {
                         const pagesLength = pages.length
                         for(let k = 0; k < pagesLength - 1; k++){
                             if(pages[k]){
-                                let currentRowData = pages[k].child
+                                let currentRowData = pages[k].columns[columnIndex].child
                                 let currentRowDataLength = currentRowData.length
                                 
-                                let nextRowData = pages[k + 1].child
+                                let nextRowData = pages[k + 1].columns[columnIndex].child
                                 const nextRowDataLength = nextRowData.length
                                 
                                 let sumOfCurrenthRow = 0
@@ -187,7 +198,6 @@ const DocumentPanel = () => {
                                 }
         
                                 console.log('<<<<<<total height of current page:', sumOfCurrenthRow)
-                                console.log(i)
         
                                 //store index to delete of the next page
                                 let deletedIndexs = []
@@ -201,7 +211,7 @@ const DocumentPanel = () => {
         
                                     if(sumOfCurrenthRow < maxHeight){
                                         const firstItemNextRowData = nextRowData[j]
-                                        pages[k].child.push(firstItemNextRowData)
+                                        pages[k].columns[columnIndex].child.push(firstItemNextRowData)
                                         deletedIndexs.push(j)
                                     }
                                     else break
@@ -218,10 +228,12 @@ const DocumentPanel = () => {
             }
         }
         
-        //clearn up empty pages
+        //clean up empty pages
         let pagesLength = pages.length - 1
         for(let i = pagesLength; i >= 0; i--){
-            if(pages[i].child.length === 0){
+            //we check another column still have data: if not we delete both, otherwise we keep the page
+            const switchColumn = columnIndex == 0 ? 1: 0;
+            if(pages[i].columns[columnIndex].child.length === 0 && pages[i].columns[switchColumn].child.length === 0){
                 pages.pop()
             }
         }
@@ -240,10 +252,10 @@ const DocumentPanel = () => {
         return this;
     };
 
-    const moveBlockUp = (pageIndex, childIndex, childBlockRef, parentBlockRef) => {
+    const moveBlockUp = (pageIndex, columnIndex, childIndex, childBlockRef, parentBlockRef) => {
         if(childIndex - 1 >= 0)
         {
-            pages[pageIndex].child.move(childIndex, childIndex - 1)
+            pages[pageIndex].columns[columnIndex].child.move(childIndex, childIndex - 1)
             setPages([...pages])
         }
         else{
@@ -252,9 +264,9 @@ const DocumentPanel = () => {
                 const currentBlockHeight = childBlockRef.current.offsetHeight
   
                 if(previousPageHeight + currentBlockHeight <= 1024){
-                    const removedBlock = pages[pageIndex].child.shift()
+                    const removedBlock = pages[pageIndex].columns[columnIndex].child.shift()
                     pages[pageIndex - 1].child.push(removedBlock)
-                    if(pages[pageIndex].child.length == 0){
+                    if(pages[pageIndex].columns[columnIndex].child.length == 0){
                         pages.pop()
                     }
                     setPages([...pages])
@@ -266,9 +278,9 @@ const DocumentPanel = () => {
         }
     }
 
-    const moveBlockDown = (pageIndex, childIndex, childBlockRef, parentBlockRef) => {
-        if(childIndex !== pages[pageIndex].child.length - 1){
-            pages[pageIndex].child.move(childIndex, childIndex + 1)
+    const moveBlockDown = (pageIndex, columnIndex, childIndex, childBlockRef, parentBlockRef) => {
+        if(childIndex !== pages[pageIndex].columns[columnIndex].child.length - 1){
+            pages[pageIndex].columns[columnIndex].child.move(childIndex, childIndex + 1)
             setPages([...pages])
         }
         else{
@@ -277,8 +289,8 @@ const DocumentPanel = () => {
                 const currentBlockHeight = childBlockRef.current.offsetHeight
 
                 if(nextPageHeight + currentBlockHeight <= 1024){
-                    if(pages[pageIndex].child.length > 1){
-                        const removedBlock = pages[pageIndex].child.pop()
+                    if(pages[pageIndex].columns[columnIndex].child.length > 1){
+                        const removedBlock = pages[pageIndex].columns[columnIndex].child.pop()
                         pages[pageIndex + 1].child.unshift(removedBlock)
                         setPages([...pages])
                     }
@@ -293,16 +305,16 @@ const DocumentPanel = () => {
         }
     }
 
-    const updateFieldHeight = (pageIndex, childIndex, currentIndex = -1, type, height) => {
+    const updateFieldHeight = (pageIndex, columnIndex, childIndex, currentIndex = -1, type, height) => {
         if(type === InputFieldType.header){
-            if(pages[pageIndex].child[childIndex]){
-                pages[pageIndex].child[childIndex].height = height
+            if(pages[pageIndex].columns[columnIndex].child[childIndex]){
+                pages[pageIndex].columns[columnIndex].child[childIndex].height = height
                 setPages([...pages])
             }
         }
         else{
-            if(pages[pageIndex].child[childIndex]){
-                pages[pageIndex].child[childIndex].data[currentIndex].forEach(row => {
+            if(pages[pageIndex].columns[columnIndex].child[childIndex]){
+                pages[pageIndex].columns[columnIndex].child[childIndex].data[currentIndex].forEach(row => {
                     const firstProperty = Object.keys(row)[0]
                     if(firstProperty === type){
                         row.height = height
@@ -313,17 +325,17 @@ const DocumentPanel = () => {
         }
     }
 
-    const updateFieldData = (pageIndex, childIndex, currentIndex = -1, type, rootContent, contentToUpdate) => {
+    const updateFieldData = (pageIndex, columnIndex, childIndex, currentIndex = -1, type, rootContent, contentToUpdate) => {
         if(type === InputFieldType.header){
-            if(pages[pageIndex].child[childIndex]){
-                pages[pageIndex].child[childIndex][type] = contentToUpdate
+            if(pages[pageIndex].columns[columnIndex].child[childIndex]){
+                pages[pageIndex].columns[columnIndex].child[childIndex][type] = contentToUpdate
                 setPages([...pages])
             }
         }
         else{
             if(contentToUpdate !== rootContent){
-                if(pages[pageIndex].child[childIndex]){
-                    pages[pageIndex].child[childIndex].data[currentIndex].forEach(row => {
+                if(pages[pageIndex].columns[columnIndex].child[childIndex]){
+                    pages[pageIndex].columns[columnIndex].child[childIndex].data[currentIndex].forEach(row => {
                         const firstProperty = Object.keys(row)[0]
                         if(firstProperty === type){
                             row.status = true
@@ -340,14 +352,15 @@ const DocumentPanel = () => {
         panelsRef.current = panelsRef.current.slice(0, pages.length);
     }, [pages]);
 
-    function renderChildContent(pageIndex, childId, childIndex){
-        const child =  pages[pageIndex].child.find(c => c.id == childId)
+    function renderChildContent(pageIndex, columnIndex, childId, childIndex){
+        const child =  pages[pageIndex].columns[columnIndex].child.find(c => c.id == childId)
         return <BlockWrapper
                     title={child.header} 
                     blockType={child.blockType}
                     data={child.data}
                     key={childIndex} 
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childId={childId}
                     childIndex={childIndex}
                     handleOutsideClick={useOnClickOutside}
@@ -370,14 +383,23 @@ const DocumentPanel = () => {
         <div className="document">
             {pages && pages.map((page, pageIndex) => (
                 <div key={pageIndex} 
-                     ref={el => panelsRef.current[pageIndex] = el}>
-                    <Panel pageIndex={pageIndex}>
-                        {page.child && (
-                            page.child.map((child, childIndex) => {
-                                return(renderChildContent(pageIndex, child.id, childIndex)
-                            )})
-                        )}
-                    </Panel>
+                     ref={el => panelsRef.current[pageIndex] = el}
+                     className="panel-wrapper"
+                     >
+                        {page && page.columns.map((column, columnIndex) => (
+                           <div key={columnIndex} className='column'>
+                               <Panel 
+                                    pageIndex={pageIndex}
+                                    externalClassName={(page.columns.length > 1 && columnIndex === 0) ? " left": ""}
+                                >
+                                   {column.child && (
+                                       column.child.map((child, childIndex) => {
+                                           return(renderChildContent(pageIndex, columnIndex, child.id, childIndex)
+                                       )})
+                                   )}
+                               </Panel>
+                           </div>
+                        ))}
                 </div>
             ))}
         </div>
