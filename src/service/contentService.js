@@ -58,7 +58,7 @@ export const getContent = (childId) => {
             ]
         case 6:
             return [ 
-                {title: "Certificate Name", status: false, height: 0},
+                {title: "Achievement Name", status: false, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "mm", status: false, height: 0},
@@ -87,12 +87,30 @@ export const getContent = (childId) => {
             ]
         case 9:
             return [ 
-                {title: "Organization Name", status: false, height: 0},
-                {month_start: "mm", status: false, height: 0},
-                {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
-                {content_detail_dashed: "Role (optional)", status: false, height: 0},
+                { title: "Name of the class", status: false, height: 0 },
+                { desc: "Institution/Place of Education", status: false, height: 0 },
+                { month_start: "mm", status: false, height: 0 },
+                { month_end: "mm", status: false, height: 0 },
+                { year_start: "mm", status: false, height: 0 },
+                { year_end: "mm", status: false, height: 0 },
+                {
+                  optional_dashed: "City, Country",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  content_detail: "Tasks/Achievements",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  content_bullet: "Task/Responsibility/Accomplishment",
+                  status: false,
+                  height: 0,
+                },
+                { contact: "Contact:", status: false, height: 0 },
+                { contact_person: "Contact Person", status: false, height: 0 },
+                { contact_info: "Contact Info", status: false, height: 0 },
             ]
         case 10:
             return [ 
@@ -110,5 +128,72 @@ export const getContent = (childId) => {
                 {contact_person: "Contact Person", status: false, height: 0},
                 {contact_info: "Contact Info", status: false, height: 0},
             ]
+        case 11:
+            return [ 
+                { content_detail: "Cause", status: false, height: 0 },
+            ]
+        case 12:
+            return [ 
+                { title: "Language Name", status: false, height: 0 },
+                {
+                  content_detail_dashed: "Description",
+                  status: false,
+                  height: 0,
+                },
+            ]
+        case 13:
+            return [ 
+                { title: "Publication Title", status: false, height: 0 },
+                { desc: "Publication Type", status: false, height: 0 },
+                {
+                  optional_dashed: "Author(s)",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  optional_dashed2: "List of Authors",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  content_detail: "Date of Publication",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  optional_dashed3: "Publisher/Issue/Pages, etc.",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  optional_dashed4: "Description",
+                  status: false,
+                  height: 0,
+                },
+            ]
+        case 14:
+            return [
+                { content_detail: "Skill name", status: false, height: 0 },
+            ]    
+        case 15:
+            return [
+                { content_detail: "Interest", status: false, height: 0 },
+            ] 
+        case 16:
+            return [
+                { content_detail: "Soft skill", status: false, height: 0 },
+            ]     
+        case 17:
+            return [
+                { title: "Name and Position", status: false, height: 0 },
+                {
+                  optional_dashed: "“Reference”",
+                  status: false,
+                  height: 0,
+                },
+                { contact: "Contact:", status: false, height: 0 },
+                { contact_person: "Contact Person", status: false, height: 0 },
+                { contact_info: "Contact Info", status: false, height: 0 },
+            ]     
     }
 }
