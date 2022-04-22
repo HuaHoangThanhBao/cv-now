@@ -1,13 +1,22 @@
 import React, {useState, useRef, useEffect} from 'react'
 
-function DragNDrop({data}) {
-
+function DragNDrop(props) {
+    const {data, setPages, setIsReOrder} = props
     const [list, setList] = useState(data); 
     const [dragging, setDragging] = useState(false);
 
     useEffect(() => {
         setList(data);
     }, [setList, data])
+
+    useEffect(() => {
+        if(!dragging && dragItemNode.current !== null){
+            console.log('---------start re-order---------')
+            reOrderPages()
+            dragItem.current = null;
+            dragItemNode.current = null;
+        }
+    }, [list, dragging])
 
     const dragItem = useRef();
     const dragItemNode = useRef();
@@ -29,7 +38,9 @@ function DragNDrop({data}) {
             console.log('Target is NOT the same as dragged item')
             setList(oldList => {
                 let newList = JSON.parse(JSON.stringify(oldList))
-                newList[targetItem.grpI].items.splice(targetItem.itemI, 0, newList[dragItem.current.grpI].items.splice(dragItem.current.itemI,1)[0])
+                newList[targetItem.pageIndex].columns[targetItem.columnIndex].child
+                    .splice(targetItem.childIndex, 0, newList[dragItem.current.pageIndex].columns[dragItem.current.columnIndex].child
+                    .splice(dragItem.current.childIndex, 1)[0])
                 dragItem.current = targetItem;
                 return newList
             })
@@ -37,44 +48,47 @@ function DragNDrop({data}) {
     }
     const handleDragEnd = (e) => {
         console.log('drag end')
-        if(dragItem.current.grpI === 2){
+        if(dragItem.current.columnIndex === 2){
             console.log('we drag to no need zone')
         }
         setDragging(false);
-        dragItem.current = null;
         dragItemNode.current.removeEventListener('dragend', handleDragEnd)
-        dragItemNode.current = null;
     }
     const getStyles = (item) => {
-        if (dragItem.current.grpI === item.grpI && dragItem.current.itemI === item.itemI) {
+        if (dragItem.current.pageIndex === item.pageIndex && dragItem.current.columnIndex === item.columnIndex && dragItem.current.childIndex === item.childIndex) {
             return "dnd-item current"
         }
         return "dnd-item"
     }
-
+    const reOrderPages = () => {
+        setIsReOrder(true)
+        setPages([...list])
+    }
     if (list) {
         return (                
             <div>
                 <input type="checkbox" />
                 <label className='group-title'>One column</label>
                 <div className="drag-n-drop">
-                    {list.map((grp, grpI) => (
-                      <div 
-                        key={grp.title} 
-                        onDragEnter={dragging && !grp.items.length?(e) => handleDragEnter(e,{grpI, itemI: 0}):null} 
-                        className="dnd-group"
-                    >
-                        {grp.items.map((item, itemI) => (
-                        <div 
-                            draggable key={item} 
-                            onDragStart={(e) => handletDragStart(e, {grpI, itemI})} 
-                            onDragEnter={dragging?(e) => {handleDragEnter(e, {grpI, itemI})}:null} 
-                            className={dragging?getStyles({grpI, itemI}):"dnd-item"}
-                        >
-                            {item}
-                        </div>
-                        ))}
-                      </div>
+                    {list.map((page, pageIndex) => (
+                        page.columns.map((column, columnIndex) => (
+                            <div key={columnIndex} className='dnd-group'>
+                                <div className='group-title'>Page: {pageIndex}, Column: {columnIndex}</div>
+                                <div key={columnIndex} className='dnd-group-1'>
+                                    {column.child.length !== 0 && column.child.map((child, childIndex) => (
+                                        <div 
+                                            draggable 
+                                            key={child.id} 
+                                            onDragStart={(e) => handletDragStart(e, {pageIndex, columnIndex, childIndex})} 
+                                            onDragEnter={dragging?(e) => {handleDragEnter(e, {pageIndex, columnIndex, childIndex})}:null} 
+                                            className={dragging?getStyles({pageIndex, columnIndex, childIndex}):"dnd-item"}
+                                        >
+                                            {child.header}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))
                     ))}
                 </div>
             </div>

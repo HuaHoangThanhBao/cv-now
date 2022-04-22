@@ -1,13 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { InputFieldType } from '../../../constants/InputFieldType';
-import { MetaData } from '../../../constants/MetaData';
 import { getContent } from '../../../service/contentService';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
 import Panel from '../Panel/Panel';
 import './DocumentPanel.scss';
 
-const DocumentPanel = () => {
-    const [pages, setPages] = useState(MetaData)
+const DocumentPanel = (props) => {
+    const {pages, setPages, isReOrder, setIsReOrder} = props;
     const panelsRef = useRef([]);
 
     function useOnClickOutside(ref, handler) {
@@ -342,6 +341,16 @@ const DocumentPanel = () => {
             }
         }
     }
+
+    useEffect(() => {
+        if(isReOrder){
+            console.log('+++++++++++page has changed++++++++++')
+            //re-check two column of each page
+            checkToMoveContent(0, 0)
+            checkToMoveContent(0, 1)
+            setIsReOrder(false)
+        }
+    })
 
     useEffect(() => {
         panelsRef.current = panelsRef.current.slice(0, pages.length);

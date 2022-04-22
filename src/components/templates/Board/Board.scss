@@ -7,20 +7,20 @@
         padding: .5rem;
         display: grid;
         width: 100%;
-        height: 100%;
-        grid-template-columns: 300px 300px 600px;
+        grid-template-columns: 300px 300px;
     }
     .dnd-group{
         background-color: #49505e;
         border-radius: 5px;
         padding: .5rem;
         margin-right: .5rem;
+        margin-bottom: 1rem;
     }
     .dnd-item{
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 150px;
+        min-height: 50px;
         border-radius: 5px;
         background-color: white;
         color: #282c34;
