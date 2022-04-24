@@ -5,6 +5,7 @@ function DragNDrop(props) {
     const [list, setList] = useState(data); 
     const [dragging, setDragging] = useState(false);
     const [noNeedDragging, setNoNeedDragging] = useState(false);
+    const [noNeedDraggingOver, setNoNeedDraggingOver] = useState(false);
     const [noNeedList, setNoNeedList] = useState([])
 
     //use for drag and drop of pages
@@ -145,9 +146,29 @@ function DragNDrop(props) {
 
     const handleNoNeedItemDragEnd = (e) => {
         console.log('drag no need end')
+        const {noNeedIndex} = rootDragNoNeedItem.current
+        const currentNoNeedDragging = noNeedList[noNeedIndex]
+        const {status, pageIndex, columnIndex, childIndex} = checkForExists(currentNoNeedDragging)
+        if(status){
+            setNoNeedDraggingOver(false);
+        }
         setNoNeedDragging(false);
         dragNoNeedItemNode.current.removeEventListener('dragend', handleNoNeedItemDragEnd)
     }
+
+    const handleNoNeedItemDragOver = (e) => {
+        const {noNeedIndex} = rootDragNoNeedItem.current
+        const currentNoNeedDragging = noNeedList[noNeedIndex]
+        if(currentNoNeedDragging){
+            const {status, pageIndex, columnIndex, childIndex} = checkForExists(currentNoNeedDragging)
+            if(status){
+                setNoNeedDraggingOver(true)
+                list[pageIndex].columns[columnIndex].child.splice(childIndex, 1)
+                dragNoNeedItem.current = null
+                setList([...list])
+            }
+        }
+    } 
 
     const checkForExists = (currentDragItem) => {
         for(const [pageIndex, page] of list.entries()){
@@ -180,19 +201,18 @@ function DragNDrop(props) {
     useEffect(() => {
         if(!dragging && dragItemNode.current !== null){
             console.log('---------start re-order---------')
-            reOrderPages()
             dragItem.current = null;
             dragItemNode.current = null;
+            reOrderPages()
         }
     }, [list, dragging])
 
     useEffect(() => {
         if(!noNeedDragging && dragNoNeedItemNode.current !== null){
             console.log('---------start re-order when no need---------')
-            reOrderPages()
             
             //after we drag end, we remove 'current no need item drag' from no need list
-            if(rootDragNoNeedItem.current){
+            if(rootDragNoNeedItem.current && !noNeedDraggingOver){
                 const {noNeedIndex} = rootDragNoNeedItem.current
                 noNeedList.splice(noNeedIndex, 1)
                 setNoNeedList([...noNeedList])
@@ -201,6 +221,8 @@ function DragNDrop(props) {
             rootDragNoNeedItem.current = null
             dragNoNeedItem.current = null;
             dragNoNeedItemNode.current = null;
+            
+            reOrderPages()
         }
     }, [list, noNeedDragging])
 
@@ -216,7 +238,10 @@ function DragNDrop(props) {
                                     onDragEnter={dragging && !column.child.length ? (e) => handleDragEnter(e, {pageIndex, columnIndex, childIndex: 0}): null}
                                 >
                                     <div className='group-title'>Page: {pageIndex}, Column: {columnIndex}</div>
-                                    <div key={columnIndex} className='dnd-group-1'>
+                                    <div 
+                                        key={columnIndex} 
+                                        className='dnd-group-block'
+                                    >
                                         {column.child.length !== 0 && column.child.map((child, childIndex) => (
                                             <div 
                                                 key={child.id} 
@@ -245,6 +270,7 @@ function DragNDrop(props) {
                         <div 
                             className='drag-no-need'
                             onDragEnter={dragging ? (e) => handleNoNeedItemDragEnter(e): null}
+                            onDragOver={noNeedDragging ? (e) => handleNoNeedItemDragOver(e): null}
                         >
                             {noNeedList && noNeedList.map((noNeedItem, noNeedIndex) => (
                                 <div 
