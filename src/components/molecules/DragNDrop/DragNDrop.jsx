@@ -93,6 +93,29 @@ function DragNDrop(props) {
         return "dnd-item-wrapper"
     }
 
+    const getNoNeedItemStyles = (noNeedItem) => {
+        if(dragItem.current && dragging){
+            const currentDragItem = list[dragItem.current.pageIndex].columns[dragItem.current.columnIndex].child[dragItem.current.childIndex];
+            return dragging && currentDragItem.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+        }
+        else if(dragNoNeedItem.current){
+                const {noNeedIndex} = rootDragNoNeedItem.current
+                const currentNoNeedDragging = noNeedList[noNeedIndex]
+                if(noNeedDraggingOver){
+                    return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+                }
+                else if(noNeedDragging){
+                    return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+                }
+                else if(!noNeedDragging){
+                    return noNeedDragging ? 'drag-no-need-item current': 'drag-no-need-item unactive'
+                }
+        }
+        else {
+            return 'drag-no-need-item'
+        }
+    }
+
     const handleColumnDragEnter = (e, targetItem) => {
         console.log('no need drag enter')
         console.log(targetItem)
@@ -146,12 +169,7 @@ function DragNDrop(props) {
 
     const handleNoNeedItemDragEnd = (e) => {
         console.log('drag no need end')
-        const {noNeedIndex} = rootDragNoNeedItem.current
-        const currentNoNeedDragging = noNeedList[noNeedIndex]
-        const {status, pageIndex, columnIndex, childIndex} = checkForExists(currentNoNeedDragging)
-        if(status){
-            setNoNeedDraggingOver(false);
-        }
+        setNoNeedDraggingOver(false);
         setNoNeedDragging(false);
         dragNoNeedItemNode.current.removeEventListener('dragend', handleNoNeedItemDragEnd)
     }
@@ -214,8 +232,13 @@ function DragNDrop(props) {
             //after we drag end, we remove 'current no need item drag' from no need list
             if(rootDragNoNeedItem.current && !noNeedDraggingOver){
                 const {noNeedIndex} = rootDragNoNeedItem.current
-                noNeedList.splice(noNeedIndex, 1)
-                setNoNeedList([...noNeedList])
+                const currentNoNeedDragging = noNeedList[noNeedIndex]
+                const {status, pageIndex, columnIndex, childIndex} = checkForExists(currentNoNeedDragging)
+                //check if pages have no need item that we dragged into
+                if(status){
+                    noNeedList.splice(noNeedIndex, 1)
+                    setNoNeedList([...noNeedList])
+                }
             }
 
             rootDragNoNeedItem.current = null
@@ -250,7 +273,7 @@ function DragNDrop(props) {
                                             >
                                                 <div 
                                                     draggable 
-                                                    onDragStart={(e) => handletDragStart(e, {pageIndex, columnIndex, childIndex})} 
+                                                    onDragStart={(e) => handletDragStart(e, {childId: child.id, pageIndex, columnIndex, childIndex})} 
                                                     onDragEnter={dragging ? (e) => {handleDragEnter(e, {pageIndex, columnIndex, childIndex})}: null} 
                                                     className={dragging ? getStyles({pageIndex, columnIndex, childIndex}): "dnd-item"}
                                                 >
@@ -275,7 +298,7 @@ function DragNDrop(props) {
                             {noNeedList && noNeedList.map((noNeedItem, noNeedIndex) => (
                                 <div 
                                     draggable
-                                    className='drag-no-need-item' 
+                                    className={getNoNeedItemStyles(noNeedItem)} 
                                     key={noNeedItem.header + noNeedIndex}
                                     onDragStart={(e) => handleNoNeedItemDragStart(e, {noNeedIndex})}
                                 >
