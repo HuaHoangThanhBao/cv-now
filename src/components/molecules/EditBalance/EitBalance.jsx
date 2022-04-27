@@ -8,7 +8,7 @@ const EditBalance = ({onClick}) => {
         <div className="balance">
             <div className="balance-container">
                 <div className="balance-holder">
-                    <img src={LeftArrow}/>
+                    <img src={LeftArrow} alt=''/>
                     {/* {<Icon} */}
                 </div>
                 <div className="balance-holder">
@@ -54,7 +54,7 @@ const EditBalance = ({onClick}) => {
                     <div className="balance-inner"></div>
                 </div>
                 <div className="balance-holder">
-                    <img src={RightArrow}/>
+                    <img src={RightArrow} alt=''/>
                     {/* {<Icon} */}
                 </div>
             </div>

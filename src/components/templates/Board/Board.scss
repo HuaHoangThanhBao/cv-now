@@ -1,0 +1,92 @@
+.board{
+    min-height: 300px;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    .drag-wrapper{
+        display: flex;
+        gap: 1rem;
+    }
+    .drag-n-drop{
+        display: grid;
+        width: 100%;
+        grid-template-columns: 300px 300px;
+    }
+    .dnd-group{
+        background-color: #49505e;
+        border-radius: 5px;
+        padding: .5rem;
+        margin-right: .5rem;
+        margin-bottom: 1rem;
+    }
+    .dnd-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 50px;
+        border-radius: 5px;
+        background-color: white;
+        color: #282c34;
+        &-wrapper{
+            cursor: pointer;
+            &:not(:last-of-type){
+                margin-bottom: .5rem;
+            }
+            &.current{
+                .dnd-item{
+                    background-color: #282c34;
+                }
+            }
+        }
+        &-no-need{
+            margin-bottom: .5rem;
+            &.current{
+                background-color: #282c34;
+            }
+        }
+    }
+    .drag-no-need{
+        width: 550px;
+        height: 350px;
+        max-height: 350px;
+        background-color: #49505e;
+        margin-top: 1rem;
+        border-radius: .25rem;
+        padding: .5rem;
+        overflow-y: auto;
+        &-wrapper{
+            color: white;
+        }
+        &-item{
+            height: 3rem;
+            min-width: 3rem;
+            background-color: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: .25rem;
+            font-size: 1rem;
+            padding: .5rem;
+            float: left;
+            margin: 0 .5rem .5rem 0;
+            cursor: pointer;
+            &.current{
+                opacity: .5;
+                color: white;
+            }
+            &.unactive{
+                background-color: inherit;
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    }
+    .group-title{
+        color: white;
+        margin-bottom: .5rem;
+    }
+    .current{
+        background-color: #282c34;
+    }
+}

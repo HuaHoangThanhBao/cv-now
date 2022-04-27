@@ -1,18 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { InputFieldType } from '../../../constants/InputFieldType';
-import { MetaData, rootData } from '../../../constants/MetaData';
 import { getContent } from '../../../service/contentService';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
-import CertificateBlock from '../CertificateBlock/CertificateBlock';
-import EducationBlock from '../EducationBlock/EducationBlock';
-import OrganizationBlock from '../OrganizationBlock/OrganizationBlock';
 import Panel from '../Panel/Panel';
-import PersonalProjectBlock from '../PersonalProjectBlock/PersonalProjectBlock';
-import WorkBlock from '../WorkBlock/WorkBlock';
 import './DocumentPanel.scss';
 
-const DocumentPanel = () => {
-    const [pages, setPages] = useState(MetaData)
+const DocumentPanel = (props) => {
+    const {pages, setPages, isReOrder, setIsReOrder} = props;
     const panelsRef = useRef([]);
 
     function useOnClickOutside(ref, handler) {
@@ -143,7 +137,7 @@ const DocumentPanel = () => {
 
                         if(sumOfEachRow > maxHeight){
                             maximunIndex = j
-                            if(maximunIndex == 0) maximunIndex = j + 1
+                            if(maximunIndex === 0) maximunIndex = j + 1
                             console.log('Max index at:', maximunIndex)
                             break;
                         }
@@ -232,7 +226,7 @@ const DocumentPanel = () => {
         let pagesLength = pages.length - 1
         for(let i = pagesLength; i >= 0; i--){
             //we check another column still have data: if not we delete both, otherwise we keep the page
-            const switchColumn = columnIndex == 0 ? 1: 0;
+            const switchColumn = columnIndex === 0 ? 1: 0;
             if(pages[i].columns[columnIndex].child.length === 0 && pages[i].columns[switchColumn].child.length === 0){
                 pages.pop()
             }
@@ -266,7 +260,7 @@ const DocumentPanel = () => {
                 if(previousPageHeight + currentBlockHeight <= 1024){
                     const removedBlock = pages[pageIndex].columns[columnIndex].child.shift()
                     pages[pageIndex - 1].child.push(removedBlock)
-                    if(pages[pageIndex].columns[columnIndex].child.length == 0){
+                    if(pages[pageIndex].columns[columnIndex].child.length === 0){
                         pages.pop()
                     }
                     setPages([...pages])
@@ -349,11 +343,21 @@ const DocumentPanel = () => {
     }
 
     useEffect(() => {
+        if(isReOrder){
+            console.log('+++++++++++page has changed++++++++++')
+            //re-check two column of each page
+            checkToMoveContent(0, 0)
+            checkToMoveContent(0, 1)
+            setIsReOrder(false)
+        }
+    })
+
+    useEffect(() => {
         panelsRef.current = panelsRef.current.slice(0, pages.length);
     }, [pages]);
 
     function renderChildContent(pageIndex, columnIndex, childId, childIndex){
-        const child =  pages[pageIndex].columns[columnIndex].child.find(c => c.id == childId)
+        const child =  pages[pageIndex].columns[columnIndex].child.find(c => c.id === childId)
         return <BlockWrapper
                     title={child.header} 
                     blockType={child.blockType}

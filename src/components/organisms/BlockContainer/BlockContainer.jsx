@@ -1,13 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import BlockBar from '../../molecules/BlockBar/BlockBar';
 import BlockContent from '../../molecules/BlockContent/BlockContent';
 import BlockContentBar from '../../molecules/BlockContentBar/BlockContentBar';
 import BlockHeader from '../../molecules/BlockHeader/BlockHeader';
-import AddIcon from './../../../dist/add.svg';
-import TrashIcon from './../../../dist/trash.svg';
-import AlertIcon from './../../../dist/exclamation.svg';
-import MoveUpIcon from './../../../dist/move-up.svg';
-import MoveDownIcon from './../../../dist/move-down.svg';
 
 const BlockContainer = (props) => {
     const {
@@ -89,7 +84,7 @@ const BlockContainer = (props) => {
                 {data && data.map((item, index) => (
                     <BlockContent 
                         isVisible={isVisible} 
-                        key={item[0].title + index} 
+                        key={pageIndex + childIndex + columnIndex + index} 
                         onClick={() => handleBlockContentStatus(true)}
                         onCreateNewContent={() => createNewContent(pageIndex, columnIndex, childId, childIndex, index)}
                     >

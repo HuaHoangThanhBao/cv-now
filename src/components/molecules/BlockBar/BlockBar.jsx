@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React from 'react';
 import TrashIcon from './../../../dist/trash.svg';
 import MoveUpIcon from './../../../dist/move-up.svg';
 import MoveDownIcon from './../../../dist/move-down.svg';
@@ -11,7 +11,7 @@ const BlockBar = ({childIndex, pageIndex, isVisible, onRemoveBlock, moveBlockUp,
                 <div className='block-bar-container'>
                     {
                         (
-                            childIndex != 0 || (pageIndex != 0 && childIndex == 0) 
+                            childIndex !== 0 || (pageIndex !== 0 && childIndex === 0) 
                             ?
                             <div className='block-btn' onClick={moveBlockUp}>
                                 <img src={MoveUpIcon} alt="" />

@@ -5,7 +5,7 @@ import './InputField.scss';
 const InputField = (props) => {
     const inputRef = useRef();
     const contentEditable = createRef();
-    const {externalClass, pageIndex, columnIndex, childIndex, currentIndex, visible, isVisible, inputBlockType, icon, type, placeHolder, updateFieldData, updateFieldHeight} = props;
+    const {externalClass, pageIndex, columnIndex, childIndex, currentIndex, visible, isVisible, inputBlockType, icon, placeHolder, updateFieldData, updateFieldHeight} = props;
     const [html, setHTML] = useState(placeHolder);
     
     useEffect(() => {
