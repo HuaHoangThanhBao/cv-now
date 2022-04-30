@@ -3,10 +3,12 @@ import { InputFieldType } from '../../../constants/InputFieldType';
 import { getContent } from '../../../service/contentService';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
 import Panel from '../Panel/Panel';
+import Profile from '../Profile/Profile';
+import { template } from '../../../constants/Template';
 import './DocumentPanel.scss';
 
 const DocumentPanel = (props) => {
-    const {pages, setPages, isReOrder, setIsReOrder} = props;
+    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, setCurrentTemplateType} = props;
     const panelsRef = useRef([]);
 
     function useOnClickOutside(ref, handler) {
@@ -143,7 +145,7 @@ const DocumentPanel = (props) => {
                         }
                     }
 
-                    if(i >= pages.length - 1)
+                    if(i >= pages.length - 1 && pages[pageIndex].columns.length == 2)
                     {
                         pages.push(
                             {
@@ -151,6 +153,17 @@ const DocumentPanel = (props) => {
                                     {
                                         child: []
                                     },
+                                    {
+                                        child: []
+                                    }
+                                ]
+                            }
+                        )
+                    }
+                    else{
+                        pages.push(
+                            {
+                                columns: [
                                     {
                                         child: []
                                     }
@@ -341,13 +354,37 @@ const DocumentPanel = (props) => {
             }
         }
     }
+    
+    const getColumnType = () => {
+        const columnType = template[currentTemplateType]
+        if(columnType.columns == 2){
+            return "two-column"
+        }
+        else return "one-column"
+    }
+
+    const getChildSpecialdIndex = (childId) => {
+        const collection = []
+        pages.forEach(page => {
+            page.columns.forEach(column => {
+                column.child.forEach(child => {
+                    collection.push(child)
+                })
+            })
+        })
+        
+        return collection.findIndex(child => child.id === childId)
+    }
 
     useEffect(() => {
         if(isReOrder){
             console.log('+++++++++++page has changed++++++++++')
             //re-check two column of each page
             checkToMoveContent(0, 0)
+            console.log(pages.columns)
+            if(pages.columns && pages.columns.length > 1){
             checkToMoveContent(0, 1)
+            }
             setIsReOrder(false)
         }
     })
@@ -380,21 +417,26 @@ const DocumentPanel = (props) => {
                     updateFieldHeight={updateFieldHeight}
                     moveContentDown={moveContentDown}
                     moveContentUp={moveContentUp}
+                    getChildSpecialdIndex={getChildSpecialdIndex}
                 />
     }
 
     return(
         <div className="document">
+            <Profile
+                currentTemplateType={currentTemplateType}
+                getColumnType={getColumnType}
+            />
             {pages && pages.map((page, pageIndex) => (
                 <div key={pageIndex} 
                      ref={el => panelsRef.current[pageIndex] = el}
-                     className="panel-wrapper"
+                     className={"document-wrapper" + ` ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
                      >
                         {page && page.columns.map((column, columnIndex) => (
                            <div key={columnIndex} className='column'>
                                <Panel 
                                     pageIndex={pageIndex}
-                                    externalClassName={(page.columns.length > 1 && columnIndex === 0) ? " left": ""}
+                                    externalClassName={(page.columns.length > 1 && columnIndex === 0) ? " left": (page.columns.length === 1 && columnIndex === 0) ? " left": " right"}
                                 >
                                    {column.child && (
                                        column.child.map((child, childIndex) => {

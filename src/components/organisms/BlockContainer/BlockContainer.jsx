@@ -31,6 +31,7 @@ const BlockContainer = (props) => {
         moveContentDown,
         moveContentUp,
         updateFieldHeight,
+        getChildSpecialdIndex
     } = props;
 
     const myRef = useRef();
@@ -48,7 +49,7 @@ const BlockContainer = (props) => {
     }
 
     return(
-        <div className="block block-education" ref={myRef}>
+        <div className={"block block-education" + (getChildSpecialdIndex(childId) % 2 == 0 ? " odd": " even")} ref={myRef}>
            <BlockHeader 
                 title={title}
                 handleBlockHeader={setBlockHeaderStatus}
@@ -77,10 +78,7 @@ const BlockContainer = (props) => {
                     }}
                 />
             </BlockHeader>
-           <div className="block-space">
-                <hr />
-           </div>
-           <div ref={contentRef}>
+           <div className='block-content-wrapper' ref={contentRef}>
                 {data && data.map((item, index) => (
                     <BlockContent 
                         isVisible={isVisible} 

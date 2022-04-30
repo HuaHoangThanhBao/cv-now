@@ -1,4 +1,108 @@
 .document{
     width: 1200px;
     margin: 0 auto;
+    &-wrapper{
+        margin-bottom: 5rem;
+        min-height: 1000px;
+        background-color: #fff;
+        padding: 2rem;
+        width: 100%;
+        display: flex;
+        .column{
+            &:nth-child(1){
+              width: 50%;
+              padding: 2rem 2rem 0 2rem;
+            }
+            &:nth-child(2){
+              width: 50%;
+              padding: 2rem 2rem 0 1rem;
+            }
+        }
+
+        &.one-column{
+            .column{
+                width: 100%;
+            }
+        }
+
+        /*combined*/
+        &.combined{
+            padding-top: 0;
+            &.new.two-column{
+                .column:nth-child(2){
+                    margin-top: 2rem;
+                }
+            }
+            &.two-column{
+                .column:nth-child(2){
+                    background-color: #EBEBEB;
+                    border-radius: 0.5rem;
+                }
+            }
+            &.one-column{
+                .block{
+                    position: relative;
+                    &.even{
+                        &::before{
+                            content: "";
+                            position: absolute;
+                            width: calc(100% + 5rem);
+                            height: 100%;
+                            background-color: #EBEBEB;
+                            z-index: 0;
+                            margin-top: 1rem;
+                            margin-left: -2rem;
+                            border-radius: 0.5rem;
+                        }
+                    }
+                }
+            }
+            .panel{
+                &.left{
+                   .block-bar{
+                        left: -5.3rem;
+                   }
+                }
+                &.right{
+                   .block-bar{
+                        right: -5.3rem;
+                   }
+                }
+            }
+        }
+        /*end combined*/
+
+
+        /*it*/
+        &.it{
+            padding: 2rem 0;
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        width: 70%;
+                        padding: 0 3rem;
+                    }
+                    &:nth-child(2){
+                        width: calc(30% - 1rem);
+                        background-color: #2B343D;
+                        border-radius: 0.5rem;
+                        color: white;
+                    }
+                }
+            }
+            &.one-column{
+                .column{
+                    padding: 0 3rem;
+                }
+            }
+            .panel{
+                &.right{
+                   .block-bar{
+                        right: -6.3rem;
+                   }
+                }
+            }
+        }
+        /*end it*/
+    }
 }

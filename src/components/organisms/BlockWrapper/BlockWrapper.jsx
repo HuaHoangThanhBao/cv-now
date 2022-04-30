@@ -28,6 +28,7 @@ const BlockWrapper = (props) => {
         moveContentUp,
         updateFieldHeight,
         getHeader,
+        getChildSpecialdIndex
     } = props;
 
     const [isVisible, setIsVisible] = useState(false);
@@ -844,6 +845,7 @@ const BlockWrapper = (props) => {
             moveContentUp={moveContentUp}
             updateFieldHeight={updateFieldHeight}
             getHeader={getHeader}
+            getChildSpecialdIndex={getChildSpecialdIndex}
         />
     )
 }

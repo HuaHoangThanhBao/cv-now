@@ -1,5 +1,8 @@
 .block-content{
     position: relative;
+    &-wrapper{
+        padding: 0.5rem 0;
+    }
     .field-input{
         margin-top: 0.5rem;
     }
@@ -50,7 +53,7 @@
     }
     &-alert{
         position: absolute;
-        left: -1.7rem;
+        left: -1.6rem;
         height: 1.3rem;
         width: 1.3rem;
         border-radius: 50%;
