@@ -139,7 +139,7 @@
             }
         }
 
-        &.basic, &.executive, &.modern, &.professional, &.colleage, &.simple{
+        &.basic, &.executive, &.modern, &.professional, &.colleage, &.simple, &.minimalist{
             padding: 2rem;
             &.two-column{
                 .column{
@@ -184,6 +184,227 @@
                     &:nth-child(2){
                         background-color: inherit;
                         color: #2B343D;
+                    }
+                }
+            }
+        }
+
+        &.minimalist, &.skilled_based, &.functional{
+            .profile{
+                &-avatar{
+                    border: 3px solid black;
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    &-block{
+                        height: 13rem;
+                        width: 100%;
+                        position: relative;
+                        margin-bottom: 5rem;
+                    }
+                }
+                &-social{
+                    margin-top: 2rem;
+                    margin-bottom: 3.5rem;
+                    &__row{
+                        width: 50%;
+                        float: left;
+                        flex-direction: row-reverse;
+                        justify-content: flex-end;
+                        margin-bottom: 0.5rem;
+                    }
+                }
+            }
+            &.two-column{
+                padding-left: 0;
+                .column{
+                    &:nth-child(1){
+                        width: 30%;
+                        position: relative;
+                        padding: 2rem 3rem;
+                    }
+                    &:nth-child(2){
+                        width: 70%;
+                        padding-left: 4rem;
+                        padding-top: 2rem;
+                        padding-bottom: 2rem;
+                    }
+                }
+            }
+            .panel{
+                &.right{
+                   .block-bar{
+                        right: -3.3rem;
+                   }
+                }
+            }
+            .divider{
+                position: absolute;
+                right: 0;
+                width: 0.15rem;
+                background: #BFC2C4;
+                height: 100%;
+                top: 0;
+                &-wrapper{
+                    position: relative;
+                    height: 100%;
+                }
+                &-diamond{
+                    width: 0;
+                    height: 0;
+                    border: 10px solid transparent;
+                    border-bottom-color: #BFC2C4;
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    &.top{
+                        top: -1rem;
+                    }
+                    &.bottom{
+                        bottom: 0;
+                    }
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        left: -10px;
+                        top: 10px;
+                        width: 0;
+                        height: 0;
+                        border: 10px solid transparent;
+                        border-top-color: #BFC2C4;
+                    }
+                }
+            }
+        }
+
+        &.skilled_based, &.functional{
+            .profile{
+                &-social{
+                    &__wrapper{
+                        background-color: #2B343D;
+                        padding: 1rem 1rem 0.5rem 1rem;
+                        color: white;
+                        border-radius: 0.5rem;
+                    }
+                    &__row{
+                        &--txt{
+                            margin-left: 0.7rem;
+                        }
+                    }
+                    svg{
+                        path {
+                            fill: white
+                        }
+                    }
+                }
+            }
+            &.two-column{
+                padding: 1rem;
+                .column{
+                    &:nth-child(1){
+                        background-color: #2B343D;
+                        color: white;
+                        border-top-left-radius: 0.5rem;
+                        border-bottom-left-radius: 0.5rem;
+                    }
+                }
+                .panel{
+                    &.left{
+                       .block-bar{
+                            left: -5.3rem;
+                       }
+                    }
+                    &.right{
+                       .block-bar{
+                            right: -4.3rem;
+                       }
+                    }
+                }
+            }
+            &.one-column{
+                padding: 0;
+                .column{
+                    padding: 2rem 3rem;
+                }
+                .panel{
+                    &.left{
+                       .block-bar{
+                            left: -4.3rem;
+                       }
+                    }
+                }
+            }
+            .divider{
+                width: 0.5rem;
+                background: red;
+            }
+        }
+
+        &.functional{
+            .profile{
+                &-detail{
+                    width: 100%;
+                    background-color: #2B343D;
+                    padding: 1rem;
+                    color: white;
+                    float: none;
+                    height: 13rem;
+                    margin-bottom: 2rem;
+                }
+                &-avatar{
+                    margin-bottom: 2rem;
+                    border: 2px solid black;
+                    position: relative;
+                    left: 0;
+                    transform: none;
+                    &-block{
+                        margin: 0;
+                    }
+                }
+                &-social{
+                    &__wrapper{
+                        background-color: transparent;
+                        color: #2B343D;
+                        padding: 0;
+                    }
+                    &__row{
+                        width: 100%;
+                        &--txt{
+                            margin-left: 0.7rem;
+                        }
+                    }
+                    svg{
+                        path {
+                            fill: inherit
+                        }
+                    }
+                }
+            }
+            &.two-column{
+                padding-right: 0;
+                padding-left: 0;
+                .column{
+                    &:nth-child(1){
+                        background-color: inherit;
+                        color: inherit;
+                        padding-right: 1rem;
+                    }
+                    &:nth-child(2){
+                        padding-left: 1rem;
+                        padding-right: 0;
+                    }
+                    .panel{
+                        padding-right: 2rem;
+                        &.left{
+                           .block-bar{
+                                left: -4.3rem;
+                           }
+                        }
+                        &.right{
+                           .block-bar{
+                                right: -3.3rem;
+                           }
+                        }
                     }
                 }
             }

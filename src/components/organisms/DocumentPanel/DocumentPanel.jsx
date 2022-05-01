@@ -4,8 +4,11 @@ import { getContent } from '../../../service/contentService';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
 import Panel from '../Panel/Panel';
 import Profile from '../Profile/Profile';
-import { template } from '../../../constants/Template';
+import { template, template_type } from '../../../constants/Template';
 import './DocumentPanel.scss';
+import ProfileAvatar from '../../molecules/ProfileAvatar/ProfileAvatar';
+import ProfileInfo from '../../molecules/ProfileInfo/ProfileInfo';
+import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
 
 const DocumentPanel = (props) => {
     const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, setCurrentTemplateType} = props;
@@ -145,7 +148,7 @@ const DocumentPanel = (props) => {
                         }
                     }
 
-                    if(i >= pages.length - 1 && pages[pageIndex].columns.length == 2)
+                    if(i >= pages.length - 1 && pages[pageIndex].columns.length === 2)
                     {
                         pages.push(
                             {
@@ -357,7 +360,7 @@ const DocumentPanel = (props) => {
     
     const getColumnType = () => {
         const columnType = template[currentTemplateType]
-        if(columnType.columns == 2){
+        if(columnType.columns === 2){
             return "two-column"
         }
         else return "one-column"
@@ -381,7 +384,6 @@ const DocumentPanel = (props) => {
             console.log('+++++++++++page has changed++++++++++')
             //re-check two column of each page
             checkToMoveContent(0, 0)
-            console.log(pages.columns)
             if(pages.columns && pages.columns.length > 1){
             checkToMoveContent(0, 1)
             }
@@ -421,12 +423,134 @@ const DocumentPanel = (props) => {
                 />
     }
 
+    function renderDocumentHeader() {
+        if(currentTemplateType !== template_type.minimalist
+            && currentTemplateType !== template_type.skilled_based
+            && currentTemplateType !== template_type.functional){
+            return(
+                <Profile
+                    currentTemplateType={currentTemplateType}
+                    getColumnType={getColumnType}
+                />
+            )
+        }
+        else if(currentTemplateType === template_type.minimalist
+            || currentTemplateType === template_type.skilled_based
+            || currentTemplateType === template_type.functional){
+            if(pages[0].columns.length === 1){
+                return(
+                    <Profile
+                        currentTemplateType={currentTemplateType}
+                        getColumnType={getColumnType}
+                    />
+                )
+            }
+        }
+    }
+
+    function renderSpecialHeader(pageIndex, columnIndex){
+        if(currentTemplateType === template_type.minimalist){
+            if(columnIndex === 0){
+                return (
+                    <React.Fragment>
+                        {(pageIndex === 0 && pages[0].columns.length > 1) && 
+                        (
+                            <div className='profile-avatar-block'>
+                                <ProfileAvatar />
+                            </div>
+                        )}
+                        <div className='divider'>
+                            <div className='divider-wrapper'>
+                                <div className="divider-diamond top"></div>
+                                <div className="divider-diamond bottom"></div>
+                            </div>
+                        </div>
+                    </React.Fragment>
+                )
+            }
+            else if(columnIndex === 1){
+                return (
+                    <React.Fragment>
+                        {(pageIndex === 0 && (
+                            <ProfileInfo />
+                        ))}
+
+                        {(pageIndex === 0 && (
+                            <ProfileSocial 
+                                getColumnType={getColumnType}
+                            />
+                        ))}
+                    </React.Fragment>
+                )
+            }
+        }
+        else if(currentTemplateType === template_type.skilled_based){
+            if(columnIndex === 0){
+                return (
+                    <React.Fragment>
+                        {(pageIndex === 0 && pages[0].columns.length > 1) && 
+                        (
+                            <div className='profile-avatar-block'>
+                                <ProfileAvatar />
+                            </div>
+                        )}
+                        <div className='divider'>
+                            <div className='divider-wrapper'></div>
+                        </div>
+                    </React.Fragment>
+                )
+            }
+            else if(columnIndex === 1){
+                return (
+                    <React.Fragment>
+                        {(pageIndex === 0 && (
+                            <ProfileInfo />
+                        ))}
+                        
+                        {(pageIndex === 0 && (
+                            <ProfileSocial 
+                                getColumnType={getColumnType}
+                            />
+                        ))}
+                    </React.Fragment>
+                )
+            }
+        }
+        else if(currentTemplateType === template_type.functional){
+            if(columnIndex === 0){
+                return (
+                    <React.Fragment>
+                        {(pageIndex === 0 && pages[0].columns.length > 1) && 
+                        (
+                            <div className='profile-avatar-block'>
+                                <ProfileAvatar />
+                            </div>
+                        )}
+                        
+                        {(pageIndex === 0  && pages[0].columns.length > 1) && 
+                        (
+                            <ProfileSocial 
+                                getColumnType={getColumnType}
+                            />
+                        )}
+                    </React.Fragment>
+                )
+            }
+            else if(columnIndex === 1){
+                return (
+                    <React.Fragment>
+                        {(pageIndex === 0 && (
+                            <ProfileInfo />
+                        ))}
+                    </React.Fragment>
+                )
+            }
+        }
+    }
+
     return(
         <div className="document">
-            <Profile
-                currentTemplateType={currentTemplateType}
-                getColumnType={getColumnType}
-            />
+            {renderDocumentHeader()}
             {pages && pages.map((page, pageIndex) => (
                 <div key={pageIndex} 
                      ref={el => panelsRef.current[pageIndex] = el}
@@ -434,6 +558,7 @@ const DocumentPanel = (props) => {
                      >
                         {page && page.columns.map((column, columnIndex) => (
                            <div key={columnIndex} className='column'>
+                               {renderSpecialHeader(pageIndex, columnIndex)}
                                <Panel 
                                     pageIndex={pageIndex}
                                     externalClassName={(page.columns.length > 1 && columnIndex === 0) ? " left": (page.columns.length === 1 && columnIndex === 0) ? " left": " right"}

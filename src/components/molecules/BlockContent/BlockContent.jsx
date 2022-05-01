@@ -17,8 +17,12 @@ const BlockContent = ({isVisible, onCreateNewContent, onClick, children}) => {
                         icon={AddIcon} 
                         onClick={onCreateNewContent}
                     />
-                    <div className="block-content-bottom-line"></div>
-                    <div className="block-content-bottom-small-circle"></div>
+                    <div className='block-content-bottom-box line'>
+                        <div className="block-content-bottom-line"></div>
+                    </div>
+                    <div className='block-content-bottom-box circle'>
+                        <div className="block-content-bottom-small-circle"></div>
+                    </div>
                 </div>
             )}
         </div>

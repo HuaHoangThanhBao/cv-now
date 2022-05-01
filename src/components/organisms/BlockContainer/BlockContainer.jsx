@@ -49,7 +49,7 @@ const BlockContainer = (props) => {
     }
 
     return(
-        <div className={"block block-education" + (getChildSpecialdIndex(childId) % 2 == 0 ? " odd": " even")} ref={myRef}>
+        <div className={"block block-education" + (getChildSpecialdIndex(childId) % 2 === 0 ? " odd": " even")} ref={myRef}>
            <BlockHeader 
                 title={title}
                 handleBlockHeader={setBlockHeaderStatus}

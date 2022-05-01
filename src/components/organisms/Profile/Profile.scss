@@ -60,9 +60,9 @@
         font-size: 1rem;
     }
     &-avatar{
-        width: 10rem;
-        height: 10rem;
-        max-height: 10rem;
+        width: 13rem;
+        height: 13rem;
+        max-height: 13rem;
         background-color: white;
         border-radius: 50%;
         &-container{
@@ -174,10 +174,9 @@
     }
 
     &.functional{
-        padding-top: 2rem;
         .profile{
             &-info{
-                height: 10rem;
+                height: 13rem;
             }
             &-detail{
                 width: calc(100% - 15rem);
@@ -198,6 +197,7 @@
     
     /*skilled_based teamplate*/
     &.skilled_based{
+        padding: 2rem 3rem 0 3rem;
         .profile{
             &-info{
                 &::after{
@@ -330,7 +330,7 @@
         }
     }
 
-    &.basic, &.executive, &.simple{
+    &.basic, &.executive, &.simple, &.minimalist{
         padding: 0;
         .profile{
             &-info{
@@ -379,11 +379,20 @@
         }
     }
     
-    &.executive{
+    &.executive, &.minimalist{
         .profile{
             &-social{
+                margin-top: 0;
                 border: none;
                 background-color: #EBEBEB;
+            }
+        }
+    }
+
+    &.minimalist{
+        .profile{
+            &-social{
+                background-color: inherit;
             }
         }
     }
