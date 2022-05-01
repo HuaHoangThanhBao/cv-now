@@ -1,0 +1,45 @@
+.preview{
+    width: 270px;
+    height: 270px;
+    padding: 0.25rem;
+    float: left;
+    margin: 2rem;
+    position: relative;
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    &:hover{
+        border: 2px solid #00c8aa;
+    }
+    &-container{
+        &::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+    }
+    &-box{
+        transform: scale(0.217);
+        position: absolute;
+        left: -6.3rem;
+        right: 0;
+        top: -6.3rem;
+        height: 100%;
+        width: 100%;
+        &-wrapper{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: 0.25rem;
+        }
+    }
+    &-overlay{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
+        cursor: pointer;
+    }
+}
