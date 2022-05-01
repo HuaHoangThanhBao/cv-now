@@ -96,20 +96,26 @@ function DragNDrop(props) {
     const getNoNeedItemStyles = (noNeedItem) => {
         if(dragItem.current && dragging){
             const currentDragItem = list[dragItem.current.pageIndex].columns[dragItem.current.columnIndex].child[dragItem.current.childIndex];
-            return dragging && currentDragItem.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+            if(currentDragItem){
+                return dragging && currentDragItem.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+            }
         }
         else if(dragNoNeedItem.current){
+            if(rootDragNoNeedItem.current){
                 const {noNeedIndex} = rootDragNoNeedItem.current
                 const currentNoNeedDragging = noNeedList[noNeedIndex]
-                if(noNeedDraggingOver){
-                    return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+                if(currentNoNeedDragging){
+                    if(noNeedDraggingOver){
+                        return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+                    }
+                    else if(noNeedDragging){
+                        return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+                    }
+                    else if(!noNeedDragging){
+                        return noNeedDragging ? 'drag-no-need-item current': 'drag-no-need-item unactive'
+                    }
                 }
-                else if(noNeedDragging){
-                    return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
-                }
-                else if(!noNeedDragging){
-                    return noNeedDragging ? 'drag-no-need-item current': 'drag-no-need-item unactive'
-                }
+            }
         }
         else {
             return 'drag-no-need-item'

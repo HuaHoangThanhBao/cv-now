@@ -148,7 +148,7 @@ const DocumentPanel = (props) => {
                         }
                     }
 
-                    if(i >= pages.length - 1 && pages[pageIndex].columns.length === 2)
+                    if(i >= pages.length - 1 && pages[0].columns.length === 2)
                     {
                         pages.push(
                             {
@@ -163,7 +163,7 @@ const DocumentPanel = (props) => {
                             }
                         )
                     }
-                    else{
+                    else if(i >= pages.length - 1 && pages[0].columns.length < 2){
                         pages.push(
                             {
                                 columns: [
@@ -244,7 +244,7 @@ const DocumentPanel = (props) => {
             //we check another column still have data: if not we delete both, otherwise we keep the page
             const switchColumn = columnIndex === 0 ? 1: 0;
             if(pages[i].columns[columnIndex].child.length === 0 && pages[i].columns[switchColumn].child.length === 0){
-                pages.pop()
+                pages.splice(i, 1)
             }
         }
 
