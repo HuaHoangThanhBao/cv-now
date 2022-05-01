@@ -93,21 +93,22 @@
     
     /*Cominbed Template*/
     &.combined{
-        padding-bottom: 0;
+        padding: 1rem 1rem 0 1rem;
         .profile{
             &-wrapper{
                 display: flex;
             }
             &-info{
+                width: 60%;
                 padding: 2rem;
                 background-color: #2B343D;
                 color: white;
                 border-radius: 0.5rem;
+                position: relative;
             }
             &-avatar{
                 position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
+                right: -5rem;
                 &-container{
                     &::before{
                         border: 1px solid #2B343D;
@@ -115,6 +116,8 @@
                 }
             }
             &-social{
+                width: 40%;
+                padding-left: 5rem;
                 &__row{
                     justify-content: flex-end;
                     padding-bottom: 0.5rem;
@@ -249,15 +252,31 @@
     /*end skilled_based teamplate*/
 
     &.tech{
+        padding: 0;
         .profile{
+            &-wrapper{
+                display: flex;
+                padding: 1rem 1rem 0 2rem;
+            }
             &-info{
-                width: calc(75% - 0.25rem);
+                width: 65%;
                 padding: 2rem;
                 background-color: #EBEBEB;
                 color: #2B343D;
-                border-top-left-radius: 1rem;
-                border-bottom-left-radius: 1rem;
-                margin-right: 0.5rem;
+                border-top-left-radius: 0.5rem;
+                border-bottom-left-radius: 0.5rem;
+                border-bottom-right-radius: 0.5rem;
+                position: relative;
+                &::before{
+                   content: '';
+                   position: absolute;
+                   height: 100%;
+                   width: 1rem;
+                   background-color: #2B343D;
+                   left: -1.5rem;
+                   border-radius: 1rem;
+                   top: 0;
+                }
             }
             &-avatar{
                 float: left;
@@ -269,11 +288,13 @@
                 }
             }
             &-social{
-                width: calc(25% - 0.25rem);
+                width: calc(35% - 0.7rem);
                 background-color: #2B343D;
                 color: white;
-                border-top-right-radius: 1rem;
-                border-bottom-right-radius: 1rem;
+                border-top-right-radius: 0.5rem;
+                border-bottom-right-radius: 0.5rem;
+                border-bottom-left-radius: 0.5rem;
+                margin-left: 0.7rem;
                 &__wrapper{
                     padding-top: 2rem;
                     padding-bottom: 1rem;
@@ -309,11 +330,11 @@
         }
     }
 
-    &.basic, &.executive{
+    &.basic, &.executive, &.simple{
         padding: 0;
         .profile{
             &-info{
-                padding: 1rem 3rem;
+                padding: 2rem 3rem;
                 &::after{
                     content: '';
                     display: block;
@@ -334,7 +355,6 @@
             }
             &-social{
                 padding: 1rem 3rem;
-                margin-top: 2rem;
                 border-top: 2px solid #2B343D;
                 border-bottom: 2px solid #2B343D;
                 &__wrapper{
@@ -369,51 +389,12 @@
     }
 
     &.simple{
-        padding: 0;
         .profile{
-            &-info{
-                padding: 1rem 3rem;
-                &::after{
-                    content: '';
-                    display: block;
-                    clear: left;
-                }
-            }
-            &-heading{
-                padding-top: 1rem;
-            }
-            &-avatar{
-                float: left;
-                margin-right: 2rem;
-                &-container{
-                    &::before{
-                        border: 2px solid #2B343D;
-                    }
-                }
-            }
             &-social{
+                border: none;
                 padding: 1rem 3rem;
-                margin-top: 2rem;
                 background-color: #2B343D;
                 color: white;
-                &__wrapper{
-                    padding-bottom: 0.5rem;
-                }
-                &__row{
-                    width: 25%;
-                    float: left;
-                    flex-direction: row-reverse;
-                    justify-content: flex-end;
-                    padding-top: 0.5rem;
-                    &--txt{
-                        margin-left: 0.7rem;
-                    }
-                }
-                &::after{
-                    content: '';
-                    display: block;
-                    clear: left;
-                }
                 svg{
                     path {
                         fill: white
@@ -451,7 +432,7 @@
                 }
             }
             &-social{
-                padding: 2rem 3rem;
+                padding: 2rem 3rem 2rem 5rem;
                 &__row{
                     justify-content: flex-end;
                     padding-bottom: 0.5rem;
@@ -471,17 +452,41 @@
         }
     }
 
-    &.modern, &.it{
+    // &.modern, &.it{
+    //     border: none;
+    //     &::before{
+    //         content: none;
+    //     }
+    //     .profile{
+    //         &-info{
+    //             width: calc(75% - 0.25rem);
+    //         }
+    //         &-social{
+    //             width: calc(25% - 0.25rem);
+    //         }
+    //         &-avatar{
+    //             position: relative;
+    //             left: 0;
+    //             transform: none;
+    //             float: left;
+    //             margin-right: 2rem;
+    //             &-container{
+    //                 &::before{
+    //                     border: 2px solid #2B343D;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    &.it, &.modern{
         border: none;
         &::before{
             content: none;
         }
         .profile{
             &-info{
-                width: calc(75% - 0.25rem);
-            }
-            &-social{
-                width: calc(25% - 0.25rem);
+                width: 70%;
             }
             &-avatar{
                 position: relative;
@@ -494,14 +499,6 @@
                         border: 2px solid #2B343D;
                     }
                 }
-            }
-        }
-    }
-
-    &.it{
-        .profile{
-            &-info{
-                width: 70%;
             }
             &-social{
                 width: 30%;
@@ -532,6 +529,25 @@
                             left: 50%;
                             transform: translate(-50%, -50%);
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    &.modern{
+        .profile{
+            &-social{
+                padding: 2rem 3rem 0 0;
+                &__wrapper{
+                    padding: 0;
+                    background-color: inherit;
+                    color: #2B343D;
+                }
+                &__row{
+                    flex-direction: row;
+                    &--txt{
+                        text-align: right;
                     }
                 }
             }

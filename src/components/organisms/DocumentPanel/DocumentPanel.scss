@@ -12,11 +12,18 @@
             &:nth-child(1){
               width: 50%;
               padding: 2rem 2rem 0 2rem;
+              float: left;
             }
             &:nth-child(2){
               width: 50%;
               padding: 2rem 2rem 0 1rem;
+              float: left;
             }
+        }
+        &::after{
+            content: '';
+            display: block;
+            clear: both;
         }
 
         &.one-column{
@@ -27,16 +34,22 @@
 
         /*combined*/
         &.combined{
-            padding-top: 0;
+            padding: 0 1rem 1rem 1rem;
             &.new.two-column{
                 .column:nth-child(2){
                     margin-top: 2rem;
                 }
             }
             &.two-column{
-                .column:nth-child(2){
-                    background-color: #EBEBEB;
-                    border-radius: 0.5rem;
+                .column{
+                    &:nth-child(1){
+                        width: 60%;
+                    }
+                    &:nth-child(2){
+                        width: 40%;
+                        background-color: #EBEBEB;
+                        border-radius: 0.5rem;
+                    }
                 }
             }
             &.one-column{
@@ -46,7 +59,7 @@
                         &::before{
                             content: "";
                             position: absolute;
-                            width: calc(100% + 5rem);
+                            width: calc(100% + 4rem);
                             height: 100%;
                             background-color: #EBEBEB;
                             z-index: 0;
@@ -57,24 +70,12 @@
                     }
                 }
             }
-            .panel{
-                &.left{
-                   .block-bar{
-                        left: -5.3rem;
-                   }
-                }
-                &.right{
-                   .block-bar{
-                        right: -5.3rem;
-                   }
-                }
-            }
         }
         /*end combined*/
 
 
         /*it*/
-        &.it{
+        &.it, &.tech, &.modern{
             padding: 2rem 0;
             &.two-column{
                 .column{
@@ -104,5 +105,88 @@
             }
         }
         /*end it*/
+
+        &.tech, &.basic{
+            padding: 0.7rem 1rem 1rem 2rem;
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        width: 65%;
+                        padding: 2rem;
+                    }
+                    &:nth-child(2){
+                        width: calc(35% - 0.7rem);
+                        background-color: #EBEBEB;
+                        color: #2B343D;
+                        margin-left: 0.7rem;
+                    }
+                }
+            }
+            &.one-column{
+                .column{
+                    &:nth-child(1){
+                        width: 100%;
+                        padding: 2rem;
+                    }
+                }
+            }
+            .panel{
+                &.left{
+                   .block-bar{
+                        left: -5.3rem;
+                   }
+                }
+            }
+        }
+
+        &.basic, &.executive, &.modern, &.professional, &.colleage, &.simple{
+            padding: 2rem;
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        width: 55%;
+                        padding: 0 2rem 0 1rem;
+                    }
+                    &:nth-child(2){
+                        width: 45%;
+                        padding: 0 0 0 2rem;
+                        margin-left: 0;
+                        background-color: inherit;
+                    }
+                }
+            }
+            &.one-column{
+                .column{
+                    &:nth-child(1){
+                        width: 100%;
+                        padding: 0 2rem 0 1rem;
+                    }
+                }
+            }
+            .panel{
+                &.left{
+                   .block-bar{
+                        left: -4.3rem;
+                   }
+                }
+                &.right{
+                   .block-bar{
+                        left: -2.3rem;
+                   }
+                }
+            }
+        }
+
+        &.modern, &.professional, &.colleage, &.simple{
+            padding: 2rem 3rem 2rem 2rem;
+            &.two-column{
+                .column{
+                    &:nth-child(2){
+                        background-color: inherit;
+                        color: #2B343D;
+                    }
+                }
+            }
+        }
     }
 }

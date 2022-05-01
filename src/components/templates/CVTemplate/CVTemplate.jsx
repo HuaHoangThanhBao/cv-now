@@ -12,7 +12,7 @@ import { template_type } from '../../../constants/Template';
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
-    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.it)
+    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.combined)
     return(
         <div className="cv-template">
             <MainMenu />
