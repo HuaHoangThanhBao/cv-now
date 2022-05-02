@@ -132,7 +132,7 @@ const DocumentPanel = (props) => {
                 }
             }
             if(currentTemplateType === template_type.minimalist || template_type.skilled_based){
-                if(i == 0){
+                if(i === 0){
                     if(pages[0].columns.length === 2){
                         if(columnIndex === 0){
                             sum = profileAvatarRef.current.offsetHeight
@@ -171,9 +171,7 @@ const DocumentPanel = (props) => {
                         })
                     })
 
-                    if(index > 0) {
-                        sumPanelHeight += headerHeight + itemsHeight + blockMarginTop
-                    }
+                    if(index > 0) sumPanelHeight += headerHeight + itemsHeight + blockMarginTop
                     else sumPanelHeight += headerHeight + itemsHeight
                 })
 
@@ -480,6 +478,7 @@ const DocumentPanel = (props) => {
                     moveContentDown={moveContentDown}
                     moveContentUp={moveContentUp}
                     getChildSpecialdIndex={getChildSpecialdIndex}
+                    currentTemplateType={currentTemplateType}
                 />
     }
 

@@ -461,33 +461,6 @@
         }
     }
 
-    // &.modern, &.it{
-    //     border: none;
-    //     &::before{
-    //         content: none;
-    //     }
-    //     .profile{
-    //         &-info{
-    //             width: calc(75% - 0.25rem);
-    //         }
-    //         &-social{
-    //             width: calc(25% - 0.25rem);
-    //         }
-    //         &-avatar{
-    //             position: relative;
-    //             left: 0;
-    //             transform: none;
-    //             float: left;
-    //             margin-right: 2rem;
-    //             &-container{
-    //                 &::before{
-    //                     border: 2px solid #2B343D;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
     &.it, &.modern{
         border: none;
         &::before{

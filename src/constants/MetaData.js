@@ -276,7 +276,126 @@ export const MetaData = [
           },
         ],
       },
-      
+      {
+        child: [
+          {
+            id: 11,
+            header: "SUPPORTED CAUSE",
+            blockType: 8,
+            height: 0,
+            data: [
+              [
+                { content_detail: "Cause", status: false, height: 0 },
+              ],
+            ],
+          },
+          {
+            id: 12,
+            header: "LANGUAGES",
+            blockType: 6,
+            height: 0,
+            data: [
+              [
+                { title: "Language Name", status: false, height: 0 },
+                {
+                  content_detail_dashed: "Description",
+                  status: false,
+                  height: 0,
+                },
+              ],
+            ],
+          },
+          {
+            id: 13,
+            header: "PUBLICATIONS",
+            blockType: 7,
+            height: 0,
+            data: [
+              [
+                { title: "Publication Title", status: false, height: 0 },
+                { desc: "Publication Type", status: false, height: 0 },
+                {
+                  optional_dashed: "Author(s)",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  optional_dashed2: "List of Authors",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  content_detail: "Date of Publication",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  optional_dashed3: "Publisher/Issue/Pages, etc.",
+                  status: false,
+                  height: 0,
+                },
+                {
+                  optional_dashed4: "Description",
+                  status: false,
+                  height: 0,
+                },
+              ],
+            ],
+          },
+          {
+            id: 14,
+            header: "SKILLS",
+            blockType: 8,
+            height: 0,
+            data: [
+              [
+                { content_detail: "Skill name", status: false, height: 0 },
+              ],
+            ],
+          },
+          {
+            id: 15,
+            header: "INTERESTS",
+            blockType: 8,
+            height: 0,
+            data: [
+              [
+                { content_detail: "Interest", status: false, height: 0 },
+              ],
+            ],
+          },
+          {
+            id: 16,
+            header: "SOFT SKILLS",
+            blockType: 8,
+            height: 0,
+            data: [
+              [
+                { content_detail: "Soft skill", status: false, height: 0 },
+              ],
+            ],
+          },
+          {
+            id: 17,
+            header: "REFERENCES",
+            blockType: 9,
+            height: 0,
+            data: [
+              [
+                { title: "Name and Position", status: false, height: 0 },
+                {
+                  optional_dashed: "“Reference”",
+                  status: false,
+                  height: 0,
+                },
+                { contact: "Contact:", status: false, height: 0 },
+                { contact_person: "Contact Person", status: false, height: 0 },
+                { contact_info: "Contact Info", status: false, height: 0 },
+              ],
+            ],
+          },
+        ],
+      },
     ],
   },
 ];

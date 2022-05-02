@@ -31,7 +31,8 @@ const BlockContainer = (props) => {
         moveContentDown,
         moveContentUp,
         updateFieldHeight,
-        getChildSpecialdIndex
+        getChildSpecialdIndex,
+        currentTemplateType
     } = props;
 
     const myRef = useRef();
@@ -49,57 +50,60 @@ const BlockContainer = (props) => {
     }
 
     return(
-        <div className={"block block-education" + (getChildSpecialdIndex(childId) % 2 === 0 ? " odd": " even")} ref={myRef}>
-           <BlockHeader 
-                title={title}
-                handleBlockHeader={setBlockHeaderStatus}
-                handleOutsideClick={handleOutsideClick}
-                updateFieldData={updateFieldData}
-                pageIndex={pageIndex}
-                columnIndex={columnIndex}
-                childIndex={childIndex}
-                updateFieldHeight={updateFieldHeight}
-            >
-                <BlockBar 
-                    childIndex={childIndex}
+        <div className={"block" + (getChildSpecialdIndex(childId) % 2 === 0 ? " odd": " even")} ref={myRef}>
+            <div className="block-wrapper">
+                <BlockHeader 
+                    title={title}
+                    handleBlockHeader={setBlockHeaderStatus}
+                    handleOutsideClick={handleOutsideClick}
+                    updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
-                    isVisible={blockHeaderStatus}
-                    onRemoveBlock={() => {
-                        setBlockHeaderStatus(false)
-                        removeBlock(pageIndex, columnIndex, childIndex, setBlockHeaderStatus)
-                    }}
-                    moveBlockUp={() => {
-                        setBlockHeaderStatus(false)
-                        moveBlockUp(pageIndex, columnIndex, childIndex, contentRef, parentRef)
-                    }}
-                    moveBlockDown={() => {
-                        setBlockHeaderStatus(false)
-                        moveBlockDown(pageIndex, columnIndex, childIndex, contentRef, parentRef)
-                    }}
-                />
-            </BlockHeader>
-           <div className='block-content-wrapper' ref={contentRef}>
-                {data && data.map((item, index) => (
-                    <BlockContent 
-                        isVisible={isVisible} 
-                        key={pageIndex + childIndex + columnIndex + index} 
-                        onClick={() => handleBlockContentStatus(true)}
-                        onCreateNewContent={() => createNewContent(pageIndex, columnIndex, childId, childIndex, index)}
-                    >
-                        {getBlockContent(blockType, index)}
-                        
-                        <BlockContentBar 
-                            isVisible={isVisible}
-                            dataLength={data.length}
-                            currentIndex={index}
+                    columnIndex={columnIndex}
+                    childIndex={childIndex}
+                    updateFieldHeight={updateFieldHeight}
+                    currentTemplateType={currentTemplateType}
+                >
+                    <BlockBar 
+                        childIndex={childIndex}
+                        pageIndex={pageIndex}
+                        isVisible={blockHeaderStatus}
+                        onRemoveBlock={() => {
+                            setBlockHeaderStatus(false)
+                            removeBlock(pageIndex, columnIndex, childIndex, setBlockHeaderStatus)
+                        }}
+                        moveBlockUp={() => {
+                            setBlockHeaderStatus(false)
+                            moveBlockUp(pageIndex, columnIndex, childIndex, contentRef, parentRef)
+                        }}
+                        moveBlockDown={() => {
+                            setBlockHeaderStatus(false)
+                            moveBlockDown(pageIndex, columnIndex, childIndex, contentRef, parentRef)
+                        }}
+                    />
+                </BlockHeader>
+                <div className='block-content-wrapper' ref={contentRef}>
+                    {data && data.map((item, index) => (
+                        <BlockContent 
+                            isVisible={isVisible} 
+                            key={pageIndex + childIndex + columnIndex + index} 
+                            onClick={() => handleBlockContentStatus(true)}
                             onCreateNewContent={() => createNewContent(pageIndex, columnIndex, childId, childIndex, index)}
-                            onRemoveContent={() => removeContent(pageIndex, columnIndex, childId, childIndex, index)}
-                            onMoveContentDown={() => moveContentDown(pageIndex, columnIndex, childId, childIndex, index)}
-                            onMoveContentUp={() => moveContentUp(pageIndex, columnIndex, childId, childIndex, index)}
-                        />
-                    </BlockContent>
-                ))}
-           </div>
+                        >
+                            {getBlockContent(blockType, index)}
+
+                            <BlockContentBar 
+                                isVisible={isVisible}
+                                dataLength={data.length}
+                                currentIndex={index}
+                                onCreateNewContent={() => createNewContent(pageIndex, columnIndex, childId, childIndex, index)}
+                                onRemoveContent={() => removeContent(pageIndex, columnIndex, childId, childIndex, index)}
+                                onMoveContentDown={() => moveContentDown(pageIndex, columnIndex, childId, childIndex, index)}
+                                onMoveContentUp={() => moveContentUp(pageIndex, columnIndex, childId, childIndex, index)}
+                            />
+                        </BlockContent>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
