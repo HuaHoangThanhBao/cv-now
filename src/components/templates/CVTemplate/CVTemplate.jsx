@@ -13,7 +13,7 @@ import PreviewContainer from '../../organisms/PreviewContainer/PreviewContainer'
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
-    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.functional)
+    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.skilled_based)
     const [isShowPreviewList, setIsShowReviewList] = useState(false)
     return(
         <div className="cv-template">

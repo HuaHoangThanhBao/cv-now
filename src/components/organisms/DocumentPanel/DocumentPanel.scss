@@ -30,11 +30,31 @@
             .column{
                 width: 100%;
             }
+            .block{
+                &-content-wrapper{
+                    &::after{
+                        content: '';
+                        display: block;
+                        clear: both;
+                    }
+                }
+                &-content{
+                    width: calc(50% - 1rem);
+                    float: left;
+                    &:nth-child(even){
+                        margin-left: 2rem;
+                        .block-bar{
+                            right: -4.3rem !important;
+                            left: auto !important;
+                        }
+                    }
+                }
+            }
         }
 
         /*combined*/
         &.combined{
-            padding: 0 1rem 1rem 1rem;
+            padding: 0 1rem 2rem 1rem;
             &.new.two-column{
                 .column:nth-child(2){
                     margin-top: 2rem;
@@ -56,16 +76,19 @@
                 .block{
                     position: relative;
                     &.even{
-                        &::before{
-                            content: "";
-                            position: absolute;
-                            width: calc(100% + 4rem);
-                            height: 100%;
-                            background-color: #EBEBEB;
-                            z-index: 0;
-                            margin-top: 1rem;
-                            margin-left: -2rem;
-                            border-radius: 0.5rem;
+                        .block-wrapper{
+                            position: relative;
+                            &::before{
+                                content: "";
+                                position: absolute;
+                                width: calc(100% + 4rem);
+                                height: 100%;
+                                background-color: #EBEBEB;
+                                z-index: 0;
+                                margin-top: 1rem;
+                                margin-left: -2rem;
+                                border-radius: 0.5rem;
+                            }
                         }
                     }
                 }
@@ -107,7 +130,7 @@
         /*end it*/
 
         &.tech, &.basic{
-            padding: 0.7rem 1rem 1rem 2rem;
+            padding: 2rem;
             &.two-column{
                 .column{
                     &:nth-child(1){
@@ -126,7 +149,7 @@
                 .column{
                     &:nth-child(1){
                         width: 100%;
-                        padding: 2rem;
+                        padding: 0 2rem;
                     }
                 }
             }
@@ -219,12 +242,12 @@
                 padding-left: 0;
                 .column{
                     &:nth-child(1){
-                        width: 30%;
+                        width: 33%;
                         position: relative;
                         padding: 2rem 3rem;
                     }
                     &:nth-child(2){
-                        width: 70%;
+                        width: 67%;
                         padding-left: 4rem;
                         padding-top: 2rem;
                         padding-bottom: 2rem;
@@ -352,7 +375,6 @@
                     margin-bottom: 2rem;
                 }
                 &-avatar{
-                    margin-bottom: 2rem;
                     border: 2px solid black;
                     position: relative;
                     left: 0;

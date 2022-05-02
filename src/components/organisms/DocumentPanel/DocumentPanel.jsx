@@ -12,6 +12,12 @@ import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
 
 const DocumentPanel = (props) => {
     const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, setCurrentTemplateType} = props;
+
+    const profileContainerRef = useRef();
+    const profileSocialRef = useRef();
+    const profileAvatarRef = useRef();
+    const profileInfoRef = useRef();
+
     const panelsRef = useRef([]);
 
     function useOnClickOutside(ref, handler) {
@@ -100,15 +106,61 @@ const DocumentPanel = (props) => {
         return sum
     }
 
+    const sumOfTemplate = (i, columnIndex) => {
+        let sum = 0;
+        if(currentTemplateType !== template_type.minimalist
+            && currentTemplateType !== template_type.skilled_based
+            && currentTemplateType !== template_type.functional){
+            if(i === 0){
+                sum = profileContainerRef.current.offsetHeight
+            }
+        }
+        else{
+            if(currentTemplateType === template_type.functional){
+                if(i === 0){
+                    if(pages[0].columns.length === 2){
+                        if(columnIndex === 0){
+                            sum = profileAvatarRef.current.offsetHeight + profileSocialRef.current.offsetHeight
+                        }
+                        else if(columnIndex === 1){
+                            sum = profileInfoRef.current.offsetHeight
+                        }
+                    }
+                    else {
+                        sum = profileContainerRef.current.offsetHeight
+                    }
+                }
+            }
+            if(currentTemplateType === template_type.minimalist || template_type.skilled_based){
+                if(i == 0){
+                    if(pages[0].columns.length === 2){
+                        if(columnIndex === 0){
+                            sum = profileAvatarRef.current.offsetHeight
+                        }
+                        else if(columnIndex === 1){
+                            sum = profileInfoRef.current.offsetHeight + profileSocialRef.current.offsetHeight
+                        }
+                    }
+                    else{
+                        sum = profileContainerRef.current.offsetHeight
+                    }
+                }
+            }
+        }
+        return sum
+    }
+
     const checkToMoveContent = (pageIndex, columnIndex, childIndex, setBlockHeaderStatus, isDeleted) => {
         console.log("start calculating......")
         console.log('pages:', pages)
 
-        const maxHeight = 1000
+        const maxHeight = 1700
+        const blockMarginTop = 80
         for(let i = 0; i < panelsRef.current.length; i++){
             if(pages[i])
             {
-                let sumPanelHeight = 0
+                let sumPanelHeight = sumOfTemplate(i, columnIndex)
+                
                 pages[i].columns[columnIndex].child.forEach((item, index) => {
                     let headerHeight = item.height
 
@@ -119,7 +171,10 @@ const DocumentPanel = (props) => {
                         })
                     })
 
-                    sumPanelHeight += headerHeight + itemsHeight
+                    if(index > 0) {
+                        sumPanelHeight += headerHeight + itemsHeight + blockMarginTop
+                    }
+                    else sumPanelHeight += headerHeight + itemsHeight
                 })
 
                 console.log('-------------------------------')
@@ -132,12 +187,15 @@ const DocumentPanel = (props) => {
                     // console.log(currentRowData)
 
                     let maximunIndex = 0
+                    let sumOfEachRow = sumOfTemplate(i, columnIndex)
 
-                    let sumOfEachRow = 0
                     for(let j = 0; j < currentRowDataLength; j++){
                         const headerHeight = currentRowData[j].height
                         const childHeights = sumOfChildData(currentRowData[j].data)
-                        sumOfEachRow += headerHeight + childHeights
+
+                        if(j > 0) sumOfEachRow += headerHeight + childHeights + blockMarginTop
+                        else sumOfEachRow += headerHeight + childHeights
+
                         console.log('header height: ' + headerHeight + ", at index: " + j + ", has child height: " + childHeights)
 
                         if(sumOfEachRow > maxHeight){
@@ -200,11 +258,14 @@ const DocumentPanel = (props) => {
                                 let nextRowData = pages[k + 1].columns[columnIndex].child
                                 const nextRowDataLength = nextRowData.length
                                 
-                                let sumOfCurrenthRow = 0
+                                let sumOfCurrenthRow = sumOfTemplate(k, columnIndex)
+
                                 for(let j = 0; j < currentRowDataLength; j++){
                                     const headerHeight = currentRowData[j].height
                                     const childHeights = sumOfChildData(currentRowData[j].data)
-                                    sumOfCurrenthRow += headerHeight + childHeights
+
+                                    if(j > 0) sumOfCurrenthRow += headerHeight + childHeights + blockMarginTop
+                                    else sumOfCurrenthRow += headerHeight + childHeights
                                 }
         
                                 console.log('<<<<<<total height of current page:', sumOfCurrenthRow)
@@ -217,7 +278,7 @@ const DocumentPanel = (props) => {
                                     const headerHeight = nextRowData[j].height
                                     const childHeights = sumOfChildData(nextRowData[j].data)
                                     
-                                    sumOfCurrenthRow += headerHeight + childHeights
+                                    sumOfCurrenthRow += headerHeight + childHeights + blockMarginTop
         
                                     if(sumOfCurrenthRow < maxHeight){
                                         const firstItemNextRowData = nextRowData[j]
@@ -242,7 +303,7 @@ const DocumentPanel = (props) => {
         let pagesLength = pages.length - 1
         for(let i = pagesLength; i >= 0; i--){
             //we check another column still have data: if not we delete both, otherwise we keep the page
-            const switchColumn = columnIndex === 0 ? 1: 0;
+            const switchColumn = columnIndex === 0 ? (pages[0].columns.length === 2) ? 1: 0: 0;
             if(pages[i].columns[columnIndex].child.length === 0 && pages[i].columns[switchColumn].child.length === 0){
                 pages.splice(i, 1)
             }
@@ -319,7 +380,6 @@ const DocumentPanel = (props) => {
         if(type === InputFieldType.header){
             if(pages[pageIndex].columns[columnIndex].child[childIndex]){
                 pages[pageIndex].columns[columnIndex].child[childIndex].height = height
-                setPages([...pages])
             }
         }
         else{
@@ -328,7 +388,6 @@ const DocumentPanel = (props) => {
                     const firstProperty = Object.keys(row)[0]
                     if(firstProperty === type){
                         row.height = height
-                        setPages([...pages])
                     }
                 })
             }
@@ -384,7 +443,7 @@ const DocumentPanel = (props) => {
             console.log('+++++++++++page has changed++++++++++')
             //re-check two column of each page
             checkToMoveContent(0, 0)
-            if(pages.columns && pages.columns.length > 1){
+            if(pages[0].columns && pages[0].columns.length > 1){
             checkToMoveContent(0, 1)
             }
             setIsReOrder(false)
@@ -428,10 +487,12 @@ const DocumentPanel = (props) => {
             && currentTemplateType !== template_type.skilled_based
             && currentTemplateType !== template_type.functional){
             return(
-                <Profile
-                    currentTemplateType={currentTemplateType}
-                    getColumnType={getColumnType}
-                />
+                <div ref={profileContainerRef}>
+                    <Profile
+                        currentTemplateType={currentTemplateType}
+                        getColumnType={getColumnType}
+                    />
+                </div>
             )
         }
         else if(currentTemplateType === template_type.minimalist
@@ -439,32 +500,40 @@ const DocumentPanel = (props) => {
             || currentTemplateType === template_type.functional){
             if(pages[0].columns.length === 1){
                 return(
-                    <Profile
-                        currentTemplateType={currentTemplateType}
-                        getColumnType={getColumnType}
-                    />
+                    <div ref={profileContainerRef}>
+                        <Profile
+                            currentTemplateType={currentTemplateType}
+                            getColumnType={getColumnType}
+                        />
+                    </div>
                 )
             }
         }
     }
 
     function renderSpecialHeader(pageIndex, columnIndex){
-        if(currentTemplateType === template_type.minimalist){
+        if(currentTemplateType === template_type.minimalist
+            || currentTemplateType === template_type.skilled_based){
             if(columnIndex === 0){
                 return (
                     <React.Fragment>
                         {(pageIndex === 0 && pages[0].columns.length > 1) && 
                         (
-                            <div className='profile-avatar-block'>
+                            <div className='profile-avatar-block' ref={profileAvatarRef}>
                                 <ProfileAvatar />
                             </div>
                         )}
-                        <div className='divider'>
-                            <div className='divider-wrapper'>
-                                <div className="divider-diamond top"></div>
-                                <div className="divider-diamond bottom"></div>
+                        
+                        {pages[0].columns.length === 2 && (
+                            <div className='divider'>
+                                {currentTemplateType === template_type.minimalist && (
+                                    <div className='divider-wrapper'>
+                                        <div className="divider-diamond top"></div>
+                                        <div className="divider-diamond bottom"></div>
+                                    </div>
+                                )}
                             </div>
-                        </div>
+                        )}
                     </React.Fragment>
                 )
             }
@@ -472,45 +541,17 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         {(pageIndex === 0 && (
-                            <ProfileInfo />
+                            <div className='profile-info-side' ref={profileInfoRef}>
+                                <ProfileInfo />
+                            </div>
                         ))}
 
                         {(pageIndex === 0 && (
-                            <ProfileSocial 
-                                getColumnType={getColumnType}
-                            />
-                        ))}
-                    </React.Fragment>
-                )
-            }
-        }
-        else if(currentTemplateType === template_type.skilled_based){
-            if(columnIndex === 0){
-                return (
-                    <React.Fragment>
-                        {(pageIndex === 0 && pages[0].columns.length > 1) && 
-                        (
-                            <div className='profile-avatar-block'>
-                                <ProfileAvatar />
+                            <div className='profile-social-side' ref={profileSocialRef}>
+                                <ProfileSocial 
+                                    getColumnType={getColumnType}
+                                />
                             </div>
-                        )}
-                        <div className='divider'>
-                            <div className='divider-wrapper'></div>
-                        </div>
-                    </React.Fragment>
-                )
-            }
-            else if(columnIndex === 1){
-                return (
-                    <React.Fragment>
-                        {(pageIndex === 0 && (
-                            <ProfileInfo />
-                        ))}
-                        
-                        {(pageIndex === 0 && (
-                            <ProfileSocial 
-                                getColumnType={getColumnType}
-                            />
                         ))}
                     </React.Fragment>
                 )
@@ -522,27 +563,29 @@ const DocumentPanel = (props) => {
                     <React.Fragment>
                         {(pageIndex === 0 && pages[0].columns.length > 1) && 
                         (
-                            <div className='profile-avatar-block'>
+                            <div className='profile-avatar-block' ref={profileAvatarRef}>
                                 <ProfileAvatar />
                             </div>
                         )}
                         
                         {(pageIndex === 0  && pages[0].columns.length > 1) && 
                         (
-                            <ProfileSocial 
-                                getColumnType={getColumnType}
-                            />
+                            <div className='profile-social-side' ref={profileSocialRef}>
+                                <ProfileSocial 
+                                    getColumnType={getColumnType}
+                                />
+                            </div>
                         )}
                     </React.Fragment>
                 )
             }
             else if(columnIndex === 1){
                 return (
-                    <React.Fragment>
+                    <div className='profile-info-side' ref={profileInfoRef}>
                         {(pageIndex === 0 && (
                             <ProfileInfo />
                         ))}
-                    </React.Fragment>
+                    </div>
                 )
             }
         }
