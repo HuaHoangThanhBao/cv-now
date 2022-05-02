@@ -278,6 +278,7 @@ const DocumentPanel = (props) => {
                                     const headerHeight = nextRowData[j].height
                                     const childHeights = sumOfChildData(nextRowData[j].data)
                                     
+                                    //we plus blockMarginTop here because we need to calculate the first child of next page is last item of old previous page
                                     sumOfCurrenthRow += headerHeight + childHeights + blockMarginTop
         
                                     if(sumOfCurrenthRow < maxHeight){
