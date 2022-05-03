@@ -11,6 +11,10 @@
         display: grid;
         width: 100%;
         grid-template-columns: 300px 300px;
+        &.one-column{
+            display: block;
+            width: 300px;
+        }
     }
     .dnd-group{
         background-color: #49505e;

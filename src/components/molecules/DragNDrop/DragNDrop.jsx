@@ -258,7 +258,7 @@ function DragNDrop(props) {
         return (                
             <div>
                 <div className='drag-wrapper'>
-                    <div className="drag-n-drop">
+                    <div className={`drag-n-drop ${list[0].columns.length === 1 ? 'one-column': ''}`}>
                         {list.map((page, pageIndex) => (
                             page.columns.map((column, columnIndex) => (
                                 <div key={columnIndex} 
