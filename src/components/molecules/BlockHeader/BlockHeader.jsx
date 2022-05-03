@@ -14,7 +14,9 @@ const BlockHeader = (props) => {
         <div className="block-header" ref={ref}>
             {props.children}
             <div className='block-header-container'>
-                {currentTemplateType === template_type.skilled_based && (
+                {(currentTemplateType === template_type.skilled_based ||
+                currentTemplateType === template_type.it) && 
+                (
                     <div className='block-header-process'>
                         <div></div>
                         <div></div>
