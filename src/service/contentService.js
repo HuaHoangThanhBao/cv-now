@@ -194,6 +194,8 @@ export const getContent = (childId) => {
                 { contact: "Contact:", status: false, height: 0 },
                 { contact_person: "Contact Person", status: false, height: 0 },
                 { contact_info: "Contact Info", status: false, height: 0 },
-            ]     
+            ]  
+        default:
+            return []   
     }
 }

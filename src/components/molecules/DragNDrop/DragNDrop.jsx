@@ -194,7 +194,7 @@ function DragNDrop(props) {
         }
     } 
 
-    const checkForExists = (currentDragItem) => {
+    const checkForExists = React.useCallback((currentDragItem) => {
         for(const [pageIndex, page] of list.entries()){
             for(const [columnIndex, column] of page.columns.entries()){
                 for(const [childIndex, child] of column.child.entries()){
@@ -211,12 +211,12 @@ function DragNDrop(props) {
             }
         }
         return {status: false}
-    }
+    }, [list, noNeedList])
 
-    const reOrderPages = () => {
+    const reOrderPages = React.useCallback(() => {
         setIsReOrder(true)
         setPages([...list])
-    }
+    }, [list, setIsReOrder, setPages])
 
     useEffect(() => {
         setList(data);
@@ -229,7 +229,7 @@ function DragNDrop(props) {
             dragItemNode.current = null;
             reOrderPages()
         }
-    }, [list, dragging])
+    }, [list, dragging, reOrderPages])
 
     useEffect(() => {
         if(!noNeedDragging && dragNoNeedItemNode.current !== null){
@@ -239,11 +239,10 @@ function DragNDrop(props) {
             if(rootDragNoNeedItem.current && !noNeedDraggingOver){
                 const {noNeedIndex} = rootDragNoNeedItem.current
                 const currentNoNeedDragging = noNeedList[noNeedIndex]
-                const {status, pageIndex, columnIndex, childIndex} = checkForExists(currentNoNeedDragging)
+                const {status} = checkForExists(currentNoNeedDragging)
                 //check if pages have no need item that we dragged into
                 if(status){
                     noNeedList.splice(noNeedIndex, 1)
-                    setNoNeedList([...noNeedList])
                 }
             }
 
@@ -253,7 +252,7 @@ function DragNDrop(props) {
             
             reOrderPages()
         }
-    }, [list, noNeedDragging])
+    }, [list, noNeedList, noNeedDragging, noNeedDraggingOver, checkForExists, reOrderPages])
 
     if (list) {
         return (                

@@ -37,7 +37,14 @@ const BlockHeader = (props) => {
                     updateFieldHeight={updateFieldHeight}
                 />
 
-                {(currentTemplateType !== template_type.combined && currentTemplateType !== template_type.skilled_based) &&
+                {(currentTemplateType !== template_type.combined && 
+                currentTemplateType !== template_type.skilled_based &&
+                currentTemplateType !== template_type.modern &&
+                currentTemplateType !== template_type.professional &&
+                currentTemplateType !== template_type.colleage &&
+                currentTemplateType !== template_type.simple &&
+                currentTemplateType !== template_type.basic &&
+                currentTemplateType !== template_type.executive) &&
                 (
                     <div className='divider-row'>
                         <div className='divider-row-wrapper'>

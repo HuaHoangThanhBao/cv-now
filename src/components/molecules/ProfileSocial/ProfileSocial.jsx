@@ -5,7 +5,7 @@ const ProfileSocial = (props) => {
     const {getColumnType} = props
     
     return (
-        <div className={"profile-social" + ` ${getColumnType()}`}>
+        <div className={`profile-social ${getColumnType()}`}>
             <div className="profile-social__wrapper">
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>

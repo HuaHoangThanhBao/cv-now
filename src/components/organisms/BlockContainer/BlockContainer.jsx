@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { template_type } from '../../../constants/Template';
 import BlockBar from '../../molecules/BlockBar/BlockBar';
 import BlockContent from '../../molecules/BlockContent/BlockContent';
 import BlockContentBar from '../../molecules/BlockContentBar/BlockContentBar';
@@ -22,7 +23,6 @@ const BlockContainer = (props) => {
         title,
         data,
         setMyBlockVisible,
-        myBlockVisible,
         getBlockContent,
         blockType,
         updateFieldData,
@@ -81,6 +81,15 @@ const BlockContainer = (props) => {
                         }}
                     />
                 </BlockHeader>
+
+                {(currentTemplateType === template_type.functional || 
+                currentTemplateType === template_type.modern) &&
+                (
+                    <div className="block-space">
+                        <hr />
+                    </div>
+                )}
+
                 <div className='block-content-wrapper' ref={contentRef}>
                     {data && data.map((item, index) => (
                         <BlockContent 

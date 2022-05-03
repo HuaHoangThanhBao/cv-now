@@ -5,7 +5,7 @@ const ProfileAvatar = (props) => {
     return (
         <div className='profile-avatar'>
             <div className='profile-avatar-container'>
-                <img src={Avatar}/>
+                <img src={Avatar} alt=''/>
             </div>
         </div>
     )

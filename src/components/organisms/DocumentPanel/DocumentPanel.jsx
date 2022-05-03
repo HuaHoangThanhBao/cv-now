@@ -11,7 +11,7 @@ import ProfileInfo from '../../molecules/ProfileInfo/ProfileInfo';
 import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
 
 const DocumentPanel = (props) => {
-    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, setCurrentTemplateType} = props;
+    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType} = props;
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
@@ -93,7 +93,7 @@ const DocumentPanel = (props) => {
 
     const removeBlock = (pageIndex, columnIndex, childIndex, setBlockHeaderStatus) => {
         pages[pageIndex].columns[columnIndex].child.splice(childIndex, 1)
-        checkToMoveContent(pageIndex, childIndex, setBlockHeaderStatus, true)
+        checkToMoveContent(pageIndex, columnIndex, childIndex, setBlockHeaderStatus, true)
     }
 
     const sumOfChildData = (childData) => {
@@ -597,7 +597,7 @@ const DocumentPanel = (props) => {
             {pages && pages.map((page, pageIndex) => (
                 <div key={pageIndex} 
                      ref={el => panelsRef.current[pageIndex] = el}
-                     className={"document-wrapper" + ` ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
+                     className={`document-wrapper ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
                      >
                         {page && page.columns.map((column, columnIndex) => (
                            <div key={columnIndex} className='column'>

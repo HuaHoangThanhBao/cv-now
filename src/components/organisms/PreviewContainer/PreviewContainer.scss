@@ -1,14 +1,17 @@
 .preview{
-    width: 270px;
-    height: 270px;
-    padding: 0.25rem;
     float: left;
     margin: 2rem;
-    position: relative;
-    border: 2px solid transparent;
-    border-radius: 0.5rem;
-    &:hover{
-        border: 2px solid #00c8aa;
+    &-selection{
+        width: 270px;
+        height: 270px;
+        padding: 0.25rem;
+        position: relative;
+        border: 2px solid transparent;
+        border-radius: 0.5rem;
+        user-select: none;
+        &:hover{
+            border: 2px solid #00c8aa;
+        }
     }
     &-container{
         &::after{
@@ -16,6 +19,14 @@
             display: block;
             clear: both;
         }
+    }
+    &-info{
+        padding: 0.5rem;
+    }
+    &-txt{
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
     }
     &-box{
         transform: scale(0.217);

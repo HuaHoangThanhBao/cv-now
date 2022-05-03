@@ -174,17 +174,24 @@
     }
 
     &.functional{
+        padding-right: 0;
         .profile{
             &-info{
                 height: 13rem;
             }
+            &-avatar{
+                margin-right: 2.5rem;
+            }
             &-detail{
-                width: calc(100% - 15rem);
+                width: calc(100% - 17.5rem);
                 background-color: #2B343D;
                 padding: 1rem;
                 color: white;
                 float: right;
                 height: 100%;
+            }
+            &-social{
+                padding-right: 3rem;
             }
             &-heading{
                 margin-top: 0;

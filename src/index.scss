@@ -31,7 +31,17 @@ code {
     padding-top: 80px;
   }
   &-space{
-    padding-top: 0.5rem;
+    padding-top: 0.25rem;
+    hr{
+      border-color: #2B343D;
+    }
+    &-top{
+      padding-top: 0;
+      padding-bottom: 0.25rem;
+      hr{
+        border-color: #2B343D;
+      }
+    }
   }
 }
 

@@ -163,7 +163,7 @@
         }
 
         &.tech{
-            padding-left: 1rem;
+            padding-top: 1rem;
             padding-right: 1rem;
             &.one-column{
                 .block{
@@ -200,7 +200,7 @@
             .panel{
                 &.left{
                    .block-bar{
-                        left: -4.3rem;
+                        left: -5.3rem;
                    }
                 }
             }
@@ -234,12 +234,6 @@
                 }
                 .block{
                     &-header{
-                        &-container{
-                            display: flex;
-                            .field{
-                                max-width: 70%;
-                            }
-                        }
                         .divider{
                             &-row{
                                 position: relative;
@@ -549,6 +543,98 @@
                            .block-bar{
                                 right: -3.3rem;
                            }
+                        }
+                    }
+                }
+            }
+            .divider-row{
+                display: none;
+            }
+        }
+        
+        &.minimalist{
+            &.one-column{
+                .block{
+                    &-header{
+                        &-container{
+                            display: flex;
+                            .field{
+                                max-width: 70%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.simple{
+            &.one-column{
+                .block{
+                    &.even{
+                        .block-header{
+                            &::before{
+                                content: '';
+                                position: absolute;
+                                width: 2rem;
+                                height: 3px;
+                                left: -3rem;
+                                top: 1rem;
+                                background-color: #2B343D;
+                            }
+                        }
+                    }
+                }
+            }
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        .block{
+                            &.even{
+                                .block-header{
+                                    &::before{
+                                        content: '';
+                                        position: absolute;
+                                        width: 1.5rem;
+                                        height: 3px;
+                                        left: -3rem;
+                                        top: 0.7rem;
+                                        background-color: #2B343D;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &:nth-child(2){.block{
+                        &.even{
+                            .block-header{
+                                &::before{
+                                    content: '';
+                                    position: absolute;
+                                    width: 1.5rem;
+                                    height: 3px;
+                                    right: -3rem;
+                                    top: 0.7rem;
+                                    background-color: #2B343D;
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
+            }
+        }
+
+        &.colleage{
+            .block{
+                &-header{
+                    &-container{
+                        padding:  0.25rem 0;
+                        display: inline-block;
+                        max-width: 100%;
+                        .field{
+                            border: 2px solid #2B343D;
+                            border-left-width: 0;
+                            border-right-width: 0;
                         }
                     }
                 }
