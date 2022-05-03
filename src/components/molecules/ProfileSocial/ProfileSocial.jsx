@@ -1,5 +1,17 @@
 import React from 'react';
 import {ReactComponent as MailIcon} from '../../../dist/mail.svg';
+import {ReactComponent as PhoneIcon} from '../../../dist/phone.svg';
+import {ReactComponent as LocationIcon} from '../../../dist/location.svg';
+import {ReactComponent as WebsiteIcon} from '../../../dist/website.svg';
+import {ReactComponent as LinkedinIcon} from '../../../dist/linkedin.svg';
+import {ReactComponent as TwitterIcon} from '../../../dist/twitter.svg';
+import {ReactComponent as QuoraIcon} from '../../../dist/quora.svg';
+import {ReactComponent as SkypeIcon} from '../../../dist/skype.svg';
+import {ReactComponent as FacebookIcon} from '../../../dist/facebook.svg';
+import {ReactComponent as GithubIcon} from '../../../dist/github.svg';
+import {ReactComponent as StackOverFlowIcon} from '../../../dist/stackoverflow.svg';
+import {ReactComponent as MediumIcon} from '../../../dist/medium.svg';
+import {ReactComponent as InstagramIcon} from '../../../dist/instagram.svg';
 
 const ProfileSocial = (props) => {
     const {getColumnType} = props
@@ -16,79 +28,73 @@ const ProfileSocial = (props) => {
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <PhoneIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <LocationIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <WebsiteIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <LinkedinIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <TwitterIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <QuoraIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <SkypeIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <FacebookIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <GithubIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <StackOverFlowIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <MediumIcon />
                     </div>
                 </div>
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>
                     <div className="profile-social__row--icon">
-                        <MailIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <MailIcon />
+                        <InstagramIcon />
                     </div>
                 </div>
             </div>

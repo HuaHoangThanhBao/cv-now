@@ -412,10 +412,20 @@ const DocumentPanel = (props) => {
     
     const getColumnType = () => {
         const columnType = template[currentTemplateType]
-        if(columnType.columns === 2){
-            return "two-column"
+        let dotType = false
+        if(currentTemplateType === template_type.combined){
+            if(pages[0].columns.length > 1){
+                console.log('ssss')
+                dotType = true
+            }
         }
-        else return "one-column"
+        else if(currentTemplateType === template_type.tech){
+            dotType = true
+        }
+        if(columnType.columns === 2){
+            return `two-column ${dotType ? 'dot': ''}`
+        }
+        else return `one-column ${dotType ? 'dot': ''}`
     }
 
     const getChildSpecialdIndex = (childId) => {

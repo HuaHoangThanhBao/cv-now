@@ -166,6 +166,7 @@
             padding-top: 1rem;
             padding-right: 1rem;
             &.one-column{
+                padding-left: 1rem;
                 .block{
                     &.odd{
                         .block-wrapper{
@@ -363,7 +364,7 @@
                     }
                     svg{
                         path {
-                            fill: white
+                            fill: white !important
                         }
                     }
                 }
@@ -452,6 +453,16 @@
         }
 
         &.functional{
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        width: 30%;
+                    }
+                    &:nth-child(2){
+                        width: 70%;
+                    }
+                }
+            }
             .profile{
                 &-detail{
                     width: 100%;
@@ -485,7 +496,7 @@
                     }
                     svg{
                         path {
-                            fill: inherit
+                            fill: inherit !important
                         }
                     }
                 }
