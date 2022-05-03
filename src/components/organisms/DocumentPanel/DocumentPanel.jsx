@@ -326,7 +326,6 @@ const DocumentPanel = (props) => {
         if(childIndex - 1 >= 0)
         {
             pages[pageIndex].columns[columnIndex].child.move(childIndex, childIndex - 1)
-            setPages([...pages])
         }
         else{
             if(pageIndex > 0){
@@ -339,7 +338,6 @@ const DocumentPanel = (props) => {
                     if(pages[pageIndex].columns[columnIndex].child.length === 0){
                         pages.pop()
                     }
-                    setPages([...pages])
                 }
                 else{
                     console.log('cannot move block to previous page')
@@ -351,7 +349,6 @@ const DocumentPanel = (props) => {
     const moveBlockDown = (pageIndex, columnIndex, childIndex, childBlockRef, parentBlockRef) => {
         if(childIndex !== pages[pageIndex].columns[columnIndex].child.length - 1){
             pages[pageIndex].columns[columnIndex].child.move(childIndex, childIndex + 1)
-            setPages([...pages])
         }
         else{
             if(pageIndex < pages.length - 1){
@@ -362,7 +359,6 @@ const DocumentPanel = (props) => {
                     if(pages[pageIndex].columns[columnIndex].child.length > 1){
                         const removedBlock = pages[pageIndex].columns[columnIndex].child.pop()
                         pages[pageIndex + 1].child.unshift(removedBlock)
-                        setPages([...pages])
                     }
                     else{
                         console.log('cannot move block to next page because there is at least one block in page')
@@ -397,7 +393,6 @@ const DocumentPanel = (props) => {
         if(type === InputFieldType.header){
             if(pages[pageIndex].columns[columnIndex].child[childIndex]){
                 pages[pageIndex].columns[columnIndex].child[childIndex][type] = contentToUpdate
-                setPages([...pages])
             }
         }
         else{
@@ -408,7 +403,6 @@ const DocumentPanel = (props) => {
                         if(firstProperty === type){
                             row.status = true
                             row[firstProperty] = contentToUpdate
-                            setPages([...pages])
                         }
                     })
                 }
