@@ -490,7 +490,7 @@ const DocumentPanel = (props) => {
             && currentTemplateType !== template_type.skilled_based
             && currentTemplateType !== template_type.functional){
             return(
-                <div ref={profileContainerRef}>
+                <div className='profile-block' ref={profileContainerRef}>
                     <Profile
                         currentTemplateType={currentTemplateType}
                         getColumnType={getColumnType}
@@ -503,7 +503,7 @@ const DocumentPanel = (props) => {
             || currentTemplateType === template_type.functional){
             if(pages[0].columns.length === 1){
                 return(
-                    <div ref={profileContainerRef}>
+                    <div className='profile-block' ref={profileContainerRef}>
                         <Profile
                             currentTemplateType={currentTemplateType}
                             getColumnType={getColumnType}
