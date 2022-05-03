@@ -415,7 +415,6 @@ const DocumentPanel = (props) => {
         let dotType = false
         if(currentTemplateType === template_type.combined){
             if(pages[0].columns.length > 1){
-                console.log('ssss')
                 dotType = true
             }
         }

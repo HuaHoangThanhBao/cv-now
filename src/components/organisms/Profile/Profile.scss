@@ -437,7 +437,7 @@
         .profile{
             &-social{
                 margin-top: 0;
-                border: none;
+                border: 0;
                 background-color: #EBEBEB;
             }
         }
@@ -454,7 +454,7 @@
     &.simple{
         .profile{
             &-social{
-                border: none;
+                border: 0;
                 padding: 1rem 3rem;
                 background-color: #2B343D;
                 color: white;
@@ -509,14 +509,14 @@
     }
 
     &.colleage{
-        border: none;
+        border: 0;
         &::before{
             content: none;
         }
     }
 
     &.it, &.modern{
-        border: none;
+        border: 0;
         &::before{
             content: none;
         }
