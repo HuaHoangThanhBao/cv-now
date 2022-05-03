@@ -446,7 +446,7 @@ const DocumentPanel = (props) => {
             //re-check two column of each page
             checkToMoveContent(0, 0)
             if(pages[0].columns && pages[0].columns.length > 1){
-            checkToMoveContent(0, 1)
+                checkToMoveContent(0, 1)
             }
             setIsReOrder(false)
         }
