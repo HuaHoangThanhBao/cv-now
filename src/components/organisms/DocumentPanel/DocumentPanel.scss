@@ -86,17 +86,6 @@
                         clear: both;
                     }
                 }
-                &-content{
-                    width: calc(50% - 1rem);
-                    float: left;
-                    &:nth-child(even){
-                        margin-left: 2rem;
-                        .block-bar{
-                            right: -4.3rem !important;
-                            left: auto !important;
-                        }
-                    }
-                }
             }
         }
 
