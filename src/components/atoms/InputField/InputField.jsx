@@ -23,7 +23,7 @@ const InputField = (props) => {
             const height = inputRef.current.offsetHeight
             updateFieldHeight(pageIndex, columnIndex, childIndex, currentIndex, inputBlockType, height)
         }
-    }, [html])
+    }, [html, childIndex, columnIndex, currentIndex, inputBlockType, pageIndex, updateFieldHeight])
 
     const renderField = () => {
         if(visible){

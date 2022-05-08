@@ -96,20 +96,26 @@ function DragNDrop(props) {
     const getNoNeedItemStyles = (noNeedItem) => {
         if(dragItem.current && dragging){
             const currentDragItem = list[dragItem.current.pageIndex].columns[dragItem.current.columnIndex].child[dragItem.current.childIndex];
-            return dragging && currentDragItem.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+            if(currentDragItem){
+                return dragging && currentDragItem.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+            }
         }
         else if(dragNoNeedItem.current){
+            if(rootDragNoNeedItem.current){
                 const {noNeedIndex} = rootDragNoNeedItem.current
                 const currentNoNeedDragging = noNeedList[noNeedIndex]
-                if(noNeedDraggingOver){
-                    return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+                if(currentNoNeedDragging){
+                    if(noNeedDraggingOver){
+                        return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+                    }
+                    else if(noNeedDragging){
+                        return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
+                    }
+                    else if(!noNeedDragging){
+                        return noNeedDragging ? 'drag-no-need-item current': 'drag-no-need-item unactive'
+                    }
                 }
-                else if(noNeedDragging){
-                    return noNeedDragging && currentNoNeedDragging.id === noNeedItem.id ? 'drag-no-need-item current': 'drag-no-need-item'
-                }
-                else if(!noNeedDragging){
-                    return noNeedDragging ? 'drag-no-need-item current': 'drag-no-need-item unactive'
-                }
+            }
         }
         else {
             return 'drag-no-need-item'
@@ -188,7 +194,7 @@ function DragNDrop(props) {
         }
     } 
 
-    const checkForExists = (currentDragItem) => {
+    const checkForExists = React.useCallback((currentDragItem) => {
         for(const [pageIndex, page] of list.entries()){
             for(const [columnIndex, column] of page.columns.entries()){
                 for(const [childIndex, child] of column.child.entries()){
@@ -205,12 +211,12 @@ function DragNDrop(props) {
             }
         }
         return {status: false}
-    }
+    }, [list, noNeedList])
 
-    const reOrderPages = () => {
+    const reOrderPages = React.useCallback(() => {
         setIsReOrder(true)
         setPages([...list])
-    }
+    }, [list, setIsReOrder, setPages])
 
     useEffect(() => {
         setList(data);
@@ -223,7 +229,7 @@ function DragNDrop(props) {
             dragItemNode.current = null;
             reOrderPages()
         }
-    }, [list, dragging])
+    }, [list, dragging, reOrderPages])
 
     useEffect(() => {
         if(!noNeedDragging && dragNoNeedItemNode.current !== null){
@@ -233,11 +239,10 @@ function DragNDrop(props) {
             if(rootDragNoNeedItem.current && !noNeedDraggingOver){
                 const {noNeedIndex} = rootDragNoNeedItem.current
                 const currentNoNeedDragging = noNeedList[noNeedIndex]
-                const {status, pageIndex, columnIndex, childIndex} = checkForExists(currentNoNeedDragging)
+                const {status} = checkForExists(currentNoNeedDragging)
                 //check if pages have no need item that we dragged into
                 if(status){
                     noNeedList.splice(noNeedIndex, 1)
-                    setNoNeedList([...noNeedList])
                 }
             }
 
@@ -247,13 +252,13 @@ function DragNDrop(props) {
             
             reOrderPages()
         }
-    }, [list, noNeedDragging])
+    }, [list, noNeedList, noNeedDragging, noNeedDraggingOver, checkForExists, reOrderPages])
 
     if (list) {
         return (                
             <div>
                 <div className='drag-wrapper'>
-                    <div className="drag-n-drop">
+                    <div className={`drag-n-drop ${list[0].columns.length === 1 ? 'one-column': ''}`}>
                         {list.map((page, pageIndex) => (
                             page.columns.map((column, columnIndex) => (
                                 <div key={columnIndex} 

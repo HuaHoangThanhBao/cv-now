@@ -28,6 +28,8 @@ const BlockWrapper = (props) => {
         moveContentUp,
         updateFieldHeight,
         getHeader,
+        getChildSpecialdIndex,
+        currentTemplateType
     } = props;
 
     const [isVisible, setIsVisible] = useState(false);
@@ -61,27 +63,27 @@ const BlockWrapper = (props) => {
 
     const getTitle = (index, _blockType) => {
         let title = ''
-        data[index].find(row => {
-            for(const [key, item]  of Object.entries(row)){
+        for(let i = 0; i < data[index].length; i++){
+            for(const [key, item]  of Object.entries(data[index][i])){
                 if(key === _blockType){
                     title = item;
                     break;
                 }
             }
-        });
+        }
         return title
     }
 
     const getStatus = (index, _blockType) => {
         let status;
-        data[index].find(row => {
-            for(const [key, item]  of Object.entries(row)){
+        for(let i = 0; i < data[index].length; i++){
+            for(const [key]  of Object.entries(data[index][i])){
                 if(key === _blockType){
-                    status = row.status
+                    status = data[index][i].status;
                     break;
                 }
             }
-        });
+        }
         return status
     }
 
@@ -808,7 +810,7 @@ const BlockWrapper = (props) => {
     useEffect(() => {
         return() => {
             if(isVisible || blockHeaderStatus) {
-                // console.log('yess')
+                console.log('yess:', pageIndex + "/" + columnIndex + "/" + childIndex)
                 checkToMoveContent(pageIndex, columnIndex, childIndex, setBlockHeaderStatus)
             }
         }
@@ -844,6 +846,8 @@ const BlockWrapper = (props) => {
             moveContentUp={moveContentUp}
             updateFieldHeight={updateFieldHeight}
             getHeader={getHeader}
+            getChildSpecialdIndex={getChildSpecialdIndex}
+            currentTemplateType={currentTemplateType}
         />
     )
 }
