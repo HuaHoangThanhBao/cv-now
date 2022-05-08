@@ -11,6 +11,8 @@ import ProfileInfo from '../../molecules/ProfileInfo/ProfileInfo';
 import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
 import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
+import { maxHeight } from '../../../constants/Variables';
+import DocumentFooter from '../../molecules/DocumentFooter/DocumentFooter';
 
 const DocumentPanel = (props) => {
     const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType} = props;
@@ -108,6 +110,7 @@ const DocumentPanel = (props) => {
         return sum
     }
 
+    //sum of profile refs
     const sumOfTemplate = (i, columnIndex) => {
         let sum = 0;
         if(currentTemplateType !== template_type.minimalist
@@ -156,9 +159,8 @@ const DocumentPanel = (props) => {
         console.log("start calculating......")
         console.log('pages:', pages)
 
-        const maxHeight = 1700
         const blockMarginTop = 80
-        for(let i = 0; i < panelsRef.current.length; i++){
+        for(let i = 0; i < pages.length; i++){
             if(pages[i])
             {
                 let sumPanelHeight = sumOfTemplate(i, columnIndex)
@@ -475,7 +477,6 @@ const DocumentPanel = (props) => {
                     checkToMoveContent={checkToMoveContent}
                     removeContent={removeContent}
                     removeBlock={removeBlock}
-                    parentRef={panelsRef}
                     moveBlockUp={moveBlockUp}
                     moveBlockDown={moveBlockDown}
                     updateFieldData={updateFieldData}
@@ -487,7 +488,9 @@ const DocumentPanel = (props) => {
                 />
     }
 
-    function renderDocumentHeader() {
+    function renderDocumentHeader(pageIndex) {
+        if(pageIndex !== 0) return;
+
         if(currentTemplateType !== template_type.minimalist
             && currentTemplateType !== template_type.skilled_based
             && currentTemplateType !== template_type.functional){
@@ -604,28 +607,40 @@ const DocumentPanel = (props) => {
             const pdf = new jsPDF('portrait', 'px', [680, 1050]);
             pdf.addImage(divImage, 'PNG', 0, 0);
 
-            for(let i = 1; i < panels.length; i++){
-                html2canvas(panels[i]).then(function(c){
-                    console.log(c)
-                    const imgData = c.toDataURL("image/png");
-                    pdf.addPage([680, panels[i].offsetHeight]);
-                    pdf.addImage(imgData, 'PNG', 0, 0)
-                    if(i == panels.length - 1){
-                        pdf.save("download.pdf");
-                    }
-                })
+            if(panels.length === 1) {
+                pdf.save("download.pdf");
+            }
+            else{
+                for(let i = 1; i < panels.length; i++){
+                    html2canvas(panels[i]).then(function(c){
+                        console.log(c)
+                        const imgData = c.toDataURL("image/png");
+                        pdf.addPage([680, 1050]);
+                        pdf.addImage(imgData, 'PNG', 0, 0)
+                        if(i == panels.length - 1){
+                            pdf.save("download.pdf");
+                        }
+                    })
+                }
             }
         })
     }
 
     return(
         <div id='document' className="document">
-            {renderDocumentHeader()}
             {pages && pages.map((page, pageIndex) => (
-                <div key={pageIndex} 
-                     ref={el => panelsRef.current[pageIndex] = el}
-                     className={`document-wrapper ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
-                     >
+                <div 
+                    key={pageIndex} 
+                    ref={el => panelsRef.current[pageIndex] = el}
+                    className={`document-wrapper ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
+                >
+                         
+                    {renderDocumentHeader(pageIndex)}
+
+                    <div 
+                        className={`document-container ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
+                        style={{minHeight: `${pageIndex === 0 && profileContainerRef.current ? (maxHeight - profileContainerRef.current.offsetHeight): maxHeight}px`}}
+                    >
                         {page && page.columns.map((column, columnIndex) => (
                            <div key={columnIndex} className='column'>
                                {renderSpecialHeader(pageIndex, columnIndex)}
@@ -641,6 +656,12 @@ const DocumentPanel = (props) => {
                                </Panel>
                            </div>
                         ))}
+                    </div>
+
+                    <DocumentFooter 
+                        pageIndex={pageIndex}
+                        pageLength={pages.length}
+                    />
                 </div>
             ))}
             <button onClick={generatePDF}>Generate PDF</button>

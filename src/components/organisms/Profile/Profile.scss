@@ -346,13 +346,9 @@
                         border: 2px solid white;
                         height: 3rem;
                         width: 3rem;
-                        position: relative;
-                        svg{
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                        }
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     }
                 }
                 &::before{
@@ -558,13 +554,9 @@
                         border-radius: 0.75rem;
                         height: 2.5rem;
                         width: 2.5rem;
-                        position: relative;
-                        svg{
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                        }
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     }
                 }
             }
