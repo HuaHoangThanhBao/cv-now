@@ -9,6 +9,8 @@ import './DocumentPanel.scss';
 import ProfileAvatar from '../../molecules/ProfileAvatar/ProfileAvatar';
 import ProfileInfo from '../../molecules/ProfileInfo/ProfileInfo';
 import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
+import html2canvas from 'html2canvas';
+import { jsPDF } from "jspdf";
 
 const DocumentPanel = (props) => {
     const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType} = props;
@@ -593,9 +595,31 @@ const DocumentPanel = (props) => {
             }
         }
     }
+    
+    function generatePDF(){
+        const divToDisplay = document.getElementById('document')
+        let panels = panelsRef.current;
+        html2canvas(divToDisplay).then(function(canvas) {
+            const divImage = canvas.toDataURL("image/png");
+            const pdf = new jsPDF('portrait', 'px', [680, 1050]);
+            pdf.addImage(divImage, 'PNG', 0, 0);
+
+            for(let i = 1; i < panels.length; i++){
+                html2canvas(panels[i]).then(function(c){
+                    console.log(c)
+                    const imgData = c.toDataURL("image/png");
+                    pdf.addPage([680, panels[i].offsetHeight]);
+                    pdf.addImage(imgData, 'PNG', 0, 0)
+                    if(i == panels.length - 1){
+                        pdf.save("download.pdf");
+                    }
+                })
+            }
+        })
+    }
 
     return(
-        <div className="document">
+        <div id='document' className="document">
             {renderDocumentHeader()}
             {pages && pages.map((page, pageIndex) => (
                 <div key={pageIndex} 
@@ -619,6 +643,7 @@ const DocumentPanel = (props) => {
                         ))}
                 </div>
             ))}
+            <button onClick={generatePDF}>Generate PDF</button>
         </div>
     )
 }
