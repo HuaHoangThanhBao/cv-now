@@ -112,12 +112,11 @@ const DocumentPanel = (props) => {
 
     //sum of profile refs
     const sumOfTemplate = (i, columnIndex) => {
-        let sum = 0;
         if(currentTemplateType !== template_type.minimalist
             && currentTemplateType !== template_type.skilled_based
             && currentTemplateType !== template_type.functional){
             if(i === 0){
-                sum = profileContainerRef.current.offsetHeight
+                return profileContainerRef.current.offsetHeight
             }
         }
         else{
@@ -125,14 +124,14 @@ const DocumentPanel = (props) => {
                 if(i === 0){
                     if(pages[0].columns.length === 2){
                         if(columnIndex === 0){
-                            sum = profileAvatarRef.current.offsetHeight + profileSocialRef.current.offsetHeight
+                            return profileAvatarRef.current.offsetHeight + profileSocialRef.current.offsetHeight + 64 //offset margin based on css value
                         }
                         else if(columnIndex === 1){
-                            sum = profileInfoRef.current.offsetHeight
+                            return profileInfoRef.current.offsetHeight
                         }
                     }
                     else {
-                        sum = profileContainerRef.current.offsetHeight
+                        return profileContainerRef.current.offsetHeight
                     }
                 }
             }
@@ -140,19 +139,19 @@ const DocumentPanel = (props) => {
                 if(i === 0){
                     if(pages[0].columns.length === 2){
                         if(columnIndex === 0){
-                            sum = profileAvatarRef.current.offsetHeight
+                            return profileAvatarRef.current.offsetHeight + 80 //offset margin based on css value
                         }
                         else if(columnIndex === 1){
-                            sum = profileInfoRef.current.offsetHeight + profileSocialRef.current.offsetHeight
+                            return profileInfoRef.current.offsetHeight + profileSocialRef.current.offsetHeight + 64 //offset margin based on css value
                         }
                     }
                     else{
-                        sum = profileContainerRef.current.offsetHeight
+                        return profileContainerRef.current.offsetHeight
                     }
                 }
             }
         }
-        return sum
+        return 0
     }
 
     const checkToMoveContent = (pageIndex, columnIndex, childIndex, setBlockHeaderStatus, isDeleted) => {
@@ -478,6 +477,7 @@ const DocumentPanel = (props) => {
                     removeContent={removeContent}
                     removeBlock={removeBlock}
                     moveBlockUp={moveBlockUp}
+                    parentRef={panelsRef}
                     moveBlockDown={moveBlockDown}
                     updateFieldData={updateFieldData}
                     updateFieldHeight={updateFieldHeight}
@@ -598,32 +598,39 @@ const DocumentPanel = (props) => {
             }
         }
     }
-    
-    function generatePDF(){
-        const divToDisplay = document.getElementById('document')
-        let panels = panelsRef.current;
-        html2canvas(divToDisplay).then(function(canvas) {
-            const divImage = canvas.toDataURL("image/png");
-            const pdf = new jsPDF('portrait', 'px', [680, 1050]);
-            pdf.addImage(divImage, 'PNG', 0, 0);
 
-            if(panels.length === 1) {
-                pdf.save("download.pdf");
-            }
-            else{
-                for(let i = 1; i < panels.length; i++){
-                    html2canvas(panels[i]).then(function(c){
-                        console.log(c)
-                        const imgData = c.toDataURL("image/png");
-                        pdf.addPage([680, 1050]);
-                        pdf.addImage(imgData, 'PNG', 0, 0)
-                        if(i == panels.length - 1){
-                            pdf.save("download.pdf");
-                        }
-                    })
+    var i = 0;
+    const pdf = new jsPDF({
+        orientation: 'portrait',
+    });
+
+    function generatePDF(){
+        if(i <= panelsRef.current.length - 1){
+            html2canvas(panelsRef.current[i]).then(
+                function(canvas) {
+                    const imgData = canvas.toDataURL('image/png');
+                    // const imgProps= pdf.getImageProperties(imgData);
+                    
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+                    console.log(pdfWidth + "/" + pdfHeight)
+
+                    if(i > 0){
+                        pdf.addPage()
+                    }
+                    
+                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+                    if(i === panelsRef.current.length - 1){
+                        pdf.save("download.pdf");
+                    }
+
+                    i++;
+                    generatePDF(); // Important! - call the function again
                 }
-            }
-        })
+            )
+        };
     }
 
     return(

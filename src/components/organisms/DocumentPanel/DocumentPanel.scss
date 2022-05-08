@@ -52,19 +52,19 @@
         }
     }
     &-container{
-        background-color: #fff;
         padding: 2rem;
         width: 100%;
+        background-color: #fff;
         display: flex;
         .column{
             &:nth-child(1){
               width: 50%;
-              padding: 2rem 2rem 0 2rem;
+              padding: 2rem 2rem 8rem 2rem;
               float: left;
             }
             &:nth-child(2){
               width: 50%;
-              padding: 2rem 2rem 0 1rem;
+              padding: 2rem 2rem 8rem 1rem;
               float: left;
             }
         }
@@ -117,13 +117,13 @@
                 .column{
                     &:nth-child(1){
                         width: 60%;
-                        padding-bottom: 8rem;
+                        
                     }
                     &:nth-child(2){
                         width: 40%;
                         background-color: #EBEBEB;
                         border-radius: 0.5rem;
-                        padding-bottom: 8rem;
+                        
                     }
                 }
             }
@@ -159,7 +159,6 @@
                 .column{
                     &:nth-child(1){
                         width: 70%;
-                        padding: 0 3rem;
                     }
                     &:nth-child(2){
                         width: calc(30% - 1rem);
@@ -167,11 +166,6 @@
                         border-radius: 0.5rem;
                         color: white;
                     }
-                }
-            }
-            &.one-column{
-                .column{
-                    padding: 0 3rem;
                 }
             }
             .panel{
@@ -185,12 +179,10 @@
         /*end it*/
 
         &.tech, &.basic{
-            padding: 2rem;
             &.two-column{
                 .column{
                     &:nth-child(1){
                         width: 65%;
-                        padding: 2rem;
                     }
                     &:nth-child(2){
                         width: calc(35% - 0.7rem);
@@ -204,7 +196,9 @@
                 .column{
                     &:nth-child(1){
                         width: 100%;
-                        padding: 0 2rem;
+                        padding-top: 0;
+                        padding-right: 2rem;
+                        padding-left: 2rem;
                     }
                 }
             }
@@ -257,33 +251,30 @@
                 padding-bottom: 1rem;
                 .column{
                     &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
+                        padding-left: 4rem;
                     }
                 }
             }
             .panel{
                 &.left{
                    .block-bar{
-                        left: -5.3rem;
+                        left: -4.3rem;
                    }
                 }
             }
         }
 
         &.basic, &.executive, &.modern, &.professional, &.colleage, &.simple, &.minimalist{
-            padding: 2rem;
             &.two-column{
                 .column{
                     &:nth-child(1){
                         width: 55%;
-                        padding: 0 2rem 0 1rem;
+                        padding-right: 2rem;
+                        padding-left: 1rem;
                     }
                     &:nth-child(2){
                         width: 45%;
-                        padding: 0 0 0 2rem;
+                        padding-left: 2rem;
                         margin-left: 0;
                         background-color: inherit;
                     }
@@ -296,7 +287,8 @@
                 .column{
                     &:nth-child(1){
                         width: 100%;
-                        padding: 0 2rem 0 1rem;
+                        padding-right: 2rem;
+                        padding-left: 1rem;
                     }
                 }
             }
@@ -342,7 +334,7 @@
                 }
                 &-social{
                     margin-top: 2rem;
-                    margin-bottom: 3.5rem;
+                    margin-bottom: 2rem;
                     &__row{
                         width: 50%;
                         float: left;
@@ -358,7 +350,9 @@
                     &:nth-child(1){
                         width: 33%;
                         position: relative;
-                        padding: 2rem 3rem;
+                        padding-top: 2rem;
+                        padding-right: 3rem;
+                        padding-left: 3rem;
                     }
                     &:nth-child(2){
                         width: 67%;
@@ -461,7 +455,9 @@
             &.one-column{
                 padding: 0;
                 .column{
-                    padding: 2rem 3rem;
+                    padding-top: 2rem;
+                    padding-right: 3rem;
+                    padding-left: 3rem;
                 }
                 .panel{
                     &.left{
@@ -516,23 +512,13 @@
                     }
                 }
             }
-            &.two-column{
-                .column{
-                    &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
-                    }
-                }
-            }
         }
 
         &.functional{
             &.two-column{
                 .column{
                     &:nth-child(1){
-                        padding-bottom: 8rem;
+                        
                         width: 30%;
                     }
                     &:nth-child(2){
@@ -612,6 +598,7 @@
         
         &.minimalist{
             &.one-column{
+                padding-top: 0;
                 .block{
                     &-header{
                         &-container{
@@ -651,16 +638,6 @@
                     }
                 }
             }
-            &.two-column{
-                .column{
-                    &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
-                    }
-                }
-            }
         }
 
         &.simple{
@@ -684,7 +661,7 @@
             &.two-column{
                 .column{
                     &:nth-child(1){
-                        padding-bottom: 8rem;
+                        
                         .block{
                             &.even{
                                 .block-header{
@@ -702,7 +679,7 @@
                         }
                     }
                     &:nth-child(2){
-                        padding-bottom: 8rem;
+                        
                         .block{
                             &.even{
                                 .block-header{
@@ -734,19 +711,16 @@
                             border: 2px solid #2B343D;
                             border-left-width: 0;
                             border-right-width: 0;
+                            padding-bottom: 0.2rem;
                         }
                     }
                 }
             }
+            &.one-column{
+                padding-top: 0;
+            }
             &.two-column{
-                .column{
-                    &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
-                    }
-                }
+                padding-top: 0;
             }
         }
 
@@ -798,66 +772,48 @@
             &.two-column{
                 padding-bottom: 1rem;
                 padding-top: 1rem;
-                .column{
-                    &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
-                    }
-                }
             }
         }
 
         &.basic{
             &.two-column{
-                .column{
-                    &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
-                    }
-                }
+                padding-top: 0;
             }
         }
 
         &.executive{
+            &.one-column{
+                padding-top: 0;
+            }
             &.two-column{
-                .column{
-                    &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
-                    }
-                }
+                padding-top: 0;
             }
         }
 
+        &.simple{
+            &.one-column{
+                padding-top: 0;
+            }
+            &.two-column{
+                padding-top: 0;
+            }
+        }
+        
         &.professional{
+            &.one-column{
+                padding-top: 0;
+            }
             &.two-column{
-                .column{
-                    &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
-                    }
-                }
+                padding-top: 0;
             }
         }
-
+        
         &.modern{
+            &.one-column{
+                padding-top: 0;
+            }
             &.two-column{
-                .column{
-                    &:nth-child(1){
-                        padding-bottom: 8rem;
-                    }
-                    &:nth-child(2){
-                        padding-bottom: 8rem;
-                    }
-                }
+                padding-top: 0;
             }
         }
     }

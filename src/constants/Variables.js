@@ -1,1 +1,1 @@
-export const maxHeight = 1700
+export const maxHeight = 1500
