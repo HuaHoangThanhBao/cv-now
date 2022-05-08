@@ -504,17 +504,6 @@
         }
 
         &.functional{
-            &.two-column{
-                .column{
-                    &:nth-child(1){
-                        
-                        width: 30%;
-                    }
-                    &:nth-child(2){
-                        width: 70%;
-                    }
-                }
-            }
             .profile{
                 &-detail{
                     width: 100%;
@@ -557,11 +546,13 @@
                 padding: 0;
                 .column{
                     &:nth-child(1){
+                        width: 30%;
                         background-color: inherit;
                         color: inherit;
                         padding-right: 1rem;
                     }
                     &:nth-child(2){
+                        width: 70%;
                         padding-left: 1rem;
                         padding-right: 0;
                     }
@@ -578,6 +569,11 @@
                            }
                         }
                     }
+                }
+            }
+            &.one-column{
+                .column{
+                    padding-top: 0;
                 }
             }
             .divider-row{
