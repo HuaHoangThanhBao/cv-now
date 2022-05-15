@@ -658,7 +658,7 @@ const DocumentPanel = (props) => {
                             <div 
                                 key={columnIndex} 
                                 className='column'
-                                data-column_level={columnIndex !== 0 ? (100 - currentColumnWidthAttr): currentColumnWidthAttr}
+                                data-column_level={columnIndex !== 0 ? currentColumnWidthAttr && (100 - currentColumnWidthAttr): currentColumnWidthAttr}
                             >
                                {renderSpecialHeader(pageIndex, columnIndex)}
                                <Panel 

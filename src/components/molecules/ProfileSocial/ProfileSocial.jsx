@@ -20,7 +20,7 @@ const ProfileSocial = (props) => {
     return (
         <div 
             className={`profile-social ${getColumnType()}`}
-            data-column_level={`${currentTemplateType === template_type.combined ? (100 - currentColumnWidthAttr): ''}`}
+            data-column_level={`${currentTemplateType === template_type.combined ? currentColumnWidthAttr && (100 - currentColumnWidthAttr): ''}`}
         >
             <div className="profile-social__wrapper">
                 <div className="profile-social__row">
