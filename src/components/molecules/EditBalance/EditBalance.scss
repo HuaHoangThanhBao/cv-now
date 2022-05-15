@@ -112,16 +112,19 @@
         top: 62%;
         display: none;
     }
-    &-left-holder{
+    &-left-holder, &-right-holder{
         position: absolute;
-        left: 45%;
         margin-top: 0.05rem;
         cursor: pointer;
+        &.unactive{
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    }
+    &-left-holder{
+        left: 45%;
     }
     &-right-holder{
-        position: absolute;
         left: 62%;
-        cursor: pointer;
-        margin-top: 0.05rem;
     }
 }

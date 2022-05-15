@@ -3,6 +3,7 @@ import './EditBalance.scss';
 import {ReactComponent as LeftArrow} from './../../../dist/arrow-left.svg';
 import {ReactComponent as RightArrow} from './../../../dist/arrow-right.svg';
 import { template_type } from '../../../constants/Template';
+import {minColumnLevel, maxColumnLevel} from '../../../constants/Variables';
 
 const EditBalance = (props) => {
     const {pageColumnsCount, currentTemplateType, currentColumnWidthAttr, setCurrentColumnWidthAttr} = props;
@@ -37,7 +38,10 @@ const EditBalance = (props) => {
                         
                     </div>
                     <div className="balance-container">
-                        <div className="balance-left-holder">
+                        <div 
+                            className={`balance-left-holder ${currentColumnWidthAttr === minColumnLevel ? 'unactive': ''}`}
+                            onClick={() => {setCurrentColumnWidthAttr(prevValue => prevValue - 1)}}
+                        >
                             <LeftArrow width={30} height={30}/>
                         </div>
                         <div 
@@ -180,7 +184,10 @@ const EditBalance = (props) => {
                             <div className="balance-inner"></div>
                             
                         </div>
-                        <div className="balance-right-holder">
+                        <div 
+                            className={`balance-right-holder ${currentColumnWidthAttr === maxColumnLevel ? 'unactive': ''}`}
+                            onClick={() => {setCurrentColumnWidthAttr(prevValue => prevValue + 1)}}
+                        >
                             <RightArrow width={30} height={30}/>
                         </div>
                         <div id='balance-line' className="balance-line"></div>
