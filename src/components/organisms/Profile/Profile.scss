@@ -89,22 +89,64 @@
         clear: left;
     }
 
-    
-    
     /*Cominbed Template*/
     &.combined{
-        padding: 1rem 1rem 0 1rem;
+        padding: 0;
         .profile{
             &-wrapper{
                 display: flex;
             }
             &-info{
-                width: 60%;
+                width: 55%;
                 padding: 2rem;
                 background-color: #2B343D;
                 color: white;
                 border-radius: 0.5rem;
                 position: relative;
+                margin-top: 1rem;
+                margin-left: 1rem;
+                &[data-column_level="48"]{
+                  width: 48%;
+                }
+                &[data-column_level="49"]{
+                  width: 49%;
+                }
+                &[data-column_level="50"]{
+                  width: 50%;
+                }
+                &[data-column_level="51"]{
+                  width: 51%;
+                }
+                &[data-column_level="52"]{
+                  width: 52%;
+                }
+                &[data-column_level="53"]{
+                  width: 53%;
+                }
+                &[data-column_level="54"]{
+                  width: 54%;
+                }
+                &[data-column_level="55"]{
+                  width: 55%;
+                }
+                &[data-column_level="56"]{
+                  width: 56%;
+                }
+                &[data-column_level="57"]{
+                  width: 57%;
+                }
+                &[data-column_level="58"]{
+                  width: 58%;
+                }
+                &[data-column_level="59"]{
+                  width: 59%;
+                }
+                &[data-column_level="60"]{
+                  width: 60%;
+                }
+                &[data-column_level="61"]{
+                  width: 61%;
+                }
             }
             &-avatar{
                 position: absolute;
@@ -116,8 +158,10 @@
                 }
             }
             &-social{
-                width: 40%;
+                width: 45%;
                 padding-left: 5rem;
+                margin-top: 1rem;
+                margin-right: 1rem;
                 &__row{
                     justify-content: flex-end;
                     padding-bottom: 0.5rem;
@@ -125,6 +169,48 @@
                         margin-right: 0.7rem;
                         text-align: right;
                     }
+                }
+                &[data-column_level="52"]{
+                  width: 52%;
+                }
+                &[data-column_level="51"]{
+                  width: 51%;
+                }
+                &[data-column_level="50"]{
+                  width: 50%;
+                }
+                &[data-column_level="49"]{
+                  width: 49%;
+                }
+                &[data-column_level="48"]{
+                  width: 48%;
+                }
+                &[data-column_level="47"]{
+                  width: 47%;
+                }
+                &[data-column_level="45"]{
+                  width: 45%;
+                }
+                &[data-column_level="46"]{
+                  width: 46%;
+                }
+                &[data-column_level="44"]{
+                  width: 44%;
+                }
+                &[data-column_level="43"]{
+                  width: 43%;
+                }
+                &[data-column_level="42"]{
+                  width: 42%;
+                }
+                &[data-column_level="41"]{
+                  width: 41%;
+                }
+                &[data-column_level="40"]{
+                  width: 40%;
+                }
+                &[data-column_level="39"]{
+                  width: 39%;
                 }
             }
         }

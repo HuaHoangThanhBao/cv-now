@@ -15,7 +15,7 @@ import { maxHeight } from '../../../constants/Variables';
 import DocumentFooter from '../../molecules/DocumentFooter/DocumentFooter';
 
 const DocumentPanel = (props) => {
-    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType} = props;
+    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentColumnWidthAttr} = props;
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
@@ -495,10 +495,14 @@ const DocumentPanel = (props) => {
             && currentTemplateType !== template_type.skilled_based
             && currentTemplateType !== template_type.functional){
             return(
-                <div className='profile-block' ref={profileContainerRef}>
+                <div 
+                    className='profile-block' 
+                    ref={profileContainerRef}
+                >
                     <Profile
                         currentTemplateType={currentTemplateType}
                         getColumnType={getColumnType}
+                        currentColumnWidthAttr={currentColumnWidthAttr}
                     />
                 </div>
             )
@@ -508,7 +512,10 @@ const DocumentPanel = (props) => {
             || currentTemplateType === template_type.functional){
             if(pages[0].columns.length === 1){
                 return(
-                    <div className='profile-block' ref={profileContainerRef}>
+                    <div 
+                        className='profile-block' 
+                        ref={profileContainerRef}
+                    >
                         <Profile
                             currentTemplateType={currentTemplateType}
                             getColumnType={getColumnType}
@@ -641,7 +648,6 @@ const DocumentPanel = (props) => {
                     ref={el => panelsRef.current[pageIndex] = el}
                     className={`document-wrapper ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
                 >
-                         
                     {renderDocumentHeader(pageIndex)}
 
                     <div 
@@ -649,7 +655,11 @@ const DocumentPanel = (props) => {
                         style={{minHeight: `${pageIndex === 0 && profileContainerRef.current ? (maxHeight - profileContainerRef.current.offsetHeight): maxHeight}px`}}
                     >
                         {page && page.columns.map((column, columnIndex) => (
-                           <div key={columnIndex} className='column'>
+                            <div 
+                                key={columnIndex} 
+                                className='column'
+                                data-column_level={columnIndex !== 0 ? (100 - currentColumnWidthAttr): currentColumnWidthAttr}
+                            >
                                {renderSpecialHeader(pageIndex, columnIndex)}
                                <Panel 
                                     pageIndex={pageIndex}
