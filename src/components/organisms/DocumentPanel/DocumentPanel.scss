@@ -7,11 +7,18 @@
         // min-height: 1000px;
         &.skilled_based{
             &.two-column{
+                .column{
+                    &:nth-child(1){
+                        .field-input{
+                            color: white;
+                        }
+                    }
+                }
                 .document{
                     &-footer{
                         &-col{
                             &:nth-child(1){
-                                color: white;
+                                color: currentColor;
                             }
                         }
                     }
@@ -27,6 +34,15 @@
                                 color: white;
                             }
                         }
+                    }
+                }
+            }
+        }
+        &:nth-of-type(1).functional{
+            .document{
+                &-container{
+                    .column{
+                        padding-top: 0;
                     }
                 }
             }
@@ -120,9 +136,8 @@
                     }
                     &:nth-child(2){
                         width: calc(30% - 1rem);
-                        background-color: #2B343D;
+                        background-color: currentColor;
                         border-radius: 0.5rem;
-                        color: white;
                     }
                 }
             }
@@ -145,7 +160,6 @@
                     &:nth-child(2){
                         width: calc(35% - 0.7rem);
                         background-color: #EBEBEB;
-                        color: #2B343D;
                     }
                 }
             }
@@ -309,7 +323,6 @@
                 .column{
                     &:nth-child(2){
                         background-color: inherit;
-                        color: #2B343D;
                     }
                 }
             }
@@ -409,9 +422,8 @@
             .profile{
                 &-social{
                     &__wrapper{
-                        background-color: #2B343D;
+                        background-color: currentColor;
                         padding: 1rem 1rem 0.5rem 1rem;
-                        color: white;
                         border-radius: 0.5rem;
                     }
                     &__row{
@@ -421,7 +433,7 @@
                     }
                     svg{
                         path {
-                            fill: white !important
+                            fill: currentColor !important
                         }
                     }
                 }
@@ -430,8 +442,7 @@
                 padding: 1rem;
                 .column{
                     &:nth-child(1){
-                        background-color: #2B343D;
-                        color: white;
+                        background-color: currentColor;
                         border-top-left-radius: 0.5rem;
                         border-bottom-left-radius: 0.5rem;
                     }
@@ -483,7 +494,7 @@
                                 content: '';
                                 height: 100%;
                                 width: 1rem;
-                                background-color: #2B343D;
+                                background-color: currentColor;
                                 position: absolute;
                                 left: -2.5rem;
                                 border-radius: 0.5rem;
@@ -497,12 +508,19 @@
                                 content: '';
                                 height: 100%;
                                 width: 1rem;
-                                background-color: #EE4539;
+                                background-color: #EBEBEB;
                                 position: absolute;
                                 left: -2.5rem;
                                 border-radius: 0.5rem;
                             }
                         }
+                    }
+                }
+                .panel{
+                    &.left{
+                       .block-bar{
+                            left: -4.3rem;
+                       }
                     }
                 }
             }
@@ -520,16 +538,16 @@
                         z-index: 2;
                     }
                 }
-            }
-            .panel{
-                &.left{
-                   .block-bar{
-                        left: -5.3rem;
-                   }
-                }
-                &.right{
-                    .block-bar{
-                        right: -5.3rem;
+                .panel{
+                    &.left{
+                       .block-bar{
+                            left: -5.3rem;
+                       }
+                    }
+                    &.right{
+                        .block-bar{
+                            right: -5.3rem;
+                        }
                     }
                 }
             }
@@ -612,7 +630,7 @@
                             &:nth-child(1){
                                 width: 40%;
                                 height: 100%;
-                                background-color: #2B343D;
+                                background-color: currentColor;
                                 border-top-left-radius: 0.5rem;
                                 border-bottom-left-radius: 0.5rem;
                             }
@@ -642,6 +660,23 @@
                         z-index: 3;
                     }
                 }
+                .profile{
+                    &-avatar{
+                        border: none;
+                    }
+                    &-social{
+                        &__row{
+                            &--txt{
+                                color: white;
+                            }
+                        }
+                    }
+                }
+                svg{
+                    path{
+                        fill: white !important;
+                    }
+                }
             }
         }
 
@@ -649,9 +684,8 @@
             .profile{
                 &-detail{
                     width: 100%;
-                    background-color: #2B343D;
+                    background-color: currentColor;
                     padding: 1rem;
-                    color: white;
                     float: none;
                     height: 13rem;
                     margin-bottom: 2rem;
@@ -672,20 +706,30 @@
                 &-social{
                     &__wrapper{
                         background-color: transparent;
-                        color: #2B343D;
+                        // color: #2B343D;
                         padding: 0;
                     }
                     &__row{
                         width: 100%;
                         &--txt{
                             margin-left: 0.7rem;
+                            color: black;
                         }
                     }
                     svg{
                         path {
-                            fill: inherit !important
+                            fill: currentColor !important
                         }
                     }
+                }
+                &-heading{
+                    color: white;
+                }
+                &-title{
+                    color: white;
+                }
+                &-description{
+                    color: white;
                 }
             }
             &.two-column{
@@ -715,11 +759,6 @@
                            }
                         }
                     }
-                }
-            }
-            &.one-column{
-                .column{
-                    padding-top: 0;
                 }
             }
             .divider-row{
@@ -787,6 +826,11 @@
                     }
                 }
             }
+            svg{
+                path {
+                    fill: currentColor !important
+                }
+            }
         }
 
         &.simple{
@@ -801,7 +845,7 @@
                                 height: 3px;
                                 left: -3rem;
                                 top: 1rem;
-                                background-color: #2B343D;
+                                background-color: currentColor;
                             }
                         }
                     }
@@ -823,7 +867,7 @@
                                         height: 3px;
                                         left: -3rem;
                                         top: 0.7rem;
-                                        background-color: #2B343D;
+                                        background-color: currentColor;
                                     }
                                 }
                             }
@@ -840,7 +884,7 @@
                                         height: 3px;
                                         right: -2rem;
                                         top: 0.7rem;
-                                        background-color: #2B343D;
+                                        background-color: currentColor;
                                     }
                                 }
                             }
@@ -923,7 +967,7 @@
                                 width: 50%;
                                 height: 100%;
                                 margin-left: -1rem;
-                                background-color: #2B343D;
+                                background-color: currentColor;
                                 border-radius: 0.5rem;
                                 margin-right: 2rem;
                             }
@@ -948,6 +992,9 @@
                     &:nth-child(2){
                         position: relative;
                         z-index: 2;
+                        .field-input{
+                            color: white;
+                        }
                     }
                 }
             }

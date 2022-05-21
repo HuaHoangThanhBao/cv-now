@@ -89,7 +89,7 @@ const BlockWrapper = (props) => {
 
     const educationContenType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                      externalClass="block-content-title"
                      type="text"
@@ -177,7 +177,7 @@ const BlockWrapper = (props) => {
 
     const workExperienceType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                     externalClass="block-content-title"
                     type="text"
@@ -326,7 +326,7 @@ const BlockWrapper = (props) => {
 
     const referenceType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                     externalClass="block-content-title"
                     type="text"
@@ -407,7 +407,7 @@ const BlockWrapper = (props) => {
 
     const teachingType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                     externalClass="block-content-title"
                     type="text"
@@ -542,7 +542,7 @@ const BlockWrapper = (props) => {
 
     const personalProjectType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                     externalClass="block-content-title"
                     type="text"
@@ -588,7 +588,7 @@ const BlockWrapper = (props) => {
 
     const languageType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                     externalClass="block-content-title"
                     type="text"
@@ -623,7 +623,7 @@ const BlockWrapper = (props) => {
 
     const tagType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                     externalClass="content_detail"
                     type="text"
@@ -644,7 +644,7 @@ const BlockWrapper = (props) => {
 
     const publicationType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                     externalClass="block-content-desc"
                     type="text"
@@ -749,7 +749,7 @@ const BlockWrapper = (props) => {
 
     const conferenceType = (index) => {
         return(
-            <div>
+            <div className='block-content-container'>
                 <InputField
                     externalClass="block-content-title"
                     type="text"

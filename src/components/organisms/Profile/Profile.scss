@@ -40,12 +40,18 @@
                 // margin-top: 0.4rem;
                 word-break: break-all;
                 text-align: left;
+                color: black;
             }
             &::after{
                 content: '';
                 display: block;
                 clear: left;
             }
+        }
+    }
+    svg{
+        path{
+            fill: currentColor !important;
         }
     }
     &-heading{
@@ -101,8 +107,7 @@
             &-info{
                 width: 50%;
                 padding: 2rem;
-                background-color: #2B343D;
-                color: white;
+                background-color: currentColor;
                 border-radius: 0.5rem;
                 position: relative;
                 margin-top: 1rem;
@@ -216,6 +221,9 @@
                   width: 39%;
                 }
             }
+            &-heading{
+                color: white;
+            }
         }
         &.dot{
             .profile{
@@ -238,7 +246,7 @@
                         height: 1.5rem;
                         width: 1.5rem;
                         border-radius: 50%;
-                        background-color: #EE4539;
+                        background-color: currentColor;
                     }
                 }
             }
@@ -299,9 +307,8 @@
             }
             &-detail{
                 width: calc(100% - 17.5rem);
-                background-color: #2B343D;
+                background-color: currentColor;
                 padding: 1rem;
-                color: white;
                 float: right;
                 height: 100%;
                 position: relative;
@@ -313,6 +320,13 @@
             &-heading{
                 margin-top: 0;
                 padding: 0;
+                color: white;
+            }
+            &-title{
+                color: white;
+            }
+            &-description{
+                color: white;
             }
         }
     }
@@ -344,8 +358,7 @@
             }
             &-social{
                 margin-top: 2rem;
-                background-color: #2B343D;
-                color: white;
+                background-color: currentColor;
                 border-radius: 0.5rem;
                 position: relative;
                 z-index: 3;
@@ -360,11 +373,12 @@
                     padding-top: 1rem;
                     &--txt{
                         margin-left: 0.7rem;
+                        color: white;
                     }
                 }
                 svg{
                     path {
-                        fill: white !important
+                        fill: white !important;
                     }
                 }
                 &::after{
@@ -388,7 +402,6 @@
                 width: 65%;
                 padding: 2rem;
                 background-color: #EBEBEB;
-                color: #2B343D;
                 border-top-left-radius: 0.5rem;
                 border-bottom-left-radius: 0.5rem;
                 border-bottom-right-radius: 0.5rem;
@@ -399,7 +412,7 @@
                    position: absolute;
                    height: 100%;
                    width: 1rem;
-                   background-color: #2B343D;
+                   background-color: currentColor;
                    left: -1.5rem;
                    border-radius: 1rem;
                    top: 0;
@@ -416,8 +429,7 @@
             }
             &-social{
                 width: calc(35% - 0.7rem);
-                background-color: #2B343D;
-                color: white;
+                background-color: currentColor;
                 border-top-right-radius: 0.5rem;
                 border-bottom-right-radius: 0.5rem;
                 border-bottom-left-radius: 0.5rem;
@@ -435,6 +447,7 @@
                     padding-bottom: 1rem;
                     &--txt{
                         margin-left: 0.7rem;
+                        color: white;
                     }
                     &--icon{
                         border-radius: 50%;
@@ -464,11 +477,11 @@
                     height: 2rem;
                     width: 2rem;
                     border-radius: 50%;
-                    background-color: #EE4539;
+                    background-color: currentColor;
                 }
                 svg{
                     path {
-                        fill: white !important
+                        fill: white !important;
                     }
                 }
             }
@@ -549,10 +562,14 @@
             &-social{
                 border: 0;
                 padding: 1rem 3rem;
-                background-color: #2B343D;
-                color: white;
+                background-color: currentColor;
                 position: relative;
                 z-index: 3;
+                &__row{
+                    &--txt{
+                        color: white;
+                    }
+                }
                 svg{
                     path {
                         fill: white !important
@@ -569,7 +586,7 @@
             position: absolute;
             height: 4rem;
             width: 2rem;
-            background-color: #2B343D;
+            background-color: currentColor;
             top: 2.5rem;
         }
         padding: 0;
@@ -637,8 +654,7 @@
                 &__wrapper{
                     padding: 1.5rem 1rem 0.5rem 1rem;
                     border-radius: 0.5rem;
-                    background-color: #2B343D;
-                    color: white;
+                    background-color: currentColor;
                 }
                 &__row{
                     flex-direction: row-reverse;
@@ -669,7 +685,7 @@
                 &__wrapper{
                     padding: 0;
                     background-color: inherit;
-                    color: #2B343D;
+                    color: currentColor;
                 }
                 &__row{
                     padding-bottom: 0;
@@ -679,6 +695,22 @@
                     }
                     &--icon{
                         height: 2rem;
+                    }
+                }
+            }
+        }
+    }
+
+    &.it{
+        .profile{
+            &-social{
+                &__wrapper{
+                    position: relative;
+                    z-index: 3;
+                }
+                &__row{
+                    &--txt{
+                        color: white;
                     }
                 }
             }

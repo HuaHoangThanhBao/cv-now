@@ -27,7 +27,7 @@ import {ReactComponent as Triangle} from '../../../dist/triangle-bg.svg';
 import {ReactComponent as TriangleBottom} from '../../../dist/triangle-bottom-bg.svg';
 
 const DocumentPanel = (props) => {
-    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, currentColumnWidthAttr} = props;
+    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, currentColumnWidthAttr, colorHex} = props;
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
@@ -731,6 +731,7 @@ const DocumentPanel = (props) => {
                     key={pageIndex} 
                     ref={el => panelsRef.current[pageIndex] = el}
                     className={`document-wrapper ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
+                    style={{color: `${colorHex}`}}
                 >
                     {renderTheme(currentThemeType)}
                     {renderDocumentHeader(pageIndex)}
