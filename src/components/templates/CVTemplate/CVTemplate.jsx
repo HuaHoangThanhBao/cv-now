@@ -7,14 +7,17 @@ import DocumentPanel from '../../organisms/DocumentPanel/DocumentPanel';
 import { MetaData } from '../../../constants/MetaData';
 import './CVTemplate.scss';
 import { template_type } from '../../../constants/Template';
+import {theme} from '../../../constants/Theme';
 import {columnLevel} from '../../../constants/Variables';
 import PreviewContainer from '../../organisms/PreviewContainer/PreviewContainer';
+import ThemeList from '../../organisms/ThemeList/ThemeList';
 
 
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
     const [currentTemplateType, setCurrentTemplateType] = useState(template_type.basic)
+    const [currentThemeType, setCurrentThemeType] = useState(theme.triangle_theme)
     const [isShowPreviewList, setIsShowReviewList] = useState(false)
     const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);
     return(
@@ -25,6 +28,11 @@ const CVTemplate = () => {
                 setPages={setPages}
                 setIsReOrder={setIsReOrder}
             />
+            
+            <ThemeList 
+                setCurrentThemeType={setCurrentThemeType}
+            />
+
             <div className="mini-menu">
                 <Title placeholder="My Document"/>
                 <EditBalance 
@@ -53,6 +61,7 @@ const CVTemplate = () => {
                 isReOrder={isReOrder}
                 setIsReOrder={setIsReOrder}
                 currentTemplateType={currentTemplateType}
+                currentThemeType={currentThemeType}
                 currentColumnWidthAttr={currentColumnWidthAttr}
             />
         </div>

@@ -1,0 +1,54 @@
+.theme{
+    &-list{
+        height: 200px;
+        width: 550px;
+        background-color: #425061;
+        overflow: auto;
+        margin-left: -1rem;
+        margin: 0 auto;
+        padding: 1rem 0;
+    }
+    &-item{
+        width: 250px;
+        height: 50px;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.15rem;
+        float: left;
+        border: 2px solid transparent;
+        cursor: pointer;
+        &:hover{
+            border-color: #00C8AA;
+            border-radius: 0.25rem;
+        }
+    }
+    &-image{
+        height: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: white;
+        border-radius: 0.25rem;
+        &.basic_theme{
+            background-image: none;
+        }
+        &.triangle_theme{
+            background-image: url('../../../dist/triangle.png');
+        }
+        &.graph_theme{
+            background-image: url('../../../dist/graph.png');
+        }
+        &.graph_dot_theme{
+            background-image: url('../../../dist/graph-dot.png');
+        }
+        &.hex_circuit_theme{
+            background-image: url('../../../dist/hex-circuit.png');
+        }
+        &.line_theme{
+            background-image: url('../../../dist/line.png');
+        }
+        &.wave_theme{
+            background-image: url('../../../dist/wave.png');
+        }
+    }
+}
