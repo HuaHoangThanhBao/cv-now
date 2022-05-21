@@ -516,6 +516,8 @@
                         margin-left: 0.7rem;
                         padding-left: 3rem;
                         padding-right: 3rem;
+                        position: relative;
+                        z-index: 2;
                     }
                 }
             }
@@ -633,6 +635,14 @@
                     }
                 }
             }
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        position: relative;
+                        z-index: 3;
+                    }
+                }
+            }
         }
 
         &.functional{
@@ -654,6 +664,10 @@
                     &-block{
                         margin: 0;
                     }
+                }
+                &-info-side{
+                    position: relative;
+                    z-index: 3;
                 }
                 &-social{
                     &__wrapper{
@@ -930,6 +944,10 @@
                 .column{
                     &:nth-child(1){
                         padding-left: 3rem;
+                    }
+                    &:nth-child(2){
+                        position: relative;
+                        z-index: 2;
                     }
                 }
             }

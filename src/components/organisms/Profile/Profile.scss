@@ -107,6 +107,7 @@
                 position: relative;
                 margin-top: 1rem;
                 margin-left: 1rem;
+                z-index: 3;
                 &[data-column_level="48"]{
                   width: 48%;
                 }
@@ -303,6 +304,8 @@
                 color: white;
                 float: right;
                 height: 100%;
+                position: relative;
+                z-index: 3;
             }
             &-social{
                 padding-right: 3rem;
@@ -344,6 +347,8 @@
                 background-color: #2B343D;
                 color: white;
                 border-radius: 0.5rem;
+                position: relative;
+                z-index: 3;
                 &__wrapper{
                     padding: 0 1.5rem 1rem 1.5rem;
                 }
@@ -388,6 +393,7 @@
                 border-bottom-left-radius: 0.5rem;
                 border-bottom-right-radius: 0.5rem;
                 position: relative;
+                z-index: 3;
                 &::before{
                    content: '';
                    position: absolute;
@@ -417,6 +423,7 @@
                 border-bottom-left-radius: 0.5rem;
                 margin-left: 0.7rem;
                 position: relative;
+                z-index: 3;
                 &__wrapper{
                     padding-top: 2rem;
                     padding-bottom: 1rem;

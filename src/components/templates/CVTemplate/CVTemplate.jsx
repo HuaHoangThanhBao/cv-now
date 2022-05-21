@@ -16,8 +16,8 @@ import ThemeList from '../../organisms/ThemeList/ThemeList';
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
-    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.basic)
-    const [currentThemeType, setCurrentThemeType] = useState(theme.triangle_theme)
+    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.functional)
+    const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
     const [isShowPreviewList, setIsShowReviewList] = useState(false)
     const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);
     return(
