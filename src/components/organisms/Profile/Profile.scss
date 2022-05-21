@@ -530,6 +530,8 @@
                 margin-top: 0;
                 border: 0;
                 background-color: #EBEBEB;
+                position: relative;
+                z-index: 3;
             }
         }
     }
@@ -549,6 +551,8 @@
                 padding: 1rem 3rem;
                 background-color: #2B343D;
                 color: white;
+                position: relative;
+                z-index: 3;
                 svg{
                     path {
                         fill: white !important
