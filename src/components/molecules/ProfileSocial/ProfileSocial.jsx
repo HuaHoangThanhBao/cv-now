@@ -12,12 +12,16 @@ import {ReactComponent as GithubIcon} from '../../../dist/github.svg';
 import {ReactComponent as StackOverFlowIcon} from '../../../dist/stackoverflow.svg';
 import {ReactComponent as MediumIcon} from '../../../dist/medium.svg';
 import {ReactComponent as InstagramIcon} from '../../../dist/instagram.svg';
+import { template_type } from '../../../constants/Template';
 
 const ProfileSocial = (props) => {
-    const {getColumnType} = props
+    const {getColumnType, currentTemplateType, currentColumnWidthAttr} = props
     
     return (
-        <div className={`profile-social ${getColumnType()}`}>
+        <div 
+            className={`profile-social ${getColumnType()}`}
+            data-column_level={`${currentTemplateType === template_type.combined ? currentColumnWidthAttr && (100 - currentColumnWidthAttr): ''}`}
+        >
             <div className="profile-social__wrapper">
                 <div className="profile-social__row">
                     <div className="profile-social__row--txt">test@gmail.com</div>

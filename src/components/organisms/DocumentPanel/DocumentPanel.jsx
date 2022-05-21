@@ -13,9 +13,21 @@ import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
 import { maxHeight } from '../../../constants/Variables';
 import DocumentFooter from '../../molecules/DocumentFooter/DocumentFooter';
+import { theme } from '../../../constants/Theme';
+import {ReactComponent as Wave} from '../../../dist/wave-bg.svg';
+import {ReactComponent as WaveBottom} from '../../../dist/wave-bottom-bg.svg';
+import {ReactComponent as Line} from '../../../dist/line-bg.svg';
+import {ReactComponent as LineBottom} from '../../../dist/line-bottom-bg.svg';
+import {ReactComponent as HexCircuit} from '../../../dist/hex-circuit-bg.svg';
+import {ReactComponent as HexCircuitBottom} from '../../../dist/hex-circuit-bottom-bg.svg';
+import {ReactComponent as GraphDot} from '../../../dist/graph-dot-bg.svg';
+import {ReactComponent as GraphDotBottom} from '../../../dist/graph-dot-bottom-bg.svg';
+import {ReactComponent as Graph} from '../../../dist/graph-bg.svg';
+import {ReactComponent as Triangle} from '../../../dist/triangle-bg.svg';
+import {ReactComponent as TriangleBottom} from '../../../dist/triangle-bottom-bg.svg';
 
 const DocumentPanel = (props) => {
-    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType} = props;
+    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, currentColumnWidthAttr, colorHex} = props;
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
@@ -495,10 +507,14 @@ const DocumentPanel = (props) => {
             && currentTemplateType !== template_type.skilled_based
             && currentTemplateType !== template_type.functional){
             return(
-                <div className='profile-block' ref={profileContainerRef}>
+                <div 
+                    className='profile-block' 
+                    ref={profileContainerRef}
+                >
                     <Profile
                         currentTemplateType={currentTemplateType}
                         getColumnType={getColumnType}
+                        currentColumnWidthAttr={currentColumnWidthAttr}
                     />
                 </div>
             )
@@ -508,7 +524,10 @@ const DocumentPanel = (props) => {
             || currentTemplateType === template_type.functional){
             if(pages[0].columns.length === 1){
                 return(
-                    <div className='profile-block' ref={profileContainerRef}>
+                    <div 
+                        className='profile-block' 
+                        ref={profileContainerRef}
+                    >
                         <Profile
                             currentTemplateType={currentTemplateType}
                             getColumnType={getColumnType}
@@ -633,6 +652,78 @@ const DocumentPanel = (props) => {
         };
     }
 
+    const renderTheme = (currentThemeType) => {
+        switch(currentThemeType){
+            case theme.basic_theme:
+                return null
+            case theme.triangle_theme:
+                return (
+                    <React.Fragment>
+                        <div className='document-theme-container'>
+                            <Triangle className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                        <div className='document-theme-container'>
+                            <TriangleBottom className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                    </React.Fragment>
+                )
+            case theme.line_theme:
+                return (
+                    <React.Fragment>
+                        <div className='document-theme-container'>
+                            <Line className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                        <div className='document-theme-container'>
+                            <LineBottom className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                    </React.Fragment>
+                )
+            case theme.hex_circuit_theme:
+                return (
+                    <React.Fragment>
+                        <div className='document-theme-container'>
+                            <HexCircuit className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                        <div className='document-theme-container'>
+                            <HexCircuitBottom className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                    </React.Fragment>
+                )
+            case theme.graph_dot_theme:
+                return (
+                    <React.Fragment>
+                        <div className='document-theme-container'>
+                            <GraphDot className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                        <div className='document-theme-container'>
+                            <GraphDotBottom className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                    </React.Fragment>
+                )
+            case theme.graph_theme:
+                return (
+                    <React.Fragment>
+                        <div className='document-theme-container'>
+                            <Graph className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                    </React.Fragment>
+                )
+            case theme.wave_theme:
+                return (
+                    <React.Fragment>
+                        <div className='document-theme-container'>
+                            <Wave className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                        <div className='document-theme-container'>
+                            <WaveBottom className={`document-theme ${currentThemeType}`}/>
+                        </div>
+                    </React.Fragment>
+                )
+            default:
+                return null;
+        }
+    }
+
     return(
         <div id='document' className="document">
             {pages && pages.map((page, pageIndex) => (
@@ -640,8 +731,9 @@ const DocumentPanel = (props) => {
                     key={pageIndex} 
                     ref={el => panelsRef.current[pageIndex] = el}
                     className={`document-wrapper ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
+                    style={{color: `${colorHex}`}}
                 >
-                         
+                    {renderTheme(currentThemeType)}
                     {renderDocumentHeader(pageIndex)}
 
                     <div 
@@ -649,7 +741,11 @@ const DocumentPanel = (props) => {
                         style={{minHeight: `${pageIndex === 0 && profileContainerRef.current ? (maxHeight - profileContainerRef.current.offsetHeight): maxHeight}px`}}
                     >
                         {page && page.columns.map((column, columnIndex) => (
-                           <div key={columnIndex} className='column'>
+                            <div 
+                                key={columnIndex} 
+                                className='column'
+                                data-column_level={columnIndex !== 0 ? currentColumnWidthAttr && (100 - currentColumnWidthAttr): currentColumnWidthAttr}
+                            >
                                {renderSpecialHeader(pageIndex, columnIndex)}
                                <Panel 
                                     pageIndex={pageIndex}

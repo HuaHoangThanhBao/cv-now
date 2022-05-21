@@ -9,6 +9,7 @@
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "react": "^16.9.0",
+    "react-color": "^2.19.3",
     "react-contenteditable": "^3.3.6",
     "react-dom": "^16.9.0",
     "react-scripts": "3.4.1",

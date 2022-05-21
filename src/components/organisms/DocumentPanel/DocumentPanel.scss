@@ -7,11 +7,18 @@
         // min-height: 1000px;
         &.skilled_based{
             &.two-column{
+                .column{
+                    &:nth-child(1){
+                        .field-input{
+                            color: white;
+                        }
+                    }
+                }
                 .document{
                     &-footer{
                         &-col{
                             &:nth-child(1){
-                                color: white;
+                                color: currentColor;
                             }
                         }
                     }
@@ -30,6 +37,37 @@
                     }
                 }
             }
+        }
+        &:nth-of-type(1).functional{
+            .document{
+                &-container{
+                    .column{
+                        padding-top: 0;
+                    }
+                }
+            }
+        }
+    }
+    &-theme{
+        color: grey;
+        width: 100%;
+        height: 100%;
+        &-container{
+            position: absolute;
+            width: 100%;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            pointer-events: none;
+            &:nth-child(1){
+                top: 0;
+            }
+            &:nth-child(2){
+                bottom: 0;
+            }
+        }
+        path, polygon{
+            fill: currentColor;
         }
     }
     &-footer{
@@ -89,59 +127,6 @@
             }
         }
 
-        /*combined*/
-        &.combined{
-            padding: 0 1rem 1rem 1rem;
-            &.new.two-column{
-                .column{
-                    &:nth-child(1){
-                        padding-top: 3rem;
-                    }
-                    &:nth-child(2){
-                        margin-top: 1rem;
-                    }
-                }
-            }
-            &.two-column{
-                .column{
-                    &:nth-child(1){
-                        width: 60%;
-                        
-                    }
-                    &:nth-child(2){
-                        width: 40%;
-                        background-color: #EBEBEB;
-                        border-radius: 0.5rem;
-                        
-                    }
-                }
-            }
-            &.one-column{
-                .block{
-                    position: relative;
-                    &.even{
-                        .block-wrapper{
-                            position: relative;
-                            &::before{
-                                content: "";
-                                position: absolute;
-                                width: calc(100% + 4rem);
-                                height: 100%;
-                                background-color: #EBEBEB;
-                                z-index: 0;
-                                margin-top: 1rem;
-                                margin-left: -2rem;
-                                border-radius: 0.5rem;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        /*end combined*/
-
-
-        /*it*/
         &.it, &.tech, &.modern{
             padding: 2rem 0;
             &.two-column{
@@ -151,9 +136,8 @@
                     }
                     &:nth-child(2){
                         width: calc(30% - 1rem);
-                        background-color: #2B343D;
+                        background-color: currentColor;
                         border-radius: 0.5rem;
-                        color: white;
                     }
                 }
             }
@@ -176,8 +160,6 @@
                     &:nth-child(2){
                         width: calc(35% - 0.7rem);
                         background-color: #EBEBEB;
-                        color: #2B343D;
-                        margin-left: 0.7rem;
                     }
                 }
             }
@@ -200,71 +182,16 @@
             }
         }
 
-        &.tech{
-            padding-top: 1rem;
-            padding-right: 1rem;
-            &.one-column{
-                padding-left: 1rem;
-                .block{
-                    &.odd{
-                        .block-wrapper{
-                            position: relative;
-                            &::before{
-                                content: '';
-                                height: 100%;
-                                width: 1rem;
-                                background-color: #2B343D;
-                                position: absolute;
-                                left: -2.5rem;
-                                border-radius: 0.5rem;
-                            }
-                        }
-                    }
-                    &.even{
-                        .block-wrapper{
-                            position: relative;
-                            &::before{
-                                content: '';
-                                height: 100%;
-                                width: 1rem;
-                                background-color: #EE4539;
-                                position: absolute;
-                                left: -2.5rem;
-                                border-radius: 0.5rem;
-                            }
-                        }
-                    }
-                }
-            }
-            &.two-column{
-                padding-bottom: 1rem;
-                .column{
-                    &:nth-child(1){
-                        padding-left: 4rem;
-                    }
-                }
-            }
-            .panel{
-                &.left{
-                   .block-bar{
-                        left: -4.3rem;
-                   }
-                }
-            }
-        }
-
-        &.basic, &.executive, &.modern, &.professional, &.colleage, &.simple, &.minimalist{
+        &.basic, &.executive, &.modern, &.professional, &.colleage, &.simple{
             &.two-column{
                 .column{
                     &:nth-child(1){
                         width: 55%;
                         padding-right: 2rem;
-                        padding-left: 1rem;
                     }
                     &:nth-child(2){
                         width: 45%;
                         padding-left: 2rem;
-                        margin-left: 0;
                         background-color: inherit;
                     }
                 }
@@ -295,18 +222,112 @@
             }
         }
 
+        &.basic, &.executive, &.modern, &.professional, &.colleage, &.simple, &.combined{
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        &[data-column_level="48"]{
+                          width: 48%;
+                        }
+                        &[data-column_level="49"]{
+                          width: 49%;
+                        }
+                        &[data-column_level="50"]{
+                          width: 50%;
+                        }
+                        &[data-column_level="51"]{
+                          width: 51%;
+                        }
+                        &[data-column_level="52"]{
+                          width: 52%;
+                        }
+                        &[data-column_level="53"]{
+                          width: 53%;
+                        }
+                        &[data-column_level="54"]{
+                          width: 54%;
+                        }
+                        &[data-column_level="55"]{
+                          width: 55%;
+                        }
+                        &[data-column_level="56"]{
+                          width: 56%;
+                        }
+                        &[data-column_level="57"]{
+                          width: 57%;
+                        }
+                        &[data-column_level="58"]{
+                          width: 58%;
+                        }
+                        &[data-column_level="59"]{
+                          width: 59%;
+                        }
+                        &[data-column_level="60"]{
+                          width: 60%;
+                        }
+                        &[data-column_level="61"]{
+                          width: 61%;
+                        }
+                    }
+                    &:nth-child(2){
+                        &[data-column_level="52"]{
+                          width: 52%;
+                        }
+                        &[data-column_level="51"]{
+                          width: 51%;
+                        }
+                        &[data-column_level="50"]{
+                          width: 50%;
+                        }
+                        &[data-column_level="49"]{
+                          width: 49%;
+                        }
+                        &[data-column_level="48"]{
+                          width: 48%;
+                        }
+                        &[data-column_level="47"]{
+                          width: 47%;
+                        }
+                        &[data-column_level="45"]{
+                          width: 45%;
+                        }
+                        &[data-column_level="46"]{
+                          width: 46%;
+                        }
+                        &[data-column_level="44"]{
+                          width: 44%;
+                        }
+                        &[data-column_level="43"]{
+                          width: 43%;
+                        }
+                        &[data-column_level="42"]{
+                          width: 42%;
+                        }
+                        &[data-column_level="41"]{
+                          width: 41%;
+                        }
+                        &[data-column_level="40"]{
+                          width: 40%;
+                        }
+                        &[data-column_level="39"]{
+                          width: 39%;
+                        }
+                    }
+                }
+            }
+        }
+
         &.modern, &.professional, &.colleage, &.simple{
             padding: 2rem 3rem 2rem 2rem;
             &.two-column{
                 .column{
                     &:nth-child(2){
                         background-color: inherit;
-                        color: #2B343D;
                     }
                 }
             }
         }
-
+        
         &.minimalist, &.skilled_based, &.functional{
             .profile{
                 &-avatar{
@@ -401,9 +422,8 @@
             .profile{
                 &-social{
                     &__wrapper{
-                        background-color: #2B343D;
+                        background-color: currentColor;
                         padding: 1rem 1rem 0.5rem 1rem;
-                        color: white;
                         border-radius: 0.5rem;
                     }
                     &__row{
@@ -413,7 +433,7 @@
                     }
                     svg{
                         path {
-                            fill: white !important
+                            fill: currentColor !important
                         }
                     }
                 }
@@ -422,8 +442,7 @@
                 padding: 1rem;
                 .column{
                     &:nth-child(1){
-                        background-color: #2B343D;
-                        color: white;
+                        background-color: currentColor;
                         border-top-left-radius: 0.5rem;
                         border-bottom-left-radius: 0.5rem;
                     }
@@ -462,6 +481,139 @@
             }
         }
 
+        &.tech{
+            padding-top: 1rem;
+            padding-right: 1rem;
+            &.one-column{
+                padding-left: 1rem;
+                .block{
+                    &.odd{
+                        .block-wrapper{
+                            position: relative;
+                            &::before{
+                                content: '';
+                                height: 100%;
+                                width: 1rem;
+                                background-color: currentColor;
+                                position: absolute;
+                                left: -2.5rem;
+                                border-radius: 0.5rem;
+                            }
+                        }
+                    }
+                    &.even{
+                        .block-wrapper{
+                            position: relative;
+                            &::before{
+                                content: '';
+                                height: 100%;
+                                width: 1rem;
+                                background-color: #EBEBEB;
+                                position: absolute;
+                                left: -2.5rem;
+                                border-radius: 0.5rem;
+                            }
+                        }
+                    }
+                }
+                .panel{
+                    &.left{
+                       .block-bar{
+                            left: -4.3rem;
+                       }
+                    }
+                }
+            }
+            &.two-column{
+                padding-bottom: 1rem;
+                .column{
+                    &:nth-child(1){
+                        padding-left: 4rem;
+                    }
+                    &:nth-child(2){
+                        margin-left: 0.7rem;
+                        padding-left: 3rem;
+                        padding-right: 3rem;
+                        position: relative;
+                        z-index: 2;
+                    }
+                }
+                .panel{
+                    &.left{
+                       .block-bar{
+                            left: -5.3rem;
+                       }
+                    }
+                    &.right{
+                        .block-bar{
+                            right: -5.3rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.combined{
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: 1rem;
+            &.new.two-column{
+                .column{
+                    &:nth-child(1){
+                        padding-top: 3rem;
+                    }
+                    &:nth-child(2){
+                        margin-top: 1rem;
+                    }
+                }
+            }
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        padding-left: 3rem;
+                    }
+                    &:nth-child(2){
+                        padding: 0;
+                    }
+                }
+                .panel{
+                    &.right{
+                        background-color: #EBEBEB;
+                        border-radius: 0.5rem;
+                        padding: 2rem 2rem 8rem 1rem;
+                        margin-right: 1rem;
+                        height: 100%;
+                    }
+                }
+            }
+            &.one-column{
+                .column{
+                    padding-left: 3rem;
+                    padding-right: 2rem;
+                }
+                .block{
+                    position: relative;
+                    &.even{
+                        .block-wrapper{
+                            position: relative;
+                            &::before{
+                                content: "";
+                                position: absolute;
+                                width: calc(100% + 3rem);
+                                height: 100%;
+                                background-color: #EBEBEB;
+                                z-index: 0;
+                                margin-top: 1rem;
+                                margin-left: -2rem;
+                                border-radius: 0.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         &.skilled_based{
             &.one-column{
                 .block{
@@ -478,7 +630,7 @@
                             &:nth-child(1){
                                 width: 40%;
                                 height: 100%;
-                                background-color: #2B343D;
+                                background-color: currentColor;
                                 border-top-left-radius: 0.5rem;
                                 border-bottom-left-radius: 0.5rem;
                             }
@@ -501,15 +653,39 @@
                     }
                 }
             }
+            &.two-column{
+                .column{
+                    &:nth-child(1){
+                        position: relative;
+                        z-index: 3;
+                    }
+                }
+                .profile{
+                    &-avatar{
+                        border: none;
+                    }
+                    &-social{
+                        &__row{
+                            &--txt{
+                                color: white;
+                            }
+                        }
+                    }
+                }
+                svg{
+                    path{
+                        fill: white !important;
+                    }
+                }
+            }
         }
 
         &.functional{
             .profile{
                 &-detail{
                     width: 100%;
-                    background-color: #2B343D;
+                    background-color: currentColor;
                     padding: 1rem;
-                    color: white;
                     float: none;
                     height: 13rem;
                     margin-bottom: 2rem;
@@ -523,23 +699,37 @@
                         margin: 0;
                     }
                 }
+                &-info-side{
+                    position: relative;
+                    z-index: 3;
+                }
                 &-social{
                     &__wrapper{
                         background-color: transparent;
-                        color: #2B343D;
+                        // color: #2B343D;
                         padding: 0;
                     }
                     &__row{
                         width: 100%;
                         &--txt{
                             margin-left: 0.7rem;
+                            color: black;
                         }
                     }
                     svg{
                         path {
-                            fill: inherit !important
+                            fill: currentColor !important
                         }
                     }
+                }
+                &-heading{
+                    color: white;
+                }
+                &-title{
+                    color: white;
+                }
+                &-description{
+                    color: white;
                 }
             }
             &.two-column{
@@ -571,11 +761,6 @@
                     }
                 }
             }
-            &.one-column{
-                .column{
-                    padding-top: 0;
-                }
-            }
             .divider-row{
                 display: none;
             }
@@ -584,6 +769,12 @@
         &.minimalist{
             &.one-column{
                 padding-top: 0;
+                padding-right: 0;
+                padding-left: 0;
+                .column{
+                    padding-left: 3rem;
+                    padding-right: 3rem;
+                }
                 .block{
                     &-header{
                         &-container{
@@ -623,6 +814,23 @@
                     }
                 }
             }
+            &.two-column{
+                .divider-row{
+                    display: none;
+                }
+                .panel{
+                    &.right{
+                       .block-bar{
+                            right: -5.3rem;
+                       }
+                    }
+                }
+            }
+            svg{
+                path {
+                    fill: currentColor !important
+                }
+            }
         }
 
         &.simple{
@@ -637,16 +845,18 @@
                                 height: 3px;
                                 left: -3rem;
                                 top: 1rem;
-                                background-color: #2B343D;
+                                background-color: currentColor;
                             }
                         }
                     }
                 }
             }
             &.two-column{
+                padding-left: 0;
+                padding-right: 0;
                 .column{
                     &:nth-child(1){
-                        
+                        padding-left: 3rem;
                         .block{
                             &.even{
                                 .block-header{
@@ -657,14 +867,13 @@
                                         height: 3px;
                                         left: -3rem;
                                         top: 0.7rem;
-                                        background-color: #2B343D;
+                                        background-color: currentColor;
                                     }
                                 }
                             }
                         }
                     }
                     &:nth-child(2){
-                        
                         .block{
                             &.even{
                                 .block-header{
@@ -673,12 +882,19 @@
                                         position: absolute;
                                         width: 1.5rem;
                                         height: 3px;
-                                        right: -3rem;
+                                        right: -2rem;
                                         top: 0.7rem;
-                                        background-color: #2B343D;
+                                        background-color: currentColor;
                                     }
                                 }
                             }
+                        }
+                    }
+                    .panel{
+                        &.right{
+                           .block-bar{
+                                right: -3.3rem;
+                           }
                         }
                     }
                 }
@@ -706,11 +922,26 @@
             }
             &.two-column{
                 padding-top: 0;
+                padding-left: 0;
+                padding-right: 0;
+                .column{
+                    &:nth-child(1){
+                        padding-left: 3rem;
+                    }
+                    &:nth-child(2){
+                        padding-right: 3rem;
+                    }
+                }
             }
         }
 
         &.it{
             &.one-column{
+                padding-left: 0;
+                .column{
+                    padding-left: 3rem;
+                    padding-right: 3rem;
+                }
                 .block{
                     &-header-container{
                         display: flex;
@@ -736,7 +967,7 @@
                                 width: 50%;
                                 height: 100%;
                                 margin-left: -1rem;
-                                background-color: #2B343D;
+                                background-color: currentColor;
                                 border-radius: 0.5rem;
                                 margin-right: 2rem;
                             }
@@ -750,19 +981,42 @@
                         }
                     }
                 }
-                .field{
-                    max-width: 70%;
-                }
             }
             &.two-column{
                 padding-bottom: 1rem;
                 padding-top: 1rem;
+                .column{
+                    &:nth-child(1){
+                        padding-left: 3rem;
+                    }
+                    &:nth-child(2){
+                        position: relative;
+                        z-index: 2;
+                        .field-input{
+                            color: white;
+                        }
+                    }
+                }
             }
         }
 
         &.basic{
             &.two-column{
                 padding-top: 0;
+                padding-left: 0;
+                padding-right: 0;
+                .column{
+                    &:nth-child(1){
+                        padding-left: 3rem;
+                    }
+                }
+                .panel{
+                    &.right{
+                       .block-bar{
+                            right: -3.3rem;
+                       }
+                    }
+                }
             }
         }
 
@@ -772,6 +1026,20 @@
             }
             &.two-column{
                 padding-top: 0;
+                padding-left: 0;
+                padding-right: 0;
+                .column{
+                    &:nth-child(1){
+                        padding-left: 3rem;
+                    }
+                }
+                .panel{
+                    &.right{
+                       .block-bar{
+                            right: -3.3rem;
+                       }
+                    }
+                }
             }
         }
 
@@ -790,6 +1058,16 @@
             }
             &.two-column{
                 padding-top: 0;
+                padding-left: 0;
+                padding-right: 0;
+                .column{
+                    &:nth-child(1){
+                        padding-left: 3rem;
+                    }
+                    &:nth-child(2){
+                        padding-right: 3rem;
+                    }
+                }
             }
         }
         
@@ -799,6 +1077,16 @@
             }
             &.two-column{
                 padding-top: 0;
+                padding-left: 0;
+                padding-right: 0;
+                .column{
+                    &:nth-child(1){
+                        padding-left: 3rem;
+                    }
+                    &:nth-child(2){
+                        padding-right: 3rem;
+                    }
+                }
             }
         }
     }
