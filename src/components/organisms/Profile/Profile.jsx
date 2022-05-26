@@ -6,7 +6,7 @@ import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
 import { template_type } from '../../../constants/Template';
 
 const Profile = (props) => {
-    const {currentTemplateType, getColumnType, currentColumnWidthAttr} = props
+    const {currentTemplateType, getColumnType, currentColumnWidthAttr, infoKeys, info, setInfo} = props
 
     return (
         <div className={`profile ${currentTemplateType} ${getColumnType()}`}>
@@ -16,7 +16,11 @@ const Profile = (props) => {
                     data-column_level={`${currentTemplateType === template_type.combined ? currentColumnWidthAttr: ''}`}
                 >
                     <ProfileAvatar />
-                    <ProfileInfo />
+                    <ProfileInfo 
+                        infoKeys={infoKeys}
+                        info={info}
+                        setInfo={setInfo}
+                    />
                 </div>
                 <ProfileSocial 
                     getColumnType={getColumnType}

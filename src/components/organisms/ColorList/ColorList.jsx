@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SketchPicker } from "react-color";
 import './ColorList.scss';
 
 const ColorList = (props) => {
-    const {colorRbg, setColorRbg, colorHex, setColorHex} = props;
+    const {colorRbg, setColorRbg, setColorHex} = props;
 
     const handleChange = (color) => {
         setColorHex(color.hex);

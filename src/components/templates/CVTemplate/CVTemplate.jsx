@@ -12,6 +12,7 @@ import {columnLevel} from '../../../constants/Variables';
 import PreviewContainer from '../../organisms/PreviewContainer/PreviewContainer';
 import ThemeList from '../../organisms/ThemeList/ThemeList';
 import ColorList from '../../organisms/ColorList/ColorList';
+import { infoData } from '../../../constants/InfoData';
 
 
 const CVTemplate = () => {
@@ -23,6 +24,8 @@ const CVTemplate = () => {
     const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);
     const [colorRbg, setColorRbg] = useState('#2B343D')
     const [colorHex, setColorHex] = useState('#2B343D')
+    const [info, setInfo] = useState(infoData);
+    const infoKeys = Object.keys(info);
     return(
         <div className="cv-template">
             <MainMenu />
@@ -61,6 +64,9 @@ const CVTemplate = () => {
                     setIsReOrder={setIsReOrder}
                     currentTemplateType={currentTemplateType}
                     setCurrentTemplateType={setCurrentTemplateType}
+                    infoKeys={infoKeys}
+                    info={info}
+                    setInfo={setInfo}
                 />
             )}
             <button onClick={() => setIsShowReviewList(!isShowPreviewList)}>Show preview list</button>
@@ -74,6 +80,9 @@ const CVTemplate = () => {
                 currentThemeType={currentThemeType}
                 currentColumnWidthAttr={currentColumnWidthAttr}
                 colorHex={colorHex}
+                infoKeys={infoKeys}
+                info={info}
+                setInfo={setInfo}
             />
         </div>
     )
