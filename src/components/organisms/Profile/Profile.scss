@@ -18,6 +18,7 @@
             text-align: right;
         }
         &__wrapper{
+            cursor: pointer;
             &::after{
                 content: '';
                 display: block;

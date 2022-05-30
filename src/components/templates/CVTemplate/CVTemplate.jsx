@@ -13,6 +13,7 @@ import PreviewContainer from '../../organisms/PreviewContainer/PreviewContainer'
 import ThemeList from '../../organisms/ThemeList/ThemeList';
 import ColorList from '../../organisms/ColorList/ColorList';
 import { infoData } from '../../../constants/InfoData';
+import ProfileModal from '../../molecules/ProfileModal/ProfileModal';
 
 
 const CVTemplate = () => {
@@ -27,64 +28,68 @@ const CVTemplate = () => {
     const [info, setInfo] = useState(infoData);
     const infoKeys = Object.keys(info);
     return(
-        <div className="cv-template">
-            <MainMenu />
-            <Board 
-                pages={pages}
-                setPages={setPages}
-                setIsReOrder={setIsReOrder}
-            />
-            
-            <ColorList 
-                colorRbg={colorRbg}
-                setColorRbg={setColorRbg}
-                colorHex={colorHex}
-                setColorHex={setColorHex}
-            />
-
-            <ThemeList 
-                setCurrentThemeType={setCurrentThemeType}
-            />
-
-            <div className="mini-menu">
-                <Title placeholder="My Document"/>
-                <EditBalance 
-                    pageColumnsCount={pages[0].columns.length}
-                    currentTemplateType={currentTemplateType}
-                    currentColumnWidthAttr={currentColumnWidthAttr} 
-                    setCurrentColumnWidthAttr={setCurrentColumnWidthAttr}
+        <React.Fragment>
+            <div className="cv-template">
+                <MainMenu />
+                <Board 
+                    pages={pages}
+                    setPages={setPages}
+                    setIsReOrder={setIsReOrder}
                 />
-            </div>
+                
+                <ColorList 
+                    colorRbg={colorRbg}
+                    setColorRbg={setColorRbg}
+                    colorHex={colorHex}
+                    setColorHex={setColorHex}
+                />
 
-            {isShowPreviewList && (
-                <PreviewContainer 
+                <ThemeList 
+                    setCurrentThemeType={setCurrentThemeType}
+                />
+
+                <div className="mini-menu">
+                    <Title placeholder="My Document"/>
+                    <EditBalance 
+                        pageColumnsCount={pages[0].columns.length}
+                        currentTemplateType={currentTemplateType}
+                        currentColumnWidthAttr={currentColumnWidthAttr} 
+                        setCurrentColumnWidthAttr={setCurrentColumnWidthAttr}
+                    />
+                </div>
+
+                {isShowPreviewList && (
+                    <PreviewContainer 
+                        pages={pages}
+                        setPages={setPages}
+                        isReOrder={isReOrder}
+                        setIsReOrder={setIsReOrder}
+                        currentTemplateType={currentTemplateType}
+                        setCurrentTemplateType={setCurrentTemplateType}
+                        colorHex={colorHex}
+                        infoKeys={infoKeys}
+                        info={info}
+                        setInfo={setInfo}
+                    />
+                )}
+                <button onClick={() => setIsShowReviewList(!isShowPreviewList)}>Show preview list</button>
+
+                <DocumentPanel 
                     pages={pages}
                     setPages={setPages}
                     isReOrder={isReOrder}
                     setIsReOrder={setIsReOrder}
                     currentTemplateType={currentTemplateType}
-                    setCurrentTemplateType={setCurrentTemplateType}
+                    currentThemeType={currentThemeType}
+                    currentColumnWidthAttr={currentColumnWidthAttr}
+                    colorHex={colorHex}
                     infoKeys={infoKeys}
                     info={info}
                     setInfo={setInfo}
                 />
-            )}
-            <button onClick={() => setIsShowReviewList(!isShowPreviewList)}>Show preview list</button>
-
-            <DocumentPanel 
-                pages={pages}
-                setPages={setPages}
-                isReOrder={isReOrder}
-                setIsReOrder={setIsReOrder}
-                currentTemplateType={currentTemplateType}
-                currentThemeType={currentThemeType}
-                currentColumnWidthAttr={currentColumnWidthAttr}
-                colorHex={colorHex}
-                infoKeys={infoKeys}
-                info={info}
-                setInfo={setInfo}
-            />
-        </div>
+            </div>
+            <ProfileModal />
+        </React.Fragment>
     )
 }
 
