@@ -18,6 +18,7 @@
             text-align: right;
         }
         &__wrapper{
+            cursor: pointer;
             &::after{
                 content: '';
                 display: block;
@@ -97,7 +98,6 @@
         clear: left;
     }
 
-    /*Cominbed Template*/
     &.combined{
         padding: 0;
         .profile{
@@ -224,6 +224,10 @@
             &-heading{
                 color: white;
             }
+            &-detail{
+                width: calc(100% - 7rem);
+                color: white;
+            }
         }
         &.dot{
             .profile{
@@ -252,9 +256,7 @@
             }
         }
     }
-    /*End Combined Template*/
 
-    /*minimalist teamplate*/
     &.minimalist, &.functional{
         padding: 2rem 3rem;
         .profile{
@@ -356,6 +358,10 @@
                     }
                 }
             }
+            &-detail{
+                width: calc(100% - 15rem);
+                float: left;
+            }
             &-social{
                 margin-top: 2rem;
                 background-color: currentColor;
@@ -417,6 +423,10 @@
                    border-radius: 1rem;
                    top: 0;
                 }
+            }
+            &-detail{
+                width: calc(100% - 15rem);
+                float: left;
             }
             &-avatar{
                 float: left;
@@ -549,8 +559,21 @@
         }
     }
 
+    &.executive{
+        .profile{
+            &-detail{
+                width: calc(100% - 15rem);
+                float: left;
+            }
+        }
+    }
+
     &.minimalist{
         .profile{
+            &-detail{
+                width: calc(100% - 15rem);
+                float: left;
+            }
             &-social{
                 background-color: inherit;
             }
@@ -575,6 +598,10 @@
                         fill: white !important
                     }
                 }
+            }
+            &-detail{
+                width: calc(100% - 15rem);
+                float: left;
             }
         }
     }
@@ -617,13 +644,6 @@
                     }
                 }
             }
-        }
-    }
-
-    &.colleage{
-        border: 0;
-        &::before{
-            content: none;
         }
     }
 
@@ -678,6 +698,18 @@
         }
     }
 
+    &.colleage{
+        border: 0;
+        &::before{
+            content: none;
+        }
+        .profile{
+            &-detail{
+                width: calc(100% - 5rem);
+            }
+        }
+    }
+
     &.modern{
         .profile{
             &-social{
@@ -698,6 +730,10 @@
                     }
                 }
             }
+            &-detail{
+                width: calc(100% - 15rem);
+                float: left;
+            }
         }
     }
 
@@ -713,6 +749,27 @@
                         color: white;
                     }
                 }
+            }
+            &-detail{
+                width: calc(100% - 15rem);
+                float: left;
+            }
+        }
+    }
+
+    &.basic{
+        .profile{
+            &-detail{
+                width: calc(100% - 15rem);
+                float: left;
+            }
+        }
+    }
+
+    &.professional{
+        .profile{
+            &-detail{
+                width: calc(100% - 5rem);
             }
         }
     }

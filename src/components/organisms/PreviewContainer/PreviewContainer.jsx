@@ -4,7 +4,8 @@ import DocumentPanel from '../DocumentPanel/DocumentPanel';
 import './PreviewContainer.scss'
 
 const PreviewContainer = (props) => {
-    const {pages, setPages, isReOrder, setIsReOrder, setCurrentTemplateType} = props;
+    const {pages, setPages, isReOrder, setIsReOrder, setCurrentTemplateType, colorHex, infoKeys, info, 
+           setInfo, socialData, isOpenProfileModal, setIsOpenProfileModal} = props;
     const templateList = Object.keys(template)
     
     return(
@@ -31,6 +32,13 @@ const PreviewContainer = (props) => {
                                     setIsReOrder={setIsReOrder}
                                     currentTemplateType={template}
                                     setCurrentTemplateType={setCurrentTemplateType}
+                                    colorHex={colorHex}
+                                    infoKeys={infoKeys}
+                                    info={info}
+                                    setInfo={setInfo}
+                                    socialData={socialData}
+                                    isOpenProfileModal={isOpenProfileModal} 
+                                    setIsOpenProfileModal={setIsOpenProfileModal}
                                 />
                             </div>
                         </div>

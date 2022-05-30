@@ -15,92 +15,65 @@ import {ReactComponent as InstagramIcon} from '../../../dist/instagram.svg';
 import { template_type } from '../../../constants/Template';
 
 const ProfileSocial = (props) => {
-    const {getColumnType, currentTemplateType, currentColumnWidthAttr} = props
+    const {getColumnType, currentTemplateType, currentColumnWidthAttr, setIsOpenProfileModal, socialData} = props
+
+    const renderSocialIcon = (item) => {
+        switch(item){
+            case "email":
+                return <MailIcon />
+            case "address":
+                return <LocationIcon />
+            case "phoneNumber":
+                return <PhoneIcon />
+            case "website":
+                return <WebsiteIcon />
+            case "linkedIn":
+                return <LinkedinIcon />
+            case "twitter":
+                return <TwitterIcon />
+            case "quora":
+                return <QuoraIcon />
+            case "skype":
+                return <SkypeIcon />
+            case "facebook":
+                return <FacebookIcon />
+            case "github":
+                return <GithubIcon />
+            case "stackOverflow":
+                return <StackOverFlowIcon />
+            case "medium":
+                return <MediumIcon />
+            case "instagram":
+                return <InstagramIcon />
+            default:
+                return null
+        }
+    }
+
+    const renderSocialItem = (group, item) => {
+        if(socialData[group][item]){
+            return (
+                <div key={item} className="profile-social__row">
+                    <div className="profile-social__row--txt">{item}</div>
+                    <div className="profile-social__row--icon">
+                        {renderSocialIcon(item)}
+                    </div>
+                </div>
+            )
+        }
+    }
+
     
     return (
         <div 
             className={`profile-social ${getColumnType()}`}
             data-column_level={`${currentTemplateType === template_type.combined ? currentColumnWidthAttr && (100 - currentColumnWidthAttr): ''}`}
+            onClick={() => setIsOpenProfileModal(true)}
         >
             <div className="profile-social__wrapper">
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <MailIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <PhoneIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <LocationIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <WebsiteIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <LinkedinIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <TwitterIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <QuoraIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <SkypeIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <FacebookIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <GithubIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <StackOverFlowIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <MediumIcon />
-                    </div>
-                </div>
-                <div className="profile-social__row">
-                    <div className="profile-social__row--txt">test@gmail.com</div>
-                    <div className="profile-social__row--icon">
-                        <InstagramIcon />
-                    </div>
-                </div>
+                {socialData && Object.keys(socialData).map(group => (
+                    Object.keys(socialData[group]).map(item => renderSocialItem(group, item))
+                ))}
             </div>
         </div>
     )

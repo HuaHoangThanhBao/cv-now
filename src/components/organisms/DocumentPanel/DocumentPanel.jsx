@@ -27,7 +27,11 @@ import {ReactComponent as Triangle} from '../../../dist/triangle-bg.svg';
 import {ReactComponent as TriangleBottom} from '../../../dist/triangle-bottom-bg.svg';
 
 const DocumentPanel = (props) => {
-    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, currentColumnWidthAttr, colorHex} = props;
+    const {
+        pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
+        currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
+        setIsOpenProfileModal
+    } = props;
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
@@ -515,6 +519,11 @@ const DocumentPanel = (props) => {
                         currentTemplateType={currentTemplateType}
                         getColumnType={getColumnType}
                         currentColumnWidthAttr={currentColumnWidthAttr}
+                        infoKeys={infoKeys}
+                        info={info}
+                        setInfo={setInfo}
+                        socialData={socialData}
+                        setIsOpenProfileModal={setIsOpenProfileModal}
                     />
                 </div>
             )
@@ -531,6 +540,11 @@ const DocumentPanel = (props) => {
                         <Profile
                             currentTemplateType={currentTemplateType}
                             getColumnType={getColumnType}
+                            infoKeys={infoKeys}
+                            info={info}
+                            setInfo={setInfo}
+                            socialData={socialData}
+                            setIsOpenProfileModal={setIsOpenProfileModal}
                         />
                     </div>
                 )
@@ -569,7 +583,11 @@ const DocumentPanel = (props) => {
                     <React.Fragment>
                         {(pageIndex === 0 && (
                             <div className='profile-info-side' ref={profileInfoRef}>
-                                <ProfileInfo />
+                                <ProfileInfo 
+                                    infoKeys={infoKeys}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
                             </div>
                         ))}
 
@@ -577,6 +595,8 @@ const DocumentPanel = (props) => {
                             <div className='profile-social-side' ref={profileSocialRef}>
                                 <ProfileSocial 
                                     getColumnType={getColumnType}
+                                    socialData={socialData}
+                                    setIsOpenProfileModal={setIsOpenProfileModal}
                                 />
                             </div>
                         ))}
@@ -600,6 +620,8 @@ const DocumentPanel = (props) => {
                             <div className='profile-social-side' ref={profileSocialRef}>
                                 <ProfileSocial 
                                     getColumnType={getColumnType}
+                                    socialData={socialData}
+                                    setIsOpenProfileModal={setIsOpenProfileModal}
                                 />
                             </div>
                         )}
@@ -610,7 +632,11 @@ const DocumentPanel = (props) => {
                 return (
                     <div className='profile-info-side' ref={profileInfoRef}>
                         {(pageIndex === 0 && (
-                            <ProfileInfo />
+                            <ProfileInfo 
+                                infoKeys={infoKeys}
+                                info={info}
+                                setInfo={setInfo}
+                            />
                         ))}
                     </div>
                 )
