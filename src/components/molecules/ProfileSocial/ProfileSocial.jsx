@@ -54,7 +54,7 @@ const ProfileSocial = (props) => {
         if(socialData[group][item]){
             return (
                 <div key={item} className="profile-social__row">
-                    <div className="profile-social__row--txt">{item}</div>
+                    <div className="profile-social__row--txt">{socialData[group][item]}</div>
                     <div className="profile-social__row--icon">
                         {renderSocialIcon(item)}
                     </div>
