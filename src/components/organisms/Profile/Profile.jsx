@@ -6,7 +6,10 @@ import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
 import { template_type } from '../../../constants/Template';
 
 const Profile = (props) => {
-    const {currentTemplateType, getColumnType, currentColumnWidthAttr, infoKeys, info, setInfo} = props
+    const {
+        currentTemplateType, getColumnType, currentColumnWidthAttr, infoKeys, info, setInfo,
+        socialData, setIsOpenProfileModal
+    } = props
 
     return (
         <div className={`profile ${currentTemplateType} ${getColumnType()}`}>
@@ -26,6 +29,8 @@ const Profile = (props) => {
                     getColumnType={getColumnType}
                     currentTemplateType={currentTemplateType}
                     currentColumnWidthAttr={currentColumnWidthAttr}
+                    socialData={socialData}
+                    setIsOpenProfileModal={setIsOpenProfileModal}
                 />
             </div>
         </div>

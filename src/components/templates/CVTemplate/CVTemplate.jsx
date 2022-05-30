@@ -14,6 +14,7 @@ import ThemeList from '../../organisms/ThemeList/ThemeList';
 import ColorList from '../../organisms/ColorList/ColorList';
 import { infoData } from '../../../constants/InfoData';
 import ProfileModal from '../../molecules/ProfileModal/ProfileModal';
+import { socialMetaData } from '../../../constants/SocialData';
 
 
 const CVTemplate = () => {
@@ -27,6 +28,8 @@ const CVTemplate = () => {
     const [colorHex, setColorHex] = useState('#2B343D')
     const [info, setInfo] = useState(infoData);
     const infoKeys = Object.keys(info);
+    const [isOpenProfileModal, setIsOpenProfileModal] = useState(false);
+    const [socialData, setSocialData] = useState(socialMetaData);
     return(
         <React.Fragment>
             <div className="cv-template">
@@ -70,6 +73,9 @@ const CVTemplate = () => {
                         infoKeys={infoKeys}
                         info={info}
                         setInfo={setInfo}
+                        socialData={socialData}
+                        isOpenProfileModal={isOpenProfileModal} 
+                        setIsOpenProfileModal={setIsOpenProfileModal}
                     />
                 )}
                 <button onClick={() => setIsShowReviewList(!isShowPreviewList)}>Show preview list</button>
@@ -86,9 +92,17 @@ const CVTemplate = () => {
                     infoKeys={infoKeys}
                     info={info}
                     setInfo={setInfo}
+                    socialData={socialData}
+                    isOpenProfileModal={isOpenProfileModal} 
+                    setIsOpenProfileModal={setIsOpenProfileModal}
                 />
             </div>
-            <ProfileModal />
+            <ProfileModal 
+                socialData={socialData}
+                setSocialData={setSocialData}
+                isOpenProfileModal={isOpenProfileModal} 
+                setIsOpenProfileModal={setIsOpenProfileModal}
+            />
         </React.Fragment>
     )
 }

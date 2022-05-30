@@ -27,7 +27,11 @@ import {ReactComponent as Triangle} from '../../../dist/triangle-bg.svg';
 import {ReactComponent as TriangleBottom} from '../../../dist/triangle-bottom-bg.svg';
 
 const DocumentPanel = (props) => {
-    const {pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, currentColumnWidthAttr, colorHex, infoKeys, info, setInfo} = props;
+    const {
+        pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
+        currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
+        setIsOpenProfileModal
+    } = props;
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
@@ -518,6 +522,8 @@ const DocumentPanel = (props) => {
                         infoKeys={infoKeys}
                         info={info}
                         setInfo={setInfo}
+                        socialData={socialData}
+                        setIsOpenProfileModal={setIsOpenProfileModal}
                     />
                 </div>
             )
@@ -537,6 +543,8 @@ const DocumentPanel = (props) => {
                             infoKeys={infoKeys}
                             info={info}
                             setInfo={setInfo}
+                            socialData={socialData}
+                            setIsOpenProfileModal={setIsOpenProfileModal}
                         />
                     </div>
                 )
@@ -587,6 +595,8 @@ const DocumentPanel = (props) => {
                             <div className='profile-social-side' ref={profileSocialRef}>
                                 <ProfileSocial 
                                     getColumnType={getColumnType}
+                                    socialData={socialData}
+                                    setIsOpenProfileModal={setIsOpenProfileModal}
                                 />
                             </div>
                         ))}
@@ -610,6 +620,8 @@ const DocumentPanel = (props) => {
                             <div className='profile-social-side' ref={profileSocialRef}>
                                 <ProfileSocial 
                                     getColumnType={getColumnType}
+                                    socialData={socialData}
+                                    setIsOpenProfileModal={setIsOpenProfileModal}
                                 />
                             </div>
                         )}
