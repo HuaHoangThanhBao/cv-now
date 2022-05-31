@@ -630,15 +630,17 @@ const DocumentPanel = (props) => {
             }
             else if(columnIndex === 1){
                 return (
-                    <div className='profile-info-side' ref={profileInfoRef}>
+                    <React.Fragment>
                         {(pageIndex === 0 && (
-                            <ProfileInfo 
-                                infoKeys={infoKeys}
-                                info={info}
-                                setInfo={setInfo}
-                            />
+                            <div className='profile-info-side' ref={profileInfoRef}>
+                                <ProfileInfo 
+                                    infoKeys={infoKeys}
+                                    info={info}
+                                    setInfo={setInfo}
+                                />
+                            </div>
                         ))}
-                    </div>
+                    </React.Fragment>
                 )
             }
         }
