@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react'
 
 function DragNDrop(props) {
-    const {data, setPages, setIsReOrder} = props
+    const {data, setPages, setIsReOrder, handleTransformToOneColumn} = props
     const [list, setList] = useState(data); 
     const [dragging, setDragging] = useState(false);
     const [noNeedDragging, setNoNeedDragging] = useState(false);
@@ -218,6 +218,10 @@ function DragNDrop(props) {
         setPages([...list])
     }, [list, setIsReOrder, setPages])
 
+    const onCheckOneColumnCheckBox = (e) => {
+        handleTransformToOneColumn(e.target.checked);
+    }
+
     useEffect(() => {
         setList(data);
     }, [setList, data])
@@ -292,7 +296,10 @@ function DragNDrop(props) {
                         ))}
                     </div>
                     <div className='drag-no-need-wrapper'>
-                        <input type="checkbox" />
+                        <input 
+                            type="checkbox" 
+                            onChange={onCheckOneColumnCheckBox}
+                        />
                         <label className='group-title'>One column</label>
                         <div>Drag and drop to Add or Remove sections.</div>
                         <div 

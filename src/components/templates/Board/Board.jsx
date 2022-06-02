@@ -9,7 +9,7 @@ import DragNDrop from '../../molecules/DragNDrop/DragNDrop';
 // ]
 
 const Board = (props) => {
-    const {pages, setPages, setIsReOrder} = props
+    const {pages, setPages, setIsReOrder, handleTransformToOneColumn} = props
     
     return (
         <div className='board'>
@@ -17,6 +17,7 @@ const Board = (props) => {
                 data={pages}
                 setPages={setPages}
                 setIsReOrder={setIsReOrder}
+                handleTransformToOneColumn={handleTransformToOneColumn}
             />
         </div>
     )
