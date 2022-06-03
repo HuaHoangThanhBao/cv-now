@@ -18,8 +18,8 @@ export const one_column_format = [
     "REFERENCES",
 ]
 
-export const two_column_format = {
-    first_column: [
+export const two_column_format = [
+    [
         "EDUCATION",
         "WORK EXPERIENCE",
         "ORGANIZATIONS",
@@ -30,7 +30,7 @@ export const two_column_format = {
         "HONOR AWARDS",
         "TEACHING EXPERIENCE",
     ],
-    second_column: [
+    [
         "VOLUNTEER EXPERIENCE",
         "SUPPORTED CAUSE",
         "LANGUAGES",
@@ -40,4 +40,4 @@ export const two_column_format = {
         "SOFT SKILLS",
         "REFERENCES",
     ]
-}
+]
