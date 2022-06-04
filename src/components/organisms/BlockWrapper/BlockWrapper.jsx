@@ -32,9 +32,10 @@ const BlockWrapper = (props) => {
         currentTemplateType
     } = props;
 
-    const [isVisible, setIsVisible] = useState(false);
+    const [isDisplayWhenHasInformation, setIsDisplayWhenHasInformation] = useState(false);
     const [myBlockVisible, setMyBlockVisible] = useState(false)
     const [blockHeaderStatus, setBlockHeaderStatus] = useState(false)
+    const [currentBlockSelectedIndex, setCurrentBlockSelectedIndex] = useState(-1)
 
     const getBlockContent = (_blockType, index) => {
         switch(_blockType){
@@ -96,7 +97,7 @@ const BlockWrapper = (props) => {
                      inputBlockType={InputFieldType.title}
                      placeHolder={getTitle(index, InputFieldType.title)}
                      visible={true}
-                     isVisible={getStatus(index,InputFieldType.title)}
+                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      columnIndex={columnIndex}
@@ -109,8 +110,8 @@ const BlockWrapper = (props) => {
                      type="text"
                      inputBlockType={InputFieldType.desc}
                      placeHolder={getTitle(index, InputFieldType.desc)}
-                     visible={isVisible}
-                     isVisible={getStatus(index,InputFieldType.desc)}
+                     visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
+                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.desc)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      columnIndex={columnIndex}
@@ -119,7 +120,7 @@ const BlockWrapper = (props) => {
                      updateFieldHeight={updateFieldHeight}
                  />
                  <DateInput 
-                     isVisible={isVisible}
+                     isDisplayWhenHasInformation={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                      onInputFieldChange={onInputFieldChange}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
@@ -134,8 +135,8 @@ const BlockWrapper = (props) => {
                      type="text"
                      inputBlockType={InputFieldType.optional_dashed}
                      placeHolder={getTitle(index, InputFieldType.optional_dashed)}
-                     visible={isVisible}
-                     isVisible={getStatus(index,InputFieldType.optional_dashed)}
+                     visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
+                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      columnIndex={columnIndex}
@@ -148,8 +149,8 @@ const BlockWrapper = (props) => {
                      type="text"
                      inputBlockType={InputFieldType.content_detail}
                      placeHolder={getTitle(index, InputFieldType.content_detail)}
-                     visible={isVisible}
-                     isVisible={getStatus(index,InputFieldType.content_detail)}
+                     visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
+                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      columnIndex={columnIndex}
@@ -162,8 +163,8 @@ const BlockWrapper = (props) => {
                      type="text"
                      inputBlockType={InputFieldType.content_bullet}
                      placeHolder={getTitle(index, InputFieldType.content_bullet)}
-                     visible={isVisible}
-                     isVisible={getStatus(index,InputFieldType.content_bullet)}
+                     visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
+                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_bullet)}
                      updateFieldData={updateFieldData}
                      pageIndex={pageIndex}
                      columnIndex={columnIndex}
@@ -184,7 +185,7 @@ const BlockWrapper = (props) => {
                     visible={true}
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
-                    isVisible={getStatus(index,InputFieldType.title)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -195,10 +196,10 @@ const BlockWrapper = (props) => {
                 <InputField
                     externalClass="block-content-desc"
                     type="text"
-                    visible={isVisible}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     inputBlockType={InputFieldType.desc}
                     placeHolder={getTitle(index, InputFieldType.desc)}
-                    isVisible={getStatus(index,InputFieldType.desc)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.desc)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -207,7 +208,7 @@ const BlockWrapper = (props) => {
                     updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
-                    isVisible={isVisible}
+                    isDisplayWhenHasInformation={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     onInputFieldChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
@@ -222,8 +223,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.optional_dashed}
                     placeHolder={getTitle(index, InputFieldType.optional_dashed)}
-                    isVisible={getStatus(index,InputFieldType.optional_dashed)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -236,8 +237,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.optional_dashed2}
                     placeHolder={getTitle(index, InputFieldType.optional_dashed2)}
-                    isVisible={getStatus(index,InputFieldType.optional_dashed2)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed2)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -250,8 +251,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.content_detail}
                     placeHolder={getTitle(index, InputFieldType.content_detail)}
-                    isVisible={getStatus(index,InputFieldType.content_detail)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -265,8 +266,8 @@ const BlockWrapper = (props) => {
                     icon={BulletIcon}
                     inputBlockType={InputFieldType.content_bullet}
                     placeHolder={getTitle(index, InputFieldType.content_bullet)}
-                    isVisible={getStatus(index,InputFieldType.content_bullet)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_bullet)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -280,8 +281,8 @@ const BlockWrapper = (props) => {
                         type="text"
                         inputBlockType={InputFieldType.contact}
                         placeHolder={getTitle(index, InputFieldType.contact)}
-                        isVisible={getStatus(index,InputFieldType.contact)}
-                        visible={isVisible}
+                        isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact)}
+                        visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                         updateFieldData={updateFieldData}
                         pageIndex={pageIndex}
                         columnIndex={columnIndex}
@@ -295,8 +296,8 @@ const BlockWrapper = (props) => {
                             type="text"
                             inputBlockType={InputFieldType.contact_person}
                             placeHolder={getTitle(index, InputFieldType.contact_person)}
-                            isVisible={getStatus(index,InputFieldType.contact_person)}
-                            visible={isVisible}
+                            isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact_person)}
+                            visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
                             columnIndex={columnIndex}
@@ -309,8 +310,8 @@ const BlockWrapper = (props) => {
                             type="text"
                             inputBlockType={InputFieldType.contact_info}
                             placeHolder={getTitle(index, InputFieldType.contact_info)}
-                            isVisible={getStatus(index,InputFieldType.contact_info)}
-                            visible={isVisible}
+                            isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact_info)}
+                            visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
                             columnIndex={columnIndex}
@@ -333,7 +334,7 @@ const BlockWrapper = (props) => {
                     visible={true}
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
-                    isVisible={getStatus(index,InputFieldType.title)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -346,8 +347,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.optional_dashed}
                     placeHolder={getTitle(index, InputFieldType.optional_dashed)}
-                    isVisible={getStatus(index,InputFieldType.optional_dashed)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -361,8 +362,8 @@ const BlockWrapper = (props) => {
                         type="text"
                         inputBlockType={InputFieldType.contact}
                         placeHolder={getTitle(index, InputFieldType.contact)}
-                        isVisible={getStatus(index,InputFieldType.contact)}
-                        visible={isVisible}
+                        isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact)}
+                        visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                         updateFieldData={updateFieldData}
                         pageIndex={pageIndex}
                         columnIndex={columnIndex}
@@ -376,8 +377,8 @@ const BlockWrapper = (props) => {
                             type="text"
                             inputBlockType={InputFieldType.contact_person}
                             placeHolder={getTitle(index, InputFieldType.contact_person)}
-                            isVisible={getStatus(index,InputFieldType.contact_person)}
-                            visible={isVisible}
+                            isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact_person)}
+                            visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
                             columnIndex={columnIndex}
@@ -390,8 +391,8 @@ const BlockWrapper = (props) => {
                             type="text"
                             inputBlockType={InputFieldType.contact_info}
                             placeHolder={getTitle(index, InputFieldType.contact_info)}
-                            isVisible={getStatus(index,InputFieldType.contact_info)}
-                            visible={isVisible}
+                            isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact_info)}
+                            visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
                             columnIndex={columnIndex}
@@ -414,7 +415,7 @@ const BlockWrapper = (props) => {
                     visible={true}
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
-                    isVisible={getStatus(index,InputFieldType.title)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -425,10 +426,10 @@ const BlockWrapper = (props) => {
                 <InputField
                     externalClass="block-content-desc"
                     type="text"
-                    visible={isVisible}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     inputBlockType={InputFieldType.desc}
                     placeHolder={getTitle(index, InputFieldType.desc)}
-                    isVisible={getStatus(index,InputFieldType.desc)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.desc)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -437,7 +438,7 @@ const BlockWrapper = (props) => {
                     updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
-                    isVisible={isVisible}
+                    isDisplayWhenHasInformation={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     onInputFieldChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
@@ -452,8 +453,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.optional_dashed}
                     placeHolder={getTitle(index, InputFieldType.optional_dashed)}
-                    isVisible={getStatus(index,InputFieldType.optional_dashed)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -466,8 +467,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.content_detail}
                     placeHolder={getTitle(index, InputFieldType.content_detail)}
-                    isVisible={getStatus(index,InputFieldType.content_detail)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -481,8 +482,8 @@ const BlockWrapper = (props) => {
                     icon={BulletIcon}
                     inputBlockType={InputFieldType.content_bullet}
                     placeHolder={getTitle(index, InputFieldType.content_bullet)}
-                    isVisible={getStatus(index,InputFieldType.content_bullet)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_bullet)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -496,8 +497,8 @@ const BlockWrapper = (props) => {
                         type="text"
                         inputBlockType={InputFieldType.contact}
                         placeHolder={getTitle(index, InputFieldType.contact)}
-                        isVisible={getStatus(index,InputFieldType.contact)}
-                        visible={isVisible}
+                        isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact)}
+                        visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                         updateFieldData={updateFieldData}
                         pageIndex={pageIndex}
                         columnIndex={columnIndex}
@@ -511,8 +512,8 @@ const BlockWrapper = (props) => {
                             type="text"
                             inputBlockType={InputFieldType.contact_person}
                             placeHolder={getTitle(index, InputFieldType.contact_person)}
-                            isVisible={getStatus(index,InputFieldType.contact_person)}
-                            visible={isVisible}
+                            isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact_person)}
+                            visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
                             columnIndex={columnIndex}
@@ -525,8 +526,8 @@ const BlockWrapper = (props) => {
                             type="text"
                             inputBlockType={InputFieldType.contact_info}
                             placeHolder={getTitle(index, InputFieldType.contact_info)}
-                            isVisible={getStatus(index,InputFieldType.contact_info)}
-                            visible={isVisible}
+                            isDisplayWhenHasInformation={getStatus(index,InputFieldType.contact_info)}
+                            visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                             updateFieldData={updateFieldData}
                             pageIndex={pageIndex}
                             columnIndex={columnIndex}
@@ -549,7 +550,7 @@ const BlockWrapper = (props) => {
                     visible={true}
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
-                    isVisible={getStatus(index,InputFieldType.title)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -558,7 +559,7 @@ const BlockWrapper = (props) => {
                     updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
-                    isVisible={isVisible}
+                    isDisplayWhenHasInformation={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     onInputFieldChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
@@ -573,8 +574,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.content_detail_dashed}
                     placeHolder={getTitle(index, InputFieldType.content_detail_dashed)}
-                    isVisible={getStatus(index,InputFieldType.content_detail_dashed)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail_dashed)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -595,7 +596,7 @@ const BlockWrapper = (props) => {
                     visible={true}
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
-                    isVisible={getStatus(index,InputFieldType.title)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -608,8 +609,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.content_detail_dashed}
                     placeHolder={getTitle(index, InputFieldType.content_detail_dashed)}
-                    isVisible={getStatus(index,InputFieldType.content_detail_dashed)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail_dashed)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -630,7 +631,7 @@ const BlockWrapper = (props) => {
                     visible={true}
                     inputBlockType={InputFieldType.content_detail}
                     placeHolder={getTitle(index, InputFieldType.content_detail)}
-                    isVisible={getStatus(index,InputFieldType.content_detail)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -650,8 +651,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.desc}
                     placeHolder={getTitle(index, InputFieldType.desc)}
-                    isVisible={getStatus(index,InputFieldType.desc)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.desc)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -665,7 +666,7 @@ const BlockWrapper = (props) => {
                     visible={true}
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
-                    isVisible={getStatus(index,InputFieldType.title)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -678,8 +679,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.optional_dashed}
                     placeHolder={getTitle(index, InputFieldType.optional_dashed)}
-                    isVisible={getStatus(index,InputFieldType.optional_dashed)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -692,8 +693,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.optional_dashed2}
                     placeHolder={getTitle(index, InputFieldType.optional_dashed2)}
-                    isVisible={getStatus(index,InputFieldType.optional_dashed2)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed2)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -706,8 +707,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.content_detail}
                     placeHolder={getTitle(index, InputFieldType.content_detail)}
-                    isVisible={getStatus(index,InputFieldType.content_detail)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -720,8 +721,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.optional_dashed3}
                     placeHolder={getTitle(index, InputFieldType.optional_dashed3)}
-                    isVisible={getStatus(index,InputFieldType.optional_dashed3)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed3)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -734,8 +735,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.optional_dashed4}
                     placeHolder={getTitle(index, InputFieldType.optional_dashed4)}
-                    isVisible={getStatus(index,InputFieldType.optional_dashed4)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.optional_dashed4)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -756,7 +757,7 @@ const BlockWrapper = (props) => {
                     visible={true}
                     inputBlockType={InputFieldType.title}
                     placeHolder={getTitle(index, InputFieldType.title)}
-                    isVisible={getStatus(index,InputFieldType.title)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -765,7 +766,7 @@ const BlockWrapper = (props) => {
                     updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
-                    isVisible={isVisible}
+                    isDisplayWhenHasInformation={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     onInputFieldChange={onInputFieldChange}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
@@ -780,8 +781,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.content_detail_dashed}
                     placeHolder={getTitle(index, InputFieldType.content_detail_dashed)}
-                    isVisible={getStatus(index,InputFieldType.content_detail_dashed)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail_dashed)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -794,8 +795,8 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.content_detail}
                     placeHolder={getTitle(index, InputFieldType.content_detail)}
-                    isVisible={getStatus(index,InputFieldType.content_detail)}
-                    visible={isVisible}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail)}
+                    visible={isDisplayWhenHasInformation && index === currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
                     columnIndex={columnIndex}
@@ -809,12 +810,12 @@ const BlockWrapper = (props) => {
 
     useEffect(() => {
         return() => {
-            if(isVisible || blockHeaderStatus) {
+            if(isDisplayWhenHasInformation || blockHeaderStatus) {
                 console.log('yess:', pageIndex + "/" + columnIndex + "/" + childIndex)
                 checkToMoveContent(pageIndex, columnIndex, childIndex, setBlockHeaderStatus)
             }
         }
-    }, [isVisible, blockHeaderStatus])
+    }, [isDisplayWhenHasInformation, blockHeaderStatus])
 
     return (
         <BlockContainer 
@@ -832,8 +833,8 @@ const BlockWrapper = (props) => {
             moveBlockUp={moveBlockUp}
             moveBlockDown={moveBlockDown}
             title={title}
-            setIsVisible={setIsVisible}
-            isVisible={isVisible}
+            setIsDisplayWhenHasInformation={setIsDisplayWhenHasInformation}
+            isDisplayWhenHasInformation={isDisplayWhenHasInformation}
             setMyBlockVisible={setMyBlockVisible}
             myBlockVisible={myBlockVisible}
             getBlockContent={getBlockContent}
@@ -848,6 +849,8 @@ const BlockWrapper = (props) => {
             getHeader={getHeader}
             getChildSpecialdIndex={getChildSpecialdIndex}
             currentTemplateType={currentTemplateType}
+            currentBlockSelectedIndex={currentBlockSelectedIndex}
+            setCurrentBlockSelectedIndex={setCurrentBlockSelectedIndex}
         />
     )
 }

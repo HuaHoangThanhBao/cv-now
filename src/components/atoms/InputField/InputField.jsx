@@ -3,9 +3,13 @@ import ContentEditable from 'react-contenteditable';
 import './InputField.scss';
 
 const InputField = (props) => {
+    const {
+        externalClass, pageIndex, columnIndex, childIndex, currentIndex, visible, 
+        isDisplayWhenHasInformation, inputBlockType, icon, placeHolder, 
+        updateFieldData, updateFieldHeight
+    } = props;
     const inputRef = useRef();
     const contentEditable = createRef();
-    const {externalClass, pageIndex, columnIndex, childIndex, currentIndex, visible, isVisible, inputBlockType, icon, placeHolder, updateFieldData, updateFieldHeight} = props;
     const [html, setHTML] = useState(placeHolder);
     
     useEffect(() => {
@@ -25,43 +29,26 @@ const InputField = (props) => {
         }
     }, [html, childIndex, columnIndex, currentIndex, inputBlockType, pageIndex, updateFieldHeight])
 
-    const renderField = () => {
-        if(visible){
-            return (
-                <div className={'field' + (icon ? " field-bullet": "")} ref={inputRef}>
-                    {icon && (
-                        <img src={icon} alt="" className='field-icon'/>
-                    )}
-                    <ContentEditable 
-                        className={"field-input" + (externalClass ? " " + externalClass: "")}
-                        innerRef={contentEditable} 
-                        html={html}
-                        onChange={handleChange}
-                    />
-                </div>
-            )
-        }
-        else{
-            if(isVisible){
-                return (
-                    <div className={'field' + (icon ? " field-bullet": "")}>
-                        {icon && (
-                            <img src={icon} alt="" className='field-icon'/>
-                        )}
-                        <ContentEditable 
-                            className={"field-input" + (externalClass ? " " + externalClass: "")}
-                            innerRef={contentEditable} 
-                            html={html}
-                            onChange={handleChange}
-                        />
-                    </div>
-                )
-            }
-            else return ''
-        }
-    }
     return(
-        renderField()
+        <div 
+            className={
+                'field' 
+                + (icon ? " field-bullet": "") 
+                + (visible ? " visible": "") 
+                + (isDisplayWhenHasInformation ? " isDisplayWhenHasInformation": "")
+            } 
+            ref={inputRef}
+        >
+            {icon && (
+                <img src={icon} alt="" className='field-icon'/>
+            )}
+            <ContentEditable 
+                className={"field-input" + (externalClass ? ` ${externalClass}`: "")}
+                innerRef={contentEditable} 
+                html={html}
+                onChange={handleChange}
+            />
+        </div>
     )
 }
 

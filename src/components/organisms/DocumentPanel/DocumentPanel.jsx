@@ -780,9 +780,9 @@ const DocumentPanel = (props) => {
                                     externalClassName={(page.columns.length > 1 && columnIndex === 0) ? " left": (page.columns.length === 1 && columnIndex === 0) ? " left": " right"}
                                 >
                                    {column.child && (
-                                       column.child.map((child, childIndex) => {
-                                           return(renderChildContent(pageIndex, columnIndex, child.id, childIndex)
-                                       )})
+                                       column.child.map((child, childIndex) => (
+                                           renderChildContent(pageIndex, columnIndex, child.id, childIndex)
+                                       ))
                                    )}
                                </Panel>
                            </div>

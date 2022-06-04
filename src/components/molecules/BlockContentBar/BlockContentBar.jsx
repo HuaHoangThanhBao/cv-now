@@ -5,10 +5,10 @@ import MoveUpIcon from './../../../dist/move-up.svg';
 import MoveDownIcon from './../../../dist/move-down.svg';
 import './BlockContentBar.scss';
 
-const BlockContentBar = ({isVisible, currentIndex, dataLength, onCreateNewContent, onRemoveContent, onMoveContentDown, onMoveContentUp}) => {
+const BlockContentBar = ({isDisplayWhenHasInformation, currentIndex, dataLength, onCreateNewContent, onRemoveContent, onMoveContentDown, onMoveContentUp}) => {
     return(
         <div className='block-bar'>
-            {(isVisible && (
+            {(isDisplayWhenHasInformation && (
                 <div className='block-bar-container'>
                     <div className='block-btn add' onClick={onCreateNewContent}>
                         <img src={AddIcon} alt="" />
