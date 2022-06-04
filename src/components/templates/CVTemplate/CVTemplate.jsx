@@ -87,8 +87,8 @@ const CVTemplate = () => {
                         clonePages[i].columns.pop()
                     }
                 }
-                if(pages[i].columns.length <= 1){
-                    pages.pop()
+                if(clonePages[i].columns.length <= 1){
+                    clonePages.pop()
                 }
             }
         }
