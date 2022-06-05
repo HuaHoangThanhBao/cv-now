@@ -44,12 +44,15 @@ const CVTemplate = () => {
             console.log('start tranform to two column')
             for(let i = 0; i < two_column_format.length; i++){
                 for(let j = 0; j < two_column_format[i].length; j++){
+                    const result = findChildHeaderMatchToOneColumnFormatItem(clonePages, two_column_format[i][j])
+                    if(!result) continue;
+                    
                     const {
                         child, 
                         pageIndex, 
                         columnIndex, 
                         childIndex
-                    } = findChildHeaderMatchToOneColumnFormatItem(clonePages, two_column_format[i][j])
+                    } = result
                     if(child){
                         console.log(`move from pageIndex: ${pageIndex}, columnIndex: ${columnIndex}, childIndex: ${childIndex}, 
                         to pageIndex: ${i}, columnIndex: ${i}, childIndex: ${childIndex}`)
@@ -71,12 +74,15 @@ const CVTemplate = () => {
         else{
             console.log('start tranform to one column')
             for(let i = 0; i < one_column_format.length; i++){
+                const result = findChildHeaderMatchToOneColumnFormatItem(clonePages, one_column_format[i])
+                if(!result) continue;
+
                 const {
                     child, 
                     pageIndex, 
                     columnIndex, 
                     childIndex
-                } = findChildHeaderMatchToOneColumnFormatItem(clonePages, one_column_format[i])
+                } = result
                 if(child){
                     console.log(`move from pageIndex: ${pageIndex}, columnIndex: ${columnIndex}, childIndex: ${childIndex}, to: ${i - 1}`)
                     //We delete before move
