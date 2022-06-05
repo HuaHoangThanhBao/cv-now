@@ -33,8 +33,8 @@ const BlockContainer = (props) => {
         updateFieldHeight,
         getChildSpecialdIndex,
         currentTemplateType,
-        currentBlockSelectedIndex, 
-        setCurrentBlockSelectedIndex
+        currentBlockSelected,
+        setCurrentBlockSelected
     } = props;
 
     const myRef = useRef();
@@ -51,6 +51,7 @@ const BlockContainer = (props) => {
         setMyBlockVisible(!status)
     }
 
+    const {_currentBlockSelectedIndex} = currentBlockSelected
     return(
         <div 
             className={"block" + (getChildSpecialdIndex(childId) % 2 === 0 ? " odd": " even")} 
@@ -102,15 +103,27 @@ const BlockContainer = (props) => {
                     {data && data.map((item, index) => (
                         <BlockContent 
                             isDisplayWhenHasInformation={
-                                isDisplayWhenHasInformation && index === currentBlockSelectedIndex 
+                                isDisplayWhenHasInformation && index === _currentBlockSelectedIndex 
                                 ? isDisplayWhenHasInformation
                                 : false
                             } 
                             key={pageIndex + '/'+ columnIndex + '/' + childIndex + '/' + index} 
-                            onFocus={() => setCurrentBlockSelectedIndex(index)}
+                            onFocus={() => {
+                                setCurrentBlockSelected({
+                                    _pageIndex: pageIndex,
+                                    _columnIndex: columnIndex,
+                                    _childIndex: childIndex,
+                                    _currentBlockSelectedIndex: index
+                                })
+                            }}
                             onClick={() => handleBlockContentStatus(true)}
                             onCreateNewContent={() => {
-                                setCurrentBlockSelectedIndex(index + 1)
+                                setCurrentBlockSelected({
+                                    _pageIndex: pageIndex,
+                                    _columnIndex: columnIndex,
+                                    _childIndex: childIndex,
+                                    _currentBlockSelectedIndex: index + 1
+                                })
                                 createNewContent(pageIndex, columnIndex, childId, childIndex, index)
                             }}
                         >
@@ -118,26 +131,41 @@ const BlockContainer = (props) => {
 
                             <BlockContentBar 
                                 isDisplayWhenHasInformation={
-                                    isDisplayWhenHasInformation && index === currentBlockSelectedIndex 
+                                    isDisplayWhenHasInformation && index === _currentBlockSelectedIndex 
                                     ? isDisplayWhenHasInformation
                                     : false
                                 }
                                 dataLength={data.length}
                                 currentIndex={index}
                                 onCreateNewContent={() => {
-                                    setCurrentBlockSelectedIndex(index + 1)
+                                    setCurrentBlockSelected({
+                                        _pageIndex: pageIndex,
+                                        _columnIndex: columnIndex,
+                                        _childIndex: childIndex,
+                                        _currentBlockSelectedIndex: index + 1
+                                    })
                                     createNewContent(pageIndex, columnIndex, childId, childIndex, index)
                                 }}
                                 onRemoveContent={() => removeContent(pageIndex, columnIndex, childId, childIndex, index)}
                                 onMoveContentDown={() => {
                                     if(data.length > 1){
-                                        setCurrentBlockSelectedIndex(index + 1)
+                                        setCurrentBlockSelected({
+                                            _pageIndex: pageIndex,
+                                            _columnIndex: columnIndex,
+                                            _childIndex: childIndex,
+                                            _currentBlockSelectedIndex: index + 1
+                                        })
                                     }
                                     moveContentDown(pageIndex, columnIndex, childId, childIndex, index)
                                 }}
                                 onMoveContentUp={() => {
                                     if(data.length > 0){
-                                        setCurrentBlockSelectedIndex(index - 1)
+                                        setCurrentBlockSelected({
+                                            _pageIndex: pageIndex,
+                                            _columnIndex: columnIndex,
+                                            _childIndex: childIndex,
+                                            _currentBlockSelectedIndex: index - 1
+                                        })
                                     }
                                     moveContentUp(pageIndex, columnIndex, childId, childIndex, index)
                                 }}

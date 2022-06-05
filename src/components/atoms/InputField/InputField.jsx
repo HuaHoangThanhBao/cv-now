@@ -5,13 +5,19 @@ import './InputField.scss';
 const InputField = (props) => {
     const {
         externalClass, pageIndex, columnIndex, childIndex, currentIndex, visible, 
-        isDisplayWhenHasInformation, inputBlockType, icon, placeHolder, 
+        isDisplayWhenHasInformation, inputBlockType, icon, placeHolder, isFocus,
         updateFieldData, updateFieldHeight
     } = props;
     const inputRef = useRef();
     const contentEditable = createRef();
     const [html, setHTML] = useState(placeHolder);
     
+    useEffect(() => {
+        if(isFocus){
+            contentEditable.current.focus()
+        }
+    }, [isFocus])
+
     useEffect(() => {
         setHTML(placeHolder)
     }, [placeHolder])
