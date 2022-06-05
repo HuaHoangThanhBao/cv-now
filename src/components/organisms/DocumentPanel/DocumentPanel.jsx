@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { InputFieldType } from '../../../constants/InputFieldType';
 import { getContent } from '../../../service/contentService';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
@@ -30,14 +30,8 @@ const DocumentPanel = (props) => {
     const {
         pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
-        setIsOpenProfileModal
+        setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected
     } = props;
-    const [currentBlockSelected, setCurrentBlockSelected] = useState({
-        pageIndex: 0,
-        columnIndex: 0,
-        childIndex: 0,
-        _currentBlockSelectedIndex: 0
-    })
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
