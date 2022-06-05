@@ -4,14 +4,18 @@ import AddIcon from './../../../dist/add.svg';
 import AlertIcon from './../../../dist/exclamation.svg';
 import './BlockContent.scss';
 
-const BlockContent = ({isVisible, onCreateNewContent, onClick, children}) => {
+const BlockContent = ({isDisplayWhenHasInformation, onCreateNewContent, onFocus, onClick, children}) => {
     return(
-        <div className={"block-content" + (isVisible ? " active": "")} onClick={onClick}>
+        <div 
+            className={"block-content" + (isDisplayWhenHasInformation ? " active": "")} 
+            onFocus={onFocus} 
+            onClick={onClick}
+        >
             <span className='block-content-alert'>
                 <img src={AlertIcon} alt="" />
             </span>
             {children}
-            {isVisible && (
+            {isDisplayWhenHasInformation && (
                 <div className="block-content-bottom">
                     <Button 
                         icon={AddIcon} 

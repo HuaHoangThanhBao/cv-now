@@ -1,4 +1,11 @@
 .field{
+    display: none !important;
+    &.visible{
+        display: block !important;
+    }
+    &.isDisplayWhenHasInformation{
+        display: block !important;
+    }
     &-input{
         display: block;
         border: none;

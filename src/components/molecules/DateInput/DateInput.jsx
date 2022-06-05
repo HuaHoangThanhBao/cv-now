@@ -4,7 +4,7 @@ import InputField from '../../atoms/InputField/InputField';
 import './DateInput.scss';
 
 const DateInput = (props) => {
-    const {pageIndex, childIndex, currentIndex, isVisible, onInputFieldChange, updateFieldData, getTitle} = props;
+    const {pageIndex, columnIndex, childIndex, currentIndex, isDisplayWhenHasInformation, onInputFieldChange, updateFieldHeight, updateFieldData, getTitle} = props;
     const [monthStart, setMonthStart] = useState('');
     const [monthEnd, setMonthEnd] = useState('');
     const [yearStart, setYearStart] = useState('');
@@ -38,7 +38,7 @@ const DateInput = (props) => {
     }, [monthStart, monthEnd, yearStart, yearEnd])
 
     const isShow = () => {
-        if(isVisible){
+        if(isDisplayWhenHasInformation){
             if(!allCheck) return true
             return true
         }
@@ -56,11 +56,13 @@ const DateInput = (props) => {
                     placeHolder={getTitle(currentIndex, InputFieldType.month_start)}
                     type="number"
                     visible={false}
-                    isVisible={isShow()}
+                    isDisplayWhenHasInformation={isShow()}
                     allCheck={allCheck}
                     onChange={onMonthStartFieldChange}
+                    updateFieldHeight={updateFieldHeight}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                 />
@@ -73,11 +75,13 @@ const DateInput = (props) => {
                     placeHolder={getTitle(currentIndex, InputFieldType.year_start)}
                     type="number"
                     visible={false}
-                    isVisible={isShow()}
+                    isDisplayWhenHasInformation={isShow()}
                     allCheck={allCheck}
                     onChange={onMonthEndFieldChange}
+                    updateFieldHeight={updateFieldHeight}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                 />
@@ -92,11 +96,13 @@ const DateInput = (props) => {
                     placeHolder={getTitle(currentIndex, InputFieldType.month_end)}
                     type="number"
                     visible={false}
-                    isVisible={isShow()}
+                    isDisplayWhenHasInformation={isShow()}
                     allCheck={allCheck}
                     onChange={onYearStartFieldChange}
+                    updateFieldHeight={updateFieldHeight}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                 />
@@ -109,11 +115,13 @@ const DateInput = (props) => {
                     placeHolder={getTitle(currentIndex, InputFieldType.year_end)}
                     type="number"
                     visible={false}
-                    isVisible={isShow()}
+                    isDisplayWhenHasInformation={isShow()}
                     allCheck={allCheck}
                     onChange={onYearEndFieldChange}
+                    updateFieldHeight={updateFieldHeight}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
+                    columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                 />

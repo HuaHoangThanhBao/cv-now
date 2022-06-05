@@ -4,10 +4,10 @@ import MoveUpIcon from './../../../dist/move-up.svg';
 import MoveDownIcon from './../../../dist/move-down.svg';
 import './BlockBar.scss';
 
-const BlockBar = ({childIndex, pageIndex, isVisible, onRemoveBlock, moveBlockUp, moveBlockDown}) => {
+const BlockBar = ({childIndex, pageIndex, isDisplayWhenHasInformation, onRemoveBlock, moveBlockUp, moveBlockDown}) => {
     return(
         <div className='block-bar'>
-            {(isVisible && (
+            {(isDisplayWhenHasInformation && (
                 <div className='block-bar-container'>
                     {
                         (

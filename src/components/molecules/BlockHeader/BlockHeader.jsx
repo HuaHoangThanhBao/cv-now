@@ -29,7 +29,7 @@ const BlockHeader = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.header}
                     placeHolder={title}
-                    isVisible={true}
+                    isDisplayWhenHasInformation={true}
                     visible={true}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { InputFieldType } from '../../../constants/InputFieldType';
 import { getContent } from '../../../service/contentService';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
@@ -32,6 +32,12 @@ const DocumentPanel = (props) => {
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
         setIsOpenProfileModal
     } = props;
+    const [currentBlockSelected, setCurrentBlockSelected] = useState({
+        pageIndex: 0,
+        columnIndex: 0,
+        childIndex: 0,
+        _currentBlockSelectedIndex: 0
+    })
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
@@ -501,6 +507,8 @@ const DocumentPanel = (props) => {
                     moveContentUp={moveContentUp}
                     getChildSpecialdIndex={getChildSpecialdIndex}
                     currentTemplateType={currentTemplateType}
+                    currentBlockSelected={currentBlockSelected}
+                    setCurrentBlockSelected={setCurrentBlockSelected}
                 />
     }
 
@@ -780,9 +788,9 @@ const DocumentPanel = (props) => {
                                     externalClassName={(page.columns.length > 1 && columnIndex === 0) ? " left": (page.columns.length === 1 && columnIndex === 0) ? " left": " right"}
                                 >
                                    {column.child && (
-                                       column.child.map((child, childIndex) => {
-                                           return(renderChildContent(pageIndex, columnIndex, child.id, childIndex)
-                                       )})
+                                       column.child.map((child, childIndex) => (
+                                           renderChildContent(pageIndex, columnIndex, child.id, childIndex)
+                                       ))
                                    )}
                                </Panel>
                            </div>
