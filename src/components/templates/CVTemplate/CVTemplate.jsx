@@ -31,6 +31,12 @@ const CVTemplate = () => {
     const infoKeys = Object.keys(info);
     const [isOpenProfileModal, setIsOpenProfileModal] = useState(false);
     const [socialData, setSocialData] = useState(socialMetaData);
+    const [currentBlockSelected, setCurrentBlockSelected] = useState({
+        pageIndex: 0,
+        columnIndex: 0,
+        childIndex: 0,
+        _currentBlockSelectedIndex: -1
+    })
 
     const handleTransformToOneColumn = (status) => {
         const clonePages = JSON.parse(JSON.stringify(pages));
@@ -38,12 +44,15 @@ const CVTemplate = () => {
             console.log('start tranform to two column')
             for(let i = 0; i < two_column_format.length; i++){
                 for(let j = 0; j < two_column_format[i].length; j++){
+                    const result = findChildHeaderMatchToOneColumnFormatItem(clonePages, two_column_format[i][j])
+                    if(!result) continue;
+                    
                     const {
                         child, 
                         pageIndex, 
                         columnIndex, 
                         childIndex
-                    } = findChildHeaderMatchToOneColumnFormatItem(clonePages, two_column_format[i][j])
+                    } = result
                     if(child){
                         console.log(`move from pageIndex: ${pageIndex}, columnIndex: ${columnIndex}, childIndex: ${childIndex}, 
                         to pageIndex: ${i}, columnIndex: ${i}, childIndex: ${childIndex}`)
@@ -65,12 +74,15 @@ const CVTemplate = () => {
         else{
             console.log('start tranform to one column')
             for(let i = 0; i < one_column_format.length; i++){
+                const result = findChildHeaderMatchToOneColumnFormatItem(clonePages, one_column_format[i])
+                if(!result) continue;
+
                 const {
                     child, 
                     pageIndex, 
                     columnIndex, 
                     childIndex
-                } = findChildHeaderMatchToOneColumnFormatItem(clonePages, one_column_format[i])
+                } = result
                 if(child){
                     console.log(`move from pageIndex: ${pageIndex}, columnIndex: ${columnIndex}, childIndex: ${childIndex}, to: ${i - 1}`)
                     //We delete before move
@@ -80,21 +92,20 @@ const CVTemplate = () => {
                 }
             }
             
-            //remove empty columns and pages
+            //remove second column of each page
             for(let i = 0; i < clonePages.length; i++){
-                for(let j = 0; j < clonePages[i].columns.length; j++){
-                    if(clonePages[i].columns[j].child.length === 0){
-                        clonePages[i].columns.pop()
-                    }
-                }
-                if(clonePages[i].columns.length <= 1){
-                    clonePages.pop()
-                }
+                clonePages[i].columns.pop()
             }
         }
         console.log('re-order page after transforming')
         console.log(clonePages)
         setPages([...clonePages])
+        setCurrentBlockSelected({
+            pageIndex: 0,
+            columnIndex: 0,
+            childIndex: 0,
+            _currentBlockSelectedIndex: -1
+        })
         setIsReOrder(true)
     }
 
@@ -181,6 +192,8 @@ const CVTemplate = () => {
                     socialData={socialData}
                     isOpenProfileModal={isOpenProfileModal} 
                     setIsOpenProfileModal={setIsOpenProfileModal}
+                    currentBlockSelected={currentBlockSelected}
+                    setCurrentBlockSelected={setCurrentBlockSelected}
                 />
             </div>
             <ProfileModal 
