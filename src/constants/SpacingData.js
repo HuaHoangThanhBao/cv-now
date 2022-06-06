@@ -1,0 +1,4 @@
+//These value based on CSS value
+export const blockMarginTop = 80
+export const blockContentMarginTop = 10
+export const fieldMarginTop = 4

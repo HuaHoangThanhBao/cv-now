@@ -10,7 +10,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Study Program", status: false, height: 0 },
+                { title: "Study Program", status: true, height: 0 },
                 {
                   desc: "Institution/ Place of education",
                   status: false,
@@ -41,7 +41,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Title/Position", status: false, height: 0 },
+                { title: "Title/Position", status: true, height: 0 },
                 { desc: "Workplace/Company", status: false, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
@@ -81,7 +81,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Organization Name", status: false, height: 0 },
+                { title: "Organization Name", status: true, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
                 { year_start: "mm", status: false, height: 0 },
@@ -101,7 +101,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Certificate Name", status: false, height: 0 },
+                { title: "Certificate Name", status: true, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
                 { year_start: "mm", status: false, height: 0 },
@@ -121,7 +121,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Project Name", status: false, height: 0 },
+                { title: "Project Name", status: true, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
                 { year_start: "mm", status: false, height: 0 },
@@ -141,7 +141,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Achievement Name", status: false, height: 0 },
+                { title: "Achievement Name", status: true, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
                 { year_start: "mm", status: false, height: 0 },
@@ -161,7 +161,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Conference/Course Name", status: false, height: 0 },
+                { title: "Conference/Course Name", status: true, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
                 { year_start: "mm", status: false, height: 0 },
@@ -186,7 +186,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Title/Award Name", status: false, height: 0 },
+                { title: "Title/Award Name", status: true, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
                 { year_start: "mm", status: false, height: 0 },
@@ -212,7 +212,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Name of the class", status: false, height: 0 },
+                { title: "Name of the class", status: true, height: 0 },
                 { desc: "Institution/Place of Education", status: false, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
@@ -246,7 +246,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Title/Position", status: false, height: 0 },
+                { title: "Title/Position", status: true, height: 0 },
                 { desc: "Organization", status: false, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
@@ -285,7 +285,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { content_detail: "Cause", status: false, height: 0 },
+                { content_detail: "Cause", status: true, height: 0 },
               ],
             ],
           },
@@ -296,7 +296,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Language Name", status: false, height: 0 },
+                { title: "Language Name", status: true, height: 0 },
                 {
                   content_detail_dashed: "Description",
                   status: false,
@@ -312,7 +312,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Publication Title", status: false, height: 0 },
+                { title: "Publication Title", status: true, height: 0 },
                 { desc: "Publication Type", status: false, height: 0 },
                 {
                   optional_dashed: "Author(s)",
@@ -349,7 +349,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { content_detail: "Skill name", status: false, height: 0 },
+                { content_detail: "Skill name", status: true, height: 0 },
               ],
             ],
           },
@@ -360,7 +360,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { content_detail: "Interest", status: false, height: 0 },
+                { content_detail: "Interest", status: true, height: 0 },
               ],
             ],
           },
@@ -371,7 +371,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { content_detail: "Soft skill", status: false, height: 0 },
+                { content_detail: "Soft skill", status: true, height: 0 },
               ],
             ],
           },
@@ -382,7 +382,7 @@ export const MetaData = [
             height: 0,
             data: [
               [
-                { title: "Name and Position", status: false, height: 0 },
+                { title: "Name and Position", status: true, height: 0 },
                 {
                   optional_dashed: "“Reference”",
                   status: false,

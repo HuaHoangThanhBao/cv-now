@@ -2,7 +2,7 @@ export const getContent = (childId) => {
     switch(childId){
         case 1:
             return [
-                {title: "Study Program", status: false, height: 0},
+                {title: "Study Program", status: true, height: 0},
                 {desc: "Institution/ Place of education", status: false, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
@@ -14,7 +14,7 @@ export const getContent = (childId) => {
             ]
         case 2:
             return [
-                {title: "Title/Position", status: false, height: 0},
+                {title: "Title/Position", status: true, height: 0},
                 {desc: "Workplace/Company", status: false, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
@@ -31,7 +31,7 @@ export const getContent = (childId) => {
             ]
         case 3:
             return [
-                {title: "Organization Name", status: false, height: 0},
+                {title: "Organization Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "mm", status: false, height: 0},
@@ -40,7 +40,7 @@ export const getContent = (childId) => {
             ]
         case 4:
             return [
-                {title: "Certificate Name", status: false, height: 0},
+                {title: "Certificate Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "mm", status: false, height: 0},
@@ -49,7 +49,7 @@ export const getContent = (childId) => {
             ]
         case 5:
             return [
-                {title: "Project Name", status: false, height: 0},
+                {title: "Project Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "mm", status: false, height: 0},
@@ -58,7 +58,7 @@ export const getContent = (childId) => {
             ]
         case 6:
             return [ 
-                {title: "Achievement Name", status: false, height: 0},
+                {title: "Achievement Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "mm", status: false, height: 0},
@@ -67,7 +67,7 @@ export const getContent = (childId) => {
             ]
         case 7:
             return [ 
-                {title: "Conference/Course Name", status: false, height: 0},
+                {title: "Conference/Course Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "mm", status: false, height: 0},
@@ -77,7 +77,7 @@ export const getContent = (childId) => {
             ]
         case 8:
             return [ 
-                {title: "Title/Award Name", status: false, height: 0},
+                {title: "Title/Award Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "mm", status: false, height: 0},
@@ -87,7 +87,7 @@ export const getContent = (childId) => {
             ]
         case 9:
             return [ 
-                { title: "Name of the class", status: false, height: 0 },
+                { title: "Name of the class", status: true, height: 0 },
                 { desc: "Institution/Place of Education", status: false, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
@@ -114,7 +114,7 @@ export const getContent = (childId) => {
             ]
         case 10:
             return [ 
-                {title: "Title/Position", status: false, height: 0},
+                {title: "Title/Position", status: true, height: 0},
                 {desc: "Organization", status: false, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
@@ -130,11 +130,11 @@ export const getContent = (childId) => {
             ]
         case 11:
             return [ 
-                { content_detail: "Cause", status: false, height: 0 },
+                { content_detail: "Cause", status: true, height: 0 },
             ]
         case 12:
             return [ 
-                { title: "Language Name", status: false, height: 0 },
+                { title: "Language Name", status: true, height: 0 },
                 {
                   content_detail_dashed: "Description",
                   status: false,
@@ -143,7 +143,7 @@ export const getContent = (childId) => {
             ]
         case 13:
             return [ 
-                { title: "Publication Title", status: false, height: 0 },
+                { title: "Publication Title", status: true, height: 0 },
                 { desc: "Publication Type", status: false, height: 0 },
                 {
                   optional_dashed: "Author(s)",
@@ -173,19 +173,19 @@ export const getContent = (childId) => {
             ]
         case 14:
             return [
-                { content_detail: "Skill name", status: false, height: 0 },
+                { content_detail: "Skill name", status: true, height: 0 },
             ]    
         case 15:
             return [
-                { content_detail: "Interest", status: false, height: 0 },
+                { content_detail: "Interest", status: true, height: 0 },
             ] 
         case 16:
             return [
-                { content_detail: "Soft skill", status: false, height: 0 },
+                { content_detail: "Soft skill", status: true, height: 0 },
             ]     
         case 17:
             return [
-                { title: "Name and Position", status: false, height: 0 },
+                { title: "Name and Position", status: true, height: 0 },
                 {
                   optional_dashed: "“Reference”",
                   status: false,

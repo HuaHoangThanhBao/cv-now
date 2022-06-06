@@ -1,7 +1,7 @@
 .block-content{
     position: relative;
     .field-input{
-        margin-top: 0.5rem;
+        margin-top: 8px;
         color: black;
     }
     &.active{
@@ -15,6 +15,9 @@
                 border-color:#00c8aa;
             }
         }
+    }
+    &-container{
+        padding-top: 10px;
     }
     &-title{
         font-size: 1.5rem;
