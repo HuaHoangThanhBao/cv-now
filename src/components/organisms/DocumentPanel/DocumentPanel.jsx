@@ -4,6 +4,7 @@ import { getContent } from '../../../service/contentService';
 import BlockWrapper from '../BlockWrapper/BlockWrapper';
 import Panel from '../Panel/Panel';
 import Profile from '../Profile/Profile';
+import { blockMarginTop, blockContentMarginTop, fieldMarginTop } from '../../../constants/SpacingData';
 import { template, template_type } from '../../../constants/Template';
 import './DocumentPanel.scss';
 import ProfileAvatar from '../../molecules/ProfileAvatar/ProfileAvatar';
@@ -119,9 +120,14 @@ const DocumentPanel = (props) => {
     const sumOfChildData = (childData) => {
         let sum = 0;
         childData.forEach(row => {
-            row.forEach(c => {
-                sum += c.height
+            row.forEach(child => {
+                //If this field is showed on UI
+                if(child.status){
+                    sum += child.height + fieldMarginTop
+                }
             })
+            //Each block content of each block has padding top value
+            sum += blockContentMarginTop
         })
         return sum
     }
@@ -174,7 +180,6 @@ const DocumentPanel = (props) => {
         console.log("start calculating......")
         console.log('pages:', pages)
 
-        const blockMarginTop = 80
         for(let i = 0; i < pages.length; i++){
             if(pages[i])
             {
@@ -182,13 +187,8 @@ const DocumentPanel = (props) => {
                 
                 pages[i].columns[columnIndex].child.forEach((item, index) => {
                     let headerHeight = item.height
-
-                    let itemsHeight = 0
-                    item.data.forEach(row => {
-                        row.forEach(c => {
-                            itemsHeight += c.height
-                        })
-                    })
+                    const itemsHeight = sumOfChildData(item.data)
+                    // console.log('itemsHeight:', itemsHeight)
 
                     if(index > 0) sumPanelHeight += headerHeight + itemsHeight + blockMarginTop
                     else sumPanelHeight += headerHeight + itemsHeight
@@ -459,6 +459,10 @@ const DocumentPanel = (props) => {
         return collection.findIndex(child => child.id === childId)
     }
 
+    const getBlock = (pageIndex, columnIndex, childIndex) => {
+        return pages[pageIndex].columns[columnIndex].child[childIndex]
+    }
+
     useEffect(() => {
         if(isReOrder){
             console.log('+++++++++++page has changed++++++++++')
@@ -503,6 +507,7 @@ const DocumentPanel = (props) => {
                     currentTemplateType={currentTemplateType}
                     currentBlockSelected={currentBlockSelected}
                     setCurrentBlockSelected={setCurrentBlockSelected}
+                    getBlock={getBlock}
                 />
     }
 
