@@ -6,8 +6,8 @@ export const getContent = (childId) => {
                 {desc: "Institution/ Place of education", status: false, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {optional_dashed: "City, Country or GPA (optional)", status: false, height: 0},
                 {content_detail: "Coures", status: false, height: 0},
                 {content_bullet: "Course/Thesis/Project", status: false, height: 0},
@@ -18,8 +18,8 @@ export const getContent = (childId) => {
                 {desc: "Workplace/Company", status: false, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {optional_dashed: "City, Country (optional)", status: false, height: 0},
                 {optional_dashed2:
                   "Company Description (optional, fill when the company is not well known)", status: false, height: 0},
@@ -34,8 +34,8 @@ export const getContent = (childId) => {
                 {title: "Organization Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Role (optional)", status: false, height: 0},
             ]
         case 4:
@@ -43,8 +43,8 @@ export const getContent = (childId) => {
                 {title: "Certificate Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Description (optional)", status: false, height: 0},
             ]
         case 5:
@@ -52,8 +52,8 @@ export const getContent = (childId) => {
                 {title: "Project Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Description of Achievements", status: false, height: 0},
             ]
         case 6:
@@ -61,8 +61,8 @@ export const getContent = (childId) => {
                 {title: "Achievement Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Description (optional)", status: false, height: 0},
             ]
         case 7:
@@ -70,8 +70,8 @@ export const getContent = (childId) => {
                 {title: "Conference/Course Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Conference/Issuer of the certificate", status: false, height: 0},
                 {content_detail: "Description (optional)", status: false, height: 0},
             ]
@@ -80,8 +80,8 @@ export const getContent = (childId) => {
                 {title: "Title/Award Name", status: true, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Name of the institution that issued/awarded it", status: false, height: 0},
                 {content_detail: "Description (optional)", status: false, height: 0},
             ]
@@ -91,8 +91,8 @@ export const getContent = (childId) => {
                 { desc: "Institution/Place of Education", status: false, height: 0 },
                 { month_start: "mm", status: false, height: 0 },
                 { month_end: "mm", status: false, height: 0 },
-                { year_start: "mm", status: false, height: 0 },
-                { year_end: "mm", status: false, height: 0 },
+                { year_start: "yyyy", status: false, height: 0 },
+                { year_end: "yyyy", status: false, height: 0 },
                 {
                   optional_dashed: "City, Country",
                   status: false,
@@ -118,8 +118,8 @@ export const getContent = (childId) => {
                 {desc: "Organization", status: false, height: 0},
                 {month_start: "mm", status: false, height: 0},
                 {month_end: "mm", status: false, height: 0},
-                {year_start: "mm", status: false, height: 0},
-                {year_end: "mm", status: false, height: 0},
+                {year_start: "yyyy", status: false, height: 0},
+                {year_end: "yyyy", status: false, height: 0},
                 {optional_dashed: "City, Country", status: false, height: 0},
                 {optional_dashed2: "Organization Description (optional)", status: false, height: 0},
                 {content_detail: "Task/Responsibility/Accomplishment", status: false, height: 0},

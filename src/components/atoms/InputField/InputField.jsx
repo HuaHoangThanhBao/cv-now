@@ -29,11 +29,13 @@ const InputField = (props) => {
     };
     
     useEffect(() => {
-        if(inputRef && inputRef.current){
-            const height = inputRef.current.offsetHeight
-            updateFieldHeight(pageIndex, columnIndex, childIndex, currentIndex, inputBlockType, height)
+        if(isDisplayWhenHasInformation){
+            if(inputRef && inputRef.current){
+                const height = inputRef.current.offsetHeight
+                updateFieldHeight(pageIndex, columnIndex, childIndex, currentIndex, inputBlockType, height)
+            }
         }
-    }, [html, childIndex, columnIndex, currentIndex, inputBlockType, pageIndex, updateFieldHeight])
+    }, [isDisplayWhenHasInformation, html, childIndex, columnIndex, currentIndex, inputBlockType, pageIndex, updateFieldHeight])
 
     return(
         <div 

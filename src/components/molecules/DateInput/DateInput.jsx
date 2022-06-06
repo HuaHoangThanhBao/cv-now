@@ -4,49 +4,22 @@ import InputField from '../../atoms/InputField/InputField';
 import './DateInput.scss';
 
 const DateInput = (props) => {
-    const {pageIndex, columnIndex, childIndex, currentIndex, isDisplayWhenHasInformation, onInputFieldChange, updateFieldHeight, updateFieldData, getTitle} = props;
-    const [monthStart, setMonthStart] = useState('');
-    const [monthEnd, setMonthEnd] = useState('');
-    const [yearStart, setYearStart] = useState('');
-    const [yearEnd, setYearEnd] = useState('');
-    const [allCheck, setAllCheck] = useState(false);
+    const {
+        pageIndex, columnIndex, childIndex, currentIndex, isDisplayWhenHasInformation, 
+        updateFieldHeight, updateFieldData, getTitle, getField
+    } = props;
 
-    const onMonthStartFieldChange = (event, setValue) => {
-        onInputFieldChange(event, setValue)
-        setMonthStart(event.target.value)
-    }
-    const onMonthEndFieldChange = (event, setValue) => {
-        onInputFieldChange(event, setValue)
-        setMonthEnd(event.target.value)
-    }
-    const onYearStartFieldChange = (event, setValue) => {
-        onInputFieldChange(event, setValue)
-        setYearStart(event.target.value)
-    }
-    const onYearEndFieldChange = (event, setValue) => {
-        onInputFieldChange(event, setValue)
-        setYearEnd(event.target.value)
-    }
+    const [allCheck, setAllCheck] = useState(false)
 
     useEffect(() => {
-        if(!monthStart || !monthEnd || !yearStart || !yearEnd){
-            setAllCheck(false)
-        }
-        else{
+        if(getField(currentIndex, InputFieldType.month_start)[InputFieldType.month_start] !== 'mm'
+        && getField(currentIndex, InputFieldType.year_start)[InputFieldType.year_start] !== 'yyyy'
+        && getField(currentIndex, InputFieldType.month_end)[InputFieldType.month_end] !== 'mm'
+        && getField(currentIndex, InputFieldType.year_end)[InputFieldType.year_end] !== 'yyyy'){
             setAllCheck(true)
         }
-    }, [monthStart, monthEnd, yearStart, yearEnd])
+    }, [currentIndex, getField])
 
-    const isShow = () => {
-        if(isDisplayWhenHasInformation){
-            if(!allCheck) return true
-            return true
-        }
-        else{
-            if(allCheck) return true;
-            return false
-        }
-    }
     return(
         <div className="date">
             <div className="date-group">
@@ -55,10 +28,8 @@ const DateInput = (props) => {
                     inputBlockType={InputFieldType.month_start}
                     placeHolder={getTitle(currentIndex, InputFieldType.month_start)}
                     type="number"
-                    visible={false}
-                    isDisplayWhenHasInformation={isShow()}
-                    allCheck={allCheck}
-                    onChange={onMonthStartFieldChange}
+                    visible={isDisplayWhenHasInformation}
+                    isDisplayWhenHasInformation={allCheck}
                     updateFieldHeight={updateFieldHeight}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
@@ -66,7 +37,7 @@ const DateInput = (props) => {
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                 />
-                {(isShow() && (
+                {((allCheck || isDisplayWhenHasInformation) && (
                     <span>/</span>
                 ))}
                 <InputField 
@@ -74,10 +45,8 @@ const DateInput = (props) => {
                     inputBlockType={InputFieldType.year_start}
                     placeHolder={getTitle(currentIndex, InputFieldType.year_start)}
                     type="number"
-                    visible={false}
-                    isDisplayWhenHasInformation={isShow()}
-                    allCheck={allCheck}
-                    onChange={onMonthEndFieldChange}
+                    visible={isDisplayWhenHasInformation}
+                    isDisplayWhenHasInformation={allCheck}
                     updateFieldHeight={updateFieldHeight}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
@@ -86,8 +55,8 @@ const DateInput = (props) => {
                     currentIndex={currentIndex}
                 />
             </div>
-            {(isShow() && (
-                <span>-</span>
+            {((allCheck || isDisplayWhenHasInformation) && (
+                <span>/</span>
             ))}
             <div className="date-group">
                 <InputField 
@@ -95,10 +64,8 @@ const DateInput = (props) => {
                     inputBlockType={InputFieldType.month_end}
                     placeHolder={getTitle(currentIndex, InputFieldType.month_end)}
                     type="number"
-                    visible={false}
-                    isDisplayWhenHasInformation={isShow()}
-                    allCheck={allCheck}
-                    onChange={onYearStartFieldChange}
+                    visible={isDisplayWhenHasInformation}
+                    isDisplayWhenHasInformation={allCheck}
                     updateFieldHeight={updateFieldHeight}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}
@@ -106,7 +73,7 @@ const DateInput = (props) => {
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                 />
-                {(isShow() && (
+                {((allCheck || isDisplayWhenHasInformation) && (
                     <span>/</span>
                 ))}
                 <InputField 
@@ -114,10 +81,8 @@ const DateInput = (props) => {
                     inputBlockType={InputFieldType.year_end}
                     placeHolder={getTitle(currentIndex, InputFieldType.year_end)}
                     type="number"
-                    visible={false}
-                    isDisplayWhenHasInformation={isShow()}
-                    allCheck={allCheck}
-                    onChange={onYearEndFieldChange}
+                    visible={isDisplayWhenHasInformation}
+                    isDisplayWhenHasInformation={allCheck}
                     updateFieldHeight={updateFieldHeight}
                     updateFieldData={updateFieldData}
                     pageIndex={pageIndex}

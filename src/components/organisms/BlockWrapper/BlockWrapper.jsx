@@ -31,7 +31,8 @@ const BlockWrapper = (props) => {
         getChildSpecialdIndex,
         currentTemplateType,
         currentBlockSelected,
-        setCurrentBlockSelected
+        setCurrentBlockSelected,
+        getBlock
     } = props;
 
     const [isDisplayWhenHasInformation, setIsDisplayWhenHasInformation] = useState(false);
@@ -61,6 +62,19 @@ const BlockWrapper = (props) => {
             default:
                 return null
         }
+    }
+
+    const getField = (index, _blockType) => {
+        let field;
+        for(let i = 0; i < data[index].length; i++){
+            for(const [key]  of Object.entries(data[index][i])){
+                if(key === _blockType){
+                    field = data[index][i];
+                    break;
+                }
+            }
+        }
+        return field
     }
 
     const getTitle = (index, _blockType) => {
@@ -131,6 +145,7 @@ const BlockWrapper = (props) => {
                      childIndex={childIndex}
                      currentIndex={index}
                      getTitle={getTitle}
+                     getField={getField}
                      updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
@@ -221,6 +236,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
+                    getField={getField}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -455,6 +471,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
+                    getField={getField}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -578,6 +595,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
+                    getField={getField}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -793,6 +811,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     getTitle={getTitle}
+                    getField={getField}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
