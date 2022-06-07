@@ -532,7 +532,7 @@
                     }
                     &:nth-child(2){
                         margin-left: 0.7rem;
-                        padding-left: 3rem;
+                        padding-left: 2.5rem;
                         padding-right: 3rem;
                         position: relative;
                         z-index: 2;
@@ -658,6 +658,13 @@
                     &:nth-child(1){
                         position: relative;
                         z-index: 3;
+                        .icon{
+                            background-color: white;
+                            color: #2B343D !important;
+                            svg, path{
+                                fill: currentColor !important;
+                            }
+                        }
                     }
                 }
                 .profile{
@@ -907,9 +914,9 @@
                     &-container{
                         padding:  0.25rem 0;
                         display: inline-block;
-                        max-width: 100%;
+                        width: 100%;
                         .field{
-                            border: 2px solid #2B343D;
+                            border: 3px solid #2B343D;
                             border-left-width: 0;
                             border-right-width: 0;
                             padding-bottom: 0.2rem;

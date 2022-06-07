@@ -1,5 +1,10 @@
 .block-header{
     position: relative;
+    &-block{
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+    }
     &-title{
         font-size: 1.7rem;
         font-weight: bold;
@@ -8,8 +13,13 @@
         }
     }
     .field{
+        max-width: calc(100% - 4rem);
         &:focus{
             border-color:#00c8aa;
         }
+    }
+    .icon{
+        margin-right: 1rem;
+        margin-top: -0.35rem;
     }
 }

@@ -60,6 +60,7 @@ const BlockContainer = (props) => {
             <div className="block-wrapper">
                 <BlockHeader 
                     title={title}
+                    childId={childId}
                     handleBlockHeader={setBlockHeaderStatus}
                     handleOutsideClick={handleOutsideClick}
                     updateFieldData={updateFieldData}
