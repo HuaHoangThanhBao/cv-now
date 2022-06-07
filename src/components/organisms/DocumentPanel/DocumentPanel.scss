@@ -203,7 +203,7 @@
                 .column{
                     &:nth-child(1){
                         width: 100%;
-                        padding-right: 2rem;
+                        padding-right: 0rem;
                         padding-left: 1rem;
                     }
                 }
@@ -486,6 +486,9 @@
             padding-right: 1rem;
             &.one-column{
                 padding-left: 1rem;
+                .column{
+                    padding-right: 0 !important;
+                }
                 .block{
                     &.odd{
                         .block-wrapper{
@@ -787,9 +790,18 @@
                         &-container{
                             display: flex;
                             align-items: center;
-                            .field{
-                                max-width: 70%;
-                            }
+                            // .field{
+                            //     max-width: 70%;
+                            // }
+                        }
+                        &-block{
+                            max-width: 70%;
+                            width: auto;
+                        }
+                        .field{
+                            width: auto;
+                            float: none;
+                            display: flex !important;
                         }
                     }
                     .divider{
@@ -947,7 +959,7 @@
                 padding-left: 0;
                 .column{
                     padding-left: 3rem;
-                    padding-right: 3rem;
+                    padding-right: 1rem;
                 }
                 .block{
                     &-header-container{
@@ -1025,11 +1037,19 @@
                     }
                 }
             }
+            &.one-column{
+                .column{
+                    padding-right: 1rem !important;
+                }
+            }
         }
 
         &.executive{
             &.one-column{
                 padding-top: 0;
+                .column{
+                    padding-right: 1rem !important;
+                }
             }
             &.two-column{
                 padding-top: 0;

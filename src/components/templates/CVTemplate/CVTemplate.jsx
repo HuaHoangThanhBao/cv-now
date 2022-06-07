@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Title from '../../atoms/Title/Title';
 import EditBalance from '../../molecules/EditBalance/EitBalance';
 import MainMenu from '../../molecules/MainMenu/MainMenu';
@@ -21,7 +21,7 @@ import { one_column_format, two_column_format } from '../../../constants/ColumnF
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
-    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.colleage)
+    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.minimalist)
     const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
     const [isShowPreviewList, setIsShowReviewList] = useState(false)
     const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);

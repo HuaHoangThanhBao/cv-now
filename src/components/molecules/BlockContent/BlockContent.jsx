@@ -11,9 +11,9 @@ const BlockContent = ({isDisplayWhenHasInformation, onCreateNewContent, onFocus,
             onFocus={onFocus} 
             onClick={onClick}
         >
-            {/* <span className='block-content-alert'>
+            <span className='block-content-alert'>
                 <img src={AlertIcon} alt="" />
-            </span> */}
+            </span>
             {children}
             {isDisplayWhenHasInformation && (
                 <div className="block-content-bottom">

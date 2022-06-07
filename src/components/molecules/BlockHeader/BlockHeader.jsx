@@ -19,8 +19,7 @@ const BlockHeader = (props) => {
         <div className="block-header" ref={ref}>
             {props.children}
             <div className='block-header-container'>
-                {(currentTemplateType === template_type.skilled_based ||
-                currentTemplateType === template_type.it) && 
+                {(currentTemplateType === template_type.skilled_based) && 
                 (
                     <div className='block-header-process'>
                         <div></div>
@@ -50,6 +49,13 @@ const BlockHeader = (props) => {
                         childIndex={childIndex}
                         currentIndex={childIndex}
                         updateFieldHeight={updateFieldHeight}
+                        isNotDisplayIcon={
+                            (currentTemplateType === template_type.functional
+                             || currentTemplateType === template_type.colleage
+                             || currentTemplateType === template_type.modern
+                            )
+                            ? true: false
+                        }
                     />
                 </div>
                 {(currentTemplateType !== template_type.combined && 
