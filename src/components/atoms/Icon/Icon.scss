@@ -5,13 +5,9 @@
     width: 2.5rem;
     height: 2.5rem;
     color: white;
-    position: relative;
-    svg{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
     svg, path{
         fill: currentColor;
     }
