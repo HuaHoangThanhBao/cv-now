@@ -1011,6 +1011,13 @@
                     &:nth-child(2){
                         position: relative;
                         z-index: 2;
+                        .icon{
+                            background-color: white;
+                            color: #2B343D !important;
+                            svg, path{
+                                fill: currentColor !important;
+                            }
+                        }
                         .field-input{
                             color: white;
                         }
