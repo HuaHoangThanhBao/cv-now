@@ -21,7 +21,7 @@ import { one_column_format, two_column_format } from '../../../constants/ColumnF
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
-    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.basic)
+    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.minimalist)
     const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
     const [isShowPreviewList, setIsShowReviewList] = useState(false)
     const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);
@@ -173,6 +173,8 @@ const CVTemplate = () => {
                         socialData={socialData}
                         isOpenProfileModal={isOpenProfileModal} 
                         setIsOpenProfileModal={setIsOpenProfileModal}
+                        currentBlockSelected={currentBlockSelected}
+                        setCurrentBlockSelected={setCurrentBlockSelected}
                     />
                 )}
                 <button onClick={() => setIsShowReviewList(!isShowPreviewList)}>Show preview list</button>

@@ -4,9 +4,9 @@ import './InputField.scss';
 
 const InputField = (props) => {
     const {
-        externalClass, pageIndex, columnIndex, childIndex, currentIndex, visible, 
+        externalClass,  pageIndex, columnIndex, childIndex, currentIndex, visible, 
         isDisplayWhenHasInformation, inputBlockType, icon, placeHolder, isFocus,
-        updateFieldData, updateFieldHeight
+        updateFieldData, updateFieldHeight, isNotDisplayIcon
     } = props;
     const inputRef = useRef();
     const contentEditable = createRef();
@@ -44,6 +44,7 @@ const InputField = (props) => {
                 + (icon ? " field-bullet": "") 
                 + (visible ? " visible": "") 
                 + (isDisplayWhenHasInformation ? " isDisplayWhenHasInformation": "")
+                + (isNotDisplayIcon ? " field-with-no-icon": "")
             } 
             ref={inputRef}
         >

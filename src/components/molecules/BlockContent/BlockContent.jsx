@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../../atoms/Button/Button';
 import AddIcon from './../../../dist/add.svg';
-import AlertIcon from './../../../dist/exclamation.svg';
+// import AlertIcon from './../../../dist/exclamation.svg';
 import './BlockContent.scss';
 
 const BlockContent = ({isDisplayWhenHasInformation, onCreateNewContent, onFocus, onClick, children}) => {
@@ -11,9 +11,9 @@ const BlockContent = ({isDisplayWhenHasInformation, onCreateNewContent, onFocus,
             onFocus={onFocus} 
             onClick={onClick}
         >
-            <span className='block-content-alert'>
+            {/* <span className='block-content-alert'>
                 <img src={AlertIcon} alt="" />
-            </span>
+            </span> */}
             {children}
             {isDisplayWhenHasInformation && (
                 <div className="block-content-bottom">

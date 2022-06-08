@@ -31,8 +31,7 @@ const BlockWrapper = (props) => {
         getChildSpecialdIndex,
         currentTemplateType,
         currentBlockSelected,
-        setCurrentBlockSelected,
-        getBlock
+        setCurrentBlockSelected
     } = props;
 
     const [isDisplayWhenHasInformation, setIsDisplayWhenHasInformation] = useState(false);

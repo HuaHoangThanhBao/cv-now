@@ -1,0 +1,14 @@
+
+.icon{
+    background-color: #2B343D;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg, path{
+        fill: currentColor;
+    }
+}

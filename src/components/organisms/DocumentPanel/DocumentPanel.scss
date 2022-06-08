@@ -203,7 +203,7 @@
                 .column{
                     &:nth-child(1){
                         width: 100%;
-                        padding-right: 2rem;
+                        padding-right: 0rem;
                         padding-left: 1rem;
                     }
                 }
@@ -486,6 +486,9 @@
             padding-right: 1rem;
             &.one-column{
                 padding-left: 1rem;
+                .column{
+                    padding-right: 0 !important;
+                }
                 .block{
                     &.odd{
                         .block-wrapper{
@@ -532,7 +535,7 @@
                     }
                     &:nth-child(2){
                         margin-left: 0.7rem;
-                        padding-left: 3rem;
+                        padding-left: 2.5rem;
                         padding-right: 3rem;
                         position: relative;
                         z-index: 2;
@@ -658,6 +661,13 @@
                     &:nth-child(1){
                         position: relative;
                         z-index: 3;
+                        .icon{
+                            background-color: white;
+                            color: #2B343D !important;
+                            svg, path{
+                                fill: currentColor !important;
+                            }
+                        }
                     }
                 }
                 .profile{
@@ -780,9 +790,18 @@
                         &-container{
                             display: flex;
                             align-items: center;
-                            .field{
-                                max-width: 70%;
-                            }
+                            // .field{
+                            //     max-width: 70%;
+                            // }
+                        }
+                        &-block{
+                            max-width: 70%;
+                            width: auto;
+                        }
+                        .field{
+                            width: auto;
+                            float: none;
+                            display: flex !important;
                         }
                     }
                     .divider{
@@ -907,9 +926,9 @@
                     &-container{
                         padding:  0.25rem 0;
                         display: inline-block;
-                        max-width: 100%;
+                        width: 100%;
                         .field{
-                            border: 2px solid #2B343D;
+                            border: 3px solid #2B343D;
                             border-left-width: 0;
                             border-right-width: 0;
                             padding-bottom: 0.2rem;
@@ -940,7 +959,7 @@
                 padding-left: 0;
                 .column{
                     padding-left: 3rem;
-                    padding-right: 3rem;
+                    padding-right: 1rem;
                 }
                 .block{
                     &-header-container{
@@ -992,6 +1011,13 @@
                     &:nth-child(2){
                         position: relative;
                         z-index: 2;
+                        .icon{
+                            background-color: white;
+                            color: #2B343D !important;
+                            svg, path{
+                                fill: currentColor !important;
+                            }
+                        }
                         .field-input{
                             color: white;
                         }
@@ -1018,11 +1044,19 @@
                     }
                 }
             }
+            &.one-column{
+                .column{
+                    padding-right: 1rem !important;
+                }
+            }
         }
 
         &.executive{
             &.one-column{
                 padding-top: 0;
+                .column{
+                    padding-right: 1rem !important;
+                }
             }
             &.two-column{
                 padding-top: 0;

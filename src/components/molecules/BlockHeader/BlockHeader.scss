@@ -1,5 +1,13 @@
 .block-header{
     position: relative;
+    &-block{
+        width: 100%;
+        &::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+    }
     &-title{
         font-size: 1.7rem;
         font-weight: bold;
@@ -8,8 +16,18 @@
         }
     }
     .field{
+        width: calc(100% - 3.5rem);
+        float: left;
         &:focus{
             border-color:#00c8aa;
         }
+    }
+    .field-with-no-icon{
+        width: 100%;
+    }
+    .icon{
+        margin-right: 1rem;
+        margin-top: -0.35rem;
+        float: left;
     }
 }

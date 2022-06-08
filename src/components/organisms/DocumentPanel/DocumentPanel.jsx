@@ -459,10 +459,6 @@ const DocumentPanel = (props) => {
         return collection.findIndex(child => child.id === childId)
     }
 
-    const getBlock = (pageIndex, columnIndex, childIndex) => {
-        return pages[pageIndex].columns[columnIndex].child[childIndex]
-    }
-
     useEffect(() => {
         if(isReOrder){
             console.log('+++++++++++page has changed++++++++++')
@@ -507,7 +503,6 @@ const DocumentPanel = (props) => {
                     currentTemplateType={currentTemplateType}
                     currentBlockSelected={currentBlockSelected}
                     setCurrentBlockSelected={setCurrentBlockSelected}
-                    getBlock={getBlock}
                 />
     }
 
