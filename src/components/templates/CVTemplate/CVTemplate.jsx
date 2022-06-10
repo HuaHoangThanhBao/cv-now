@@ -16,7 +16,8 @@ import { infoData } from '../../../constants/InfoData';
 import ProfileModal from '../../molecules/ProfileModal/ProfileModal';
 import { socialMetaData } from '../../../constants/SocialData';
 import { one_column_format, two_column_format } from '../../../constants/ColumnFormat';
-
+import { renderToString } from "react-dom/server";
+import { jsPDF } from "jspdf";
 
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
@@ -125,6 +126,38 @@ const CVTemplate = () => {
             }
         }
     }
+    
+    const print = () => {
+        const string = renderToString(
+        <DocumentPanel 
+            pages={pages}
+            setPages={setPages}
+            isReOrder={isReOrder}
+            setIsReOrder={setIsReOrder}
+            currentTemplateType={currentTemplateType}
+            currentThemeType={currentThemeType}
+            currentColumnWidthAttr={currentColumnWidthAttr}
+            colorHex={colorHex}
+            infoKeys={infoKeys}
+            info={info}
+            setInfo={setInfo}
+            socialData={socialData}
+            isOpenProfileModal={isOpenProfileModal} 
+            setIsOpenProfileModal={setIsOpenProfileModal}
+            currentBlockSelected={currentBlockSelected}
+            setCurrentBlockSelected={setCurrentBlockSelected}
+            print={print}/>
+        );
+        var doc = new jsPDF();
+        doc.html(string, {
+            callback: function (doc) {
+                doc.save();
+            },
+            x: 0,
+            y: 0,
+            width: 1200,
+        });
+    };
 
     return(
         <React.Fragment>
@@ -196,6 +229,7 @@ const CVTemplate = () => {
                     setIsOpenProfileModal={setIsOpenProfileModal}
                     currentBlockSelected={currentBlockSelected}
                     setCurrentBlockSelected={setCurrentBlockSelected}
+                    print={print}
                 />
             </div>
             <ProfileModal 

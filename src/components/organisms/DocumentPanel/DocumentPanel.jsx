@@ -31,7 +31,7 @@ const DocumentPanel = (props) => {
     const {
         pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
-        setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected
+        setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected, print
     } = props;
 
     const profileContainerRef = useRef();
@@ -797,7 +797,7 @@ const DocumentPanel = (props) => {
                     />
                 </div>
             ))}
-            <button onClick={generatePDF}>Generate PDF</button>
+            <button onClick={print}>Generate PDF</button>
         </div>
     )
 }
