@@ -10,7 +10,6 @@ import './DocumentPanel.scss';
 import ProfileAvatar from '../../molecules/ProfileAvatar/ProfileAvatar';
 import ProfileInfo from '../../molecules/ProfileInfo/ProfileInfo';
 import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
-import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
 import { maxHeight } from '../../../constants/Variables';
 import DocumentFooter from '../../molecules/DocumentFooter/DocumentFooter';
@@ -31,7 +30,7 @@ const DocumentPanel = (props) => {
     const {
         pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
-        setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected, print
+        setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected
     } = props;
 
     const profileContainerRef = useRef();
@@ -191,7 +190,7 @@ const DocumentPanel = (props) => {
                     // console.log('itemsHeight:', itemsHeight)
 
                     if(index > 0) sumPanelHeight += headerHeight + itemsHeight + blockMarginTop
-                    else sumPanelHeight += headerHeight + itemsHeight
+                    else sumPanelHeight += headerHeight + itemsHeight + blockMarginTop + 128
                 })
 
                 console.log('-------------------------------')
@@ -211,7 +210,7 @@ const DocumentPanel = (props) => {
                         const childHeights = sumOfChildData(currentRowData[j].data)
 
                         if(j > 0) sumOfEachRow += headerHeight + childHeights + blockMarginTop
-                        else sumOfEachRow += headerHeight + childHeights
+                        else sumOfEachRow += headerHeight + childHeights + blockMarginTop + 128
 
                         console.log('header height: ' + headerHeight + ", at index: " + j + ", has child height: " + childHeights)
 
@@ -282,7 +281,7 @@ const DocumentPanel = (props) => {
                                     const childHeights = sumOfChildData(currentRowData[j].data)
 
                                     if(j > 0) sumOfCurrenthRow += headerHeight + childHeights + blockMarginTop
-                                    else sumOfCurrenthRow += headerHeight + childHeights
+                                    else sumOfCurrenthRow += headerHeight + childHeights + blockMarginTop + 128
                                 }
         
                                 console.log('<<<<<<total height of current page:', sumOfCurrenthRow)
@@ -651,34 +650,30 @@ const DocumentPanel = (props) => {
     var i = 0;
     const pdf = new jsPDF({
         orientation: 'portrait',
+        unit: 'pt',
+        format: [1200, 1500]
     });
 
     function generatePDF(){
+        const documentWrapper = document.querySelectorAll('.document-wrapper');
         if(i <= panelsRef.current.length - 1){
-            html2canvas(panelsRef.current[i]).then(
-                function(canvas) {
-                    const imgData = canvas.toDataURL('image/png');
-                    // const imgProps= pdf.getImageProperties(imgData);
+            console.log(documentWrapper)
+            console.log(documentWrapper[i])
+            console.log(documentWrapper[i].offsetHeight)
+
+            pdf.html(documentWrapper[i], {
+                callback: function (_doc) {
+                    console.log(_doc)
                     
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-                    console.log(pdfWidth + "/" + pdfHeight)
-
-                    if(i > 0){
-                        pdf.addPage()
-                    }
-                    
-                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-
-                    if(i === panelsRef.current.length - 1){
+                    if(i === documentWrapper.length - 1){
                         pdf.save("download.pdf");
                     }
 
-                    i++;
-                    generatePDF(); // Important! - call the function again
-                }
-            )
+                    i++
+                    generatePDF()
+                }, y: i === 0 ? 0: (1500 * i)
+            });
+            console.log(i)
         };
     }
 
@@ -797,7 +792,7 @@ const DocumentPanel = (props) => {
                     />
                 </div>
             ))}
-            <button data-html2canvas-ignore="true" onClick={print}>Generate PDF</button>
+            <button data-html2canvas-ignore="true" onClick={generatePDF}>Generate PDF</button>
         </div>
     )
 }
