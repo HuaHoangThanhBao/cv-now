@@ -5,7 +5,6 @@ import {ReactComponent as LocationIcon} from '../../../dist/location.svg';
 import {ReactComponent as WebsiteIcon} from '../../../dist/website.svg';
 import {ReactComponent as LinkedinIcon} from '../../../dist/linkedin.svg';
 import {ReactComponent as TwitterIcon} from '../../../dist/twitter.svg';
-import {ReactComponent as QuoraIcon} from '../../../dist/quora.svg';
 import {ReactComponent as SkypeIcon} from '../../../dist/skype.svg';
 import {ReactComponent as FacebookIcon} from '../../../dist/facebook.svg';
 import {ReactComponent as GithubIcon} from '../../../dist/github.svg';
@@ -55,9 +54,6 @@ const ProfileModal = (props) => {
             break;
             case "twitter":
                 socialData.general.twitter = val;
-            break;
-            case "quora":
-                socialData.general.quora = val;
             break;
             case "skype":
                 socialData.general.skype = val;
@@ -171,15 +167,6 @@ const ProfileModal = (props) => {
                                 placeholder='Twitter'
                                 value={socialData.general.twitter}
                                 onChange={(e) => onInputChange(e, "twitter")}/>
-                        </div>
-                        <div className='profile-modal-item'>
-                            <QuoraIcon />
-                            <input 
-                                type="text" 
-                                className="profile-modal-input" 
-                                placeholder='Quora'
-                                value={socialData.general.quora}
-                                onChange={(e) => onInputChange(e, "quora")}/>
                         </div>
                         <div className='profile-modal-item'>
                             <SkypeIcon />

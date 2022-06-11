@@ -598,6 +598,7 @@ const DocumentPanel = (props) => {
                                     getColumnType={getColumnType}
                                     socialData={socialData}
                                     setIsOpenProfileModal={setIsOpenProfileModal}
+                                    currentTemplateType={currentTemplateType}
                                 />
                             </div>
                         ))}
@@ -623,6 +624,7 @@ const DocumentPanel = (props) => {
                                     getColumnType={getColumnType}
                                     socialData={socialData}
                                     setIsOpenProfileModal={setIsOpenProfileModal}
+                                    currentTemplateType={currentTemplateType}
                                 />
                             </div>
                         )}

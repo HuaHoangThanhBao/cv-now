@@ -1,20 +1,20 @@
 export const socialMetaData = {
     personal: {
         email: 'someone@gmail.com',
-        address: '',
+        address: 'dsd',
         phoneNumber: ''
     },
     general: {
-        website: '',
-        linkedIn: '',
-        twitter: '',
+        website: 'dsd',
+        linkedIn: 'dsd',
+        twitter: 'dsd',
         quora: '',
-        skype: '',
-        facebook: '',
+        skype: 'ds',
+        facebook: 'ds',
     },
     coding: {
-        github: '',
-        stackOverflow: ''
+        github: 'ds',
+        stackOverflow: 'ds'
     },
     creativePlatform: {
         medium: '',
