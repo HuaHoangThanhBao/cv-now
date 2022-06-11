@@ -763,7 +763,7 @@ const DocumentPanel = (props) => {
                     className={`document-wrapper ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
                     style={{color: `${colorHex}`}}
                 >
-                    {renderTheme(currentThemeType)}
+                    {/* {renderTheme(currentThemeType)} */}
                     {renderDocumentHeader(pageIndex)}
 
                     <div 
@@ -797,7 +797,7 @@ const DocumentPanel = (props) => {
                     />
                 </div>
             ))}
-            <button onClick={print}>Generate PDF</button>
+            <button data-html2canvas-ignore="true" onClick={print}>Generate PDF</button>
         </div>
     )
 }

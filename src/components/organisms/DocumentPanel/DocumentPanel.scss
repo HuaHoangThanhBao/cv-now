@@ -476,8 +476,9 @@
                 }
             }
             .divider{
-                width: 0.5rem;
-                background: red;
+                display: none;
+                // width: 0.5rem;
+                // background: red;
             }
         }
 
@@ -662,10 +663,13 @@
                         position: relative;
                         z-index: 3;
                         .icon{
-                            background-color: white;
+                            background-color: #1d1f22;
                             color: #2B343D !important;
                             svg, path{
                                 fill: currentColor !important;
+                            }
+                            img{
+                                filter: brightness(1);
                             }
                         }
                     }
@@ -1012,7 +1016,8 @@
                         position: relative;
                         z-index: 2;
                         .icon{
-                            background-color: white;
+                            background-color: #1d1f22;
+                            // background-color: white;
                             color: #2B343D !important;
                             svg, path{
                                 fill: currentColor !important;

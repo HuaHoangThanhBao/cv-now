@@ -22,7 +22,7 @@ import { jsPDF } from "jspdf";
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
-    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.minimalist)
+    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.it)
     const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
     const [isShowPreviewList, setIsShowReviewList] = useState(false)
     const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);
@@ -128,6 +128,12 @@ const CVTemplate = () => {
     }
     
     const print = () => {
+        var doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'pt',
+            format: [1200, 1600]
+        });
+
         const string = renderToString(
         <DocumentPanel 
             pages={pages}
@@ -148,14 +154,13 @@ const CVTemplate = () => {
             setCurrentBlockSelected={setCurrentBlockSelected}
             print={print}/>
         );
-        var doc = new jsPDF();
+
         doc.html(string, {
             callback: function (doc) {
+                console.log(string)
+                console.log(pages)
                 doc.save();
-            },
-            x: 0,
-            y: 0,
-            width: 1200,
+            }
         });
     };
 

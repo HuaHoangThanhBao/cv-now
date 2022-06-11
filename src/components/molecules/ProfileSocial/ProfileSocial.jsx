@@ -56,7 +56,7 @@ const ProfileSocial = (props) => {
                 <div key={item} className="profile-social__row">
                     <div className="profile-social__row--txt">{socialData[group][item]}</div>
                     <div className="profile-social__row--icon">
-                        {renderSocialIcon(item)}
+                        {/* {renderSocialIcon(item)} */}
                     </div>
                 </div>
             )
