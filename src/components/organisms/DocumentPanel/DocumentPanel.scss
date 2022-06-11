@@ -18,7 +18,7 @@
                     &-footer{
                         &-col{
                             &:nth-child(1){
-                                color: currentColor;
+                                color: white;
                             }
                         }
                     }
@@ -76,6 +76,7 @@
         bottom: 0;
         padding: 2.5rem;
         pointer-events: none;
+        z-index: 3;
         &-col{
             width: 50%;
             float: left;
