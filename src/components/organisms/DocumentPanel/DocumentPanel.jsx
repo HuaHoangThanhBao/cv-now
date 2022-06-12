@@ -653,29 +653,27 @@ const DocumentPanel = (props) => {
     const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'pt',
-        format: [maxWidth, maxHeight]
+        format: [maxWidth, maxHeight],
+        compress: true
     });
 
-    function generatePDF(){
+    async function generatePDF(){
         const documentWrapper = document.querySelectorAll('.document-wrapper');
         if(i <= panelsRef.current.length - 1){
-            console.log(documentWrapper)
-            console.log(documentWrapper[i])
-            console.log(documentWrapper[i].offsetHeight)
-
-            pdf.html(documentWrapper[i], {
-                callback: function (_doc) {
-                    console.log(_doc)
-                    
+            await pdf.html(documentWrapper[i], {
+                callback: function (pdf) {
                     if(i === documentWrapper.length - 1){
+                        var pageCount = pdf.internal.getNumberOfPages();
+                        //we delete the last blank page
+                        if(pageCount > documentWrapper.length){
+                            pdf.deletePage(pageCount)
+                        }
                         pdf.save("download.pdf");
                     }
-
                     i++
                     generatePDF()
                 }, y: i === 0 ? 0: (maxHeight * i)
             });
-            console.log(i)
         };
     }
 
