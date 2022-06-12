@@ -14,17 +14,17 @@ import { jsPDF } from "jspdf";
 import { maxHeight } from '../../../constants/Variables';
 import DocumentFooter from '../../molecules/DocumentFooter/DocumentFooter';
 import { theme } from '../../../constants/Theme';
-import {ReactComponent as Wave} from '../../../dist/wave-bg.svg';
-import {ReactComponent as WaveBottom} from '../../../dist/wave-bottom-bg.svg';
-import {ReactComponent as Line} from '../../../dist/line-bg.svg';
-import {ReactComponent as LineBottom} from '../../../dist/line-bottom-bg.svg';
-import {ReactComponent as HexCircuit} from '../../../dist/hex-circuit-bg.svg';
-import {ReactComponent as HexCircuitBottom} from '../../../dist/hex-circuit-bottom-bg.svg';
-import {ReactComponent as GraphDot} from '../../../dist/graph-dot-bg.svg';
-import {ReactComponent as GraphDotBottom} from '../../../dist/graph-dot-bottom-bg.svg';
-import {ReactComponent as Graph} from '../../../dist/graph-bg.svg';
-import {ReactComponent as Triangle} from '../../../dist/triangle-bg.svg';
-import {ReactComponent as TriangleBottom} from '../../../dist/triangle-bottom-bg.svg';
+import Wave from '../../../dist/wave-bg.png';
+import WaveBottom from '../../../dist/wave-bottom-bg.png';
+import Line from '../../../dist/line-bg.png';
+import LineBottom from '../../../dist/line-bottom-bg.png';
+import HexCircuit from '../../../dist/hex-circuit-bg.png';
+import HexCircuitBottom from '../../../dist/hex-circuit-bottom-bg.png';
+import GraphDot from '../../../dist/graph-dot-bg.png';
+import GraphDotBottom from '../../../dist/graph-dot-bottom-bg.png';
+import Graph from '../../../dist/graph-bg.png';
+import Triangle from '../../../dist/triangle-bg.png';
+import TriangleBottom from '../../../dist/triangle-bottom-bg.png';
 
 const DocumentPanel = (props) => {
     const {
@@ -687,10 +687,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <Triangle className={`document-theme ${currentThemeType}`}/>
+                            <img src={Triangle} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <TriangleBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={TriangleBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -698,10 +698,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <Line className={`document-theme ${currentThemeType}`}/>
+                            <img src={Line} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <LineBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={LineBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -709,10 +709,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <HexCircuit className={`document-theme ${currentThemeType}`}/>
+                            <img src={HexCircuit} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <HexCircuitBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={HexCircuitBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -720,10 +720,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <GraphDot className={`document-theme ${currentThemeType}`}/>
+                            <img src={GraphDot} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <GraphDotBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={GraphDotBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -731,7 +731,7 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <Graph className={`document-theme ${currentThemeType}`}/>
+                            <img src={Graph} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -739,10 +739,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <Wave className={`document-theme ${currentThemeType}`}/>
+                            <img src={Wave} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <WaveBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={WaveBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -760,7 +760,7 @@ const DocumentPanel = (props) => {
                     className={`document-wrapper ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
                     style={{color: `${colorHex}`}}
                 >
-                    {/* {renderTheme(currentThemeType)} */}
+                    {renderTheme(currentThemeType)}
                     {renderDocumentHeader(pageIndex)}
 
                     <div 
