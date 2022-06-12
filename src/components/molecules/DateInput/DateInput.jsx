@@ -6,7 +6,7 @@ import './DateInput.scss';
 const DateInput = (props) => {
     const {
         pageIndex, columnIndex, childIndex, currentIndex, isDisplayWhenHasInformation, 
-        updateFieldHeight, updateFieldData, getTitle, getField
+        updateFieldHeight, updateFieldData, getTitle, getField, isShowPreviewList
     } = props;
 
     const [allCheck, setAllCheck] = useState(false)
@@ -36,6 +36,7 @@ const DateInput = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
+                    isShowPreviewList={isShowPreviewList}
                 />
                 {((allCheck || isDisplayWhenHasInformation) && (
                     <span>/</span>
@@ -53,6 +54,7 @@ const DateInput = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
+                    isShowPreviewList={isShowPreviewList}
                 />
             </div>
             {((allCheck || isDisplayWhenHasInformation) && (
@@ -72,6 +74,7 @@ const DateInput = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
+                    isShowPreviewList={isShowPreviewList}
                 />
                 {((allCheck || isDisplayWhenHasInformation) && (
                     <span>/</span>
@@ -89,6 +92,7 @@ const DateInput = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
+                    isShowPreviewList={isShowPreviewList}
                 />
             </div>
         </div>

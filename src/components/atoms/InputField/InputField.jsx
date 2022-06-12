@@ -6,7 +6,7 @@ const InputField = (props) => {
     const {
         externalClass,  pageIndex, columnIndex, childIndex, currentIndex, visible, 
         isDisplayWhenHasInformation, inputBlockType, icon, placeHolder, isFocus,
-        updateFieldData, updateFieldHeight, isNotDisplayIcon
+        updateFieldData, updateFieldHeight, isNotDisplayIcon, isShowPreviewList
     } = props;
     const inputRef = useRef();
     const contentEditable = createRef();
@@ -14,6 +14,7 @@ const InputField = (props) => {
     
     useEffect(() => {
         if(isFocus){
+            if(isShowPreviewList) return
             contentEditable.current.focus()
         }
     }, [isFocus])

@@ -174,6 +174,7 @@ const CVTemplate = () => {
                         setIsOpenProfileModal={setIsOpenProfileModal}
                         currentBlockSelected={currentBlockSelected}
                         setCurrentBlockSelected={setCurrentBlockSelected}
+                        isShowPreviewList={isShowPreviewList}
                     />
                 )}
                 <button onClick={() => setIsShowReviewList(!isShowPreviewList)}>Show preview list</button>

@@ -7,7 +7,7 @@ const PreviewContainer = (props) => {
     const {
         pages, setPages, isReOrder, setIsReOrder, setCurrentTemplateType, colorHex, infoKeys, info, 
         setInfo, socialData, isOpenProfileModal, setIsOpenProfileModal, currentBlockSelected,
-        setCurrentBlockSelected, isActiveIcon
+        setCurrentBlockSelected, isActiveIcon, isShowPreviewList
     } = props;
     const templateList = Object.keys(template)
     
@@ -45,6 +45,7 @@ const PreviewContainer = (props) => {
                                     currentBlockSelected={currentBlockSelected}
                                     setCurrentBlockSelected={setCurrentBlockSelected}
                                     isActiveIcon={isActiveIcon}
+                                    isShowPreviewList={isShowPreviewList}
                                 />
                             </div>
                         </div>

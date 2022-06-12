@@ -30,7 +30,8 @@ const DocumentPanel = (props) => {
     const {
         pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
-        setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected
+        setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
+        isShowPreviewList
     } = props;
 
     const profileContainerRef = useRef();
@@ -502,6 +503,7 @@ const DocumentPanel = (props) => {
                     currentTemplateType={currentTemplateType}
                     currentBlockSelected={currentBlockSelected}
                     setCurrentBlockSelected={setCurrentBlockSelected}
+                    isShowPreviewList={isShowPreviewList}
                 />
     }
 
