@@ -11,7 +11,7 @@ import ProfileAvatar from '../../molecules/ProfileAvatar/ProfileAvatar';
 import ProfileInfo from '../../molecules/ProfileInfo/ProfileInfo';
 import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
 import { jsPDF } from "jspdf";
-import { maxHeight } from '../../../constants/Variables';
+import { maxHeight, maxWidth } from '../../../constants/Variables';
 import DocumentFooter from '../../molecules/DocumentFooter/DocumentFooter';
 import { theme } from '../../../constants/Theme';
 import Wave from '../../../dist/wave-bg.png';
@@ -653,7 +653,7 @@ const DocumentPanel = (props) => {
     const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'pt',
-        format: [1200, 1500]
+        format: [maxWidth, maxHeight]
     });
 
     function generatePDF(){
@@ -673,7 +673,7 @@ const DocumentPanel = (props) => {
 
                     i++
                     generatePDF()
-                }, y: i === 0 ? 0: (1500 * i)
+                }, y: i === 0 ? 0: (maxHeight * i)
             });
             console.log(i)
         };
