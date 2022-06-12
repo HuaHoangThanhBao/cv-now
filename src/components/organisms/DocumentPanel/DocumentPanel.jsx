@@ -10,22 +10,21 @@ import './DocumentPanel.scss';
 import ProfileAvatar from '../../molecules/ProfileAvatar/ProfileAvatar';
 import ProfileInfo from '../../molecules/ProfileInfo/ProfileInfo';
 import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
-import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
-import { maxHeight } from '../../../constants/Variables';
+import { maxHeight, maxWidth } from '../../../constants/Variables';
 import DocumentFooter from '../../molecules/DocumentFooter/DocumentFooter';
 import { theme } from '../../../constants/Theme';
-import {ReactComponent as Wave} from '../../../dist/wave-bg.svg';
-import {ReactComponent as WaveBottom} from '../../../dist/wave-bottom-bg.svg';
-import {ReactComponent as Line} from '../../../dist/line-bg.svg';
-import {ReactComponent as LineBottom} from '../../../dist/line-bottom-bg.svg';
-import {ReactComponent as HexCircuit} from '../../../dist/hex-circuit-bg.svg';
-import {ReactComponent as HexCircuitBottom} from '../../../dist/hex-circuit-bottom-bg.svg';
-import {ReactComponent as GraphDot} from '../../../dist/graph-dot-bg.svg';
-import {ReactComponent as GraphDotBottom} from '../../../dist/graph-dot-bottom-bg.svg';
-import {ReactComponent as Graph} from '../../../dist/graph-bg.svg';
-import {ReactComponent as Triangle} from '../../../dist/triangle-bg.svg';
-import {ReactComponent as TriangleBottom} from '../../../dist/triangle-bottom-bg.svg';
+import Wave from '../../../dist/wave-bg.png';
+import WaveBottom from '../../../dist/wave-bottom-bg.png';
+import Line from '../../../dist/line-bg.png';
+import LineBottom from '../../../dist/line-bottom-bg.png';
+import HexCircuit from '../../../dist/hex-circuit-bg.png';
+import HexCircuitBottom from '../../../dist/hex-circuit-bottom-bg.png';
+import GraphDot from '../../../dist/graph-dot-bg.png';
+import GraphDotBottom from '../../../dist/graph-dot-bottom-bg.png';
+import Graph from '../../../dist/graph-bg.png';
+import Triangle from '../../../dist/triangle-bg.png';
+import TriangleBottom from '../../../dist/triangle-bottom-bg.png';
 
 const DocumentPanel = (props) => {
     const {
@@ -191,7 +190,7 @@ const DocumentPanel = (props) => {
                     // console.log('itemsHeight:', itemsHeight)
 
                     if(index > 0) sumPanelHeight += headerHeight + itemsHeight + blockMarginTop
-                    else sumPanelHeight += headerHeight + itemsHeight
+                    else sumPanelHeight += headerHeight + itemsHeight + blockMarginTop + 128
                 })
 
                 console.log('-------------------------------')
@@ -211,7 +210,7 @@ const DocumentPanel = (props) => {
                         const childHeights = sumOfChildData(currentRowData[j].data)
 
                         if(j > 0) sumOfEachRow += headerHeight + childHeights + blockMarginTop
-                        else sumOfEachRow += headerHeight + childHeights
+                        else sumOfEachRow += headerHeight + childHeights + blockMarginTop + 128
 
                         console.log('header height: ' + headerHeight + ", at index: " + j + ", has child height: " + childHeights)
 
@@ -282,7 +281,7 @@ const DocumentPanel = (props) => {
                                     const childHeights = sumOfChildData(currentRowData[j].data)
 
                                     if(j > 0) sumOfCurrenthRow += headerHeight + childHeights + blockMarginTop
-                                    else sumOfCurrenthRow += headerHeight + childHeights
+                                    else sumOfCurrenthRow += headerHeight + childHeights + blockMarginTop + 128
                                 }
         
                                 console.log('<<<<<<total height of current page:', sumOfCurrenthRow)
@@ -599,6 +598,7 @@ const DocumentPanel = (props) => {
                                     getColumnType={getColumnType}
                                     socialData={socialData}
                                     setIsOpenProfileModal={setIsOpenProfileModal}
+                                    currentTemplateType={currentTemplateType}
                                 />
                             </div>
                         ))}
@@ -624,6 +624,7 @@ const DocumentPanel = (props) => {
                                     getColumnType={getColumnType}
                                     socialData={socialData}
                                     setIsOpenProfileModal={setIsOpenProfileModal}
+                                    currentTemplateType={currentTemplateType}
                                 />
                             </div>
                         )}
@@ -651,34 +652,28 @@ const DocumentPanel = (props) => {
     var i = 0;
     const pdf = new jsPDF({
         orientation: 'portrait',
+        unit: 'pt',
+        format: [maxWidth, maxHeight],
+        compress: true
     });
 
-    function generatePDF(){
-        if(i <= panelsRef.current.length - 1){
-            html2canvas(panelsRef.current[i]).then(
-                function(canvas) {
-                    const imgData = canvas.toDataURL('image/png');
-                    // const imgProps= pdf.getImageProperties(imgData);
-                    
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-                    console.log(pdfWidth + "/" + pdfHeight)
-
-                    if(i > 0){
-                        pdf.addPage()
-                    }
-                    
-                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-
-                    if(i === panelsRef.current.length - 1){
+    async function generatePDF(){
+        const pagesLength = panelsRef.current.length
+        if(i <= pagesLength - 1){
+            await pdf.html(panelsRef.current[i], {
+                callback: function (pdf) {
+                    if(i === pagesLength - 1){
+                        var pageCount = pdf.internal.getNumberOfPages();
+                        //we delete the last blank page
+                        if(pageCount > pagesLength){
+                            pdf.deletePage(pageCount)
+                        }
                         pdf.save("download.pdf");
                     }
-
-                    i++;
-                    generatePDF(); // Important! - call the function again
-                }
-            )
+                    i++
+                    generatePDF()
+                }, y: i === 0 ? 0: (maxHeight * i)
+            });
         };
     }
 
@@ -690,10 +685,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <Triangle className={`document-theme ${currentThemeType}`}/>
+                            <img src={Triangle} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <TriangleBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={TriangleBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -701,10 +696,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <Line className={`document-theme ${currentThemeType}`}/>
+                            <img src={Line} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <LineBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={LineBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -712,10 +707,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <HexCircuit className={`document-theme ${currentThemeType}`}/>
+                            <img src={HexCircuit} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <HexCircuitBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={HexCircuitBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -723,10 +718,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <GraphDot className={`document-theme ${currentThemeType}`}/>
+                            <img src={GraphDot} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <GraphDotBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={GraphDotBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -734,7 +729,7 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <Graph className={`document-theme ${currentThemeType}`}/>
+                            <img src={Graph} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -742,10 +737,10 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         <div className='document-theme-container'>
-                            <Wave className={`document-theme ${currentThemeType}`}/>
+                            <img src={Wave} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                         <div className='document-theme-container'>
-                            <WaveBottom className={`document-theme ${currentThemeType}`}/>
+                            <img src={WaveBottom} className={`document-theme ${currentThemeType}`} alt=''/>
                         </div>
                     </React.Fragment>
                 )
@@ -797,7 +792,7 @@ const DocumentPanel = (props) => {
                     />
                 </div>
             ))}
-            <button onClick={generatePDF}>Generate PDF</button>
+            <button data-html2canvas-ignore="true" onClick={generatePDF}>Generate PDF</button>
         </div>
     )
 }

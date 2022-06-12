@@ -1,4 +1,5 @@
 .field{
+    word-break: break-word;
     display: none !important;
     &.visible{
         display: block !important;

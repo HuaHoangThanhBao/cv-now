@@ -18,7 +18,7 @@
                     &-footer{
                         &-col{
                             &:nth-child(1){
-                                color: currentColor;
+                                color: white;
                             }
                         }
                     }
@@ -76,6 +76,7 @@
         bottom: 0;
         padding: 2.5rem;
         pointer-events: none;
+        z-index: 3;
         &-col{
             width: 50%;
             float: left;
@@ -346,10 +347,12 @@
                     margin-top: 2rem;
                     margin-bottom: 2rem;
                     &__row{
+                        &--block{
+                            flex-direction: row-reverse;
+                            justify-content: flex-end;
+                        }
                         width: 50%;
                         float: left;
-                        flex-direction: row-reverse;
-                        justify-content: flex-end;
                         margin-bottom: 0.5rem;
                     }
                 }
@@ -476,8 +479,9 @@
                 }
             }
             .divider{
-                width: 0.5rem;
-                background: red;
+                display: none;
+                // width: 0.5rem;
+                // background: red;
             }
         }
 
@@ -485,6 +489,7 @@
             padding-top: 1rem;
             padding-right: 1rem;
             &.one-column{
+                padding-top: 3rem;
                 padding-left: 1rem;
                 .column{
                     padding-right: 0 !important;
@@ -662,10 +667,13 @@
                         position: relative;
                         z-index: 3;
                         .icon{
-                            background-color: white;
+                            background-color: #1d1f22;
                             color: #2B343D !important;
                             svg, path{
                                 fill: currentColor !important;
+                            }
+                            img{
+                                filter: brightness(1);
                             }
                         }
                     }
@@ -675,7 +683,16 @@
                         border: none;
                     }
                     &-social{
+                        &__wrapper{
+                            padding-top: 1.5rem;
+                            padding-bottom: 0;
+                            &--block{
+                                display: flex;
+                                flex-wrap: wrap;
+                            }
+                        }
                         &__row{
+                            margin-bottom: 1rem;
                             &--txt{
                                 color: white;
                             }
@@ -721,6 +738,7 @@
                     }
                     &__row{
                         width: 100%;
+                        margin-bottom: 1rem;
                         &--txt{
                             margin-left: 0.7rem;
                             color: black;
@@ -834,6 +852,24 @@
                 }
             }
             &.two-column{
+                .column{
+                    &:nth-child(2){
+                        .profile{
+                            &-social{
+                                &__wrapper{
+                                    &--block{
+                                        display: flex;
+                                        align-items: center;
+                                        flex-wrap: wrap;
+                                    }
+                                }
+                                &__row{
+                                    margin-bottom: 1rem;
+                                }
+                            }
+                        }
+                    }
+                }
                 .divider-row{
                     display: none;
                 }
@@ -1012,7 +1048,8 @@
                         position: relative;
                         z-index: 2;
                         .icon{
-                            background-color: white;
+                            background-color: #1d1f22;
+                            // background-color: white;
                             color: #2B343D !important;
                             svg, path{
                                 fill: currentColor !important;
