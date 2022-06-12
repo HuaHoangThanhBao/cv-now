@@ -658,14 +658,14 @@ const DocumentPanel = (props) => {
     });
 
     async function generatePDF(){
-        const documentWrapper = document.querySelectorAll('.document-wrapper');
-        if(i <= panelsRef.current.length - 1){
-            await pdf.html(documentWrapper[i], {
+        const pagesLength = panelsRef.current.length
+        if(i <= pagesLength - 1){
+            await pdf.html(panelsRef.current[i], {
                 callback: function (pdf) {
-                    if(i === documentWrapper.length - 1){
+                    if(i === pagesLength - 1){
                         var pageCount = pdf.internal.getNumberOfPages();
                         //we delete the last blank page
-                        if(pageCount > documentWrapper.length){
+                        if(pageCount > pagesLength){
                             pdf.deletePage(pageCount)
                         }
                         pdf.save("download.pdf");
