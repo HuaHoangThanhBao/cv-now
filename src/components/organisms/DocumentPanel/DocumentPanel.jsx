@@ -462,7 +462,7 @@ const DocumentPanel = (props) => {
     useEffect(() => {
         if(isReOrder){
             //Prevent document panels on preview list checking for moving
-            //Only CV page is re-orederd
+            //Only CV page is re-orederd, if not we return
             if(isShowPreviewList) return;
 
             console.log('+++++++++++page has changed++++++++++')
