@@ -31,7 +31,7 @@ const DocumentPanel = (props) => {
         pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
         setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
-        isShowPreviewList
+        isShowPreviewList, profileContainerHeight, setProfileContainerHeight
     } = props;
 
     const profileContainerRef = useRef();
@@ -461,6 +461,10 @@ const DocumentPanel = (props) => {
 
     useEffect(() => {
         if(isReOrder){
+            //Prevent document panels on preview list checking for moving
+            //Only CV page is re-orederd
+            if(isShowPreviewList) return;
+
             console.log('+++++++++++page has changed++++++++++')
             //re-check two column of each page
             checkToMoveContent(0, 0)
@@ -474,6 +478,10 @@ const DocumentPanel = (props) => {
     useEffect(() => {
         panelsRef.current = panelsRef.current.slice(0, pages.length);
     }, [pages]);
+    
+    useEffect(() => {
+        setProfileContainerHeight(profileContainerRef.current ? maxHeight - profileContainerRef.current.offsetHeight: maxHeight)
+    })
 
     function renderChildContent(pageIndex, columnIndex, childId, childIndex){
         const child =  pages[pageIndex].columns[columnIndex].child.find(c => c.id === childId)
@@ -765,7 +773,7 @@ const DocumentPanel = (props) => {
 
                     <div 
                         className={`document-container ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
-                        style={{minHeight: `${pageIndex === 0 && profileContainerRef.current ? (maxHeight - profileContainerRef.current.offsetHeight): maxHeight}px`}}
+                        style={{minHeight: `${pageIndex === 0 ? profileContainerHeight: maxHeight}px`}}
                     >
                         {page && page.columns.map((column, columnIndex) => (
                             <div 

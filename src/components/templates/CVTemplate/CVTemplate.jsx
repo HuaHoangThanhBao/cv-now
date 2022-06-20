@@ -20,7 +20,7 @@ import { one_column_format, two_column_format } from '../../../constants/ColumnF
 const CVTemplate = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
-    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.it)
+    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.skilled_based)
     const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
     const [isShowPreviewList, setIsShowReviewList] = useState(false)
     const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);
@@ -36,6 +36,8 @@ const CVTemplate = () => {
         childIndex: 0,
         _currentBlockSelectedIndex: -1
     })
+    //This is a special state to calculate actualpage height based on Profile Container ref
+    const [profileContainerHeight, setProfileContainerHeight] = useState(0)
 
     const handleTransformToOneColumn = (status) => {
         const clonePages = JSON.parse(JSON.stringify(pages));
@@ -125,6 +127,12 @@ const CVTemplate = () => {
         }
     }
 
+    const handleSelectTemplate = (template) => {
+        setCurrentTemplateType(template)
+        //After we choose a new template, we re-order all blocks on CV page
+        setIsReOrder(true)
+    }
+
     return(
         <React.Fragment>
             <div className="cv-template">
@@ -164,7 +172,7 @@ const CVTemplate = () => {
                         isReOrder={isReOrder}
                         setIsReOrder={setIsReOrder}
                         currentTemplateType={currentTemplateType}
-                        setCurrentTemplateType={setCurrentTemplateType}
+                        handleSelectTemplate={handleSelectTemplate}
                         colorHex={colorHex}
                         infoKeys={infoKeys}
                         info={info}
@@ -175,6 +183,8 @@ const CVTemplate = () => {
                         currentBlockSelected={currentBlockSelected}
                         setCurrentBlockSelected={setCurrentBlockSelected}
                         isShowPreviewList={isShowPreviewList}
+                        profileContainerHeight={profileContainerHeight}
+                        setProfileContainerHeight={setProfileContainerHeight}
                     />
                 )}
                 <button onClick={() => setIsShowReviewList(!isShowPreviewList)}>Show preview list</button>
@@ -196,6 +206,8 @@ const CVTemplate = () => {
                     setIsOpenProfileModal={setIsOpenProfileModal}
                     currentBlockSelected={currentBlockSelected}
                     setCurrentBlockSelected={setCurrentBlockSelected}
+                    profileContainerHeight={profileContainerHeight}
+                    setProfileContainerHeight={setProfileContainerHeight}
                 />
             </div>
             <ProfileModal 
