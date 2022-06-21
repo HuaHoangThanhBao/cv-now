@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react'
 
 function DragNDrop(props) {
-    const {data, setPages, setIsReOrder, handleTransformToOneColumn} = props
+    const {data, setPages, handleTransformToOneColumn, setIsDragChange} = props
     const [list, setList] = useState(data); 
     const [dragging, setDragging] = useState(false);
     const [noNeedDragging, setNoNeedDragging] = useState(false);
@@ -214,9 +214,10 @@ function DragNDrop(props) {
     }, [list, noNeedList])
 
     const reOrderPages = React.useCallback(() => {
-        setIsReOrder(true)
         setPages([...list])
-    }, [list, setIsReOrder, setPages])
+        //This is a fake step to make re-order after draging is done
+        setIsDragChange(true)
+    }, [list, setIsDragChange, setPages])
 
     const onCheckOneColumnCheckBox = (e) => {
         handleTransformToOneColumn(e.target.checked);

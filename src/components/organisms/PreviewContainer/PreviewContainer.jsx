@@ -5,9 +5,10 @@ import './PreviewContainer.scss'
 
 const PreviewContainer = (props) => {
     const {
-        pages, setPages, isReOrder, setIsReOrder, setCurrentTemplateType, colorHex, infoKeys, info, 
+        pages, setPages, isReOrder, setIsReOrder, handleSelectTemplate, colorHex, infoKeys, info, 
         setInfo, socialData, isOpenProfileModal, setIsOpenProfileModal, currentBlockSelected,
-        setCurrentBlockSelected, isActiveIcon
+        setCurrentBlockSelected, isActiveIcon, isShowPreviewList, profileContainerHeight, 
+        setProfileContainerHeight
     } = props;
     const templateList = Object.keys(template)
     
@@ -23,7 +24,7 @@ const PreviewContainer = (props) => {
                     </div>
                     <div 
                         className='preview-selection' 
-                        onClick={() => setCurrentTemplateType(template)}
+                        onClick={() => handleSelectTemplate(template)}
                     >
                         <div className="preview-box-wrapper">
                             <div className="preview-overlay"></div>
@@ -34,7 +35,6 @@ const PreviewContainer = (props) => {
                                     isReOrder={isReOrder}
                                     setIsReOrder={setIsReOrder}
                                     currentTemplateType={template}
-                                    setCurrentTemplateType={setCurrentTemplateType}
                                     colorHex={colorHex}
                                     infoKeys={infoKeys}
                                     info={info}
@@ -45,6 +45,9 @@ const PreviewContainer = (props) => {
                                     currentBlockSelected={currentBlockSelected}
                                     setCurrentBlockSelected={setCurrentBlockSelected}
                                     isActiveIcon={isActiveIcon}
+                                    isShowPreviewList={isShowPreviewList}
+                                    profileContainerHeight={profileContainerHeight}
+                                    setProfileContainerHeight={setProfileContainerHeight}
                                 />
                             </div>
                         </div>

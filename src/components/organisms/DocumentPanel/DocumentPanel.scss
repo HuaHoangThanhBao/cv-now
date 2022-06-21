@@ -587,11 +587,13 @@
                 }
                 .panel{
                     &.right{
+                        position: relative;
                         background-color: #EBEBEB;
                         border-radius: 0.5rem;
                         padding: 2rem 2rem 8rem 1rem;
                         margin-right: 1rem;
                         height: 100%;
+                        z-index: 2;
                     }
                 }
             }
