@@ -659,32 +659,38 @@ const DocumentPanel = (props) => {
         }
     }
 
-    var i = 0;
-    const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'pt',
-        format: [maxWidth, maxHeight],
-        compress: true
-    });
-
     async function generatePDF(){
-        const pagesLength = panelsRef.current.length
-        if(i <= pagesLength - 1){
-            await pdf.html(panelsRef.current[i], {
-                callback: function (pdf) {
-                    if(i === pagesLength - 1){
-                        var pageCount = pdf.internal.getNumberOfPages();
-                        //we delete the last blank page
-                        if(pageCount > pagesLength){
-                            pdf.deletePage(pageCount)
+        //Only CV page is generated, if not we return
+        if(isShowPreviewList) return;
+        
+        let i = 0;
+        const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'pt',
+            format: [maxWidth, maxHeight],
+            compress: true
+        });
+        async function createPDF(){
+            const pagesLength = panelsRef.current.length
+            if(i <= pagesLength - 1){
+                await pdf.html(panelsRef.current[i], {
+                    callback: function (pdf) {
+                        if(i === pagesLength - 1){
+                            var pageCount = pdf.internal.getNumberOfPages();
+                            //we delete the last blank page
+                            if(pageCount > pagesLength){
+                                pdf.deletePage(pageCount)
+                            }
+                            pdf.save("download.pdf");
                         }
-                        pdf.save("download.pdf");
-                    }
-                    i++
-                    generatePDF()
-                }, y: i === 0 ? 0: (maxHeight * i)
-            });
-        };
+                        i++
+                        createPDF()
+                    }, y: i === 0 ? 0: (maxHeight * i)
+                });
+            };
+        }
+        
+        createPDF();
     }
 
     const renderTheme = (currentThemeType) => {
