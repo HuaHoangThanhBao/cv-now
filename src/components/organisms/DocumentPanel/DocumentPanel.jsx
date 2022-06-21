@@ -31,7 +31,8 @@ const DocumentPanel = (props) => {
         pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
         setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
-        isShowPreviewList, profileContainerHeight, setProfileContainerHeight
+        isShowPreviewList, profileContainerHeight, setProfileContainerHeight,
+        isDragChange, setIsDragChange
     } = props;
 
     const profileContainerRef = useRef();
@@ -459,6 +460,14 @@ const DocumentPanel = (props) => {
         return collection.findIndex(child => child.id === childId)
     }
 
+    //Important
+    //This is a fake step to make re-order after draging is done in DragNDrop component
+    useEffect(() => {
+        if(isDragChange){
+            setIsReOrder(true)
+        }
+    }, [isDragChange])
+
     useEffect(() => {
         if(isReOrder){
             //Prevent document panels on preview list checking for moving
@@ -472,6 +481,7 @@ const DocumentPanel = (props) => {
                 checkToMoveContent(0, 1)
             }
             setIsReOrder(false)
+            setIsDragChange(false)
         }
     })
 

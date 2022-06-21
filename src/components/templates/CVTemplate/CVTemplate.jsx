@@ -36,6 +36,8 @@ const CVTemplate = () => {
         childIndex: 0,
         _currentBlockSelectedIndex: -1
     })
+    //This is a fake state to make re-order in Document Panel
+    const [isDragChange, setIsDragChange] = useState(false)
     //This is a special state to calculate actualpage height based on Profile Container ref
     const [profileContainerHeight, setProfileContainerHeight] = useState(0)
 
@@ -140,8 +142,8 @@ const CVTemplate = () => {
                 <Board 
                     pages={pages}
                     setPages={setPages}
-                    setIsReOrder={setIsReOrder}
                     handleTransformToOneColumn={handleTransformToOneColumn}
+                    setIsDragChange={setIsDragChange}
                 />
                 
                 <ColorList 
@@ -208,6 +210,8 @@ const CVTemplate = () => {
                     setCurrentBlockSelected={setCurrentBlockSelected}
                     profileContainerHeight={profileContainerHeight}
                     setProfileContainerHeight={setProfileContainerHeight}
+                    isDragChange={isDragChange}
+                    setIsDragChange={setIsDragChange}
                 />
             </div>
             <ProfileModal 

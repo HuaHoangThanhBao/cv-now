@@ -9,15 +9,15 @@ import DragNDrop from '../../molecules/DragNDrop/DragNDrop';
 // ]
 
 const Board = (props) => {
-    const {pages, setPages, setIsReOrder, handleTransformToOneColumn} = props
+    const {pages, setPages, handleTransformToOneColumn, setIsDragChange} = props
     
     return (
         <div className='board'>
             <DragNDrop 
                 data={pages}
                 setPages={setPages}
-                setIsReOrder={setIsReOrder}
                 handleTransformToOneColumn={handleTransformToOneColumn}
+                setIsDragChange={setIsDragChange}
             />
         </div>
     )
