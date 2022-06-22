@@ -103,12 +103,7 @@ const CVTemplate = () => {
         console.log('re-order page after transforming')
         console.log(clonePages)
         setPages([...clonePages])
-        setCurrentBlockSelected({
-            pageIndex: 0,
-            columnIndex: 0,
-            childIndex: 0,
-            _currentBlockSelectedIndex: -1
-        })
+        resetCurrentBlockSelected()
         setIsReOrder(true)
     }
 
@@ -135,6 +130,15 @@ const CVTemplate = () => {
         setIsReOrder(true)
     }
 
+    const resetCurrentBlockSelected = () => {
+        setCurrentBlockSelected({
+            pageIndex: 0,
+            columnIndex: 0,
+            childIndex: 0,
+            _currentBlockSelectedIndex: -1
+        })
+    }
+
     return(
         <React.Fragment>
             <div className="cv-template">
@@ -144,6 +148,7 @@ const CVTemplate = () => {
                     setPages={setPages}
                     handleTransformToOneColumn={handleTransformToOneColumn}
                     setIsDragChange={setIsDragChange}
+                    resetCurrentBlockSelected={resetCurrentBlockSelected}
                 />
                 
                 <ColorList 

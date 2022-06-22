@@ -466,7 +466,7 @@ const DocumentPanel = (props) => {
         if(isDragChange){
             setIsReOrder(true)
         }
-    }, [isDragChange])
+    }, [isDragChange, setIsReOrder])
 
     useEffect(() => {
         if(isReOrder){

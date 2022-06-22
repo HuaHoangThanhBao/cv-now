@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react'
 
 function DragNDrop(props) {
-    const {data, setPages, handleTransformToOneColumn, setIsDragChange} = props
+    const {data, setPages, handleTransformToOneColumn, setIsDragChange, resetCurrentBlockSelected} = props
     const [list, setList] = useState(data); 
     const [dragging, setDragging] = useState(false);
     const [noNeedDragging, setNoNeedDragging] = useState(false);
@@ -232,9 +232,10 @@ function DragNDrop(props) {
             console.log('---------start re-order---------')
             dragItem.current = null;
             dragItemNode.current = null;
+            resetCurrentBlockSelected()
             reOrderPages()
         }
-    }, [list, dragging, reOrderPages])
+    }, [list, dragging, reOrderPages, resetCurrentBlockSelected])
 
     useEffect(() => {
         if(!noNeedDragging && dragNoNeedItemNode.current !== null){

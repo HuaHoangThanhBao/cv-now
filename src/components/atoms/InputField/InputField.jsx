@@ -13,11 +13,11 @@ const InputField = (props) => {
     const [html, setHTML] = useState(placeHolder);
     
     useEffect(() => {
+        if(isShowPreviewList) return
         if(isFocus){
-            if(isShowPreviewList) return
             contentEditable.current.focus()
         }
-    }, [isFocus])
+    }, [isFocus, isShowPreviewList])
 
     useEffect(() => {
         setHTML(placeHolder)
