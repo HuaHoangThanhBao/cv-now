@@ -966,10 +966,13 @@
                         display: inline-block;
                         width: 100%;
                         .field{
-                            border: 3px solid #2B343D;
+                            border-color: #2b343d;
                             border-left-width: 0;
                             border-right-width: 0;
-                            padding-bottom: 0.2rem;
+                            border-top-style: solid;
+                            border-bottom-style: solid;
+                            border-top-width: 2px;
+                            border-bottom-width: 2px;
                         }
                     }
                 }
