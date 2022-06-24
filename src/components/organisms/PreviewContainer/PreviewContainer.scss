@@ -1,6 +1,8 @@
 .preview{
-    float: left;
-    margin: 2rem;
+    &-item{
+        float: left;
+        margin: 2rem;
+    }
     &-selection{
         width: 270px;
         height: 270px;
@@ -42,6 +44,9 @@
             overflow: hidden;
             position: relative;
             border-radius: 0.25rem;
+        }
+        .document{
+            width: 1200px;
         }
     }
     &-overlay{

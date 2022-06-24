@@ -10,9 +10,8 @@ import './DocumentPanel.scss';
 import ProfileAvatar from '../../molecules/ProfileAvatar/ProfileAvatar';
 import ProfileInfo from '../../molecules/ProfileInfo/ProfileInfo';
 import ProfileSocial from '../../molecules/ProfileSocial/ProfileSocial';
-import { jsPDF } from "jspdf";
-import { maxHeight, maxWidth } from '../../../constants/Variables';
 import DocumentFooter from '../../molecules/DocumentFooter/DocumentFooter';
+import { maxHeight } from '../../../constants/Variables';
 import { theme } from '../../../constants/Theme';
 import Wave from '../../../dist/wave-bg.png';
 import WaveBottom from '../../../dist/wave-bottom-bg.png';
@@ -28,7 +27,7 @@ import TriangleBottom from '../../../dist/triangle-bottom-bg.png';
 
 const DocumentPanel = (props) => {
     const {
-        pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
+        panelsRef, pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
         setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
         isShowPreviewList, profileContainerHeight, setProfileContainerHeight,
@@ -39,8 +38,6 @@ const DocumentPanel = (props) => {
     const profileSocialRef = useRef();
     const profileAvatarRef = useRef();
     const profileInfoRef = useRef();
-
-    const panelsRef = useRef([]);
 
     function useOnClickOutside(ref, handler) {
         useEffect(() => {
@@ -460,6 +457,12 @@ const DocumentPanel = (props) => {
         return collection.findIndex(child => child.id === childId)
     }
 
+    //Add on 24/06/2022
+    useEffect(() => {
+        if(isShowPreviewList) return;
+        setIsReOrder(true)
+    }, [])
+
     //Important
     //This is a fake step to make re-order after draging is done in DragNDrop component
     useEffect(() => {
@@ -473,6 +476,8 @@ const DocumentPanel = (props) => {
             //Prevent document panels on preview list checking for moving
             //Only CV page is re-orederd, if not we return
             if(isShowPreviewList) return;
+
+            console.log(isShowPreviewList)
 
             console.log('+++++++++++page has changed++++++++++')
             //re-check two column of each page
@@ -669,40 +674,6 @@ const DocumentPanel = (props) => {
         }
     }
 
-    async function generatePDF(){
-        //Only CV page is generated, if not we return
-        if(isShowPreviewList) return;
-        
-        let i = 0;
-        const pdf = new jsPDF({
-            orientation: 'portrait',
-            unit: 'pt',
-            format: [maxWidth, maxHeight],
-            compress: true
-        });
-        async function createPDF(){
-            const pagesLength = panelsRef.current.length
-            if(i <= pagesLength - 1){
-                await pdf.html(panelsRef.current[i], {
-                    callback: function (pdf) {
-                        if(i === pagesLength - 1){
-                            var pageCount = pdf.internal.getNumberOfPages();
-                            //we delete the last blank page
-                            if(pageCount > pagesLength){
-                                pdf.deletePage(pageCount)
-                            }
-                            pdf.save("download.pdf");
-                        }
-                        i++
-                        createPDF()
-                    }, y: i === 0 ? 0: (maxHeight * i)
-                });
-            };
-        }
-        
-        createPDF();
-    }
-
     const renderTheme = (currentThemeType) => {
         switch(currentThemeType){
             case theme.basic_theme:
@@ -818,7 +789,6 @@ const DocumentPanel = (props) => {
                     />
                 </div>
             ))}
-            <button data-html2canvas-ignore="true" onClick={generatePDF}>Generate PDF</button>
         </div>
     )
 }
