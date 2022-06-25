@@ -19,6 +19,7 @@ import { maxHeight, maxWidth } from '../../constants/Variables';
 import { menu } from '../../constants/Menu';
 import './MyDocumentPage.scss';
 import FontList from '../organisms/FontList/FontList';
+import Settings from '../organisms/Settings/Settings';
 
 const MyDocumentPage = () => {
     const [pages, setPages] = useState(MetaData)
@@ -265,9 +266,7 @@ const MyDocumentPage = () => {
                 )
             case menu.settings:
                 return (
-                    <div className='settings'>
-
-                    </div>
+                    <Settings />
                 )
         }
     }
