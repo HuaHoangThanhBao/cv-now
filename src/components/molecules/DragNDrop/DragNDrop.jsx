@@ -304,7 +304,7 @@ function DragNDrop(props) {
                             onChange={onCheckOneColumnCheckBox}
                         />
                         <label className='group-title'>One column</label>
-                        <div>Drag and drop to Add or Remove sections.</div>
+                        <div className='group-desc'>Drag and drop to Add or Remove sections.</div>
                         <div 
                             className='drag-no-need'
                             onDragEnter={dragging ? (e) => handleNoNeedItemDragEnter(e): null}

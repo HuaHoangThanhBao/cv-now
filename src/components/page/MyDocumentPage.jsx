@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import CVTemplate from '../templates/CVTemplate/CVTemplate';
 import { template_type } from '../../constants/Template';
 import {theme} from '../../constants/Theme';
@@ -18,13 +18,13 @@ import { jsPDF } from "jspdf";
 import { maxHeight, maxWidth } from '../../constants/Variables';
 import { menu } from '../../constants/Menu';
 import './MyDocumentPage.scss';
+import FontList from '../organisms/FontList/FontList';
 
 const MyDocumentPage = () => {
     const [pages, setPages] = useState(MetaData)
     const [isReOrder, setIsReOrder] = useState(false)
     const [currentTemplateType, setCurrentTemplateType] = useState(template_type.combined)
     const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
-    const [isShowPreviewList, setIsShowReviewList] = useState(false)
     const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);
     const [colorRbg, setColorRbg] = useState('#2B343D')
     const [colorHex, setColorHex] = useState('#2B343D')
@@ -38,7 +38,8 @@ const MyDocumentPage = () => {
         childIndex: 0,
         _currentBlockSelectedIndex: -1
     })
-    const [menuItemSelected, setMenuItemSelected] = useState('') 
+    const [isMenuActive, setIsMenuActive] = useState(false)
+    const [menuItemSelected, setMenuItemSelected] = useState('')
 
     //This is a fake state to make re-order in Document Panel
     const [isDragChange, setIsDragChange] = useState(false)
@@ -47,6 +48,26 @@ const MyDocumentPage = () => {
     
     //All pages will be store in this ref
     const panelsRef = useRef([]);
+
+    function useOnClickOutside(ref, handler) {
+        useEffect(() => {
+            const listener = (event) => {
+              // Do nothing if clicking ref's element or descendent elements
+              if (!ref.current || ref.current.contains(event.target)) {
+                handler(true);
+                return;
+              }
+              handler(false);
+            };
+            //component did mount
+            document.addEventListener("mousedown", listener);
+            
+            //component will unmount
+            return () => {
+              document.removeEventListener("mousedown", listener);
+            };
+        }, [ref]);
+    }
 
     async function generatePDF(){
         let i = 0;
@@ -180,84 +201,71 @@ const MyDocumentPage = () => {
 
     const getMenuContent = () => {
         switch(menuItemSelected){
-            case menu.font:
+            case menu.fonts:
+                 default:
                 return (
-                    <div className='font'>
-
+                    <div className='fonts-wrapper'>
+                        <p className='fonts-heading'>Fonts</p>
+                        <FontList />
                     </div>
                 )
-            case menu.theme:
+            case menu.themes:
                 return (
-                    <div className='theme'>
-                        <div className='theme-wrapper'>
-                            <div className='theme-container'>
-                                <div className='theme-color'>
-                                    <p className='theme-text'>Color</p>
-                                    <ColorList 
-                                        colorRbg={colorRbg}
-                                        setColorRbg={setColorRbg}
-                                        colorHex={colorHex}
-                                        setColorHex={setColorHex}
-                                    />
-                                </div>
-                                <div className='theme-option'>
-                                    <p className='theme-text'>Background</p>
-                                    <ThemeList 
-                                        setCurrentThemeType={setCurrentThemeType}
-                                    />
-                                </div>
-                            </div>
+                    <div className='themes-container'>
+                        <div className='themes-color'>
+                            <p className='themes-text'>Color</p>
+                            <ColorList 
+                                colorRbg={colorRbg}
+                                setColorRbg={setColorRbg}
+                                colorHex={colorHex}
+                                setColorHex={setColorHex}
+                            />
+                        </div>
+                        <div className='themes-option'>
+                            <p className='themes-text'>Background</p>
+                            <ThemeList 
+                                setCurrentThemeType={setCurrentThemeType}
+                            />
                         </div>
                     </div>
                 )
-            case menu.layout:
+            case menu.layouts:
                 return (
-                    <div className='layout'>
-                        <Board 
-                            pages={pages}
-                            setPages={setPages}
-                            handleTransformToOneColumn={handleTransformToOneColumn}
-                            setIsDragChange={setIsDragChange}
-                            resetCurrentBlockSelected={resetCurrentBlockSelected}
-                        />
-                    </div>
+                    <Board 
+                        pages={pages}
+                        setPages={setPages}
+                        handleTransformToOneColumn={handleTransformToOneColumn}
+                        setIsDragChange={setIsDragChange}
+                        resetCurrentBlockSelected={resetCurrentBlockSelected}
+                    />
                 )
-            case menu.template:
+            case menu.templates:
                 return (
-                    <div className='template'>
-                        <PreviewContainer 
-                            panelsRef={panelsRef}
-                            pages={pages}
-                            setPages={setPages}
-                            isReOrder={isReOrder}
-                            setIsReOrder={setIsReOrder}
-                            currentTemplateType={currentTemplateType}
-                            handleSelectTemplate={handleSelectTemplate}
-                            colorHex={colorHex}
-                            infoKeys={infoKeys}
-                            info={info}
-                            setInfo={setInfo}
-                            socialData={socialData}
-                            isOpenProfileModal={isOpenProfileModal} 
-                            setIsOpenProfileModal={setIsOpenProfileModal}
-                            currentBlockSelected={currentBlockSelected}
-                            setCurrentBlockSelected={setCurrentBlockSelected}
-                            // isShowPreviewList={isShowPreviewList}
-                            setIsShowReviewList={setIsShowReviewList}
-                            profileContainerHeight={profileContainerHeight}
-                            setProfileContainerHeight={setProfileContainerHeight}
-                        />
-                    </div>
+                    <PreviewContainer 
+                        panelsRef={panelsRef}
+                        pages={pages}
+                        setPages={setPages}
+                        isReOrder={isReOrder}
+                        setIsReOrder={setIsReOrder}
+                        currentTemplateType={currentTemplateType}
+                        handleSelectTemplate={handleSelectTemplate}
+                        colorHex={colorHex}
+                        infoKeys={infoKeys}
+                        info={info}
+                        setInfo={setInfo}
+                        socialData={socialData}
+                        isOpenProfileModal={isOpenProfileModal} 
+                        setIsOpenProfileModal={setIsOpenProfileModal}
+                        currentBlockSelected={currentBlockSelected}
+                        setCurrentBlockSelected={setCurrentBlockSelected}
+                        profileContainerHeight={profileContainerHeight}
+                        setProfileContainerHeight={setProfileContainerHeight}
+                        useOnClickOutside={useOnClickOutside}
+                    />
                 )
             case menu.settings:
                 return (
                     <div className='settings'>
-
-                    </div>
-                )
-            default:
-                return (
-                    <div className='font'>
 
                     </div>
                 )
@@ -268,9 +276,12 @@ const MyDocumentPage = () => {
         <div className="document-page">
             <MainMenu 
                 generatePDF={generatePDF}
+                menuItemSelected={menuItemSelected}
                 setMenuItemSelected={setMenuItemSelected}
-                setIsShowReviewList={setIsShowReviewList}
                 getMenuContent={getMenuContent}
+                useOnClickOutside={useOnClickOutside}
+                isMenuActive={isMenuActive}
+                setIsMenuActive={setIsMenuActive}
             />
 
             <div className='document-page-cv'>
@@ -306,6 +317,7 @@ const MyDocumentPage = () => {
                     isDragChange={isDragChange}
                     setIsDragChange={setIsDragChange}
                     setSocialData={setSocialData}
+                    useOnClickOutside={useOnClickOutside}
                 />
             </div>
         </div>

@@ -30,34 +30,14 @@ const DocumentPanel = (props) => {
         panelsRef, pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
         setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
-        isShowPreviewList, profileContainerHeight, setProfileContainerHeight,
-        isDragChange, setIsDragChange
+        isPreventInteracting, profileContainerHeight, setProfileContainerHeight,
+        isDragChange, setIsDragChange, useOnClickOutside
     } = props;
 
     const profileContainerRef = useRef();
     const profileSocialRef = useRef();
     const profileAvatarRef = useRef();
     const profileInfoRef = useRef();
-
-    function useOnClickOutside(ref, handler) {
-        useEffect(() => {
-            const listener = (event) => {
-              // Do nothing if clicking ref's element or descendent elements
-              if (!ref.current || ref.current.contains(event.target)) {
-                handler(true);
-                return;
-              }
-              handler(false);
-            };
-            //component did mount
-            document.addEventListener("mousedown", listener);
-            
-            //component will unmount
-            return () => {
-              document.removeEventListener("mousedown", listener);
-            };
-        }, [ref]);
-    }
 
     const onInputFieldChange = (event, setValue) => {
         const val = event.target.value;
@@ -459,9 +439,9 @@ const DocumentPanel = (props) => {
 
     //Add on 24/06/2022
     useEffect(() => {
-        if(isShowPreviewList) return;
+        if(isPreventInteracting) return;
         setIsReOrder(true)
-    }, [])
+    }, [isPreventInteracting, setIsReOrder])
 
     //Important
     //This is a fake step to make re-order after draging is done in DragNDrop component
@@ -475,9 +455,7 @@ const DocumentPanel = (props) => {
         if(isReOrder){
             //Prevent document panels on preview list checking for moving
             //Only CV page is re-orederd, if not we return
-            if(isShowPreviewList) return;
-
-            console.log(isShowPreviewList)
+            if(isPreventInteracting) return;
 
             console.log('+++++++++++page has changed++++++++++')
             //re-check two column of each page
@@ -492,7 +470,7 @@ const DocumentPanel = (props) => {
 
     useEffect(() => {
         panelsRef.current = panelsRef.current.slice(0, pages.length);
-    }, [pages]);
+    }, [pages.length, panelsRef]);
     
     useEffect(() => {
         setProfileContainerHeight(profileContainerRef.current ? maxHeight - profileContainerRef.current.offsetHeight: maxHeight)
@@ -526,7 +504,7 @@ const DocumentPanel = (props) => {
                     currentTemplateType={currentTemplateType}
                     currentBlockSelected={currentBlockSelected}
                     setCurrentBlockSelected={setCurrentBlockSelected}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                 />
     }
 

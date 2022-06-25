@@ -8,7 +8,8 @@ const CVTemplate = (props) => {
         panelsRef, pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
         currentColumnWidthAttr, colorHex, infoKeys, isOpenProfileModal, setIsOpenProfileModal,
         info, setInfo, socialData, setSocialData, currentBlockSelected, setCurrentBlockSelected,
-        profileContainerHeight, setProfileContainerHeight, isDragChange, setIsDragChange
+        profileContainerHeight, setProfileContainerHeight, isDragChange, setIsDragChange, 
+        useOnClickOutside
     } = props;
 
     return(
@@ -36,6 +37,7 @@ const CVTemplate = (props) => {
                     setProfileContainerHeight={setProfileContainerHeight}
                     isDragChange={isDragChange}
                     setIsDragChange={setIsDragChange}
+                    useOnClickOutside={useOnClickOutside}
                 />
             </div>
             <ProfileModal 

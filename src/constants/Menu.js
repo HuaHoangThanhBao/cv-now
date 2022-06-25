@@ -1,7 +1,7 @@
 export const menu = {
-    font: "font",
-    theme: "theme",
-    template: "template",
-    layout: "layout",
+    fonts: "fonts",
+    themes: "themes",
+    templates: "templates",
+    layouts: "layouts",
     settings: "settings"
 }

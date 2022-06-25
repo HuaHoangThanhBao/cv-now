@@ -8,7 +8,7 @@ const PreviewContainer = (props) => {
         panelsRef, pages, setPages, isReOrder, setIsReOrder, handleSelectTemplate, colorHex, infoKeys, info, 
         setInfo, socialData, isOpenProfileModal, setIsOpenProfileModal, currentBlockSelected,
         setCurrentBlockSelected, isActiveIcon, profileContainerHeight, 
-        setProfileContainerHeight
+        setProfileContainerHeight, useOnClickOutside
     } = props;
     const templateList = Object.keys(template)
     
@@ -46,9 +46,10 @@ const PreviewContainer = (props) => {
                                     currentBlockSelected={currentBlockSelected}
                                     setCurrentBlockSelected={setCurrentBlockSelected}
                                     isActiveIcon={isActiveIcon}
-                                    isShowPreviewList={true}
+                                    isPreventInteracting={true}
                                     profileContainerHeight={profileContainerHeight}
                                     setProfileContainerHeight={setProfileContainerHeight}
+                                    useOnClickOutside={useOnClickOutside}
                                 />
                             </div>
                         </div>

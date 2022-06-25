@@ -85,24 +85,44 @@
         z-index: 2;
     }
     &-panel{
-        .template{
+        .fonts{
+            max-height: calc(100vh - 5rem);
+            max-width: 400px;
+            overflow: auto;
+            margin: 0 auto;
+            border-radius: 0.5rem;
+            &-wrapper{
+                background-color: #425061;
+                color: white;
+                padding: 1rem;
+            }
+            &-heading{
+                font-weight: bold;
+                text-decoration: underline;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+        }
+        .templates{
             background-color: #425061;
             max-width: 1030px;
             margin: 0 auto;
-            max-height: calc(100vh - 10rem);
+            max-height: calc(100vh - 5rem);
             overflow: auto;
+            border-radius: 0.5rem;
         }
-        .layout{
-            max-height: calc(100vh - 10rem);
+        .layouts{
+            max-height: calc(100vh - 5rem);
             max-width: 900px;
             overflow: auto;
             margin: 0 auto;
+            background-color: #425061;
+            padding: 1rem;
+            border-radius: 0.5rem;
         }
-        .theme{
-            &-wrapper{
-                margin: 0 auto;
-                max-width: 900px;
-            }
+        .themes{
+            margin: 0 auto;
+            max-width: 850px;
             &-container{
                 display: flex;
                 justify-content: center;
@@ -112,6 +132,8 @@
                 justify-content: center;
                 background-color: white;
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                border-top-left-radius: 0.5rem;
+                border-bottom-left-radius: 0.5rem;
             }
             &-option{
                 margin-left: 0.5rem;
@@ -120,6 +142,8 @@
                 color: white;
                 padding: 1.5rem;
                 overflow-y: auto;
+                border-top-right-radius: 0.5rem;
+                border-bottom-right-radius: 0.5rem;
             }
             &-text{
                 margin-bottom: 1rem;
@@ -144,6 +168,12 @@
                 max-width: calc(100vh - 24rem);
                 overflow: auto;
                 margin: 0 auto;
+                .drag-n-drop{
+                    grid-template-columns: 200px 200px;
+                }
+                .dnd-item-wrapper{
+                    text-align: center;
+                }
             }
         }
     }
