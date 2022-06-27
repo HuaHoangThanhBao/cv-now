@@ -11,7 +11,6 @@ import AlignJustifyIcon from './../../../dist/align-justify.svg';
 import TextBoldIcon from './../../../dist/text-bold.svg';
 import TextItalicIcon from './../../../dist/text-italic.svg';
 import TextUnderlineIcon from './../../../dist/text-underline.svg';
-import TextLinkIcon from './../../../dist/text-link.svg';
 import { menu } from '../../../constants/Menu';
 import './MainMenu.scss'
 import { useEffect } from 'react';
@@ -97,9 +96,6 @@ const MainMenu = (props) => {
                 />
                 <Button 
                     icon={TextUnderlineIcon}
-                />
-                <Button 
-                    icon={TextLinkIcon}
                 />
             </div>
         </div>
