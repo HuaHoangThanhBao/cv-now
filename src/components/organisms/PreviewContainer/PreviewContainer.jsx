@@ -5,10 +5,10 @@ import './PreviewContainer.scss'
 
 const PreviewContainer = (props) => {
     const {
-        pages, setPages, isReOrder, setIsReOrder, handleSelectTemplate, colorHex, infoKeys, info, 
+        panelsRef, pages, setPages, isReOrder, setIsReOrder, handleSelectTemplate, colorHex, infoKeys, info, 
         setInfo, socialData, isOpenProfileModal, setIsOpenProfileModal, currentBlockSelected,
-        setCurrentBlockSelected, isActiveIcon, isShowPreviewList, profileContainerHeight, 
-        setProfileContainerHeight
+        setCurrentBlockSelected, isActiveIcon, profileContainerHeight, 
+        setProfileContainerHeight, useOnClickOutside
     } = props;
     const templateList = Object.keys(template)
     
@@ -16,7 +16,7 @@ const PreviewContainer = (props) => {
         <div className='preview-container'>
             {templateList && templateList.map(template => (
                 <div 
-                    className='preview'
+                    className='preview-item'
                     key={template}
                 >
                     <div className='preview-info'>
@@ -30,6 +30,7 @@ const PreviewContainer = (props) => {
                             <div className="preview-overlay"></div>
                             <div className="preview-box">
                                 <DocumentPanel 
+                                    panelsRef={panelsRef}
                                     pages={pages}
                                     setPages={setPages}
                                     isReOrder={isReOrder}
@@ -45,9 +46,10 @@ const PreviewContainer = (props) => {
                                     currentBlockSelected={currentBlockSelected}
                                     setCurrentBlockSelected={setCurrentBlockSelected}
                                     isActiveIcon={isActiveIcon}
-                                    isShowPreviewList={isShowPreviewList}
+                                    isPreventInteracting={true}
                                     profileContainerHeight={profileContainerHeight}
                                     setProfileContainerHeight={setProfileContainerHeight}
+                                    useOnClickOutside={useOnClickOutside}
                                 />
                             </div>
                         </div>

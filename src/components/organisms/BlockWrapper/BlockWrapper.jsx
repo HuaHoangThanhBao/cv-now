@@ -32,7 +32,7 @@ const BlockWrapper = (props) => {
         currentTemplateType,
         currentBlockSelected,
         setCurrentBlockSelected,
-        isShowPreviewList
+        isPreventInteracting
     } = props;
 
     const [isDisplayWhenHasInformation, setIsDisplayWhenHasInformation] = useState(false);
@@ -120,7 +120,7 @@ const BlockWrapper = (props) => {
                      childIndex={childIndex}
                      currentIndex={index}
                      updateFieldHeight={updateFieldHeight}
-                     isShowPreviewList={isShowPreviewList}
+                     isPreventInteracting={isPreventInteracting}
                      isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                  />
                  <InputField
@@ -135,7 +135,7 @@ const BlockWrapper = (props) => {
                      columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
-                     isShowPreviewList={isShowPreviewList}
+                     isPreventInteracting={isPreventInteracting}
                      updateFieldHeight={updateFieldHeight}
                  />
                  <DateInput 
@@ -148,7 +148,7 @@ const BlockWrapper = (props) => {
                      currentIndex={index}
                      getTitle={getTitle}
                      getField={getField}
-                     isShowPreviewList={isShowPreviewList}
+                     isPreventInteracting={isPreventInteracting}
                      updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
@@ -163,7 +163,7 @@ const BlockWrapper = (props) => {
                      columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
-                     isShowPreviewList={isShowPreviewList}
+                     isPreventInteracting={isPreventInteracting}
                      updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
@@ -178,7 +178,7 @@ const BlockWrapper = (props) => {
                      columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
-                     isShowPreviewList={isShowPreviewList}
+                     isPreventInteracting={isPreventInteracting}
                      updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
@@ -193,7 +193,7 @@ const BlockWrapper = (props) => {
                      columnIndex={columnIndex}
                      childIndex={childIndex}
                      currentIndex={index}
-                     isShowPreviewList={isShowPreviewList}
+                     isPreventInteracting={isPreventInteracting}
                      updateFieldHeight={updateFieldHeight}
                  />
             </div>
@@ -217,7 +217,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                 />
                 <InputField
@@ -232,7 +232,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
@@ -245,7 +245,7 @@ const BlockWrapper = (props) => {
                     currentIndex={index}
                     getTitle={getTitle}
                     getField={getField}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -260,7 +260,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -275,7 +275,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -290,7 +290,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -306,7 +306,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <div className='block-content-contact'>
@@ -322,7 +322,7 @@ const BlockWrapper = (props) => {
                         columnIndex={columnIndex}
                         childIndex={childIndex}
                         currentIndex={index}
-                        isShowPreviewList={isShowPreviewList}
+                        isPreventInteracting={isPreventInteracting}
                         updateFieldHeight={updateFieldHeight}
                     />
                     <div className='block-content-contact-group'>
@@ -338,7 +338,7 @@ const BlockWrapper = (props) => {
                             columnIndex={columnIndex}
                             childIndex={childIndex}
                             currentIndex={index}
-                            isShowPreviewList={isShowPreviewList}
+                            isPreventInteracting={isPreventInteracting}
                             updateFieldHeight={updateFieldHeight}
                         />
                         <InputField
@@ -353,7 +353,7 @@ const BlockWrapper = (props) => {
                             columnIndex={columnIndex}
                             childIndex={childIndex}
                             currentIndex={index}
-                            isShowPreviewList={isShowPreviewList}
+                            isPreventInteracting={isPreventInteracting}
                             updateFieldHeight={updateFieldHeight}
                         />
                     </div>
@@ -379,7 +379,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                 />
                 <InputField
@@ -394,7 +394,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <div className='block-content-contact'>
@@ -410,7 +410,7 @@ const BlockWrapper = (props) => {
                         columnIndex={columnIndex}
                         childIndex={childIndex}
                         currentIndex={index}
-                        isShowPreviewList={isShowPreviewList}
+                        isPreventInteracting={isPreventInteracting}
                         updateFieldHeight={updateFieldHeight}
                     />
                     <div className='block-content-contact-group'>
@@ -426,7 +426,7 @@ const BlockWrapper = (props) => {
                             columnIndex={columnIndex}
                             childIndex={childIndex}
                             currentIndex={index}
-                            isShowPreviewList={isShowPreviewList}
+                            isPreventInteracting={isPreventInteracting}
                             updateFieldHeight={updateFieldHeight}
                         />
                         <InputField
@@ -441,7 +441,7 @@ const BlockWrapper = (props) => {
                             columnIndex={columnIndex}
                             childIndex={childIndex}
                             currentIndex={index}
-                            isShowPreviewList={isShowPreviewList}
+                            isPreventInteracting={isPreventInteracting}
                             updateFieldHeight={updateFieldHeight}
                         />
                     </div>
@@ -467,7 +467,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                 />
                 <InputField
@@ -482,7 +482,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <DateInput 
@@ -495,7 +495,7 @@ const BlockWrapper = (props) => {
                     currentIndex={index}
                     getTitle={getTitle}
                     getField={getField}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -510,7 +510,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -525,7 +525,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -541,7 +541,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <div className='block-content-contact'>
@@ -557,7 +557,7 @@ const BlockWrapper = (props) => {
                         columnIndex={columnIndex}
                         childIndex={childIndex}
                         currentIndex={index}
-                        isShowPreviewList={isShowPreviewList}
+                        isPreventInteracting={isPreventInteracting}
                         updateFieldHeight={updateFieldHeight}
                     />
                     <div className='block-content-contact-group'>
@@ -573,7 +573,7 @@ const BlockWrapper = (props) => {
                             columnIndex={columnIndex}
                             childIndex={childIndex}
                             currentIndex={index}
-                            isShowPreviewList={isShowPreviewList}
+                            isPreventInteracting={isPreventInteracting}
                             updateFieldHeight={updateFieldHeight}
                         />
                         <InputField
@@ -588,7 +588,7 @@ const BlockWrapper = (props) => {
                             columnIndex={columnIndex}
                             childIndex={childIndex}
                             currentIndex={index}
-                            isShowPreviewList={isShowPreviewList}
+                            isPreventInteracting={isPreventInteracting}
                             updateFieldHeight={updateFieldHeight}
                         />
                     </div>
@@ -614,7 +614,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                 />
                 <DateInput 
@@ -627,7 +627,7 @@ const BlockWrapper = (props) => {
                     currentIndex={index}
                     getTitle={getTitle}
                     getField={getField}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -642,7 +642,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
             </div>
@@ -666,7 +666,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                 />
                 <InputField
@@ -681,7 +681,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
             </div>
@@ -705,7 +705,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                 />
             </div>
@@ -728,7 +728,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -744,7 +744,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                 />
                 <InputField
@@ -759,7 +759,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -774,7 +774,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -789,7 +789,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -804,7 +804,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -819,7 +819,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
             </div>
@@ -843,7 +843,7 @@ const BlockWrapper = (props) => {
                     childIndex={childIndex}
                     currentIndex={index}
                     updateFieldHeight={updateFieldHeight}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
                 />
                 <DateInput 
@@ -856,7 +856,7 @@ const BlockWrapper = (props) => {
                     currentIndex={index}
                     getTitle={getTitle}
                     getField={getField}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -871,7 +871,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
@@ -886,7 +886,7 @@ const BlockWrapper = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={index}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
             </div>

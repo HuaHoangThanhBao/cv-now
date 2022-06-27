@@ -1,202 +1,22 @@
-import React, {useState} from 'react';
-import Title from '../../atoms/Title/Title';
-import EditBalance from '../../molecules/EditBalance/EitBalance';
-import MainMenu from '../../molecules/MainMenu/MainMenu';
-import Board from '../Board/Board';
+import React from 'react';
 import DocumentPanel from '../../organisms/DocumentPanel/DocumentPanel';
-import { MetaData } from '../../../constants/MetaData';
 import './CVTemplate.scss';
-import { template_type } from '../../../constants/Template';
-import {theme} from '../../../constants/Theme';
-import {columnLevel} from '../../../constants/Variables';
-import PreviewContainer from '../../organisms/PreviewContainer/PreviewContainer';
-import ThemeList from '../../organisms/ThemeList/ThemeList';
-import ColorList from '../../organisms/ColorList/ColorList';
-import { infoData } from '../../../constants/InfoData';
 import ProfileModal from '../../molecules/ProfileModal/ProfileModal';
-import { socialMetaData } from '../../../constants/SocialData';
-import { one_column_format, two_column_format } from '../../../constants/ColumnFormat';
 
-const CVTemplate = () => {
-    const [pages, setPages] = useState(MetaData)
-    const [isReOrder, setIsReOrder] = useState(false)
-    const [currentTemplateType, setCurrentTemplateType] = useState(template_type.skilled_based)
-    const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
-    const [isShowPreviewList, setIsShowReviewList] = useState(false)
-    const [currentColumnWidthAttr, setCurrentColumnWidthAttr] = useState(columnLevel);
-    const [colorRbg, setColorRbg] = useState('#2B343D')
-    const [colorHex, setColorHex] = useState('#2B343D')
-    const [info, setInfo] = useState(infoData);
-    const infoKeys = Object.keys(info);
-    const [isOpenProfileModal, setIsOpenProfileModal] = useState(false);
-    const [socialData, setSocialData] = useState(socialMetaData);
-    const [currentBlockSelected, setCurrentBlockSelected] = useState({
-        pageIndex: 0,
-        columnIndex: 0,
-        childIndex: 0,
-        _currentBlockSelectedIndex: -1
-    })
-    //This is a fake state to make re-order in Document Panel
-    const [isDragChange, setIsDragChange] = useState(false)
-    //This is a special state to calculate actualpage height based on Profile Container ref
-    const [profileContainerHeight, setProfileContainerHeight] = useState(0)
-
-    const handleTransformToOneColumn = (status) => {
-        const clonePages = JSON.parse(JSON.stringify(pages));
-        if(!status){
-            console.log('start tranform to two column')
-            for(let i = 0; i < two_column_format.length; i++){
-                for(let j = 0; j < two_column_format[i].length; j++){
-                    const result = findChildHeaderMatchToOneColumnFormatItem(clonePages, two_column_format[i][j])
-                    if(!result) continue;
-                    
-                    const {
-                        child, 
-                        pageIndex, 
-                        columnIndex, 
-                        childIndex
-                    } = result
-                    if(child){
-                        console.log(`move from pageIndex: ${pageIndex}, columnIndex: ${columnIndex}, childIndex: ${childIndex}, 
-                        to pageIndex: ${i}, columnIndex: ${i}, childIndex: ${childIndex}`)
-
-                        //We delete before move
-                        clonePages[pageIndex].columns[columnIndex].child.splice(childIndex, 1)
-                        //If there is only one column, we add a new one
-                        if(clonePages[pageIndex].columns.length === 1){
-                            clonePages[pageIndex].columns.push({
-                                child: []
-                            })
-                        }
-                        //After delete we move
-                        clonePages[i].columns[i].child.splice(j, 0, child)
-                    }
-                }
-            }
-        }
-        else{
-            console.log('start tranform to one column')
-            for(let i = 0; i < one_column_format.length; i++){
-                const result = findChildHeaderMatchToOneColumnFormatItem(clonePages, one_column_format[i])
-                if(!result) continue;
-
-                const {
-                    child, 
-                    pageIndex, 
-                    columnIndex, 
-                    childIndex
-                } = result
-                if(child){
-                    console.log(`move from pageIndex: ${pageIndex}, columnIndex: ${columnIndex}, childIndex: ${childIndex}, to: ${i - 1}`)
-                    //We delete before move
-                    clonePages[pageIndex].columns[columnIndex].child.splice(childIndex, 1)
-                    //After delete we move
-                    clonePages[0].columns[0].child.splice(i, 0, child)
-                }
-            }
-            
-            //remove second column of each page
-            for(let i = 0; i < clonePages.length; i++){
-                clonePages[i].columns.pop()
-            }
-        }
-        console.log('re-order page after transforming')
-        console.log(clonePages)
-        setPages([...clonePages])
-        resetCurrentBlockSelected()
-        setIsReOrder(true)
-    }
-
-    const findChildHeaderMatchToOneColumnFormatItem = (clonePages, one_column_item) => {
-        for(let i = 0; i < clonePages.length; i++){
-            for(let j = 0; j < clonePages[i].columns.length; j++){
-                for(let z = 0; z < clonePages[i].columns[j].child.length; z++){
-                    if(clonePages[i].columns[j].child[z].header === one_column_item){
-                        return {
-                            child: clonePages[i].columns[j].child[z], 
-                            pageIndex: i, 
-                            columnIndex: j, 
-                            childIndex: z
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    const handleSelectTemplate = (template) => {
-        setCurrentTemplateType(template)
-        //After we choose a new template, we re-order all blocks on CV page
-        setIsReOrder(true)
-    }
-
-    const resetCurrentBlockSelected = () => {
-        setCurrentBlockSelected({
-            pageIndex: 0,
-            columnIndex: 0,
-            childIndex: 0,
-            _currentBlockSelectedIndex: -1
-        })
-    }
+const CVTemplate = (props) => {
+    const {
+        panelsRef, pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
+        currentColumnWidthAttr, colorHex, infoKeys, isOpenProfileModal, setIsOpenProfileModal,
+        info, setInfo, socialData, setSocialData, currentBlockSelected, setCurrentBlockSelected,
+        profileContainerHeight, setProfileContainerHeight, isDragChange, setIsDragChange, 
+        useOnClickOutside
+    } = props;
 
     return(
         <React.Fragment>
             <div className="cv-template">
-                <MainMenu />
-                <Board 
-                    pages={pages}
-                    setPages={setPages}
-                    handleTransformToOneColumn={handleTransformToOneColumn}
-                    setIsDragChange={setIsDragChange}
-                    resetCurrentBlockSelected={resetCurrentBlockSelected}
-                />
-                
-                <ColorList 
-                    colorRbg={colorRbg}
-                    setColorRbg={setColorRbg}
-                    colorHex={colorHex}
-                    setColorHex={setColorHex}
-                />
-
-                <ThemeList 
-                    setCurrentThemeType={setCurrentThemeType}
-                />
-
-                <div className="mini-menu">
-                    <Title placeholder="My Document"/>
-                    <EditBalance 
-                        pageColumnsCount={pages[0].columns.length}
-                        currentTemplateType={currentTemplateType}
-                        currentColumnWidthAttr={currentColumnWidthAttr} 
-                        setCurrentColumnWidthAttr={setCurrentColumnWidthAttr}
-                    />
-                </div>
-
-                {isShowPreviewList && (
-                    <PreviewContainer 
-                        pages={pages}
-                        setPages={setPages}
-                        isReOrder={isReOrder}
-                        setIsReOrder={setIsReOrder}
-                        currentTemplateType={currentTemplateType}
-                        handleSelectTemplate={handleSelectTemplate}
-                        colorHex={colorHex}
-                        infoKeys={infoKeys}
-                        info={info}
-                        setInfo={setInfo}
-                        socialData={socialData}
-                        isOpenProfileModal={isOpenProfileModal} 
-                        setIsOpenProfileModal={setIsOpenProfileModal}
-                        currentBlockSelected={currentBlockSelected}
-                        setCurrentBlockSelected={setCurrentBlockSelected}
-                        isShowPreviewList={isShowPreviewList}
-                        profileContainerHeight={profileContainerHeight}
-                        setProfileContainerHeight={setProfileContainerHeight}
-                    />
-                )}
-                <button onClick={() => setIsShowReviewList(!isShowPreviewList)}>Show preview list</button>
-
                 <DocumentPanel 
+                    panelsRef={panelsRef}
                     pages={pages}
                     setPages={setPages}
                     isReOrder={isReOrder}
@@ -217,6 +37,7 @@ const CVTemplate = () => {
                     setProfileContainerHeight={setProfileContainerHeight}
                     isDragChange={isDragChange}
                     setIsDragChange={setIsDragChange}
+                    useOnClickOutside={useOnClickOutside}
                 />
             </div>
             <ProfileModal 

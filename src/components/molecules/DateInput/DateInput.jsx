@@ -6,7 +6,7 @@ import './DateInput.scss';
 const DateInput = (props) => {
     const {
         pageIndex, columnIndex, childIndex, currentIndex, isDisplayWhenHasInformation, 
-        updateFieldHeight, updateFieldData, getTitle, getField, isShowPreviewList
+        updateFieldHeight, updateFieldData, getTitle, getField, isPreventInteracting
     } = props;
 
     const [allCheck, setAllCheck] = useState(false)
@@ -36,7 +36,7 @@ const DateInput = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                 />
                 {((allCheck || isDisplayWhenHasInformation) && (
                     <span>/</span>
@@ -54,7 +54,7 @@ const DateInput = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                 />
             </div>
             {((allCheck || isDisplayWhenHasInformation) && (
@@ -74,7 +74,7 @@ const DateInput = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                 />
                 {((allCheck || isDisplayWhenHasInformation) && (
                     <span>/</span>
@@ -92,7 +92,7 @@ const DateInput = (props) => {
                     columnIndex={columnIndex}
                     childIndex={childIndex}
                     currentIndex={currentIndex}
-                    isShowPreviewList={isShowPreviewList}
+                    isPreventInteracting={isPreventInteracting}
                 />
             </div>
         </div>

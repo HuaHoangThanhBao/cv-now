@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
+import './DragNDrop.scss'
 
 function DragNDrop(props) {
     const {data, setPages, handleTransformToOneColumn, setIsDragChange, resetCurrentBlockSelected} = props
@@ -262,7 +263,7 @@ function DragNDrop(props) {
 
     if (list) {
         return (                
-            <div>
+            <div className='drag'>
                 <div className='drag-wrapper'>
                     <div className={`drag-n-drop ${list[0].columns.length === 1 ? 'one-column': ''}`}>
                         {list.map((page, pageIndex) => (
@@ -271,7 +272,7 @@ function DragNDrop(props) {
                                     className='dnd-group'
                                     onDragEnter={dragging && !column.child.length ? (e) => handleDragEnter(e, {pageIndex, columnIndex, childIndex: 0}): null}
                                 >
-                                    <div className='group-title'>Page: {pageIndex}, Column: {columnIndex}</div>
+                                    {/* <div className='group-title'>Page: {pageIndex}, Column: {columnIndex}</div> */}
                                     <div 
                                         key={columnIndex} 
                                         className='dnd-group-block'
@@ -303,7 +304,7 @@ function DragNDrop(props) {
                             onChange={onCheckOneColumnCheckBox}
                         />
                         <label className='group-title'>One column</label>
-                        <div>Drag and drop to Add or Remove sections.</div>
+                        <div className='group-desc'>Drag and drop to Add or Remove sections.</div>
                         <div 
                             className='drag-no-need'
                             onDragEnter={dragging ? (e) => handleNoNeedItemDragEnter(e): null}

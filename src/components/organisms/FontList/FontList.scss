@@ -1,0 +1,36 @@
+.font{
+    &-list{
+        max-height: 300px;
+        overflow-y: auto;
+        padding-bottom: 1rem;
+        &-btn{
+            display: block;
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            width: 100%;
+            padding: 1rem 0;
+            text-align: left;
+            color: white;
+            font-size: 1.2rem;
+        }
+    }
+    &-size{
+        padding: 2rem 0 1rem 0 ;
+        display: flex;
+        align-items: center;
+        &-item{
+            padding-right: 1.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: flex-end;
+        }
+        &-radio{
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+    }
+}
