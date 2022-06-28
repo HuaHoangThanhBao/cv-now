@@ -11,18 +11,26 @@ const DateInput = (props) => {
 
     const [allCheck, setAllCheck] = useState(false)
 
+    const monthStartField = getField(currentIndex, InputFieldType.month_start)[InputFieldType.month_start]
+    const yearStartField = getField(currentIndex, InputFieldType.year_start)[InputFieldType.year_start]
+    const monthEndField = getField(currentIndex, InputFieldType.month_end)[InputFieldType.month_end]
+    const yearEndField = getField(currentIndex, InputFieldType.year_end)[InputFieldType.year_end]
+
     useEffect(() => {
-        if(getField(currentIndex, InputFieldType.month_start)[InputFieldType.month_start] !== 'mm'
-        && getField(currentIndex, InputFieldType.year_start)[InputFieldType.year_start] !== 'yyyy'
-        && getField(currentIndex, InputFieldType.month_end)[InputFieldType.month_end] !== 'mm'
-        && getField(currentIndex, InputFieldType.year_end)[InputFieldType.year_end] !== 'yyyy'){
+        if((monthStartField && monthStartField !== 'mm')
+        && (yearStartField && yearStartField !== 'yyyy')
+        && (monthEndField && monthEndField !== 'mm')
+        && (yearEndField && yearEndField !== 'yyyy')){
             setAllCheck(true)
         }
-    }, [currentIndex, getField])
+        else{
+            setAllCheck(false)
+        }
+    }, [currentIndex, monthStartField, monthEndField, yearStartField, yearEndField, getField])
 
     return(
-        <div className="date">
-            <div className="date-group">
+        <div className={`date ${(!isDisplayWhenHasInformation && allCheck) ? 'isDisplayWhenHasInformation': ''}`}>
+            <div className={`date-group ${(!isDisplayWhenHasInformation && allCheck) ? 'isDisplayWhenHasInformation': ''}`}>
                 <InputField 
                     externalClass="date-month dashed" 
                     inputBlockType={InputFieldType.month_start}
@@ -37,9 +45,11 @@ const DateInput = (props) => {
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                     isPreventInteracting={isPreventInteracting}
+                    isDateInputFieldType={true}
+                    getField={getField}
                 />
                 {((allCheck || isDisplayWhenHasInformation) && (
-                    <span>/</span>
+                    <span className='date-group-divider'>/</span>
                 ))}
                 <InputField 
                     externalClass="date-year dashed" 
@@ -55,12 +65,14 @@ const DateInput = (props) => {
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                     isPreventInteracting={isPreventInteracting}
+                    isDateInputFieldType={true}
+                    getField={getField}
                 />
             </div>
             {((allCheck || isDisplayWhenHasInformation) && (
-                <span>/</span>
+                <span className='date-divider'>-</span>
             ))}
-            <div className="date-group">
+            <div className={`date-group ${(!isDisplayWhenHasInformation && allCheck) ? 'isDisplayWhenHasInformation': ''}`}>
                 <InputField 
                     externalClass="date-month dashed" 
                     inputBlockType={InputFieldType.month_end}
@@ -75,9 +87,11 @@ const DateInput = (props) => {
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                     isPreventInteracting={isPreventInteracting}
+                    isDateInputFieldType={true}
+                    getField={getField}
                 />
                 {((allCheck || isDisplayWhenHasInformation) && (
-                    <span>/</span>
+                    <span className='date-group-divider'>/</span>
                 ))}
                 <InputField 
                     externalClass="date-year dashed" 
@@ -93,6 +107,8 @@ const DateInput = (props) => {
                     childIndex={childIndex}
                     currentIndex={currentIndex}
                     isPreventInteracting={isPreventInteracting}
+                    isDateInputFieldType={true}
+                    getField={getField}
                 />
             </div>
         </div>

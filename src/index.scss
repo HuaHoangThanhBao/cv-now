@@ -49,3 +49,12 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/*Content Editable placeholder for input*/
+.field-input{
+  &.date[placeholder]:empty:before {
+    content: attr(placeholder);
+    position: absolute;
+    background-color: transparent;
+  }
+}
