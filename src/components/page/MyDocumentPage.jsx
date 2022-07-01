@@ -271,8 +271,53 @@ const MyDocumentPage = () => {
         }
     }
 
+    useEffect(() => {
+        scale_cv_document()
+        window.addEventListener('resize', scale_cv_document)
+    }, [])
+
+    //We use this function to scale CV div to fit the screen when we resize the browser
+    function scale_cv_document () {
+        const documentPage = getComputedStyle(document.getElementById('document-page'))
+        const documentPageCV = getComputedStyle(document.getElementById('document-page-cv'))
+    
+        const documentPageCVElement = document.getElementById('document-page-cv')
+    
+        let offset = 0
+        const windowWidth = window.innerWidth
+        if(windowWidth < 1000){
+            offset = 0.1
+        }
+        else if(windowWidth >= 1000 && windowWidth < 1300){
+            offset = 0.2
+        }
+        else{
+            offset = 0.5
+        }
+
+        const scale = Math.max(
+            parseFloat(documentPage.width)/parseFloat(documentPageCV.width), 	
+            parseFloat(documentPage.height)/parseFloat(documentPageCV.height)
+        ) - offset;  
+    
+        documentPageCVElement.style.transform = 'scale(' + scale + ') translateX(-50%)';
+        documentPageCVElement.style['-o-transform'] = 'scale(' + scale + ') translateX(-50%)';
+        documentPageCVElement.style['-webkit-transform'] = 'scale(' + scale + ') translateX(-50%)';
+    
+    
+        documentPageCVElement.style['-webkit-transform-origin'] = 'top left';
+        documentPageCVElement.style['-moz-transform-origin'] = 'top left';
+        documentPageCVElement.style['-o-transform-origin'] = 'top left';
+        documentPageCVElement.style['transform-origin'] = 'top left'; 
+    
+        documentPageCVElement.style.width = documentPageCV.width * scale;
+        documentPageCVElement.style.height = documentPageCV.height * scale;
+    
+        documentPageCVElement.style.margin = '0 auto';
+    }
+
     return(
-        <div className="document-page">
+        <div id='document-page' className="document-page">
             <MainMenu 
                 generatePDF={generatePDF}
                 menuItemSelected={menuItemSelected}
@@ -283,7 +328,7 @@ const MyDocumentPage = () => {
                 setIsMenuActive={setIsMenuActive}
             />
 
-            <div className='document-page-cv'>
+            <div id='document-page-cv' className='document-page-cv'>
                 <div className="mini-menu">
                     <EditBalance 
                         pageColumnsCount={pages[0].columns.length}

@@ -3,6 +3,10 @@
         margin: 0 auto;
         width: 1200px;
         padding-top: 7.5rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        transform-origin:top right;
     }
     .mini-menu{
         width: 1192px;
@@ -16,5 +20,15 @@
         position: absolute;
         left: 0;
         user-select: none;
+    }
+    @media screen and (max-width: 768px) {
+        &-cv{
+            padding-top: 15rem;
+        }
+    }
+    @media screen and (max-width: 484px) {
+        &-cv{
+            padding-top: 25rem;
+        }
     }
 }
