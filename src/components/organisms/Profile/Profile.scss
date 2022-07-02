@@ -12,13 +12,13 @@
         }
     }
     &-social{
+        cursor: pointer;
         &.two-column{
             width: 50%;
             float: left;
             text-align: right;
         }
         &__wrapper{
-            cursor: pointer;
             &::after{
                 content: '';
                 display: block;

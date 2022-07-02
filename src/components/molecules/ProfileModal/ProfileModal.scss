@@ -21,6 +21,8 @@
             background-color: #425061;
             padding: 2rem;
             position: relative;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
             &::after{
                 content: '';
                 clear: left;
@@ -32,6 +34,8 @@
             background-color: #313B47;
             max-height: calc(100vh - 5rem);
             overflow-y: auto;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
         }
         &-group{
             display: flex;
