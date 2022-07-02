@@ -73,12 +73,14 @@ const MainMenu = (props) => {
                 />
             </div>
             <div className='main-menu-panel-container'>
-                <div className='main-menu-panel'>
-                    {menuItemSelected && (
-                        <div className={menuItemSelected} ref={menuPanelRef}>
-                            {getMenuContent()}
-                        </div>
-                    )}
+                <div className='main-menu-wrapper'>
+                    <div className='main-menu-panel'>
+                        {menuItemSelected && (
+                            <div className={menuItemSelected} ref={menuPanelRef}>
+                                {getMenuContent()}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
             <div className="main-menu-content-options">

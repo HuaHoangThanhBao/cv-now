@@ -1,4 +1,5 @@
 import React from 'react';
+import './DocumentFooter.scss';
 
 const DocumentFooter = (props) => {
     const {pageIndex, pageLength} = props;

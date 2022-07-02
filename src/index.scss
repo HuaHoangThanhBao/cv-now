@@ -10,13 +10,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #313B47;
   font-size: 10px;
-  line-height: 1;
-  font-size: 16px;
+  line-height: 1.2;
+  // font-size: 16px;
   color: black;
 }
 
-.btn{
+.btn, input[type="checkbox"], input[type="radio"]{
   cursor: pointer;
+}
+
+button{
+  outline: none;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+input{
+  outline: none;
+  border: none;
+  border-radius: 0.25rem;
 }
 
 .block{

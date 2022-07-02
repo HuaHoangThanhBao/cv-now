@@ -1,6 +1,7 @@
 .field{
     word-break: break-word;
     display: none !important;
+    font-size: 1.2rem;
     &.visible{
         display: block !important;
         .date{

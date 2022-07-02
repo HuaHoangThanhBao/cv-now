@@ -20,7 +20,7 @@ const PreviewContainer = (props) => {
                     key={template}
                 >
                     <div className='preview-info'>
-                        <p className='preview-txt'>{template}</p>
+                        <p className='preview-txt'>{template.replace('_', ' ')}</p>
                     </div>
                     <div 
                         className='preview-selection' 

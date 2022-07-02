@@ -15,7 +15,7 @@
 
         &-wrapper{
             width: 800px;
-            margin: 8rem auto;
+            margin: 10rem auto;
         }
         &-option{
             background-color: #425061;
@@ -30,7 +30,7 @@
         &-container{
             padding: 2rem;
             background-color: #313B47;
-            max-height: calc(100vh - 20rem);
+            max-height: calc(100vh - 5rem);
             overflow-y: auto;
         }
         &-group{
