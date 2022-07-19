@@ -25,7 +25,6 @@ export const MetaData = [
                   status: false,
                   height: 0,
                 },
-                { content_detail: "Coures", status: false, height: 0 },
                 {
                   content_bullet: "Course/Thesis/Project",
                   status: false,
@@ -117,7 +116,7 @@ export const MetaData = [
           {
             id: 5,
             header: "PERSONAL PROJECTS",
-            blockType: 3,
+            blockType: 10,
             height: 0,
             data: [
               [
@@ -127,7 +126,7 @@ export const MetaData = [
                 { year_start: "yyyy", status: false, height: 0 },
                 { year_end: "yyyy", status: false, height: 0 },
                 {
-                  content_detail_dashed: "Description of Achievements",
+                  content_bullet: "Description of Achievements",
                   status: false,
                   height: 0,
                 },
@@ -172,7 +171,7 @@ export const MetaData = [
                   height: 0,
                 },
                 {
-                  content_detail: "Description (optional)",
+                  content_bullet: "Description (optional)",
                   status: false,
                   height: 0,
                 },
@@ -198,7 +197,7 @@ export const MetaData = [
                   height: 0,
                 },
                 {
-                  content_detail: "Description (optional)",
+                  content_bullet: "Description (optional)",
                   status: false,
                   height: 0,
                 },

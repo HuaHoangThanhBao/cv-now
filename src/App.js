@@ -1,5 +1,4 @@
 import React from 'react';
-// import './App.css';
 import MyDocumentPage from './components/page/MyDocumentPage';
 
 function App() {

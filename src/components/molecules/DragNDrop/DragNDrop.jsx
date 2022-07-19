@@ -299,11 +299,13 @@ function DragNDrop(props) {
                         ))}
                     </div>
                     <div className='drag-no-need-wrapper'>
-                        <input 
-                            type="checkbox" 
-                            onChange={onCheckOneColumnCheckBox}
-                        />
-                        <label className='group-title'>One column</label>
+                        <div className='drag-no-need-option'>
+                            <input 
+                                type="checkbox" 
+                                onChange={onCheckOneColumnCheckBox}
+                            />
+                            <label className='group-title'>One column</label>
+                        </div>
                         <div className='group-desc'>Drag and drop to Add or Remove sections.</div>
                         <div 
                             className='drag-no-need'

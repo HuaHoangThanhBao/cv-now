@@ -27,8 +27,9 @@
     }
     &-txt{
         color: white;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: bold;
+        text-transform: capitalize;
     }
     &-box{
         transform: scale(0.217);

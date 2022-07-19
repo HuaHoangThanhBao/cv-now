@@ -12,13 +12,13 @@
         }
     }
     &-social{
+        cursor: pointer;
         &.two-column{
             width: 50%;
             float: left;
             text-align: right;
         }
         &__wrapper{
-            cursor: pointer;
             &::after{
                 content: '';
                 display: block;
@@ -49,6 +49,7 @@
                 word-break: break-all;
                 text-align: left;
                 color: black;
+                font-size: 1.2rem;
             }
             &::after{
                 content: '';
@@ -71,7 +72,7 @@
         margin-bottom: 1.2rem;
     }
     &-description{
-        font-size: 1rem;
+        font-size: 1.05rem;
     }
     &-avatar{
         width: 13rem;

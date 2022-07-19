@@ -1,6 +1,7 @@
 .field{
     word-break: break-word;
     display: none !important;
+    font-size: 1.2rem;
     &.visible{
         display: block !important;
         .date{
@@ -20,7 +21,7 @@
                 width: 2.2rem;
             }
             &-year{
-                width: 2.7rem;
+                width: 2.9rem;
             }
         }
     }
@@ -32,6 +33,7 @@
         border: none;
         outline: none;
         width: 100%;
+        word-break: break-word;
         &:focus{
             border-bottom: 1px solid #238983;
         }
