@@ -9,7 +9,6 @@ export const getContent = (childId) => {
                 {year_start: "yyyy", status: false, height: 0},
                 {year_end: "yyyy", status: false, height: 0},
                 {optional_dashed: "City, Country or GPA (optional)", status: false, height: 0},
-                {content_detail: "Coures", status: false, height: 0},
                 {content_bullet: "Course/Thesis/Project", status: false, height: 0},
             ]
         case 2:
@@ -54,7 +53,7 @@ export const getContent = (childId) => {
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "yyyy", status: false, height: 0},
                 {year_end: "yyyy", status: false, height: 0},
-                {content_detail_dashed: "Description of Achievements", status: false, height: 0},
+                {content_bullet: "Description of Achievements", status: false, height: 0},
             ]
         case 6:
             return [ 
@@ -73,7 +72,7 @@ export const getContent = (childId) => {
                 {year_start: "yyyy", status: false, height: 0},
                 {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Conference/Issuer of the certificate", status: false, height: 0},
-                {content_detail: "Description (optional)", status: false, height: 0},
+                {content_bullet: "Description (optional)", status: false, height: 0},
             ]
         case 8:
             return [ 
@@ -83,7 +82,7 @@ export const getContent = (childId) => {
                 {year_start: "yyyy", status: false, height: 0},
                 {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Name of the institution that issued/awarded it", status: false, height: 0},
-                {content_detail: "Description (optional)", status: false, height: 0},
+                {content_bullet: "Description (optional)", status: false, height: 0},
             ]
         case 9:
             return [ 

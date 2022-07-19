@@ -3,7 +3,7 @@ import { InputFieldType } from '../../../constants/InputFieldType';
 import InputField from '../../atoms/InputField/InputField';
 import DateInput from '../../molecules/DateInput/DateInput';
 import BlockContainer from '../BlockContainer/BlockContainer';
-import BulletIcon from './../../../dist/bullet.svg';
+import BulletIcon from './../../../dist/bullet.png';
 
 const BlockWrapper = (props) => {
     const {
@@ -46,7 +46,7 @@ const BlockWrapper = (props) => {
             case 2:
                 return workExperienceType(index)
             case 3:
-                return personalProjectType(index)
+                return organizationType(index)
             case 4:
                 return conferenceType(index)
             case 5:
@@ -59,6 +59,8 @@ const BlockWrapper = (props) => {
                 return tagType(index)
             case 9:
                 return referenceType(index)
+            case 10:
+                return personalProjectType(index)
             default:
                 return null
         }
@@ -167,23 +169,9 @@ const BlockWrapper = (props) => {
                      updateFieldHeight={updateFieldHeight}
                  />
                  <InputField
-                     externalClass="block-content-detail"
-                     type="text"
-                     inputBlockType={InputFieldType.content_detail}
-                     placeHolder={getTitle(index, InputFieldType.content_detail)}
-                     visible={isDisplayWhenHasInformation && index === _currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
-                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail)}
-                     updateFieldData={updateFieldData}
-                     pageIndex={pageIndex}
-                     columnIndex={columnIndex}
-                     childIndex={childIndex}
-                     currentIndex={index}
-                     isPreventInteracting={isPreventInteracting}
-                     updateFieldHeight={updateFieldHeight}
-                 />
-                 <InputField
                      externalClass="block-content-bullet dashed"
                      type="text"
+                     icon={BulletIcon}
                      inputBlockType={InputFieldType.content_bullet}
                      placeHolder={getTitle(index, InputFieldType.content_bullet)}
                      visible={isDisplayWhenHasInformation && index === _currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
@@ -597,7 +585,7 @@ const BlockWrapper = (props) => {
         )
     }
 
-    const personalProjectType = (index) => {
+    const organizationType = (index) => {
         const {_pageIndex, _columnIndex, _childIndex, _currentBlockSelectedIndex} = currentBlockSelected
         return(
             <div className='block-content-container'>
@@ -635,6 +623,59 @@ const BlockWrapper = (props) => {
                     type="text"
                     inputBlockType={InputFieldType.content_detail_dashed}
                     placeHolder={getTitle(index, InputFieldType.content_detail_dashed)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail_dashed)}
+                    visible={isDisplayWhenHasInformation && index === _currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
+                    updateFieldData={updateFieldData}
+                    pageIndex={pageIndex}
+                    columnIndex={columnIndex}
+                    childIndex={childIndex}
+                    currentIndex={index}
+                    isPreventInteracting={isPreventInteracting}
+                    updateFieldHeight={updateFieldHeight}
+                />
+            </div>
+        )
+    }
+
+    const personalProjectType = (index) => {
+        const {_pageIndex, _columnIndex, _childIndex, _currentBlockSelectedIndex} = currentBlockSelected
+        return(
+            <div className='block-content-container'>
+                <InputField
+                    externalClass="block-content-title"
+                    type="text"
+                    visible={true}
+                    inputBlockType={InputFieldType.title}
+                    placeHolder={getTitle(index, InputFieldType.title)}
+                    isDisplayWhenHasInformation={getStatus(index,InputFieldType.title)}
+                    updateFieldData={updateFieldData}
+                    pageIndex={pageIndex}
+                    columnIndex={columnIndex}
+                    childIndex={childIndex}
+                    currentIndex={index}
+                    updateFieldHeight={updateFieldHeight}
+                    isPreventInteracting={isPreventInteracting}
+                    isFocus={_pageIndex === pageIndex && _columnIndex === columnIndex && _childIndex === childIndex && _currentBlockSelectedIndex === index}
+                />
+                <DateInput 
+                    isDisplayWhenHasInformation={isDisplayWhenHasInformation && index === _currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
+                    onInputFieldChange={onInputFieldChange}
+                    updateFieldData={updateFieldData}
+                    pageIndex={pageIndex}
+                    columnIndex={columnIndex}
+                    childIndex={childIndex}
+                    currentIndex={index}
+                    getTitle={getTitle}
+                    getField={getField}
+                    isPreventInteracting={isPreventInteracting}
+                    updateFieldHeight={updateFieldHeight}
+                />
+                <InputField
+                    externalClass="block-content-bullet dashed"
+                    type="text"
+                    icon={BulletIcon}
+                    inputBlockType={InputFieldType.content_detail_dashed}
+                    placeHolder={getTitle(index, InputFieldType.content_bullet)}
                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail_dashed)}
                     visible={isDisplayWhenHasInformation && index === _currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
@@ -875,10 +916,11 @@ const BlockWrapper = (props) => {
                     updateFieldHeight={updateFieldHeight}
                 />
                 <InputField
-                    externalClass="block-content-detail"
+                    externalClass="block-content-bullet dashed"
                     type="text"
-                    inputBlockType={InputFieldType.content_detail}
-                    placeHolder={getTitle(index, InputFieldType.content_detail)}
+                    icon={BulletIcon}
+                    inputBlockType={InputFieldType.content_bullet}
+                    placeHolder={getTitle(index, InputFieldType.content_bullet)}
                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_detail)}
                     visible={isDisplayWhenHasInformation && index === _currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
                     updateFieldData={updateFieldData}
