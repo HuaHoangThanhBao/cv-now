@@ -47,6 +47,7 @@
         }
         &-heading{
             padding-bottom: 1rem;
+            font-size: 1.2rem;
         }
         &-item{
             width: calc(50% - 3rem);
@@ -66,10 +67,12 @@
             height: 2rem;
             border-radius: 0.25rem;
             padding: 0 0.25rem;
+            font-size: 1.1rem;
         }
         &-btn-discard, &-btn-save{
             padding: 0.5rem 2rem;
             color: white;
+            font-size: 1rem;
         }
         &-btn-discard{
             float: left;
