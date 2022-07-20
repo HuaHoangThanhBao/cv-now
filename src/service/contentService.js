@@ -9,7 +9,15 @@ export const getContent = (childId) => {
                 {year_start: "yyyy", status: false, height: 0},
                 {year_end: "yyyy", status: false, height: 0},
                 {optional_dashed: "City, Country or GPA (optional)", status: false, height: 0},
-                {content_bullet: "Course/Thesis/Project", status: false, height: 0},
+                {
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Course/Thesis/Project", status: false, height: 0}
+                    ],
+                  },
+                  status: false,
+                  height: 0,
+                },
             ]
         case 2:
             return [
@@ -23,7 +31,15 @@ export const getContent = (childId) => {
                 {optional_dashed2:
                   "Company Description (optional, fill when the company is not well known)", status: false, height: 0},
                 {content_detail: "Achievements/Tasks", status: false, height: 0},
-                {content_bullet: "Accomplishment/Responsibility/Task", status: false, height: 0},
+                {
+                    content_bullet: {
+                      child: [
+                          {content_bullet_detail:"Accomplishment/Responsibility/Task", status: false, height: 0}
+                      ],
+                    },
+                    status: false,
+                    height: 0,
+                },
                 {contact: "Contact:", status: false, height: 0},
                 {contact_person: "Contact Person", status: false, height: 0},
                 {contact_info: "Contact Info", status: false, height: 0},
@@ -53,7 +69,15 @@ export const getContent = (childId) => {
                 {month_end: "mm", status: false, height: 0},
                 {year_start: "yyyy", status: false, height: 0},
                 {year_end: "yyyy", status: false, height: 0},
-                {content_bullet: "Description of Achievements", status: false, height: 0},
+                {
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Description of Achievements", status: false, height: 0}
+                    ],
+                  },
+                  status: false,
+                  height: 0,
+                },
             ]
         case 6:
             return [ 
@@ -72,7 +96,15 @@ export const getContent = (childId) => {
                 {year_start: "yyyy", status: false, height: 0},
                 {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Conference/Issuer of the certificate", status: false, height: 0},
-                {content_bullet: "Description (optional)", status: false, height: 0},
+                {
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Description (optional)", status: false, height: 0}
+                    ],
+                  },
+                  status: false,
+                  height: 0,
+                },
             ]
         case 8:
             return [ 
@@ -82,7 +114,15 @@ export const getContent = (childId) => {
                 {year_start: "yyyy", status: false, height: 0},
                 {year_end: "yyyy", status: false, height: 0},
                 {content_detail_dashed: "Name of the institution that issued/awarded it", status: false, height: 0},
-                {content_bullet: "Description (optional)", status: false, height: 0},
+                {
+                    content_bullet: {
+                      child: [
+                          {content_bullet_detail:"Description (optional)", status: false, height: 0}
+                      ],
+                    },
+                    status: false,
+                    height: 0,
+                },
             ]
         case 9:
             return [ 
@@ -103,7 +143,11 @@ export const getContent = (childId) => {
                   height: 0,
                 },
                 {
-                  content_bullet: "Task/Responsibility/Accomplishment",
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Task/Responsibility/Accomplishment", status: false, height: 0}
+                    ],
+                  },
                   status: false,
                   height: 0,
                 },
@@ -122,7 +166,15 @@ export const getContent = (childId) => {
                 {optional_dashed: "City, Country", status: false, height: 0},
                 {optional_dashed2: "Organization Description (optional)", status: false, height: 0},
                 {content_detail: "Task/Responsibility/Accomplishment", status: false, height: 0},
-                {content_bullet: "Tasks/Achievements", status: false, height: 0},
+                {
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Tasks/Achievements", status: false, height: 0}
+                    ],
+                  },
+                  status: false,
+                  height: 0,
+                },
                 {contact: "Contact:", status: false, height: 0},
                 {contact_person: "Contact Person", status: false, height: 0},
                 {contact_info: "Contact Info", status: false, height: 0},

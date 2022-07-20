@@ -26,7 +26,11 @@ export const MetaData = [
                   height: 0,
                 },
                 {
-                  content_bullet: "Course/Thesis/Project",
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Course/Thesis/Project", status: false, height: 0}
+                    ],
+                  },
                   status: false,
                   height: 0,
                 },
@@ -63,7 +67,11 @@ export const MetaData = [
                   height: 0,
                 },
                 {
-                  content_bullet: "Accomplishment/Responsibility/Task",
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Accomplishment/Responsibility/Task", status: false, height: 0}
+                    ],
+                  },
                   status: false,
                   height: 0,
                 },
@@ -126,7 +134,11 @@ export const MetaData = [
                 { year_start: "yyyy", status: false, height: 0 },
                 { year_end: "yyyy", status: false, height: 0 },
                 {
-                  content_bullet: "Description of Achievements",
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Description of Achievements", status: false, height: 0}
+                    ],
+                  },
                   status: false,
                   height: 0,
                 },
@@ -171,7 +183,11 @@ export const MetaData = [
                   height: 0,
                 },
                 {
-                  content_bullet: "Description (optional)",
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Description (optional)", status: false, height: 0}
+                    ],
+                  },
                   status: false,
                   height: 0,
                 },
@@ -197,7 +213,11 @@ export const MetaData = [
                   height: 0,
                 },
                 {
-                  content_bullet: "Description (optional)",
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Description (optional)", status: false, height: 0}
+                    ],
+                  },
                   status: false,
                   height: 0,
                 },
@@ -228,7 +248,11 @@ export const MetaData = [
                   height: 0,
                 },
                 {
-                  content_bullet: "Task/Responsibility/Accomplishment",
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Task/Responsibility/Accomplishment", status: false, height: 0}
+                    ],
+                  },
                   status: false,
                   height: 0,
                 },
@@ -263,7 +287,11 @@ export const MetaData = [
                   height: 0,
                 },
                 {
-                  content_bullet: "Tasks/Achievements",
+                  content_bullet: {
+                    child: [
+                        {content_bullet_detail:"Tasks/Achievements", status: false, height: 0}
+                    ],
+                  },
                   status: false,
                   height: 0,
                 },

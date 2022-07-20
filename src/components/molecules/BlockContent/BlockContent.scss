@@ -32,6 +32,11 @@
     &-optional, &-detail, &-bullet{
         font-size: 1.1rem;
     }
+    &-bullet{
+        &-detail {
+            margin-left: 1rem;
+        }
+    }
     &-tag{
         background-color: #989DA6;
         color: white;

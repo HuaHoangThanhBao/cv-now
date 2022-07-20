@@ -32,7 +32,8 @@ const BlockWrapper = (props) => {
         currentTemplateType,
         currentBlockSelected,
         setCurrentBlockSelected,
-        isPreventInteracting
+        isPreventInteracting,
+        createNewBulletDetailContent,
     } = props;
 
     const [isDisplayWhenHasInformation, setIsDisplayWhenHasInformation] = useState(false);
@@ -105,8 +106,26 @@ const BlockWrapper = (props) => {
         return status
     }
 
+    const getStatusOfContentBulletDetail = (index, currentIndex, _blockType) => {
+        let status;
+        for(let i = 0; i < data[index].length; i++){
+            for(const [key, item]  of Object.entries(data[index][i])){
+                if(key === _blockType){
+                    for(let j = 0; j < item.child.length; j++){
+                        if(j === currentIndex){
+                            status = item.child[j].status
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        return status
+    }
+
     const educationContenType = (index) => {
         const {_pageIndex, _columnIndex, _childIndex, _currentBlockSelectedIndex} = currentBlockSelected
+        const contentBullet = getField(index, InputFieldType.content_bullet)[InputFieldType.content_bullet]
         return(
             <div className='block-content-container'>
                 <InputField
@@ -168,22 +187,33 @@ const BlockWrapper = (props) => {
                      isPreventInteracting={isPreventInteracting}
                      updateFieldHeight={updateFieldHeight}
                  />
-                 <InputField
-                     externalClass="block-content-bullet dashed"
-                     type="text"
-                     icon={BulletIcon}
-                     inputBlockType={InputFieldType.content_bullet}
-                     placeHolder={getTitle(index, InputFieldType.content_bullet)}
-                     visible={isDisplayWhenHasInformation && index === _currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
-                     isDisplayWhenHasInformation={getStatus(index,InputFieldType.content_bullet)}
-                     updateFieldData={updateFieldData}
-                     pageIndex={pageIndex}
-                     columnIndex={columnIndex}
-                     childIndex={childIndex}
-                     currentIndex={index}
-                     isPreventInteracting={isPreventInteracting}
-                     updateFieldHeight={updateFieldHeight}
-                 />
+                 {contentBullet && contentBullet.child.map((detail, detailIndex) => (
+                    <div
+                        key={detail + detailIndex}
+                        className="block-content-bullet-detail-row"
+                    >
+                        <InputField
+                            externalClass="block-content-bullet-detail dashed"
+                            type="text"
+                            icon={BulletIcon}
+                            inputBlockType={InputFieldType.content_bullet_detail}
+                            placeHolder={getTitle(index, InputFieldType.content_bullet).child[detailIndex][InputFieldType.content_bullet_detail]}
+                            visible={isDisplayWhenHasInformation && index === _currentBlockSelectedIndex ? isDisplayWhenHasInformation: false}
+                            isDisplayWhenHasInformation={getStatusOfContentBulletDetail(index, detailIndex, InputFieldType.content_bullet)}
+                            updateFieldData={updateFieldData}
+                            pageIndex={pageIndex}
+                            columnIndex={columnIndex}
+                            childIndex={childIndex}
+                            childId={childId}
+                            currentIndex={index}
+                            currentContentBulletDetailIndex={detailIndex}
+                            isPreventInteracting={isPreventInteracting}
+                            updateFieldHeight={updateFieldHeight}
+                            contentBullet={contentBullet}
+                            createNewBulletDetailContent={createNewBulletDetailContent}
+                        />
+                    </div>
+                 ))}
             </div>
         )
     }
@@ -281,7 +311,7 @@ const BlockWrapper = (props) => {
                     isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
-                <InputField
+                {/* <InputField
                     externalClass="block-content-bullet dashed"
                     type="text"
                     icon={BulletIcon}
@@ -296,7 +326,7 @@ const BlockWrapper = (props) => {
                     currentIndex={index}
                     isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
-                />
+                /> */}
                 <div className='block-content-contact'>
                     <InputField
                         externalClass="block-content-detail"
@@ -516,7 +546,7 @@ const BlockWrapper = (props) => {
                     isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
-                <InputField
+                {/* <InputField
                     externalClass="block-content-bullet dashed"
                     type="text"
                     icon={BulletIcon}
@@ -531,7 +561,7 @@ const BlockWrapper = (props) => {
                     currentIndex={index}
                     isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
-                />
+                /> */}
                 <div className='block-content-contact'>
                     <InputField
                         externalClass="block-content-detail"
@@ -670,7 +700,7 @@ const BlockWrapper = (props) => {
                     isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
-                <InputField
+                {/* <InputField
                     externalClass="block-content-bullet dashed"
                     type="text"
                     icon={BulletIcon}
@@ -685,7 +715,7 @@ const BlockWrapper = (props) => {
                     currentIndex={index}
                     isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
-                />
+                /> */}
             </div>
         )
     }
@@ -915,7 +945,7 @@ const BlockWrapper = (props) => {
                     isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
                 />
-                <InputField
+                {/* <InputField
                     externalClass="block-content-bullet dashed"
                     type="text"
                     icon={BulletIcon}
@@ -930,7 +960,7 @@ const BlockWrapper = (props) => {
                     currentIndex={index}
                     isPreventInteracting={isPreventInteracting}
                     updateFieldHeight={updateFieldHeight}
-                />
+                /> */}
             </div>
         )
     }
