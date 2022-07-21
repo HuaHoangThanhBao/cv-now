@@ -34,6 +34,9 @@ const BlockWrapper = (props) => {
         setCurrentBlockSelected,
         isPreventInteracting,
         createNewBulletDetailContent,
+        removeContentBulletDetail,
+        currentBulletContentDetailSelected,
+        setCurrentBulletContentDetailSelected,
     } = props;
 
     const [isDisplayWhenHasInformation, setIsDisplayWhenHasInformation] = useState(false);
@@ -211,6 +214,9 @@ const BlockWrapper = (props) => {
                             updateFieldHeight={updateFieldHeight}
                             contentBullet={contentBullet}
                             createNewBulletDetailContent={createNewBulletDetailContent}
+                            removeContentBulletDetail={removeContentBulletDetail}
+                            currentBulletContentDetailSelected={currentBulletContentDetailSelected}
+                            setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
                         />
                     </div>
                  ))}

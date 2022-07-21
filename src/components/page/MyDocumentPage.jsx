@@ -39,6 +39,12 @@ const MyDocumentPage = () => {
         childIndex: 0,
         _currentBlockSelectedIndex: -1
     })
+    const [currentBulletContentDetailSelected, setCurrentBulletContentDetailSelected] = useState({
+        _pageIndex: 0,
+        _columnIndex: 0,
+        _childIndex: 0,
+        _currentBulletContentDetailSelected: -1
+    })
     const [isMenuActive, setIsMenuActive] = useState(false)
     const [menuItemSelected, setMenuItemSelected] = useState('')
 
@@ -200,6 +206,15 @@ const MyDocumentPage = () => {
         })
     }
 
+    const resetCurrentBulletContentDetailSelected = () => {
+        setCurrentBulletContentDetailSelected({
+            _pageIndex: 0,
+            _columnIndex: 0,
+            _childIndex: 0,
+            _currentBulletContentDetailSelected: -1
+        })
+    }
+
     const getMenuContent = () => {
         switch(menuItemSelected){
             case menu.fonts:
@@ -238,6 +253,7 @@ const MyDocumentPage = () => {
                         handleTransformToOneColumn={handleTransformToOneColumn}
                         setIsDragChange={setIsDragChange}
                         resetCurrentBlockSelected={resetCurrentBlockSelected}
+                        resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                     />
                 )
             case menu.templates:
@@ -262,6 +278,8 @@ const MyDocumentPage = () => {
                         profileContainerHeight={profileContainerHeight}
                         setProfileContainerHeight={setProfileContainerHeight}
                         useOnClickOutside={useOnClickOutside}
+                        currentBulletContentDetailSelected={currentBulletContentDetailSelected}
+                        setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
                     />
                 )
             case menu.settings:
@@ -362,6 +380,8 @@ const MyDocumentPage = () => {
                     setIsDragChange={setIsDragChange}
                     setSocialData={setSocialData}
                     useOnClickOutside={useOnClickOutside}
+                    currentBulletContentDetailSelected={currentBulletContentDetailSelected}
+                    setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
                 />
             </div>
         </div>

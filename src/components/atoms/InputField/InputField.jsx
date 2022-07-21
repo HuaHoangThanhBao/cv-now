@@ -26,10 +26,34 @@ const InputField = (props) => {
     contentBullet,
     createNewBulletDetailContent,
     currentContentBulletDetailIndex,
+    removeContentBulletDetail,
+    currentBulletContentDetailSelected,
+    setCurrentBulletContentDetailSelected,
   } = props;
   const inputRef = useRef();
   const contentEditable = createRef();
   const [html, setHTML] = useState(isDateInputFieldType ? "" : placeHolder);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      if (currentBulletContentDetailSelected) {
+        const {
+          _pageIndex,
+          _columnIndex,
+          _childIndex,
+          _currentBulletContentDetailSelected,
+        } = currentBulletContentDetailSelected;
+        if (
+          _pageIndex === pageIndex &&
+          _columnIndex === columnIndex &&
+          _childIndex === childIndex &&
+          _currentBulletContentDetailSelected === currentContentBulletDetailIndex
+        ) {
+          contentEditable.current.focus();
+        }
+      }
+    }
+  }, [currentBulletContentDetailSelected]);
 
   useEffect(() => {
     if (isPreventInteracting) return;
@@ -40,6 +64,7 @@ const InputField = (props) => {
 
   useEffect(() => {
     if (isDateInputFieldType) return;
+    console.log(placeHolder)
     setHTML(placeHolder);
   }, [placeHolder, isDateInputFieldType]);
 
@@ -123,8 +148,29 @@ const InputField = (props) => {
       if (e.keyCode === 13) {
         e.preventDefault();
       }
+      //if we press delete key code, it will remove current field
+      if (e.keyCode === 8 && html.length < 1) {
+        removeContentBulletDetail(
+          pageIndex,
+          columnIndex,
+          childIndex,
+          currentIndex,
+          currentContentBulletDetailIndex
+        );
+      }
     }
   };
+
+  const handleFocus = () => {
+    if(inputBlockType === InputFieldType.content_bullet_detail) {
+      setCurrentBulletContentDetailSelected({
+        _pageIndex: pageIndex,
+        _columnIndex: columnIndex,
+        _childIndex: childIndex,
+        _currentBulletContentDetailSelected: currentContentBulletDetailIndex
+      })
+    }
+  }
 
   return (
     <div
@@ -149,6 +195,7 @@ const InputField = (props) => {
           onChange={handleChange}
           onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDown}
+          onFocus={handleFocus}
         />
       ) : (
         <input

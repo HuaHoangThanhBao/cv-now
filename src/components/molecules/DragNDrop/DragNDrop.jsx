@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react'
 import './DragNDrop.scss'
 
 function DragNDrop(props) {
-    const {data, setPages, handleTransformToOneColumn, setIsDragChange, resetCurrentBlockSelected} = props
+    const {data, setPages, handleTransformToOneColumn, setIsDragChange, resetCurrentBlockSelected, resetCurrentBulletContentDetailSelected} = props
     const [list, setList] = useState(data); 
     const [dragging, setDragging] = useState(false);
     const [noNeedDragging, setNoNeedDragging] = useState(false);
@@ -234,9 +234,10 @@ function DragNDrop(props) {
             dragItem.current = null;
             dragItemNode.current = null;
             resetCurrentBlockSelected()
+            resetCurrentBulletContentDetailSelected()
             reOrderPages()
         }
-    }, [list, dragging, reOrderPages, resetCurrentBlockSelected])
+    }, [list, dragging, reOrderPages, resetCurrentBlockSelected, resetCurrentBulletContentDetailSelected])
 
     useEffect(() => {
         if(!noNeedDragging && dragNoNeedItemNode.current !== null){

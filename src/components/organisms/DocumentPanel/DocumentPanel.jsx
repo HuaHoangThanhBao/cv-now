@@ -32,7 +32,8 @@ const DocumentPanel = (props) => {
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
         setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
         isPreventInteracting, profileContainerHeight, setProfileContainerHeight,
-        isDragChange, setIsDragChange, useOnClickOutside
+        isDragChange, setIsDragChange, useOnClickOutside, currentBulletContentDetailSelected,
+        setCurrentBulletContentDetailSelected,
     } = props;
 
     const profileContainerRef = useRef();
@@ -96,10 +97,35 @@ const DocumentPanel = (props) => {
         checkToMoveContent(pageIndex, columnIndex, childIndex, setBlockHeaderStatus, true)
     }
 
+    const removeContentBulletDetail = (pageIndex, columnIndex, childIndex, currentIndex, currentContentBulletDetailIndex) => {
+        const blockContent = pages[pageIndex].columns[columnIndex].child[childIndex].data[currentIndex];
+        for(let i = 0; i < blockContent.length; i++){
+            for(const [key]  of Object.entries(blockContent[i])){
+                if(key === InputFieldType.content_bullet){
+                    const block = blockContent[i];
+                    const contentBullet = block[InputFieldType.content_bullet];
+                    if(contentBullet.child.length > 1) {
+                        contentBullet.child.splice(currentContentBulletDetailIndex, 1);
+                        setCurrentBulletContentDetailSelected({
+                            ...currentBulletContentDetailSelected,
+                            _currentBulletContentDetailSelected: currentContentBulletDetailIndex - 1
+                        })
+                        break;
+                    }
+                }
+            }
+        }
+        console.log(pages)
+        setPages([...pages]);
+    }
+
     const createNewBulletDetailContent = (bullet_content, childId, atIndex) => {
         console.log('Going to create bullet detail input field at index: '+ atIndex)
         bullet_content.splice(atIndex + 1, 0, getContentBulletDetail(childId))
-        console.log(pages)
+        setCurrentBulletContentDetailSelected({
+            ...currentBulletContentDetailSelected,
+            _currentBulletContentDetailSelected: atIndex + 1
+        })
         setPages([...pages])
     }
 
@@ -470,7 +496,6 @@ const DocumentPanel = (props) => {
                                     }
                                     else {
                                         block.status = false
-                                        console.log('<<<<<<<<<<<<<<<<<<<<<<<<we disable')
                                     }
                                     break;
                                 }
@@ -581,6 +606,9 @@ const DocumentPanel = (props) => {
                     setCurrentBlockSelected={setCurrentBlockSelected}
                     isPreventInteracting={isPreventInteracting}
                     createNewBulletDetailContent={createNewBulletDetailContent}
+                    removeContentBulletDetail={removeContentBulletDetail}
+                    currentBulletContentDetailSelected={currentBulletContentDetailSelected}
+                    setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
                 />
     }
 
