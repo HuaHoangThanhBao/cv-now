@@ -24,25 +24,36 @@ const InputField = (props) => {
     isNotDisplayIcon,
     isPreventInteracting,
     isDateInputFieldType,
-    getField,
     contentBullet,
     createNewBulletDetailContent,
     currentContentBulletDetailIndex,
     removeContentBulletDetail,
+    currentBlockSelectedIndex,
     currentBulletContentDetailSelected,
     setCurrentBulletContentDetailSelected,
   } = props;
   const inputRef = useRef();
   const contentEditable = createRef();
-  const [html, setHTML] = useState(isDisplayWhenHasInformation ? text : "");
+  const [html, setHTML] = useState("");
 
   useEffect(() => {
+    if(isDisplayWhenHasInformation){
+      setHTML(text)
+    }
+    else {
+      setHTML('')
+    }
+  }, [text])
+
+  useEffect(() => {
+    if(inputBlockType !== InputFieldType.content_bullet_detail) return
     if (inputRef.current) {
       if (currentBulletContentDetailSelected) {
         const {
           _pageIndex,
           _columnIndex,
           _childIndex,
+          _currentBlockSelectedIndex,
           _currentBulletContentDetailSelected,
         } = currentBulletContentDetailSelected;
         if (
@@ -50,8 +61,11 @@ const InputField = (props) => {
           _columnIndex === columnIndex &&
           _childIndex === childIndex &&
           _currentBulletContentDetailSelected ===
-            currentContentBulletDetailIndex
+            currentContentBulletDetailIndex &&
+          _currentBlockSelectedIndex === currentIndex
         ) {
+          console.log('currentBulletContentDetailSelected:', currentBulletContentDetailSelected)
+          console.log(pageIndex + "/" + columnIndex + "/" + childIndex + "/" + currentContentBulletDetailIndex)
           contentEditable.current.focus();
         }
       }
@@ -64,12 +78,6 @@ const InputField = (props) => {
       contentEditable.current.focus();
     }
   }, [isFocus, isPreventInteracting]);
-
-  useEffect(() => {
-    if (isDisablePlaceHolderOnStart || isDisplayWhenHasInformation) {
-      setHTML(text);
-    }
-  }, [placeHolder, isDisablePlaceHolderOnStart, isDisplayWhenHasInformation]);
 
   useEffect(() => {
     if (inputRef && inputRef.current) {
@@ -155,6 +163,7 @@ const InputField = (props) => {
         createNewBulletDetailContent(
           contentBullet.child,
           childId,
+          currentBlockSelectedIndex,
           currentContentBulletDetailIndex
         );
       }
@@ -179,14 +188,18 @@ const InputField = (props) => {
     }
   };
 
-  const handleFocus = () => {
+  const handleClick = () => {
     if (inputBlockType === InputFieldType.content_bullet_detail) {
-      setCurrentBulletContentDetailSelected({
-        _pageIndex: pageIndex,
-        _columnIndex: columnIndex,
-        _childIndex: childIndex,
-        _currentBulletContentDetailSelected: currentContentBulletDetailIndex,
-      });
+      if(currentContentBulletDetailIndex !== -1){
+        console.log('on click')
+        setCurrentBulletContentDetailSelected({
+          _pageIndex: pageIndex,
+          _columnIndex: columnIndex,
+          _childIndex: childIndex,
+          _currentBlockSelectedIndex: currentBlockSelectedIndex,
+          _currentBulletContentDetailSelected: currentContentBulletDetailIndex,
+        });
+      }
     }
   };
 
@@ -211,7 +224,7 @@ const InputField = (props) => {
           onChange={handleChange}
           onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDown}
-          onFocus={handleFocus}
+          onClick={handleClick}
         />
       ) : (
         <ContentEditable
@@ -224,7 +237,6 @@ const InputField = (props) => {
           onChange={handleChange}
           onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDownOfDateInput}
-          onFocus={handleFocus}
         />
       )}
     </div>

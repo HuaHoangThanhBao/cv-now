@@ -105,25 +105,26 @@ const DocumentPanel = (props) => {
                     const block = blockContent[i];
                     const contentBullet = block[InputFieldType.content_bullet];
                     if(contentBullet.child.length > 1) {
+                        console.log('remove bullet at index:', currentContentBulletDetailIndex)
                         contentBullet.child.splice(currentContentBulletDetailIndex, 1);
-                        setCurrentBulletContentDetailSelected({
-                            ...currentBulletContentDetailSelected,
-                            _currentBulletContentDetailSelected: currentContentBulletDetailIndex - 1
-                        })
                         break;
                     }
                 }
             }
         }
-        console.log(pages)
-        setPages([...pages]);
+        console.log('pages after remove bullet:', pages)
+        setCurrentBulletContentDetailSelected({
+            ...currentBulletContentDetailSelected,
+            _currentBulletContentDetailSelected: currentContentBulletDetailIndex - 1
+        })
     }
 
-    const createNewBulletDetailContent = (bullet_content, childId, atIndex) => {
+    const createNewBulletDetailContent = (bullet_content, childId, currentBlockSelectedIndex, atIndex) => {
         console.log('Going to create bullet detail input field at index: '+ atIndex)
         bullet_content.splice(atIndex + 1, 0, getContentBulletDetail(childId))
         setCurrentBulletContentDetailSelected({
             ...currentBulletContentDetailSelected,
+            _currentBlockSelectedIndex: currentBlockSelectedIndex,
             _currentBulletContentDetailSelected: atIndex + 1
         })
         setPages([...pages])

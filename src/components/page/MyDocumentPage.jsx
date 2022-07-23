@@ -40,9 +40,10 @@ const MyDocumentPage = () => {
         _currentBlockSelectedIndex: -1
     })
     const [currentBulletContentDetailSelected, setCurrentBulletContentDetailSelected] = useState({
-        _pageIndex: 0,
-        _columnIndex: 0,
-        _childIndex: 0,
+        _pageIndex: -1,
+        _columnIndex: -1,
+        _childIndex: -1,
+        _currentBlockSelected: -1,
         _currentBulletContentDetailSelected: -1
     })
     const [isMenuActive, setIsMenuActive] = useState(false)
@@ -199,9 +200,10 @@ const MyDocumentPage = () => {
 
     const resetCurrentBlockSelected = () => {
         setCurrentBlockSelected({
-            pageIndex: 0,
-            columnIndex: 0,
-            childIndex: 0,
+            pageIndex: -1,
+            columnIndex: -1,
+            childIndex: -1,
+            _currentBlockSelected: -1,
             _currentBlockSelectedIndex: -1
         })
     }

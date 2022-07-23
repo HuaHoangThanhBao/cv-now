@@ -1,55 +1,69 @@
 .date{
     &-container{
-        width: 12rem;
-        display: inline-block;
-        margin-left: 0.25rem;
-        &.editing{
-            width: 15rem;
+        &::after{
+            content: '';
+            display: block;
+            clear: left;
         }
     }
     .field{
+        line-height: 1;
         .date{
             &-month{
                 margin-right: 2px;
-                font-size: 1.1rem;
+                width: 1.3rem;
                 &.editing{
                     width: 1.7rem;
                 }
             }
             &-year{
-                font-size: 1.1rem;
+                width: 2rem;
                 &.editing {
                     width: 3rem !important;
                 }
             }
         }
+        &-input{
+            color: #888688 !important;
+            font-size: 1rem;
+        }
     }
-    .date{
-        &-group{
-            float: left;
-            display: flex;
+    &-divider{
+        float: left;
+        margin-top: 4px;
+        padding: 0 0.25rem;
+        font-size: 1rem;
+        color: #888688;
+        &.editing{
+            margin-top: 10px;
         }
-        &-field{
-            float: left;
-        }
+    }
+    &-group{
+        float: left;
+        display: flex;
         &-divider{
+            width: 5px;
             float: left;
-            margin-top: 8px;
-            padding: 0 0.25rem;
-            font-size: 1.1rem;
+            margin-top: 6px;
+            font-size: 1rem;
+            margin-right: 0.2rem;
+            color: #888688;
             &.editing{
+                padding: 0 0.25rem;
                 margin-top: 10px;
+                margin-left: 5px;
             }
         }
-        &-group-closing{
+        &-closing{
             float: left;
-            font-size: 1.1rem;
-            margin-top: 6px;
+            font-size: 1rem;
+            margin-top: 5px;
+            color: #888688;
             &.left{
-                margin-right: 5px;
+                margin-right: 1.5px;
             }
             &.right{
-                margin-left: 3px;
+                margin-left: 5px;
                 &.editing{
                     margin-left: -5px;
                 }
@@ -58,16 +72,8 @@
                 margin-top: 10px;
             }
         }
-        &-group-divider{
-            width: 5px;
-            float: left;
-            margin-top: 8px;
-            font-size: 1.1rem;
-            margin-right: 0.2rem;
-            &.editing{
-                padding: 0 0.25rem;
-                margin-top: 12px;
-            }
-        }
+    }
+    &-field{
+        float: left;
     }
 }

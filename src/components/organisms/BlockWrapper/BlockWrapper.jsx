@@ -113,6 +113,9 @@ const BlockWrapper = (props) => {
     const contentBullet = getField(index, InputFieldType.content_bullet)[
       InputFieldType.content_bullet
     ];
+    const {
+      _currentBulletContentDetailSelected,
+    } = currentBulletContentDetailSelected;
     return (
       <div className="block-content-container">
         <InputField
@@ -137,7 +140,8 @@ const BlockWrapper = (props) => {
             _pageIndex === pageIndex &&
             _columnIndex === columnIndex &&
             _childIndex === childIndex &&
-            _currentBlockSelectedIndex === index
+            _currentBlockSelectedIndex === index &&
+            _currentBulletContentDetailSelected === -1
           }
         />
         <InputField
@@ -217,29 +221,22 @@ const BlockWrapper = (props) => {
                 type="text"
                 icon={BulletIcon}
                 inputBlockType={InputFieldType.content_bullet_detail}
-                placeHolder={contentBullet.child[detailIndex].placeHolder}
-                text={
-                  contentBullet.child[detailIndex][
-                    InputFieldType.content_bullet_detail
-                  ]
-                }
+                placeHolder={detail.placeHolder}
+                text={detail[InputFieldType.content_bullet_detail]}
                 visible={
                   isDisplayWhenHasInformation &&
                   index === _currentBlockSelectedIndex
                     ? isDisplayWhenHasInformation
                     : false
                 }
-                isDisplayWhenHasInformation={getStatusOfContentBulletDetail(
-                  index,
-                  detailIndex,
-                  InputFieldType.content_bullet
-                )}
+                isDisplayWhenHasInformation={detail.status}
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
                 columnIndex={columnIndex}
                 childIndex={childIndex}
                 childId={childId}
                 currentIndex={index}
+                currentBlockSelectedIndex={_currentBlockSelectedIndex}
                 currentContentBulletDetailIndex={detailIndex}
                 isPreventInteracting={isPreventInteracting}
                 updateFieldHeight={updateFieldHeight}
@@ -269,6 +266,9 @@ const BlockWrapper = (props) => {
     const contentBullet = getField(index, InputFieldType.content_bullet)[
       InputFieldType.content_bullet
     ];
+    const {
+      _currentBulletContentDetailSelected,
+    } = currentBulletContentDetailSelected;
     return (
       <div className="block-content-container">
         <InputField
@@ -293,7 +293,8 @@ const BlockWrapper = (props) => {
             _pageIndex === pageIndex &&
             _columnIndex === columnIndex &&
             _childIndex === childIndex &&
-            _currentBlockSelectedIndex === index
+            _currentBlockSelectedIndex === index &&
+            _currentBulletContentDetailSelected === -1
           }
         />
         <InputField
@@ -401,23 +402,15 @@ const BlockWrapper = (props) => {
                 type="text"
                 icon={BulletIcon}
                 inputBlockType={InputFieldType.content_bullet_detail}
-                placeHolder={contentBullet.child[detailIndex].placeHolder}
-                text={
-                  contentBullet.child[detailIndex][
-                    InputFieldType.content_bullet_detail
-                  ]
-                }
+                placeHolder={detail.placeHolder}
+                text={detail[InputFieldType.content_bullet_detail]}
                 visible={
                   isDisplayWhenHasInformation &&
                   index === _currentBlockSelectedIndex
                     ? isDisplayWhenHasInformation
                     : false
                 }
-                isDisplayWhenHasInformation={getStatusOfContentBulletDetail(
-                  index,
-                  detailIndex,
-                  InputFieldType.content_bullet
-                )}
+                isDisplayWhenHasInformation={detail.status}
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
                 columnIndex={columnIndex}
@@ -425,6 +418,7 @@ const BlockWrapper = (props) => {
                 childId={childId}
                 currentIndex={index}
                 currentContentBulletDetailIndex={detailIndex}
+                currentBlockSelectedIndex={_currentBlockSelectedIndex}
                 isPreventInteracting={isPreventInteracting}
                 updateFieldHeight={updateFieldHeight}
                 contentBullet={contentBullet}
@@ -692,6 +686,9 @@ const BlockWrapper = (props) => {
     const contentBullet = getField(index, InputFieldType.content_bullet)[
       InputFieldType.content_bullet
     ];
+    const {
+      _currentBulletContentDetailSelected,
+    } = currentBulletContentDetailSelected;
     return (
       <div className="block-content-container">
         <InputField
@@ -715,7 +712,8 @@ const BlockWrapper = (props) => {
             _pageIndex === pageIndex &&
             _columnIndex === columnIndex &&
             _childIndex === childIndex &&
-            _currentBlockSelectedIndex === index
+            _currentBlockSelectedIndex === index &&
+            _currentBulletContentDetailSelected === -1
           }
         />
         <InputField
@@ -795,23 +793,15 @@ const BlockWrapper = (props) => {
                 type="text"
                 icon={BulletIcon}
                 inputBlockType={InputFieldType.content_bullet_detail}
-                placeHolder={contentBullet.child[detailIndex].placeHolder}
-                text={
-                  contentBullet.child[detailIndex][
-                    InputFieldType.content_bullet_detail
-                  ]
-                }
+                placeHolder={detail.placeHolder}
+                text={detail[InputFieldType.content_bullet_detail]}
                 visible={
                   isDisplayWhenHasInformation &&
                   index === _currentBlockSelectedIndex
                     ? isDisplayWhenHasInformation
                     : false
                 }
-                isDisplayWhenHasInformation={getStatusOfContentBulletDetail(
-                  index,
-                  detailIndex,
-                  InputFieldType.content_bullet
-                )}
+                isDisplayWhenHasInformation={detail.status}
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
                 columnIndex={columnIndex}
@@ -819,6 +809,7 @@ const BlockWrapper = (props) => {
                 childId={childId}
                 currentIndex={index}
                 currentContentBulletDetailIndex={detailIndex}
+                currentBlockSelectedIndex={_currentBlockSelectedIndex}
                 isPreventInteracting={isPreventInteracting}
                 updateFieldHeight={updateFieldHeight}
                 contentBullet={contentBullet}
@@ -1015,6 +1006,9 @@ const BlockWrapper = (props) => {
     const contentBullet = getField(index, InputFieldType.content_bullet)[
       InputFieldType.content_bullet
     ];
+    const {
+      _currentBulletContentDetailSelected,
+    } = currentBulletContentDetailSelected;
     return (
       <div className="block-content-container">
         <InputField
@@ -1038,7 +1032,8 @@ const BlockWrapper = (props) => {
             _pageIndex === pageIndex &&
             _columnIndex === columnIndex &&
             _childIndex === childIndex &&
-            _currentBlockSelectedIndex === index
+            _currentBlockSelectedIndex === index &&
+            _currentBulletContentDetailSelected === -1
           }
         />
         <DateInput
@@ -1068,23 +1063,15 @@ const BlockWrapper = (props) => {
                 type="text"
                 icon={BulletIcon}
                 inputBlockType={InputFieldType.content_bullet_detail}
-                placeHolder={contentBullet.child[detailIndex].placeHolder}
-                text={
-                  contentBullet.child[detailIndex][
-                    InputFieldType.content_bullet_detail
-                  ]
-                }
+                placeHolder={detail.placeHolder}
+                text={detail[InputFieldType.content_bullet_detail]}
                 visible={
                   isDisplayWhenHasInformation &&
                   index === _currentBlockSelectedIndex
                     ? isDisplayWhenHasInformation
                     : false
                 }
-                isDisplayWhenHasInformation={getStatusOfContentBulletDetail(
-                  index,
-                  detailIndex,
-                  InputFieldType.content_bullet
-                )}
+                isDisplayWhenHasInformation={detail.status}
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
                 columnIndex={columnIndex}
@@ -1092,6 +1079,7 @@ const BlockWrapper = (props) => {
                 childId={childId}
                 currentIndex={index}
                 currentContentBulletDetailIndex={detailIndex}
+                currentBlockSelectedIndex={_currentBlockSelectedIndex}
                 isPreventInteracting={isPreventInteracting}
                 updateFieldHeight={updateFieldHeight}
                 contentBullet={contentBullet}
@@ -1427,6 +1415,9 @@ const BlockWrapper = (props) => {
     const contentBullet = getField(index, InputFieldType.content_bullet)[
       InputFieldType.content_bullet
     ];
+    const {
+      _currentBulletContentDetailSelected,
+    } = currentBulletContentDetailSelected;
     return (
       <div className="block-content-container">
         <InputField
@@ -1450,7 +1441,8 @@ const BlockWrapper = (props) => {
             _pageIndex === pageIndex &&
             _columnIndex === columnIndex &&
             _childIndex === childIndex &&
-            _currentBlockSelectedIndex === index
+            _currentBlockSelectedIndex === index &&
+            _currentBulletContentDetailSelected === -1
           }
         />
         <InputField
@@ -1492,23 +1484,15 @@ const BlockWrapper = (props) => {
                 type="text"
                 icon={BulletIcon}
                 inputBlockType={InputFieldType.content_bullet_detail}
-                placeHolder={contentBullet.child[detailIndex].placeHolder}
-                text={
-                  contentBullet.child[detailIndex][
-                    InputFieldType.content_bullet_detail
-                  ]
-                }
+                placeHolder={detail.placeHolder}
+                text={detail[InputFieldType.content_bullet_detail]}
                 visible={
                   isDisplayWhenHasInformation &&
                   index === _currentBlockSelectedIndex
                     ? isDisplayWhenHasInformation
                     : false
                 }
-                isDisplayWhenHasInformation={getStatusOfContentBulletDetail(
-                  index,
-                  detailIndex,
-                  InputFieldType.content_bullet
-                )}
+                isDisplayWhenHasInformation={detail.status}
                 updateFieldData={updateFieldData}
                 pageIndex={pageIndex}
                 columnIndex={columnIndex}
@@ -1516,6 +1500,7 @@ const BlockWrapper = (props) => {
                 childId={childId}
                 currentIndex={index}
                 currentContentBulletDetailIndex={detailIndex}
+                currentBlockSelectedIndex={_currentBlockSelectedIndex}
                 isPreventInteracting={isPreventInteracting}
                 updateFieldHeight={updateFieldHeight}
                 contentBullet={contentBullet}

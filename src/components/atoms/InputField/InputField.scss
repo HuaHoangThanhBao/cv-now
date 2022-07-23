@@ -9,9 +9,6 @@
                 margin-top: 15px;
             }
         }
-        &.block-content-desc{
-            float: none !important;
-        }
     }
     &.isDisplayWhenHasInformation{
         display: block !important;
@@ -36,8 +33,5 @@
     &-bullet{
         display: flex;
         align-items: center;
-    }
-    &.block-content-desc{
-        float: left;
     }
 }
