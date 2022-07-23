@@ -1,42 +1,73 @@
 .date{
-    display: flex;
-    // gap: 0.5rem;
-    align-items: center;
-    &.isDisplayWhenHasInformation{
-        align-items: flex-end;
+    &-container{
+        width: 12rem;
+        display: inline-block;
+        margin-left: 0.25rem;
+        &.editing{
+            width: 15rem;
+        }
     }
-    &-divider{
-        margin-top: 0.2rem;
-        font-size: 1.1rem;
+    .field{
+        .date{
+            &-month{
+                margin-right: 2px;
+                font-size: 1.1rem;
+                &.editing{
+                    width: 1.7rem;
+                }
+            }
+            &-year{
+                font-size: 1.1rem;
+                &.editing {
+                    width: 3rem !important;
+                }
+            }
+        }
     }
-    &-group{
-        display: flex;
-        // gap: 0.2rem;
-        align-items: center;
-        margin-left: -0.2rem;
-        // margin-right: 0.5rem;
+    .date{
+        &-group{
+            float: left;
+            display: flex;
+        }
+        &-field{
+            float: left;
+        }
         &-divider{
-            margin-top: 0.7rem;
+            float: left;
+            margin-top: 8px;
+            padding: 0 0.25rem;
             font-size: 1.1rem;
+            &.editing{
+                margin-top: 10px;
+            }
         }
-        &.isDisplayWhenHasInformation{
-            align-items: flex-end;
+        &-group-closing{
+            float: left;
+            font-size: 1.1rem;
+            margin-top: 6px;
+            &.left{
+                margin-right: 5px;
+            }
+            &.right{
+                margin-left: 3px;
+                &.editing{
+                    margin-left: -5px;
+                }
+            }
+            &.editing{
+                margin-top: 10px;
+            }
         }
-        .field{
-            margin-left: 0.2rem;
+        &-group-divider{
+            width: 5px;
+            float: left;
+            margin-top: 8px;
+            font-size: 1.1rem;
+            margin-right: 0.2rem;
+            &.editing{
+                padding: 0 0.25rem;
+                margin-top: 12px;
+            }
         }
-        &:nth-of-type(2){
-            margin-left: 0rem;
-        }
-    }
-    &-month{
-        font-size: 1.1rem;
-        text-align: center;
-        width: 1.5rem;
-    }
-    &-year{
-        font-size: 1.1rem;
-        text-align: center;
-        width: 2.5rem;
     }
 }

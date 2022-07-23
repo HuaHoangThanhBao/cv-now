@@ -1,0 +1,9 @@
+.date{
+    &-container{
+        &::after{
+            content: '';
+            display: block;
+            clear: left;
+        }
+    }
+}

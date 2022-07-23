@@ -5,24 +5,12 @@
     &.visible{
         display: block !important;
         .date{
-            align-items: center;
             &-divider{
-                margin-top: 0.2rem;
+                margin-top: 15px;
             }
-            &-group{
-                // gap: 0.5rem;
-                align-items: center;
-                margin-left: -0.5rem;
-                .field{
-                    margin-left: 0.5rem;
-                }
-            }
-            &-month{
-                width: 2.2rem;
-            }
-            &-year{
-                width: 2.9rem;
-            }
+        }
+        &.block-content-desc{
+            float: none !important;
         }
     }
     &.isDisplayWhenHasInformation{
@@ -48,5 +36,8 @@
     &-bullet{
         display: flex;
         align-items: center;
+    }
+    &.block-content-desc{
+        float: left;
     }
 }

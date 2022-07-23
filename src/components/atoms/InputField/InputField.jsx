@@ -34,7 +34,7 @@ const InputField = (props) => {
   } = props;
   const inputRef = useRef();
   const contentEditable = createRef();
-  const [html, setHTML] = useState(isDisplayWhenHasInformation ? text: '');
+  const [html, setHTML] = useState(isDisplayWhenHasInformation ? text : "");
 
   useEffect(() => {
     if (inputRef.current) {
@@ -49,7 +49,8 @@ const InputField = (props) => {
           _pageIndex === pageIndex &&
           _columnIndex === columnIndex &&
           _childIndex === childIndex &&
-          _currentBulletContentDetailSelected === currentContentBulletDetailIndex
+          _currentBulletContentDetailSelected ===
+            currentContentBulletDetailIndex
         ) {
           contentEditable.current.focus();
         }
@@ -65,25 +66,10 @@ const InputField = (props) => {
   }, [isFocus, isPreventInteracting]);
 
   useEffect(() => {
-    if(isDisablePlaceHolderOnStart || isDisplayWhenHasInformation){
+    if (isDisablePlaceHolderOnStart || isDisplayWhenHasInformation) {
       setHTML(text);
     }
   }, [placeHolder, isDisablePlaceHolderOnStart, isDisplayWhenHasInformation]);
-
-  const handleChange = (evt) => {
-    const value = evt.target.value;
-    updateFieldData(
-      pageIndex,
-      columnIndex,
-      childIndex,
-      currentIndex,
-      currentContentBulletDetailIndex,
-      inputBlockType,
-      placeHolder,
-      value
-    );
-    setHTML(value);
-  };
 
   useEffect(() => {
     if (inputRef && inputRef.current) {
@@ -123,10 +109,41 @@ const InputField = (props) => {
     return true;
   }
 
+  const handleChange = (evt) => {
+    const value = evt.target.value;
+    updateFieldData(
+      pageIndex,
+      columnIndex,
+      childIndex,
+      currentIndex,
+      currentContentBulletDetailIndex,
+      inputBlockType,
+      placeHolder,
+      value
+    );
+    setHTML(value);
+  };
+
   const handleKeyDownOfDateInput = (e) => {
     if (isDateInputFieldType) {
       if (!isNumber(e)) {
         e.preventDefault();
+      } else if (e.keyCode !== 8) {
+        if (
+          inputBlockType === InputFieldType.month_start ||
+          inputBlockType === InputFieldType.month_end
+        ) {
+          if (html.length >= 2) {
+            e.preventDefault();
+          }
+        } else if (
+          inputBlockType === InputFieldType.year_start ||
+          inputBlockType === InputFieldType.year_end
+        ) {
+          if (html.length >= 4) {
+            e.preventDefault();
+          }
+        }
       }
     }
   };
@@ -135,7 +152,6 @@ const InputField = (props) => {
     if (inputBlockType === InputFieldType.content_bullet_detail) {
       if (e.keyCode === 13) {
         e.preventDefault();
-        console.log("create new conten bullet row");
         createNewBulletDetailContent(
           contentBullet.child,
           childId,
@@ -164,25 +180,23 @@ const InputField = (props) => {
   };
 
   const handleFocus = () => {
-    if(inputBlockType === InputFieldType.content_bullet_detail) {
+    if (inputBlockType === InputFieldType.content_bullet_detail) {
       setCurrentBulletContentDetailSelected({
         _pageIndex: pageIndex,
         _columnIndex: columnIndex,
         _childIndex: childIndex,
-        _currentBulletContentDetailSelected: currentContentBulletDetailIndex
-      })
+        _currentBulletContentDetailSelected: currentContentBulletDetailIndex,
+      });
     }
-  }
+  };
 
   return (
     <div
-      className={
-        "field" +
-        (icon ? " field-bullet" : "") +
-        (visible ? " visible" : "") +
-        (isDisplayWhenHasInformation ? " isDisplayWhenHasInformation" : "") +
-        (isNotDisplayIcon ? " field-with-no-icon" : "")
-      }
+      className={`field ${icon ? " field-bullet" : ""} ${
+        visible ? " visible" : ""
+      } ${isDisplayWhenHasInformation ? " isDisplayWhenHasInformation" : ""} ${
+        isNotDisplayIcon ? " field-with-no-icon" : ""
+      } ${externalClass ? ` ${externalClass}` : ""}`}
       ref={inputRef}
     >
       {icon && <img src={icon} alt="" className="field-icon" />}
@@ -200,24 +214,17 @@ const InputField = (props) => {
           onFocus={handleFocus}
         />
       ) : (
-        <input
+        <ContentEditable
           className={`field-input ${externalClass ? ` ${externalClass}` : ""} ${
             isDateInputFieldType ? "date" : ""
           }`}
-          type="text"
+          innerRef={contentEditable}
+          html={html}
+          placeholder={placeHolder}
           onChange={handleChange}
-          placeholder={
-            getField(currentIndex, inputBlockType)[inputBlockType] !== ""
-              ? placeHolder
-              : ""
-          }
+          onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDownOfDateInput}
-          maxLength={
-            inputBlockType === InputFieldType.month_start ||
-            inputBlockType === InputFieldType.month_end
-              ? 2
-              : 4
-          }
+          onFocus={handleFocus}
         />
       )}
     </div>
