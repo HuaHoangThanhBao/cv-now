@@ -7,7 +7,7 @@ import './BlockHeader.scss';
 
 const BlockHeader = (props) => {
     const {
-        childId, title, pageIndex, columnIndex, childIndex, handleBlockHeader, 
+        title, placeHolder, childId, pageIndex, columnIndex, childIndex, handleBlockHeader, 
         handleOutsideClick, updateFieldData, updateFieldHeight, 
         currentTemplateType
     } = props
@@ -40,7 +40,9 @@ const BlockHeader = (props) => {
                         externalClass="field-input block-header-title"
                         type="text"
                         inputBlockType={InputFieldType.header}
-                        placeHolder={title}
+                        placeHolder={placeHolder}
+                        text={title}
+                        isDisablePlaceHolderOnStart={true}
                         isDisplayWhenHasInformation={true}
                         visible={true}
                         updateFieldData={updateFieldData}

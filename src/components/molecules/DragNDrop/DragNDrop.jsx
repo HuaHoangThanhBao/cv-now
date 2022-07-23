@@ -290,7 +290,7 @@ function DragNDrop(props) {
                                                     onDragEnter={dragging ? (e) => {handleDragEnter(e, {pageIndex, columnIndex, childIndex})}: null} 
                                                     className={dragging ? getStyles({pageIndex, columnIndex, childIndex}): "dnd-item"}
                                                 >
-                                                    {child.header}
+                                                    {child.placeHolder}
                                                 </div>
                                             </div>
                                         ))}

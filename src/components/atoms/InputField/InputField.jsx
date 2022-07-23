@@ -15,7 +15,9 @@ const InputField = (props) => {
     isDisplayWhenHasInformation,
     inputBlockType,
     icon,
+    text,
     placeHolder,
+    isDisablePlaceHolderOnStart,
     isFocus,
     updateFieldData,
     updateFieldHeight,
@@ -32,7 +34,7 @@ const InputField = (props) => {
   } = props;
   const inputRef = useRef();
   const contentEditable = createRef();
-  const [html, setHTML] = useState(isDateInputFieldType ? "" : placeHolder);
+  const [html, setHTML] = useState(isDisplayWhenHasInformation ? text: '');
 
   useEffect(() => {
     if (inputRef.current) {
@@ -63,10 +65,10 @@ const InputField = (props) => {
   }, [isFocus, isPreventInteracting]);
 
   useEffect(() => {
-    if (isDateInputFieldType) return;
-    console.log(placeHolder)
-    setHTML(placeHolder);
-  }, [placeHolder, isDateInputFieldType]);
+    if(isDisablePlaceHolderOnStart || isDisplayWhenHasInformation){
+      setHTML(text);
+    }
+  }, [placeHolder, isDisablePlaceHolderOnStart, isDisplayWhenHasInformation]);
 
   const handleChange = (evt) => {
     const value = evt.target.value;

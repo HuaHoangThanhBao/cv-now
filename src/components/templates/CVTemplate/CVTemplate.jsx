@@ -10,7 +10,7 @@ const CVTemplate = (props) => {
         info, setInfo, socialData, setSocialData, currentBlockSelected, setCurrentBlockSelected,
         profileContainerHeight, setProfileContainerHeight, isDragChange, setIsDragChange, 
         useOnClickOutside, currentBulletContentDetailSelected,
-        setCurrentBulletContentDetailSelected,
+        setCurrentBulletContentDetailSelected, resetCurrentBulletContentDetailSelected
     } = props;
 
     return(
@@ -41,6 +41,7 @@ const CVTemplate = (props) => {
                     useOnClickOutside={useOnClickOutside}
                     currentBulletContentDetailSelected={currentBulletContentDetailSelected}
                     setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                    resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                 />
             </div>
             <ProfileModal 

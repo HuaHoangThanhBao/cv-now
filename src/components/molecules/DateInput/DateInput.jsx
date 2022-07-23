@@ -6,7 +6,7 @@ import './DateInput.scss';
 const DateInput = (props) => {
     const {
         pageIndex, columnIndex, childIndex, currentIndex, isDisplayWhenHasInformation, 
-        updateFieldHeight, updateFieldData, getTitle, getField, isPreventInteracting
+        updateFieldHeight, updateFieldData, getField, isPreventInteracting
     } = props;
 
     const [allCheck, setAllCheck] = useState(false)
@@ -34,7 +34,8 @@ const DateInput = (props) => {
                 <InputField 
                     externalClass="date-month dashed" 
                     inputBlockType={InputFieldType.month_start}
-                    placeHolder={getTitle(currentIndex, InputFieldType.month_start)}
+                    placeHolder={getField(currentIndex, InputFieldType.month_start).month_start}
+                    text={getField(currentIndex, InputFieldType.month_start)[InputFieldType.month_start]}
                     type="number"
                     visible={isDisplayWhenHasInformation}
                     isDisplayWhenHasInformation={allCheck}
@@ -54,7 +55,8 @@ const DateInput = (props) => {
                 <InputField 
                     externalClass="date-year dashed" 
                     inputBlockType={InputFieldType.year_start}
-                    placeHolder={getTitle(currentIndex, InputFieldType.year_start)}
+                    placeHolder={getField(currentIndex, InputFieldType.year_start).year_start}
+                    text={getField(currentIndex, InputFieldType.year_start)[InputFieldType.year_start]}
                     type="number"
                     visible={isDisplayWhenHasInformation}
                     isDisplayWhenHasInformation={allCheck}
@@ -76,7 +78,8 @@ const DateInput = (props) => {
                 <InputField 
                     externalClass="date-month dashed" 
                     inputBlockType={InputFieldType.month_end}
-                    placeHolder={getTitle(currentIndex, InputFieldType.month_end)}
+                    placeHolder={getField(currentIndex, InputFieldType.month_end).month_end}
+                    text={getField(currentIndex, InputFieldType.month_end)[InputFieldType.month_end]}
                     type="number"
                     visible={isDisplayWhenHasInformation}
                     isDisplayWhenHasInformation={allCheck}
@@ -96,7 +99,8 @@ const DateInput = (props) => {
                 <InputField 
                     externalClass="date-year dashed" 
                     inputBlockType={InputFieldType.year_end}
-                    placeHolder={getTitle(currentIndex, InputFieldType.year_end)}
+                    placeHolder={getField(currentIndex, InputFieldType.year_end).year_end}
+                    text={getField(currentIndex, InputFieldType.year_end)[InputFieldType.year_end]}
                     type="number"
                     visible={isDisplayWhenHasInformation}
                     isDisplayWhenHasInformation={allCheck}

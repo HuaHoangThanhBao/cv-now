@@ -33,7 +33,7 @@ const DocumentPanel = (props) => {
         setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
         isPreventInteracting, profileContainerHeight, setProfileContainerHeight,
         isDragChange, setIsDragChange, useOnClickOutside, currentBulletContentDetailSelected,
-        setCurrentBulletContentDetailSelected,
+        setCurrentBulletContentDetailSelected, resetCurrentBulletContentDetailSelected,
     } = props;
 
     const profileContainerRef = useRef();
@@ -580,6 +580,7 @@ const DocumentPanel = (props) => {
         const child =  pages[pageIndex].columns[columnIndex].child.find(c => c.id === childId)
         return <BlockWrapper
                     title={child.header} 
+                    placeHolder={child.placeHolder}
                     blockType={child.blockType}
                     data={child.data}
                     key={childIndex} 
@@ -609,6 +610,7 @@ const DocumentPanel = (props) => {
                     removeContentBulletDetail={removeContentBulletDetail}
                     currentBulletContentDetailSelected={currentBulletContentDetailSelected}
                     setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                    resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                 />
     }
 

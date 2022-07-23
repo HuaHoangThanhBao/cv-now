@@ -9,7 +9,7 @@ const PreviewContainer = (props) => {
         setInfo, socialData, isOpenProfileModal, setIsOpenProfileModal, currentBlockSelected,
         setCurrentBlockSelected, isActiveIcon, profileContainerHeight, 
         setProfileContainerHeight, useOnClickOutside, currentBulletContentDetailSelected,
-        setCurrentBulletContentDetailSelected,
+        setCurrentBulletContentDetailSelected, resetCurrentBulletContentDetailSelected
     } = props;
     const templateList = Object.keys(template)
     
@@ -53,6 +53,7 @@ const PreviewContainer = (props) => {
                                     useOnClickOutside={useOnClickOutside}
                                     currentBulletContentDetailSelected={currentBulletContentDetailSelected}
                                     setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                                    resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                                 />
                             </div>
                         </div>

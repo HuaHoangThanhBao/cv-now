@@ -280,6 +280,7 @@ const MyDocumentPage = () => {
                         useOnClickOutside={useOnClickOutside}
                         currentBulletContentDetailSelected={currentBulletContentDetailSelected}
                         setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                        resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                     />
                 )
             case menu.settings:
@@ -382,6 +383,7 @@ const MyDocumentPage = () => {
                     useOnClickOutside={useOnClickOutside}
                     currentBulletContentDetailSelected={currentBulletContentDetailSelected}
                     setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                    resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                 />
             </div>
         </div>
