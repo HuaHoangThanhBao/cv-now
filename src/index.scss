@@ -71,3 +71,9 @@ input[type=number] {
     background-color: transparent;
   }
 }
+
+[placeholder]:empty:before{
+  content: attr(placeholder);
+  color: #888;
+  font-style: italic;
+}

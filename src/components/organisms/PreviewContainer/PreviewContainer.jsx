@@ -8,7 +8,8 @@ const PreviewContainer = (props) => {
         panelsRef, pages, setPages, isReOrder, setIsReOrder, handleSelectTemplate, colorHex, infoKeys, info, 
         setInfo, socialData, isOpenProfileModal, setIsOpenProfileModal, currentBlockSelected,
         setCurrentBlockSelected, isActiveIcon, profileContainerHeight, 
-        setProfileContainerHeight, useOnClickOutside
+        setProfileContainerHeight, useOnClickOutside, currentBulletContentDetailSelected,
+        setCurrentBulletContentDetailSelected, resetCurrentBulletContentDetailSelected
     } = props;
     const templateList = Object.keys(template)
     
@@ -50,6 +51,9 @@ const PreviewContainer = (props) => {
                                     profileContainerHeight={profileContainerHeight}
                                     setProfileContainerHeight={setProfileContainerHeight}
                                     useOnClickOutside={useOnClickOutside}
+                                    currentBulletContentDetailSelected={currentBulletContentDetailSelected}
+                                    setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                                    resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                                 />
                             </div>
                         </div>

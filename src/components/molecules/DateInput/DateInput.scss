@@ -1,42 +1,79 @@
 .date{
-    display: flex;
-    // gap: 0.5rem;
-    align-items: center;
-    &.isDisplayWhenHasInformation{
-        align-items: flex-end;
+    &-container{
+        &::after{
+            content: '';
+            display: block;
+            clear: left;
+        }
+    }
+    .field{
+        line-height: 1;
+        .date{
+            &-month{
+                margin-right: 2px;
+                width: 1.3rem;
+                &.editing{
+                    width: 1.7rem;
+                }
+            }
+            &-year{
+                width: 2rem;
+                &.editing {
+                    width: 3rem !important;
+                }
+            }
+        }
+        &-input{
+            color: #888688 !important;
+            font-size: 1rem;
+        }
     }
     &-divider{
-        margin-top: 0.2rem;
-        font-size: 1.1rem;
+        float: left;
+        margin-top: 4px;
+        padding: 0 0.25rem;
+        font-size: 1rem;
+        color: #888688;
+        &.editing{
+            margin-top: 10px;
+        }
     }
     &-group{
+        float: left;
         display: flex;
-        // gap: 0.2rem;
-        align-items: center;
-        margin-left: -0.2rem;
-        // margin-right: 0.5rem;
         &-divider{
-            margin-top: 0.7rem;
-            font-size: 1.1rem;
+            width: 5px;
+            float: left;
+            margin-top: 6px;
+            font-size: 1rem;
+            margin-right: 0.2rem;
+            color: #888688;
+            &.editing{
+                padding: 0 0.25rem;
+                margin-top: 10px;
+                margin-left: 5px;
+            }
         }
-        &.isDisplayWhenHasInformation{
-            align-items: flex-end;
-        }
-        .field{
-            margin-left: 0.2rem;
-        }
-        &:nth-of-type(2){
-            margin-left: 0rem;
+        &-closing{
+            float: left;
+            font-size: 1rem;
+            margin-top: 5px;
+            color: #888688;
+            &.left{
+                margin-right: 1.5px;
+            }
+            &.right{
+                margin-left: 5px;
+                &.editing{
+                    margin-left: -5px;
+                }
+            }
+            &.editing{
+                margin-top: 10px;
+            }
         }
     }
-    &-month{
-        font-size: 1.1rem;
-        text-align: center;
-        width: 1.5rem;
-    }
-    &-year{
-        font-size: 1.1rem;
-        text-align: center;
-        width: 2.5rem;
+    &-field{
+        float: left;
     }
 }

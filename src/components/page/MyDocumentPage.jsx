@@ -39,6 +39,13 @@ const MyDocumentPage = () => {
         childIndex: 0,
         _currentBlockSelectedIndex: -1
     })
+    const [currentBulletContentDetailSelected, setCurrentBulletContentDetailSelected] = useState({
+        _pageIndex: -1,
+        _columnIndex: -1,
+        _childIndex: -1,
+        _currentBlockSelected: -1,
+        _currentBulletContentDetailSelected: -1
+    })
     const [isMenuActive, setIsMenuActive] = useState(false)
     const [menuItemSelected, setMenuItemSelected] = useState('')
 
@@ -193,10 +200,20 @@ const MyDocumentPage = () => {
 
     const resetCurrentBlockSelected = () => {
         setCurrentBlockSelected({
-            pageIndex: 0,
-            columnIndex: 0,
-            childIndex: 0,
+            pageIndex: -1,
+            columnIndex: -1,
+            childIndex: -1,
+            _currentBlockSelected: -1,
             _currentBlockSelectedIndex: -1
+        })
+    }
+
+    const resetCurrentBulletContentDetailSelected = () => {
+        setCurrentBulletContentDetailSelected({
+            _pageIndex: 0,
+            _columnIndex: 0,
+            _childIndex: 0,
+            _currentBulletContentDetailSelected: -1
         })
     }
 
@@ -238,6 +255,7 @@ const MyDocumentPage = () => {
                         handleTransformToOneColumn={handleTransformToOneColumn}
                         setIsDragChange={setIsDragChange}
                         resetCurrentBlockSelected={resetCurrentBlockSelected}
+                        resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                     />
                 )
             case menu.templates:
@@ -262,6 +280,9 @@ const MyDocumentPage = () => {
                         profileContainerHeight={profileContainerHeight}
                         setProfileContainerHeight={setProfileContainerHeight}
                         useOnClickOutside={useOnClickOutside}
+                        currentBulletContentDetailSelected={currentBulletContentDetailSelected}
+                        setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                        resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                     />
                 )
             case menu.settings:
@@ -292,7 +313,7 @@ const MyDocumentPage = () => {
             offset = 0.2
         }
         else{
-            offset = 0.5
+            offset = 0.4
         }
 
         const scale = Math.max(
@@ -362,6 +383,9 @@ const MyDocumentPage = () => {
                     setIsDragChange={setIsDragChange}
                     setSocialData={setSocialData}
                     useOnClickOutside={useOnClickOutside}
+                    currentBulletContentDetailSelected={currentBulletContentDetailSelected}
+                    setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                    resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                 />
             </div>
         </div>

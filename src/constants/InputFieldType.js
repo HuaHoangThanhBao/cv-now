@@ -9,6 +9,7 @@ export const InputFieldType = {
     optional_dashed4: "optional_dashed4",
     content_detail: "content_detail",
     content_bullet: "content_bullet",
+    content_bullet_detail: "content_bullet_detail",
     month_start: "month_start",
     month_end: "month_end",
     year_start: "year_start",

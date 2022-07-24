@@ -7,6 +7,8 @@ import BlockHeader from '../../molecules/BlockHeader/BlockHeader';
 
 const BlockContainer = (props) => {
     const {
+        title,
+        placeHolder,
         pageIndex, 
         columnIndex, 
         childIndex, 
@@ -20,7 +22,6 @@ const BlockContainer = (props) => {
         moveBlockDown,
         isDisplayWhenHasInformation,
         setIsDisplayWhenHasInformation,
-        title,
         data,
         setMyBlockVisible,
         getBlockContent,
@@ -34,7 +35,8 @@ const BlockContainer = (props) => {
         getChildSpecialdIndex,
         currentTemplateType,
         currentBlockSelected,
-        setCurrentBlockSelected
+        setCurrentBlockSelected,
+        resetCurrentBulletContentDetailSelected,
     } = props;
 
     const myRef = useRef();
@@ -60,6 +62,7 @@ const BlockContainer = (props) => {
             <div className="block-wrapper">
                 <BlockHeader 
                     title={title}
+                    placeHolder={placeHolder}
                     childId={childId}
                     handleBlockHeader={setBlockHeaderStatus}
                     handleOutsideClick={handleOutsideClick}
@@ -76,14 +79,17 @@ const BlockContainer = (props) => {
                         isDisplayWhenHasInformation={blockHeaderStatus}
                         onRemoveBlock={() => {
                             setBlockHeaderStatus(false)
+                            resetCurrentBulletContentDetailSelected()
                             removeBlock(pageIndex, columnIndex, childIndex, setBlockHeaderStatus)
                         }}
                         moveBlockUp={() => {
                             setBlockHeaderStatus(false)
+                            resetCurrentBulletContentDetailSelected()
                             moveBlockUp(pageIndex, columnIndex, childIndex, contentRef, parentRef)
                         }}
                         moveBlockDown={() => {
                             setBlockHeaderStatus(false)
+                            resetCurrentBulletContentDetailSelected()
                             moveBlockDown(pageIndex, columnIndex, childIndex, contentRef, parentRef)
                         }}
                     />
@@ -119,6 +125,7 @@ const BlockContainer = (props) => {
                             }}
                             onClick={() => handleBlockContentStatus(true)}
                             onCreateNewContent={() => {
+                                resetCurrentBulletContentDetailSelected()
                                 setCurrentBlockSelected({
                                     _pageIndex: pageIndex,
                                     _columnIndex: columnIndex,
@@ -139,6 +146,7 @@ const BlockContainer = (props) => {
                                 dataLength={data.length}
                                 currentIndex={index}
                                 onCreateNewContent={() => {
+                                    resetCurrentBulletContentDetailSelected()
                                     setCurrentBlockSelected({
                                         _pageIndex: pageIndex,
                                         _columnIndex: columnIndex,
@@ -147,7 +155,10 @@ const BlockContainer = (props) => {
                                     })
                                     createNewContent(pageIndex, columnIndex, childId, childIndex, index)
                                 }}
-                                onRemoveContent={() => removeContent(pageIndex, columnIndex, childId, childIndex, index)}
+                                onRemoveContent={() => {
+                                    resetCurrentBulletContentDetailSelected()
+                                    removeContent(pageIndex, columnIndex, childId, childIndex, index)
+                                }}
                                 onMoveContentDown={() => {
                                     if(data.length > 1){
                                         setCurrentBlockSelected({
@@ -157,6 +168,7 @@ const BlockContainer = (props) => {
                                             _currentBlockSelectedIndex: index + 1
                                         })
                                     }
+                                    resetCurrentBulletContentDetailSelected()
                                     moveContentDown(pageIndex, columnIndex, childId, childIndex, index)
                                 }}
                                 onMoveContentUp={() => {
@@ -168,6 +180,7 @@ const BlockContainer = (props) => {
                                             _currentBlockSelectedIndex: index - 1
                                         })
                                     }
+                                    resetCurrentBulletContentDetailSelected()
                                     moveContentUp(pageIndex, columnIndex, childId, childIndex, index)
                                 }}
                             />

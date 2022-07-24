@@ -24,6 +24,7 @@ import GraphDotBottom from '../../../dist/graph-dot-bottom-bg.png';
 import Graph from '../../../dist/graph-bg.png';
 import Triangle from '../../../dist/triangle-bg.png';
 import TriangleBottom from '../../../dist/triangle-bottom-bg.png';
+import { getContentBulletDetail } from '../../../service/contentBulletService';
 
 const DocumentPanel = (props) => {
     const {
@@ -31,7 +32,8 @@ const DocumentPanel = (props) => {
         currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
         setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
         isPreventInteracting, profileContainerHeight, setProfileContainerHeight,
-        isDragChange, setIsDragChange, useOnClickOutside
+        isDragChange, setIsDragChange, useOnClickOutside, currentBulletContentDetailSelected,
+        setCurrentBulletContentDetailSelected, resetCurrentBulletContentDetailSelected,
     } = props;
 
     const profileContainerRef = useRef();
@@ -93,6 +95,39 @@ const DocumentPanel = (props) => {
     const removeBlock = (pageIndex, columnIndex, childIndex, setBlockHeaderStatus) => {
         pages[pageIndex].columns[columnIndex].child.splice(childIndex, 1)
         checkToMoveContent(pageIndex, columnIndex, childIndex, setBlockHeaderStatus, true)
+    }
+
+    const removeContentBulletDetail = (pageIndex, columnIndex, childIndex, currentIndex, currentContentBulletDetailIndex) => {
+        const blockContent = pages[pageIndex].columns[columnIndex].child[childIndex].data[currentIndex];
+        for(let i = 0; i < blockContent.length; i++){
+            for(const [key]  of Object.entries(blockContent[i])){
+                if(key === InputFieldType.content_bullet){
+                    const block = blockContent[i];
+                    const contentBullet = block[InputFieldType.content_bullet];
+                    if(contentBullet.child.length > 1) {
+                        console.log('remove bullet at index:', currentContentBulletDetailIndex)
+                        contentBullet.child.splice(currentContentBulletDetailIndex, 1);
+                        break;
+                    }
+                }
+            }
+        }
+        console.log('pages after remove bullet:', pages)
+        setCurrentBulletContentDetailSelected({
+            ...currentBulletContentDetailSelected,
+            _currentBulletContentDetailSelected: currentContentBulletDetailIndex - 1
+        })
+    }
+
+    const createNewBulletDetailContent = (bullet_content, childId, currentBlockSelectedIndex, atIndex) => {
+        console.log('Going to create bullet detail input field at index: '+ atIndex)
+        bullet_content.splice(atIndex + 1, 0, getContentBulletDetail(childId))
+        setCurrentBulletContentDetailSelected({
+            ...currentBulletContentDetailSelected,
+            _currentBlockSelectedIndex: currentBlockSelectedIndex,
+            _currentBulletContentDetailSelected: atIndex + 1
+        })
+        setPages([...pages])
     }
 
     const sumOfChildData = (childData) => {
@@ -368,7 +403,7 @@ const DocumentPanel = (props) => {
         }
     }
 
-    const updateFieldHeight = (pageIndex, columnIndex, childIndex, currentIndex = -1, type, height) => {
+    const updateFieldHeight = (pageIndex, columnIndex, childIndex, currentIndex = -1, currentContentBulletDetailIndex = -1, type, height) => {
         if(type === InputFieldType.header){
             if(pages[pageIndex].columns[columnIndex].child[childIndex]){
                 pages[pageIndex].columns[columnIndex].child[childIndex].height = height
@@ -376,17 +411,40 @@ const DocumentPanel = (props) => {
         }
         else{
             if(pages[pageIndex].columns[columnIndex].child[childIndex]){
-                pages[pageIndex].columns[columnIndex].child[childIndex].data[currentIndex].forEach(row => {
-                    const firstProperty = Object.keys(row)[0]
-                    if(firstProperty === type){
-                        row.height = height
+                const blockContent = pages[pageIndex].columns[columnIndex].child[childIndex].data[currentIndex]
+                if(type !== InputFieldType.content_bullet_detail){
+                    blockContent.forEach(row => {
+                        const firstProperty = Object.keys(row)[0]
+                        if(firstProperty === type){
+                            row.height = height
+                        }
+                    })
+                }
+                else {
+                    if(currentContentBulletDetailIndex === - 1) return;
+                    for(let i = 0; i < blockContent.length; i++){
+                        for(const [key]  of Object.entries(blockContent[i])){
+                            if(key === InputFieldType.content_bullet){
+                                const block = blockContent[i]
+                                const contentBullet = blockContent[i][InputFieldType.content_bullet];
+                                let sumOfChildHeight = 0
+                                contentBullet.child.forEach((row, rowIndex) => {
+                                    if(rowIndex === currentContentBulletDetailIndex){
+                                        row.height = height
+                                    }
+                                    sumOfChildHeight += row.height
+                                })
+                                block.height = sumOfChildHeight
+                                break;
+                            }
+                        }
                     }
-                })
+                }
             }
         }
     }
 
-    const updateFieldData = (pageIndex, columnIndex, childIndex, currentIndex = -1, type, rootContent, contentToUpdate) => {
+    const updateFieldData = (pageIndex, columnIndex, childIndex, currentIndex = -1, currentContentBulletDetailIndex = -1, type, rootContent, contentToUpdate) => {
         if(type === InputFieldType.header){
             if(pages[pageIndex].columns[columnIndex].child[childIndex]){
                 pages[pageIndex].columns[columnIndex].child[childIndex][type] = contentToUpdate
@@ -395,13 +453,56 @@ const DocumentPanel = (props) => {
         else{
             if(contentToUpdate !== rootContent){
                 if(pages[pageIndex].columns[columnIndex].child[childIndex]){
-                    pages[pageIndex].columns[columnIndex].child[childIndex].data[currentIndex].forEach(row => {
-                        const firstProperty = Object.keys(row)[0]
-                        if(firstProperty === type){
-                            row.status = true
-                            row[firstProperty] = contentToUpdate
+                    const blockContent = pages[pageIndex].columns[columnIndex].child[childIndex].data[currentIndex]
+                    if(type !== InputFieldType.content_bullet_detail){
+                        blockContent.forEach(row => {
+                            const firstProperty = Object.keys(row)[0]
+                            if(firstProperty === type){
+                                if(contentToUpdate) {
+                                    row.status = true
+                                }
+                                else {
+                                    row.status = false
+                                }
+                                row[firstProperty] = contentToUpdate
+                            }
+                        })
+                    }
+                    else {
+                        if(currentContentBulletDetailIndex === - 1) return;
+                        for(let i = 0; i < blockContent.length; i++){
+                            for(const [key]  of Object.entries(blockContent[i])){
+                                if(key === InputFieldType.content_bullet){
+                                    const block = blockContent[i]
+                                    const contentBullet = blockContent[i][InputFieldType.content_bullet];
+                                    let existsAtLeastOneChildHaveData = false
+                                    contentBullet.child.forEach((row, rowIndex) => {
+                                        if(rowIndex === currentContentBulletDetailIndex){
+                                            if(contentToUpdate) {
+                                                row.status = true
+                                            }
+                                            else {
+                                                row.status = false
+                                            }
+                                            if(contentToUpdate){
+                                                existsAtLeastOneChildHaveData = true
+                                            }
+                                            row[InputFieldType.content_bullet_detail] = contentToUpdate
+                                        }
+                                    })
+                                    //if at least one content_bullet_detail have data in content_bullet array
+                                    //then we set status of content_bullet = true, else = false
+                                    if(existsAtLeastOneChildHaveData){
+                                        block.status = true
+                                    }
+                                    else {
+                                        block.status = false
+                                    }
+                                    break;
+                                }
+                            }
                         }
-                    })
+                    }
                 }
             }
         }
@@ -480,6 +581,7 @@ const DocumentPanel = (props) => {
         const child =  pages[pageIndex].columns[columnIndex].child.find(c => c.id === childId)
         return <BlockWrapper
                     title={child.header} 
+                    placeHolder={child.placeHolder}
                     blockType={child.blockType}
                     data={child.data}
                     key={childIndex} 
@@ -505,6 +607,11 @@ const DocumentPanel = (props) => {
                     currentBlockSelected={currentBlockSelected}
                     setCurrentBlockSelected={setCurrentBlockSelected}
                     isPreventInteracting={isPreventInteracting}
+                    createNewBulletDetailContent={createNewBulletDetailContent}
+                    removeContentBulletDetail={removeContentBulletDetail}
+                    currentBulletContentDetailSelected={currentBulletContentDetailSelected}
+                    setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
+                    resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
                 />
     }
 
