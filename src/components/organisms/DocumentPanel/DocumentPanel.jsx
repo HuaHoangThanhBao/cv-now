@@ -34,6 +34,8 @@ const DocumentPanel = (props) => {
         isPreventInteracting, profileContainerHeight, setProfileContainerHeight,
         isDragChange, setIsDragChange, useOnClickOutside, currentBulletContentDetailSelected,
         setCurrentBulletContentDetailSelected, resetCurrentBulletContentDetailSelected,
+        isShowAvatarOnTemplate, isShowCreationDateOnTemplate, isShowPageNumbersOnTemplate,
+        isShowIconsOnTemplate,
     } = props;
 
     const profileContainerRef = useRef();
@@ -159,7 +161,7 @@ const DocumentPanel = (props) => {
                 if(i === 0){
                     if(pages[0].columns.length === 2){
                         if(columnIndex === 0){
-                            return profileAvatarRef.current.offsetHeight + profileSocialRef.current.offsetHeight + 64 //offset margin based on css value
+                            return profileAvatarRef.current ? profileAvatarRef.current.offsetHeight + profileSocialRef.current.offsetHeight + 64: 0 //offset margin based on css value
                         }
                         else if(columnIndex === 1){
                             return profileInfoRef.current.offsetHeight
@@ -174,7 +176,7 @@ const DocumentPanel = (props) => {
                 if(i === 0){
                     if(pages[0].columns.length === 2){
                         if(columnIndex === 0){
-                            return profileAvatarRef.current.offsetHeight + 80 //offset margin based on css value
+                            return profileAvatarRef.current ? profileAvatarRef.current.offsetHeight + 80: 0 //offset margin based on css value
                         }
                         else if(columnIndex === 1){
                             return profileInfoRef.current.offsetHeight + profileSocialRef.current.offsetHeight + 64 //offset margin based on css value
@@ -612,6 +614,7 @@ const DocumentPanel = (props) => {
                     currentBulletContentDetailSelected={currentBulletContentDetailSelected}
                     setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
                     resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
+                    isShowIconsOnTemplate={isShowIconsOnTemplate}
                 />
     }
 
@@ -635,6 +638,7 @@ const DocumentPanel = (props) => {
                         setInfo={setInfo}
                         socialData={socialData}
                         setIsOpenProfileModal={setIsOpenProfileModal}
+                        isShowAvatarOnTemplate={isShowAvatarOnTemplate}
                     />
                 </div>
             )
@@ -656,6 +660,7 @@ const DocumentPanel = (props) => {
                             setInfo={setInfo}
                             socialData={socialData}
                             setIsOpenProfileModal={setIsOpenProfileModal}
+                            isShowAvatarOnTemplate={isShowAvatarOnTemplate}
                         />
                     </div>
                 )
@@ -670,6 +675,7 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         {(pageIndex === 0 && pages[0].columns.length > 1) && 
+                         isShowAvatarOnTemplate &&
                         (
                             <div className='profile-avatar-block' ref={profileAvatarRef}>
                                 <ProfileAvatar />
@@ -721,6 +727,7 @@ const DocumentPanel = (props) => {
                 return (
                     <React.Fragment>
                         {(pageIndex === 0 && pages[0].columns.length > 1) && 
+                         isShowAvatarOnTemplate &&
                         (
                             <div className='profile-avatar-block' ref={profileAvatarRef}>
                                 <ProfileAvatar />
@@ -844,7 +851,7 @@ const DocumentPanel = (props) => {
                     {renderDocumentHeader(pageIndex)}
 
                     <div 
-                        className={`document-container ${currentTemplateType}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
+                        className={`document-container ${currentTemplateType} ${!isShowAvatarOnTemplate ? 'disable-avatar': ''}` + (page.columns.length > 1 ? ' two-column': ' one-column') + (pageIndex > 0 ? ' new': '')}
                         style={{minHeight: `${pageIndex === 0 ? profileContainerHeight: maxHeight}px`}}
                     >
                         {page && page.columns.map((column, columnIndex) => (
@@ -871,6 +878,8 @@ const DocumentPanel = (props) => {
                     <DocumentFooter 
                         pageIndex={pageIndex}
                         pageLength={pages.length}
+                        isShowCreationDateOnTemplate={isShowCreationDateOnTemplate}
+                        isShowPageNumbersOnTemplate={isShowPageNumbersOnTemplate}
                     />
                 </div>
             ))}

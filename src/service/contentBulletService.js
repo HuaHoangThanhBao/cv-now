@@ -49,5 +49,7 @@ export const getContentBulletDetail = (childId) => {
         status: false,
         height: 0,
       };
+    default:
+      return {};
   }
 };

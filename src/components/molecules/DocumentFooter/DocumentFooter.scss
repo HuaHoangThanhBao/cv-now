@@ -2,5 +2,14 @@
     &-col{
         font-size: 1.1rem;
         color: #888688;
+        font-style: italic;
+    }
+    &.disable-creation-date{
+        .document-footer{
+            &-col{
+                width: 100%;
+                text-align: right;
+            }
+        }
     }
 }

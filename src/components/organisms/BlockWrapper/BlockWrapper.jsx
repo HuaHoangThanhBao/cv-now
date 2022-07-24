@@ -39,6 +39,7 @@ const BlockWrapper = (props) => {
     currentBulletContentDetailSelected,
     setCurrentBulletContentDetailSelected,
     resetCurrentBulletContentDetailSelected,
+    isShowIconsOnTemplate,
   } = props;
 
   const [isDisplayWhenHasInformation, setIsDisplayWhenHasInformation] =
@@ -86,23 +87,6 @@ const BlockWrapper = (props) => {
     return field;
   };
 
-  const getStatusOfContentBulletDetail = (index, currentIndex, _blockType) => {
-    let status;
-    for (let i = 0; i < data[index].length; i++) {
-      for (const [key, item] of Object.entries(data[index][i])) {
-        if (key === _blockType) {
-          for (let j = 0; j < item.child.length; j++) {
-            if (j === currentIndex) {
-              status = item.child[j].status;
-            }
-          }
-          break;
-        }
-      }
-    }
-    return status;
-  };
-
   const educationContenType = (index) => {
     const {
       _pageIndex,
@@ -124,7 +108,6 @@ const BlockWrapper = (props) => {
           inputBlockType={InputFieldType.title}
           placeHolder={getField(index, InputFieldType.title).placeHolder}
           text={getField(index, InputFieldType.title)[InputFieldType.title]}
-          isDisablePlaceHolderOnStart={true}
           visible={true}
           isDisplayWhenHasInformation={
             getField(index, InputFieldType.title).status
@@ -278,7 +261,6 @@ const BlockWrapper = (props) => {
           inputBlockType={InputFieldType.title}
           placeHolder={getField(index, InputFieldType.title).placeHolder}
           text={getField(index, InputFieldType.title)[InputFieldType.title]}
-          isDisablePlaceHolderOnStart={true}
           isDisplayWhenHasInformation={
             getField(index, InputFieldType.title).status
           }
@@ -1571,6 +1553,7 @@ const BlockWrapper = (props) => {
       resetCurrentBulletContentDetailSelected={
         resetCurrentBulletContentDetailSelected
       }
+      isShowIconsOnTemplate={isShowIconsOnTemplate}
     />
   );
 };
