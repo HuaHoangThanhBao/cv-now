@@ -184,7 +184,7 @@ const InputField = (props) => {
     }
   };
 
-  const handleClick = () => {
+  const handleMouseDown = () => {
     if (inputBlockType === InputFieldType.content_bullet_detail) {
       const { _currentBulletContentDetailSelected } = currentBulletContentDetailSelected;
       if (
@@ -223,7 +223,7 @@ const InputField = (props) => {
           onChange={handleChange}
           onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDown}
-          onClick={handleClick}
+          onMouseDown={handleMouseDown}
         />
       ) : (
         <ContentEditable
