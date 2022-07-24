@@ -112,7 +112,19 @@
             display: block;
             clear: both;
         }
-
+        &.disable-avatar{
+            &.minimalist{
+                .profile{
+                    &-heading{
+                        .field{
+                            &-input{
+                                margin-top: -8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         &.one-column{
             .column{
                 width: 100%;

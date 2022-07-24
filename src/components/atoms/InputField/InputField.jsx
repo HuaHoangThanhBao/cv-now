@@ -17,7 +17,6 @@ const InputField = (props) => {
     icon,
     text,
     placeHolder,
-    isDisablePlaceHolderOnStart,
     isFocus,
     updateFieldData,
     updateFieldHeight,
@@ -64,8 +63,6 @@ const InputField = (props) => {
             currentContentBulletDetailIndex &&
           _currentBlockSelectedIndex === currentIndex
         ) {
-          console.log('currentBulletContentDetailSelected:', currentBulletContentDetailSelected)
-          console.log(pageIndex + "/" + columnIndex + "/" + childIndex + "/" + currentContentBulletDetailIndex)
           contentEditable.current.focus();
         }
       }
@@ -191,7 +188,6 @@ const InputField = (props) => {
   const handleClick = () => {
     if (inputBlockType === InputFieldType.content_bullet_detail) {
       if(currentContentBulletDetailIndex !== -1){
-        console.log('on click')
         setCurrentBulletContentDetailSelected({
           _pageIndex: pageIndex,
           _columnIndex: columnIndex,

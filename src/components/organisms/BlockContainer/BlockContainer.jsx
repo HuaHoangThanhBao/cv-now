@@ -37,6 +37,7 @@ const BlockContainer = (props) => {
         currentBlockSelected,
         setCurrentBlockSelected,
         resetCurrentBulletContentDetailSelected,
+        isShowIconsOnTemplate,
     } = props;
 
     const myRef = useRef();
@@ -72,6 +73,7 @@ const BlockContainer = (props) => {
                     childIndex={childIndex}
                     updateFieldHeight={updateFieldHeight}
                     currentTemplateType={currentTemplateType}
+                    isShowIconsOnTemplate={isShowIconsOnTemplate}
                 >
                     <BlockBar 
                         childIndex={childIndex}

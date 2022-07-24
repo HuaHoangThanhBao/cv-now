@@ -48,6 +48,10 @@ const MyDocumentPage = () => {
     })
     const [isMenuActive, setIsMenuActive] = useState(false)
     const [menuItemSelected, setMenuItemSelected] = useState('')
+    const [isShowAvatarOnTemplate, setIsShowAvatarOnTemplate] = useState(true)
+    const [isShowCreationDateOnTemplate, setIsShowCreationDateOnTemplate] = useState(true)
+    const [isShowPageNumbersOnTemplate, setIsShowPageNumbersOnTemplate] = useState(true)
+    const [isShowIconsOnTemplate, setIsShowIconsOnTemplate] = useState(true)
 
     //This is a fake state to make re-order in Document Panel
     const [isDragChange, setIsDragChange] = useState(false)
@@ -283,11 +287,24 @@ const MyDocumentPage = () => {
                         currentBulletContentDetailSelected={currentBulletContentDetailSelected}
                         setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
                         resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
+                        isShowAvatarOnTemplate={isShowAvatarOnTemplate}
+                        isShowCreationDateOnTemplate={isShowCreationDateOnTemplate}
+                        isShowPageNumbersOnTemplate={isShowPageNumbersOnTemplate}
+                        isShowIconsOnTemplate={isShowIconsOnTemplate}
                     />
                 )
             case menu.settings:
                 return (
-                    <Settings />
+                    <Settings 
+                        isShowAvatarOnTemplate={isShowAvatarOnTemplate}
+                        setIsShowAvatarOnTemplate={setIsShowAvatarOnTemplate}
+                        isShowCreationDateOnTemplate={isShowCreationDateOnTemplate}
+                        setIsShowCreationDateOnTemplate={setIsShowCreationDateOnTemplate}
+                        isShowPageNumbersOnTemplate={isShowPageNumbersOnTemplate}
+                        setIsShowPageNumbersOnTemplate={setIsShowPageNumbersOnTemplate}
+                        isShowIconsOnTemplate={isShowIconsOnTemplate}
+                        setIsShowIconsOnTemplate={setIsShowIconsOnTemplate}
+                    />
                 )
         }
     }
@@ -386,6 +403,10 @@ const MyDocumentPage = () => {
                     currentBulletContentDetailSelected={currentBulletContentDetailSelected}
                     setCurrentBulletContentDetailSelected={setCurrentBulletContentDetailSelected}
                     resetCurrentBulletContentDetailSelected={resetCurrentBulletContentDetailSelected}
+                    isShowAvatarOnTemplate={isShowAvatarOnTemplate}
+                    isShowCreationDateOnTemplate={isShowCreationDateOnTemplate}
+                    isShowPageNumbersOnTemplate={isShowPageNumbersOnTemplate}
+                    isShowIconsOnTemplate={isShowIconsOnTemplate}
                 />
             </div>
         </div>
