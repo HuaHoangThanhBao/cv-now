@@ -313,7 +313,7 @@ const MyDocumentPage = () => {
             offset = 0.2
         }
         else{
-            offset = 0.35
+            offset = 0.4
         }
 
         const scale = Math.max(
