@@ -125,7 +125,7 @@ const BlockContainer = (props) => {
                                     _currentBlockSelectedIndex: index
                                 })
                             }}
-                            onClick={() => handleBlockContentStatus(true)}
+                            // onClick={() => handleBlockContentStatus(true)}
                             onCreateNewContent={() => {
                                 resetCurrentBulletContentDetailSelected()
                                 setCurrentBlockSelected({

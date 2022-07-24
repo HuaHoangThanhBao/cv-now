@@ -48,7 +48,6 @@ const BlockHeader = (props) => {
             inputBlockType={InputFieldType.header}
             placeHolder={placeHolder}
             text={title}
-            isDisablePlaceHolderOnStart={true}
             isDisplayWhenHasInformation={true}
             visible={true}
             updateFieldData={updateFieldData}
