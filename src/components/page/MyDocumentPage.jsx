@@ -23,6 +23,7 @@ import Settings from '../organisms/Settings/Settings';
 
 const MyDocumentPage = () => {
     const [pages, setPages] = useState(MetaData)
+    const [noNeedList, setNoNeedList] = useState([])
     const [isReOrder, setIsReOrder] = useState(false)
     const [currentTemplateType, setCurrentTemplateType] = useState(template_type.combined)
     const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
@@ -256,6 +257,8 @@ const MyDocumentPage = () => {
                     <Board 
                         pages={pages}
                         setPages={setPages}
+                        noNeedList={noNeedList}
+                        setNoNeedList={setNoNeedList}
                         handleTransformToOneColumn={handleTransformToOneColumn}
                         setIsDragChange={setIsDragChange}
                         resetCurrentBlockSelected={resetCurrentBlockSelected}
@@ -268,6 +271,8 @@ const MyDocumentPage = () => {
                         panelsRef={panelsRef}
                         pages={pages}
                         setPages={setPages}
+                        noNeedList={noNeedList}
+                        setNoNeedList={setNoNeedList}
                         isReOrder={isReOrder}
                         setIsReOrder={setIsReOrder}
                         currentTemplateType={currentTemplateType}
@@ -380,6 +385,8 @@ const MyDocumentPage = () => {
                     panelsRef={panelsRef}
                     pages={pages}
                     setPages={setPages}
+                    noNeedList={noNeedList}
+                    setNoNeedList={setNoNeedList}
                     isReOrder={isReOrder}
                     setIsReOrder={setIsReOrder}
                     currentTemplateType={currentTemplateType}

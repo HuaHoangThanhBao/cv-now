@@ -28,8 +28,8 @@ import { getContentBulletDetail } from '../../../service/contentBulletService';
 
 const DocumentPanel = (props) => {
     const {
-        panelsRef, pages, setPages, isReOrder, setIsReOrder, currentTemplateType, currentThemeType, 
-        currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
+        panelsRef, pages, setPages, noNeedList, setNoNeedList, isReOrder, setIsReOrder, currentTemplateType, 
+        currentThemeType, currentColumnWidthAttr, colorHex, infoKeys, info, setInfo, socialData, 
         setIsOpenProfileModal, currentBlockSelected, setCurrentBlockSelected,
         isPreventInteracting, profileContainerHeight, setProfileContainerHeight,
         isDragChange, setIsDragChange, useOnClickOutside, currentBulletContentDetailSelected,
@@ -95,8 +95,16 @@ const DocumentPanel = (props) => {
     }
 
     const removeBlock = (pageIndex, columnIndex, childIndex, setBlockHeaderStatus) => {
+        //Add removed block to no need list
+        const removedBlock = pages[pageIndex].columns[columnIndex].child[childIndex]
+        noNeedList.splice(0, 0, removedBlock)
+
+        //Then, remove it from metadata
         pages[pageIndex].columns[columnIndex].child.splice(childIndex, 1)
-        checkToMoveContent(pageIndex, columnIndex, childIndex, setBlockHeaderStatus, true)
+        setNoNeedList([...noNeedList])
+
+        //
+        setIsReOrder(true)
     }
 
     const removeContentBulletDetail = (pageIndex, columnIndex, childIndex, currentIndex, currentContentBulletDetailIndex) => {
@@ -594,7 +602,7 @@ const DocumentPanel = (props) => {
                     handleOutsideClick={useOnClickOutside}
                     onInputFieldChange={onInputFieldChange} 
                     createNewContent={createNewContent}
-                    checkToMoveContent={checkToMoveContent}
+                    setIsReOrder={setIsReOrder}
                     removeContent={removeContent}
                     removeBlock={removeBlock}
                     moveBlockUp={moveBlockUp}

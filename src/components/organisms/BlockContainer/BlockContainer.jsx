@@ -50,9 +50,9 @@ const BlockContainer = (props) => {
     handleOutsideClick(contentRef, handleDisplayWhenHasInformation);
     handleOutsideClick(myRef, setMyBlockVisible);
 
-    const handleBlockContentStatus = (status) => {
-        setMyBlockVisible(!status)
-    }
+    // const handleBlockContentStatus = (status) => {
+    //     setMyBlockVisible(!status)
+    // }
 
     const {_currentBlockSelectedIndex} = currentBlockSelected
     return(

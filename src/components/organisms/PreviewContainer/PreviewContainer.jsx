@@ -8,6 +8,8 @@ const PreviewContainer = (props) => {
     panelsRef,
     pages,
     setPages,
+    noNeedList,
+    setNoNeedList,
     isReOrder,
     setIsReOrder,
     handleSelectTemplate,
@@ -53,6 +55,8 @@ const PreviewContainer = (props) => {
                     panelsRef={panelsRef}
                     pages={pages}
                     setPages={setPages}
+                    noNeedList={noNeedList}
+                    setNoNeedList={setNoNeedList}
                     isReOrder={isReOrder}
                     setIsReOrder={setIsReOrder}
                     currentTemplateType={template}

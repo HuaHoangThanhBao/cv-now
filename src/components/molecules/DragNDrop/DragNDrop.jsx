@@ -2,12 +2,14 @@ import React, {useState, useRef, useEffect} from 'react'
 import './DragNDrop.scss'
 
 function DragNDrop(props) {
-    const {data, setPages, handleTransformToOneColumn, setIsDragChange, resetCurrentBlockSelected, resetCurrentBulletContentDetailSelected} = props
+    const {
+        data, setPages, noNeedList, setNoNeedList, handleTransformToOneColumn,
+        setIsDragChange, resetCurrentBlockSelected, resetCurrentBulletContentDetailSelected
+    } = props
     const [list, setList] = useState(data); 
     const [dragging, setDragging] = useState(false);
     const [noNeedDragging, setNoNeedDragging] = useState(false);
     const [noNeedDraggingOver, setNoNeedDraggingOver] = useState(false);
-    const [noNeedList, setNoNeedList] = useState([])
 
     //use for drag and drop of pages
     const dragItem = useRef();
@@ -170,6 +172,7 @@ function DragNDrop(props) {
         const {status} = checkForExists(currentDragItem);
         if(!status){
             noNeedList.splice(0, 0, currentDragItem)
+            console.log('no need list:', noNeedList)
             setNoNeedList([...noNeedList])
         }
     }
