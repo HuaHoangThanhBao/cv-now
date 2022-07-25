@@ -23,6 +23,7 @@ import Settings from '../organisms/Settings/Settings';
 
 const MyDocumentPage = () => {
     const [pages, setPages] = useState(MetaData)
+    const [noNeedList, setNoNeedList] = useState([])
     const [isReOrder, setIsReOrder] = useState(false)
     const [currentTemplateType, setCurrentTemplateType] = useState(template_type.combined)
     const [currentThemeType, setCurrentThemeType] = useState(theme.line_theme)
@@ -34,9 +35,9 @@ const MyDocumentPage = () => {
     const [isOpenProfileModal, setIsOpenProfileModal] = useState(false);
     const [socialData, setSocialData] = useState(socialMetaData);
     const [currentBlockSelected, setCurrentBlockSelected] = useState({
-        pageIndex: 0,
-        columnIndex: 0,
-        childIndex: 0,
+        _pageIndex: 0,
+        _columnIndex: 0,
+        _childIndex: 0,
         _currentBlockSelectedIndex: -1
     })
     const [currentBulletContentDetailSelected, setCurrentBulletContentDetailSelected] = useState({
@@ -204,9 +205,9 @@ const MyDocumentPage = () => {
 
     const resetCurrentBlockSelected = () => {
         setCurrentBlockSelected({
-            pageIndex: -1,
-            columnIndex: -1,
-            childIndex: -1,
+            _pageIndex: -1,
+            _columnIndex: -1,
+            _childIndex: -1,
             _currentBlockSelected: -1,
             _currentBlockSelectedIndex: -1
         })
@@ -256,6 +257,8 @@ const MyDocumentPage = () => {
                     <Board 
                         pages={pages}
                         setPages={setPages}
+                        noNeedList={noNeedList}
+                        setNoNeedList={setNoNeedList}
                         handleTransformToOneColumn={handleTransformToOneColumn}
                         setIsDragChange={setIsDragChange}
                         resetCurrentBlockSelected={resetCurrentBlockSelected}
@@ -268,6 +271,8 @@ const MyDocumentPage = () => {
                         panelsRef={panelsRef}
                         pages={pages}
                         setPages={setPages}
+                        noNeedList={noNeedList}
+                        setNoNeedList={setNoNeedList}
                         isReOrder={isReOrder}
                         setIsReOrder={setIsReOrder}
                         currentTemplateType={currentTemplateType}
@@ -380,6 +385,8 @@ const MyDocumentPage = () => {
                     panelsRef={panelsRef}
                     pages={pages}
                     setPages={setPages}
+                    noNeedList={noNeedList}
+                    setNoNeedList={setNoNeedList}
                     isReOrder={isReOrder}
                     setIsReOrder={setIsReOrder}
                     currentTemplateType={currentTemplateType}

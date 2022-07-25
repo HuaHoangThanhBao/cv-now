@@ -36,16 +36,15 @@ const InputField = (props) => {
   const [html, setHTML] = useState("");
 
   useEffect(() => {
-    if(isDisplayWhenHasInformation){
-      setHTML(text)
+    if (isDisplayWhenHasInformation) {
+      setHTML(text);
+    } else {
+      setHTML("");
     }
-    else {
-      setHTML('')
-    }
-  }, [text])
+  }, [text]);
 
   useEffect(() => {
-    if(inputBlockType !== InputFieldType.content_bullet_detail) return
+    if (inputBlockType !== InputFieldType.content_bullet_detail) return;
     if (inputRef.current) {
       if (currentBulletContentDetailSelected) {
         const {
@@ -185,9 +184,13 @@ const InputField = (props) => {
     }
   };
 
-  const handleClick = () => {
+  const handleMouseDown = () => {
     if (inputBlockType === InputFieldType.content_bullet_detail) {
-      if(currentContentBulletDetailIndex !== -1){
+      const { _currentBulletContentDetailSelected } = currentBulletContentDetailSelected;
+      if (
+        currentContentBulletDetailIndex !== -1 &&
+        _currentBulletContentDetailSelected !== currentIndex
+      ) {
         setCurrentBulletContentDetailSelected({
           _pageIndex: pageIndex,
           _columnIndex: columnIndex,
@@ -220,7 +223,7 @@ const InputField = (props) => {
           onChange={handleChange}
           onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDown}
-          onClick={handleClick}
+          onMouseDown={handleMouseDown}
         />
       ) : (
         <ContentEditable

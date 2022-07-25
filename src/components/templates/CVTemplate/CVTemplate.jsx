@@ -8,6 +8,8 @@ const CVTemplate = (props) => {
     panelsRef,
     pages,
     setPages,
+    noNeedList,
+    setNoNeedList,
     isReOrder,
     setIsReOrder,
     currentTemplateType,
@@ -44,6 +46,8 @@ const CVTemplate = (props) => {
           panelsRef={panelsRef}
           pages={pages}
           setPages={setPages}
+          noNeedList={noNeedList}
+          setNoNeedList={setNoNeedList}
           isReOrder={isReOrder}
           setIsReOrder={setIsReOrder}
           currentTemplateType={currentTemplateType}

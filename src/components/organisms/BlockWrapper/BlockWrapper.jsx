@@ -14,7 +14,7 @@ const BlockWrapper = (props) => {
     childIndex,
     childId,
     handleOutsideClick,
-    checkToMoveContent,
+    setIsReOrder,
     onInputFieldChange,
     createNewContent,
     removeContent,
@@ -1504,16 +1504,10 @@ const BlockWrapper = (props) => {
   useEffect(() => {
     return () => {
       if (isDisplayWhenHasInformation || blockHeaderStatus) {
-        console.log("yess:", pageIndex + "/" + columnIndex + "/" + childIndex);
-        checkToMoveContent(
-          pageIndex,
-          columnIndex,
-          childIndex,
-          setBlockHeaderStatus
-        );
+        setIsReOrder(true);
       }
     };
-  }, [isDisplayWhenHasInformation, blockHeaderStatus]);
+  }, [isDisplayWhenHasInformation, blockHeaderStatus, setIsReOrder]);
 
   return (
     <BlockContainer
@@ -1524,7 +1518,6 @@ const BlockWrapper = (props) => {
       childIndex={childIndex}
       childId={childId}
       handleOutsideClick={handleOutsideClick}
-      checkToMoveContent={checkToMoveContent}
       onInputFieldChange={onInputFieldChange}
       createNewContent={createNewContent}
       removeContent={removeContent}
